@@ -1,0 +1,5 @@
+name	support_a	recall_a	precision_a	f1_a	acc_a	support_b	recall_b	precision_b	f1_b	acc_b	hierarchy_consistency
+EricssonResearch__CC_a_fconv_b_A6C1Y	0.9769	0.8438	0.8921	0.8673	0.8215	1.0000	0.6174	0.7377	0.6722	0.3791	1.0000
+twistbytes__baseline_0_25	1.0000	0.8980	0.8188	0.8566	0.7645	1.0000	0.3075	0.8188	0.4471	0.0125	1.0000
+twistbytes__baseline_lca	0.9901	0.8763	0.8536	0.8648	0.7943	0.9901	0.3001	0.8536	0.4441	0.0132	1.0000
+Raghavan__SVM-BPEB	1.0000	0.8600	0.8975	0.8783	0.8465	1.0000	0.2749	0.6994	0.3947	0.0108	0.0

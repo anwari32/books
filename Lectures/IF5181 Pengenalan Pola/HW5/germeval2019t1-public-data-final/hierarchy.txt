@@ -1,0 +1,335 @@
+Literatur & Unterhaltung	Romane & Erzählungen
+Romane & Erzählungen	Erzählungen & Kurzgeschichten
+Romane & Erzählungen	Romanbiographien
+Romane & Erzählungen	Humorvolle Unterhaltung
+Romane & Erzählungen	Junge Literatur
+Romane & Erzählungen	Skandinavische Literatur
+Romane & Erzählungen	Deutschsprachige Literatur
+Romane & Erzählungen	Niederländische Literatur
+Romane & Erzählungen	Französische Literatur
+Romane & Erzählungen	Englische Literatur
+Romane & Erzählungen	Italienische Literatur
+Romane & Erzählungen	Literatur aus Spanien und Lateinamerika
+Romane & Erzählungen	Griechische Literatur
+Romane & Erzählungen	Nordamerikanische Literatur
+Romane & Erzählungen	Literatur aus Russland und Osteuropa
+Romane & Erzählungen	Indische Literatur
+Romane & Erzählungen	Afrikanische Literatur
+Romane & Erzählungen	Literatur des Nahen Ostens
+Romane & Erzählungen	Literatur aus Fernost
+Literatur & Unterhaltung	Krimi & Thriller
+Krimi & Thriller	Abenteuer & Action
+Krimi & Thriller	Agenten-/Spionage-Thriller
+Krimi & Thriller	Fantasy-/SF-Thriller
+Krimi & Thriller	Gerichtsmedizin / Pathologie
+Krimi & Thriller	Historische Krimis
+Krimi & Thriller	Justizthriller
+Krimi & Thriller	Kirchenthriller
+Krimi & Thriller	Krimikomödien
+Krimi & Thriller	Lady-Thriller
+Krimi & Thriller	Medizinthriller
+Krimi & Thriller	Mystery-Thriller
+Krimi & Thriller	Nordische Krimis
+Krimi & Thriller	Ökothriller
+Krimi & Thriller	Politthriller
+Krimi & Thriller	Psychothriller
+Krimi & Thriller	Regionalkrimis
+Krimi & Thriller	Tierkrimis
+Krimi & Thriller	Wirtschaftsthriller
+Krimi & Thriller	Wissenschaftsthriller
+Literatur & Unterhaltung	Frauenunterhaltung
+Frauenunterhaltung	Romantische Komödien
+Frauenunterhaltung	Große Gefühle
+Frauenunterhaltung	Familiensaga
+Frauenunterhaltung	Lesen & Kochen
+Literatur & Unterhaltung	Historische Romane
+Literatur & Unterhaltung	Romance
+Literatur & Unterhaltung	Erotik
+Literatur & Unterhaltung	Klassiker & Lyrik
+Klassiker & Lyrik	Antike und neulateinische Literatur
+Klassiker & Lyrik	Andere Länder
+Klassiker & Lyrik	Lyrik
+Klassiker & Lyrik	Märchen, Legenden und Sagen
+Klassiker & Lyrik	Anthologien
+Literatur & Unterhaltung	Fantasy
+Fantasy	Abenteuer-Fantasy
+Fantasy	All Age Fantasy
+Fantasy	Dark Fantasy
+Fantasy	Funny Fantasy
+Fantasy	Heroische Fantasy
+Fantasy	High Fantasy
+Fantasy	Historische Fantasy
+Fantasy	Fantasy Science Fantasy
+Fantasy	Urban Fantasy
+Literatur & Unterhaltung	Romantasy
+Literatur & Unterhaltung	Mystery
+Literatur & Unterhaltung	Horror
+Literatur & Unterhaltung	Science Fiction
+Science Fiction	Alternativwelten
+Science Fiction	Cyberpunk
+Science Fiction	Dying Earth
+Science Fiction	Dystopie
+Science Fiction	Future-History
+Science Fiction	Hard Science Fiction
+Science Fiction	Phantastik
+Science Fiction	Science Fiction Sachbuch
+Science Fiction	Science Fiction Satire
+Science Fiction	Science Fiction Science Fantasy
+Science Fiction	Science Thriller
+Science Fiction	Space Opera
+Science Fiction	Spielewelten
+Science Fiction	Steampunk
+Science Fiction	Utopie
+Literatur & Unterhaltung	Literatur & Unterhaltung Satire
+Literatur & Unterhaltung	Comic & Cartoon
+Literatur & Unterhaltung	Musik
+Sachbuch	Biographien & Autobiographien
+Biographien & Autobiographien	Politiker
+Biographien & Autobiographien	Künstler, Dichter, Denker
+Biographien & Autobiographien	Wissenschaftler
+Biographien & Autobiographien	Musiker, Sänger
+Biographien & Autobiographien	Schauspieler, Regisseure
+Sachbuch	Schicksalsberichte
+Schicksalsberichte	Schicksalsberichte Andere Länder & Kulturen
+Schicksalsberichte	Kinderschicksal
+Schicksalsberichte	Krankheit
+Schicksalsberichte	NS-Zeit & Nachkriegszeit
+Sachbuch	Politik & Gesellschaft
+Politik & Gesellschaft	Gesellschaftskritik
+Politik & Gesellschaft	Politik & Gesellschaft Andere Länder & Kulturen
+Politik & Gesellschaft	Aktuelle Debatten
+Politik & Gesellschaft	Politische Theorien
+Politik & Gesellschaft	Weltpolitik & Globalisierung
+Sachbuch	Briefe, Essays, Gespräche
+Sachbuch	(Zeit-) Geschichte
+(Zeit-) Geschichte	Urgeschichte
+(Zeit-) Geschichte	Alte Geschichte
+(Zeit-) Geschichte	Mittelalter
+(Zeit-) Geschichte	Neuere Geschichte
+(Zeit-) Geschichte	19./20. Jahrhundert
+(Zeit-) Geschichte	Nationalsozialismus
+(Zeit-) Geschichte	Geschichte nach '45
+(Zeit-) Geschichte	(Zeit-) Geschichte Andere Länder & Kulturen
+Sachbuch	Kunst & Kultur
+Kunst & Kultur	Film & Musik
+Kunst & Kultur	Kunst & Kunstgeschichte
+Kunst & Kultur	Literaturgeschichte / -kritik
+Kunst & Kultur	Sprache & Sprechen
+Sachbuch	Infotainment & erzählendes Sachbuch
+Sachbuch	Lifestyle
+Sachbuch	Wirtschaft & Recht
+Wirtschaft & Recht	Unternehmen & Manager
+Wirtschaft & Recht	Neue Wirtschaftsmodelle
+Sachbuch	Natur, Wissenschaft, Technik
+Natur, Wissenschaft, Technik	Ökologie / Umweltschutz
+Natur, Wissenschaft, Technik	Kosmologie
+Natur, Wissenschaft, Technik	Medizin & Forensik
+Natur, Wissenschaft, Technik	Fahrzeuge / Technik
+Natur, Wissenschaft, Technik	Natur, Wissenschaft, Technik Tiere
+Natur, Wissenschaft, Technik	Internet
+Sachbuch	Sachbuch Philosophie
+Sachbuch	Psychologie
+Psychologie	Psychologie Partnerschaft & Sexualität
+Psychologie	Psychologie Lebenshilfe
+Psychologie	Persönlichkeitsentwicklung
+Psychologie	Job & Karriere
+Sachbuch	Lebensgestaltung
+Sachbuch	Glaube und Grenzerfahrungen
+Sachbuch	Abenteuer, Reisen, fremde Kulturen
+Abenteuer, Reisen, fremde Kulturen	Reiseberichte
+Abenteuer, Reisen, fremde Kulturen	Länder, Städte & Regionen
+Sachbuch	Sport
+Sachbuch	Regionalia
+Sachbuch	Kabarett & Satire
+Ganzheitliches Bewusstsein	Ganzheitlich Leben
+Ganzheitliches Bewusstsein	Ganzheitliche Psychologie
+Ganzheitliche Psychologie	Ganzheitliche Psychologie Lebenshilfe
+Ganzheitliche Psychologie	Partnerschaft & Sex
+Ganzheitliche Psychologie	Spirituelle Entwicklung
+Ganzheitliche Psychologie	Systemische Therapie & Familienaufstellung
+Ganzheitliche Psychologie	Tod & Trauer
+Ganzheitliches Bewusstsein	Weisheiten der Welt
+Weisheiten der Welt	Westliche Wege
+Weisheiten der Welt	Östliche Weisheit
+Weisheiten der Welt	Wissen der Naturvölker
+Ganzheitliches Bewusstsein	Übernatürliches
+Übernatürliches	Engel & Schutzgeister
+Übernatürliches	Magie & Hexerei
+Übernatürliches	Jenseits & Wiedergeburt
+Ganzheitliches Bewusstsein	Körper & Seele
+Körper & Seele	Entspannung & Meditation
+Körper & Seele	Körpertherapien
+Ganzheitliches Bewusstsein	Energieheilung
+Energieheilung	Chakren & Aura
+Energieheilung	Mantras & Mudras
+Ganzheitliches Bewusstsein	Schicksalsdeutung
+Schicksalsdeutung	Tarot
+Schicksalsdeutung	Astrologie & Sternzeichen
+Ganzheitliches Bewusstsein	Mondkräfte
+Ganzheitliches Bewusstsein	Naturheilweisen
+Naturheilweisen	Homöopathie & Bachblüten
+Naturheilweisen	Ernährung
+Ganzheitliches Bewusstsein	Esoterische Romane
+Glaube & Ethik	Psychologie & Spiritualität
+Glaube & Ethik	Spiritualität & Religion
+Spiritualität & Religion	Spirituelles Leben
+Spiritualität & Religion	Christlicher Glauben
+Spiritualität & Religion	Glauben mit Kindern
+Spiritualität & Religion	Bibeln & Katechismus
+Spiritualität & Religion	Spiritualität & Religion Weltreligionen
+Spiritualität & Religion	Dialog der Traditionen
+Spiritualität & Religion	Philosophie
+Glaube & Ethik	Sterben, Tod und Trauer
+Sterben, Tod und Trauer	Abschied, Trauer, Neubeginn
+Sterben, Tod und Trauer	Sterbebegleitung & Hospizarbeit
+Glaube & Ethik	Religionsunterricht
+Glaube & Ethik	Gemeindearbeit
+Gemeindearbeit	Gemeindearbeit Sachbuch
+Gemeindearbeit	Gemeindearbeit mit Kindern & Jugendlichen
+Gemeindearbeit	Bibeln & Bibelarbeit
+Gemeindearbeit	Diakonie und Seelsorge
+Gemeindearbeit	Gottesdienst und Predigt
+Gemeindearbeit	Gebete und Andachten
+Gemeindearbeit	Kasualien und Sakramente
+Gemeindearbeit	Konfirmation
+Gemeindearbeit	Gesang- und Liederbücher
+Gemeindearbeit	Gemeindearbeit Religionspädagogik
+Glaube & Ethik	Theologie
+Theologie	Bibel in gerechter Sprache
+Theologie	Einzelthemen der Theologie
+Theologie	Biblische Theologie AT
+Theologie	Biblische Theologie NT
+Theologie	Kirchen- und Theologiegeschichte
+Theologie	Systematische Theologie
+Theologie	Praktische Theologie
+Theologie	Theologie Religionspädagogik
+Theologie	Feministische Theologie
+Theologie	Theologie Weltreligionen
+Glaube & Ethik	Religiöse Literatur
+Ratgeber	Essen & Trinken
+Essen & Trinken	Themenkochbuch
+Essen & Trinken	Länderküche
+Essen & Trinken	Starköche
+Essen & Trinken	Getränke
+Ratgeber	Gesundheit & Ernährung
+Gesundheit & Ernährung	Gesunde Ernährung
+Gesundheit & Ernährung	Nahrungsmittelintoleranz
+Gesundheit & Ernährung	Hausmittel
+Gesundheit & Ernährung	Magen & Darm
+Gesundheit & Ernährung	Rücken & Gelenke
+Gesundheit & Ernährung	Patientenratgeber
+Gesundheit & Ernährung	Raucherentwöhnung
+Ratgeber	Lebenshilfe & Psychologie
+Lebenshilfe & Psychologie	Besser leben
+Lebenshilfe & Psychologie	Selbstcoaching
+Lebenshilfe & Psychologie	Krisen & Ängste
+Lebenshilfe & Psychologie	Starke Frauen
+Lebenshilfe & Psychologie	Kopftraining
+Lebenshilfe & Psychologie	Psychotherapie
+Lebenshilfe & Psychologie	Sucht & Abhängigkeit
+Lebenshilfe & Psychologie	Trauma
+Lebenshilfe & Psychologie	50 plus
+Ratgeber	Eltern & Familie
+Eltern & Familie	Ernährung & Kochen
+Eltern & Familie	Spiele & Beschäftigung
+Eltern & Familie	Schule & Lernen
+Eltern & Familie	Pubertät
+Eltern & Familie	Kindererziehung
+Eltern & Familie	Babys & Kleinkinder
+Eltern & Familie	Vornamen
+Eltern & Familie	Kindergarten & Pädagogik
+Eltern & Familie	Familie & Religion
+Eltern & Familie	Schwangerschaft & Geburt
+Ratgeber	Ratgeber Partnerschaft & Sexualität
+Ratgeber Partnerschaft & Sexualität	Erotik & Sex
+Ratgeber Partnerschaft & Sexualität	Liebe & Beziehung
+Ratgeber Partnerschaft & Sexualität	Flirt & Partnersuche
+Ratgeber Partnerschaft & Sexualität	Trennung
+Ratgeber	Beauty & Wellness
+Beauty & Wellness	Schönheitspflege
+Beauty & Wellness	Styling
+Beauty & Wellness	Wellness
+Ratgeber	Fitness & Sport
+Fitness & Sport	Laufen & Nordic Walking
+Fitness & Sport	Wandern & Bergsteigen
+Fitness & Sport	Fitnesstraining
+Fitness & Sport	Problemzonen
+Fitness & Sport	Yoga, Pilates & Stretching
+Ratgeber	Kommunikation & Beruf
+Kommunikation & Beruf	Bewerbung
+Kommunikation & Beruf	Joballtag & Karriere
+Kommunikation & Beruf	Kommunikation
+Kommunikation & Beruf	Umgangsformen
+Kommunikation & Beruf	Arbeitstechniken
+Kommunikation & Beruf	Musterbriefe & Rhetorik
+Kommunikation & Beruf	Reden & Glückwünsche
+Ratgeber	Geld & Investment
+Ratgeber	Recht & Steuern
+Ratgeber	Freizeit & Hobby
+Freizeit & Hobby	Rätsel & Spiele
+Freizeit & Hobby	Kreatives
+Freizeit & Hobby	Freizeit & Hobby Tiere
+Freizeit & Hobby	Feiern & Feste
+Freizeit & Hobby	Pflanzen & Garten
+Ratgeber	Wissen & Nachschlagewerke
+Wissen & Nachschlagewerke	Humoristische Nachschlagewerke
+Wissen & Nachschlagewerke	Praktische Anleitungen
+Künste	Kunst
+Kunst	21. Jahrhundert
+Kunst	Antiquitäten
+Kunst	Street Art
+Kunst	Theater / Ballett
+Künste	Design
+Künste	Fotografie
+Künste	Mode & Lifestyle
+Architektur & Garten	Architektur
+Architektur	Altbausanierung / Denkmalpflege
+Architektur	Geschichte und Theorie
+Architektur	Bauaufgaben
+Architektur	Bauherrenratgeber
+Architektur	Baumaterialien
+Architektur	Bautechnik
+Architektur	Einfamilienhausbau
+Architektur	Entwurfs- und Detailplanung
+Architektur	Monographien
+Architektur	Stadtplanung
+Architektur & Garten	Wohnen & Innenarchitektur
+Wohnen & Innenarchitektur	Design / Lifestyle
+Wohnen & Innenarchitektur	Farbratgeber
+Wohnen & Innenarchitektur	Innenarchitektur
+Wohnen & Innenarchitektur	Wohnen
+Architektur & Garten	Garten & Landschaftsarchitektur
+Garten & Landschaftsarchitektur	Gartendesigner
+Garten & Landschaftsarchitektur	Geschenkbuch & Briefkarten
+Garten & Landschaftsarchitektur	Gartengestaltung
+Garten & Landschaftsarchitektur	Landschaftsgestaltung
+Architektur & Garten	Handwerk Holz
+Handwerk Holz	Handwerk Holz Grundlagenwissen
+Handwerk Holz	Handwerk Holz Gestaltung
+Handwerk Holz	Handwerk Holz Praxis
+Architektur & Garten	Handwerk Farbe
+Handwerk Farbe	Handwerk Farbe Grundlagenwissen
+Handwerk Farbe	Handwerk Farbe Gestaltung
+Handwerk Farbe	Handwerk Farbe Praxis
+Kinderbuch & Jugendbuch	Beschäftigung, Malen, Rätseln
+Kinderbuch & Jugendbuch	Lyrik, Anthologien, Jahrbücher
+Kinderbuch & Jugendbuch	Natur, Tiere, Umwelt, Mensch
+Kinderbuch & Jugendbuch	Geschichte, Politik
+Kinderbuch & Jugendbuch	Kunst, Musik
+Kinderbuch & Jugendbuch	Biographien
+Kinderbuch & Jugendbuch	Echtes Leben, Realistischer Roman
+Kinderbuch & Jugendbuch	Abenteuer
+Kinderbuch & Jugendbuch	Geister- und Gruselgeschichten
+Kinderbuch & Jugendbuch	Fantasy und Science Fiction
+Kinderbuch & Jugendbuch	Liebe, Beziehung und Freundschaft
+Kinderbuch & Jugendbuch	Familie
+Kinderbuch & Jugendbuch	Tiergeschichten
+Kinderbuch & Jugendbuch	Lustige Geschichten, Witze
+Kinderbuch & Jugendbuch	Sportgeschichten
+Kinderbuch & Jugendbuch	Schulgeschichten
+Kinderbuch & Jugendbuch	Historische Romane, Zeitgeschichte
+Kinderbuch & Jugendbuch	Religion, Glaube, Ethik, Philosophie
+Kinderbuch & Jugendbuch	Krimis und Thriller
+Kinderbuch & Jugendbuch	Detektivgeschichten
+Kinderbuch & Jugendbuch	Märchen, Sagen
+Kinderbuch & Jugendbuch	Schullektüre

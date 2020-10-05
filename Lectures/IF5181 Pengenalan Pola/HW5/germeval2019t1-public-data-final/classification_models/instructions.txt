@@ -1,0 +1,11 @@
+This folder contains a basic implementation of the baseline and contender system as described in in the task report for GermEval-2019 Task 1: Shared task on hierarchical classification of blurbs.
+
+The baseline system can be executed by typing the command: python3 classification_baseline.py --mode train_test 
+The additional --dev flag can be used to evaluate on the dev set instead.
+Required modules are: sklearn, stop_words, numpy, BeautifulSoup, pickle
+
+The contender system can be executed by typing the command: python3 classification_contender.py --mode train_test 
+This will train and test capsule network with the default hyperaprameters.
+A comprehensive list for all tuneable hyperparameters can be assessed by typing python3 classification_contender.py --help
+Required modules are: sklearn, stop_words, numpy, BeautifulSoup, pickle, keras, gensim
+Additionally, for the contender system a file with pre-trained embeddings is needed. The ones, used in the task report can be downloaded here: https://dl.fbaipublicfiles.com/fasttext/vectors-wiki/wiki.de.vec

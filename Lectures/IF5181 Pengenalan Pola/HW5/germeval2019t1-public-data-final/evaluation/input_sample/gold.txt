@@ -1,0 +1,44 @@
+subtask_a
+9783579074030	Glaube & Ethik
+9783570380093	Kinderbuch & Jugendbuch
+9783453422650	Literatur & Unterhaltung
+9783453702479	Ganzheitliches Bewusstsein	Glaube & Ethik
+9783641048198	Literatur & Unterhaltung
+9783442376599	Literatur & Unterhaltung
+9783453527577	Literatur & Unterhaltung
+9783336547913	Literatur & Unterhaltung
+9783442372201	Literatur & Unterhaltung
+9783570550090	Sachbuch
+9783641201678	Literatur & Unterhaltung
+9783442748495	Literatur & Unterhaltung
+9783466310500	Ratgeber
+9783844518115	Literatur & Unterhaltung
+9783328600619	Literatur & Unterhaltung
+9783837140118	Literatur & Unterhaltung	Sachbuch
+9783641052393	Sachbuch
+9783809436898	Ratgeber
+9783641084202	Literatur & Unterhaltung
+9783453677241	Sachbuch
+9783328102212	Kinderbuch & Jugendbuch	Literatur & Unterhaltung
+9783442174850	Ratgeber	Sachbuch
+9783453418530	Literatur & Unterhaltung
+9783641089337	Sachbuch
+9783466371518	Sachbuch
+9783641231323	Literatur & Unterhaltung
+9783442731473	Literatur & Unterhaltung
+9783328102625	Literatur & Unterhaltung
+9783641142551	Kinderbuch & Jugendbuch
+9783641154752	Literatur & Unterhaltung
+9783466458530	Ratgeber
+9783453270404	Literatur & Unterhaltung
+9783641115777	Literatur & Unterhaltung
+subtask_b
+9783579074030	Gemeindearbeit mit Kindern & Jugendlichen	Glaube & Ethik	Gemeindearbeit	Konfirmation
+9783570380093	Fantasy und Science Fiction	Geister- und Gruselgeschichten	Kinderbuch & Jugendbuch	Echtes Leben, Realistischer Roman
+9783453422650	Literatur & Unterhaltung	Historische Romane
+9783453702479	Spiritualität & Religion Weltreligionen	Östliche Weisheit	Weisheiten der Welt	Ganzheitliches Bewusstsein	Glaube & Ethik	Spiritualität & Religion
+9783641048198	Krimi & Thriller	Psychothriller	Literatur & Unterhaltung
+9783442376599	Frauenunterhaltung	Romane & Erzählungen	Literatur & Unterhaltung	Große Gefühle
+9783453527577	Dystopie	Literatur & Unterhaltung	Science Fiction
+9783336547913	Literatur & Unterhaltung	Romane & Erzählungen
+9783442372201	Krimi & Thriller	Psychothriller	Literatur & Unterhaltung
