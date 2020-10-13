@@ -1,0 +1,2 @@
+*.zip filter=lfs diff=lfs merge=lfs -text
+Lectures/IF5181[[:space:]]Pengenalan[[:space:]]Pola/Paper/ScienceDirect_articles_03Oct2020_02-50-10.638.zip filter=lfs diff=lfs merge=lfs -text
