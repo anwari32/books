@@ -1,0 +1,6974 @@
+1
+00:00:00,060 --> 00:00:01,780
+The following
+content is provided
+
+2
+00:00:01,780 --> 00:00:04,019
+under a Creative
+Commons license.
+
+3
+00:00:04,019 --> 00:00:06,870
+Your support will help MIT
+OpenCourseWare continue
+
+4
+00:00:06,870 --> 00:00:10,730
+to offer high quality
+educational resources for free.
+
+5
+00:00:10,730 --> 00:00:13,340
+To make a donation or
+view additional materials
+
+6
+00:00:13,340 --> 00:00:17,215
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:17,215 --> 00:00:17,840
+at ocw.mit.edu.
+
+8
+00:00:26,840 --> 00:00:31,390
+PROFESSOR: All right, well,
+good afternoon and welcome back.
+
+9
+00:00:31,390 --> 00:00:35,400
+We have an exciting fun-filled
+program for you this afternoon.
+
+10
+00:00:35,400 --> 00:00:36,176
+I'm David Gifford.
+
+11
+00:00:36,176 --> 00:00:37,550
+I'm delighted to
+be back with you
+
+12
+00:00:37,550 --> 00:00:40,970
+again, here in computational
+systems biology.
+
+13
+00:00:40,970 --> 00:00:43,140
+Today we're going to talk
+about chromatin structure
+
+14
+00:00:43,140 --> 00:00:45,540
+and how we can analyze it.
+
+15
+00:00:45,540 --> 00:00:51,290
+And to give you the narrative
+arc for our discussion today,
+
+16
+00:00:51,290 --> 00:00:54,130
+we're first going to
+begin with looking
+
+17
+00:00:54,130 --> 00:00:56,750
+at computational methods that
+we can break the, quote unquote
+
+18
+00:00:56,750 --> 00:01:01,120
+code, that describes
+the epigenome.
+
+19
+00:01:01,120 --> 00:01:03,900
+Now, epigenetic state is
+extraordinarily important
+
+20
+00:01:03,900 --> 00:01:05,800
+and one way you
+can visualize this
+
+21
+00:01:05,800 --> 00:01:08,400
+is that the genome is
+like a hotel filled
+
+22
+00:01:08,400 --> 00:01:09,780
+with lots of different rooms.
+
+23
+00:01:09,780 --> 00:01:13,360
+And a lot of the doors are
+locked and some of the doors
+
+24
+00:01:13,360 --> 00:01:13,990
+are unlocked.
+
+25
+00:01:13,990 --> 00:01:15,890
+And only in the doors
+that we can go into,
+
+26
+00:01:15,890 --> 00:01:18,320
+where the genome is
+open and accessible
+
+27
+00:01:18,320 --> 00:01:22,270
+can there actually be work
+done, regulation performed
+
+28
+00:01:22,270 --> 00:01:26,254
+and transcripts
+and proteins made.
+
+29
+00:01:26,254 --> 00:01:28,420
+So we're going to talk about
+how to actually analyze
+
+30
+00:01:28,420 --> 00:01:30,777
+epigenetic state.
+
+31
+00:01:30,777 --> 00:01:32,360
+And then we're going
+to talk about how
+
+32
+00:01:32,360 --> 00:01:35,150
+to use epigenetic
+information to understand
+
+33
+00:01:35,150 --> 00:01:39,260
+the entire regulatory
+occupancy of the genome.
+
+34
+00:01:39,260 --> 00:01:42,230
+We've already talked about
+ChIP-seq and the idea
+
+35
+00:01:42,230 --> 00:01:44,620
+that we can understand where
+individual regulators sit
+
+36
+00:01:44,620 --> 00:01:49,950
+on the genome, and how they
+regulate proximal genes.
+
+37
+00:01:49,950 --> 00:01:53,590
+We're now going to see if we
+can learn more about the genome.
+
+38
+00:01:53,590 --> 00:01:56,610
+How it's state-- whether
+it's open or closed.
+
+39
+00:01:56,610 --> 00:01:58,380
+Is it self-regulated?
+
+40
+00:01:58,380 --> 00:02:00,440
+And answer a puzzle.
+
+41
+00:02:00,440 --> 00:02:04,430
+The puzzle is, if there
+are hundreds of thousands
+
+42
+00:02:04,430 --> 00:02:06,390
+of possible binary
+locations that
+
+43
+00:02:06,390 --> 00:02:09,770
+are equally good
+for a regulator,
+
+44
+00:02:09,770 --> 00:02:12,680
+why are only tens of
+thousands occupied?
+
+45
+00:02:12,680 --> 00:02:15,420
+And how are those sites picked?
+
+46
+00:02:15,420 --> 00:02:18,630
+Because that level of regulation
+is extraordinarily important
+
+47
+00:02:18,630 --> 00:02:21,860
+to establish a basal
+level of what genes
+
+48
+00:02:21,860 --> 00:02:24,140
+are accessible and operating.
+
+49
+00:02:24,140 --> 00:02:29,540
+And finally, we're going to
+talk about how we can map,
+
+50
+00:02:29,540 --> 00:02:32,270
+which regulatory
+regions in the genome
+
+51
+00:02:32,270 --> 00:02:36,160
+are affecting which genes.
+
+52
+00:02:36,160 --> 00:02:40,360
+It turns out that about
+1/3 of the regulatory sites
+
+53
+00:02:40,360 --> 00:02:44,440
+in the genome skip over a
+gene that's closest to them
+
+54
+00:02:44,440 --> 00:02:48,240
+to regulate a gene
+that's farther away.
+
+55
+00:02:48,240 --> 00:02:49,510
+This is a million genomes.
+
+56
+00:02:49,510 --> 00:02:52,530
+And so given that
+rough approximation,
+
+57
+00:02:52,530 --> 00:02:54,380
+how is it that we
+can make connections
+
+58
+00:02:54,380 --> 00:03:00,720
+between regulatory sites and
+the genes that they control?
+
+59
+00:03:00,720 --> 00:03:03,190
+Now, in computational
+systems biology,
+
+60
+00:03:03,190 --> 00:03:05,340
+we always talk a
+lot about biology,
+
+61
+00:03:05,340 --> 00:03:08,880
+but we also need to reflect
+upon the computational methods
+
+62
+00:03:08,880 --> 00:03:11,090
+that we're bringing to
+bear on these questions.
+
+63
+00:03:11,090 --> 00:03:13,300
+And so, today, we're
+going to be talking
+
+64
+00:03:13,300 --> 00:03:14,550
+about three different methods.
+
+65
+00:03:14,550 --> 00:03:17,520
+We'll talk about dynamic
+Bayesian networks as a way
+
+66
+00:03:17,520 --> 00:03:21,140
+to approach, understanding
+the histone code.
+
+67
+00:03:21,140 --> 00:03:24,580
+We'll talk about how to
+classify factor binding,
+
+68
+00:03:24,580 --> 00:03:27,180
+using log likelihood ratios.
+
+69
+00:03:27,180 --> 00:03:29,280
+And finally, we'll
+turn to our friend,
+
+70
+00:03:29,280 --> 00:03:33,250
+the hypergeometric
+distribution to analyze
+
+71
+00:03:33,250 --> 00:03:35,200
+which locations
+in the genome are
+
+72
+00:03:35,200 --> 00:03:36,430
+interacting with one another.
+
+73
+00:03:39,010 --> 00:03:43,680
+So let's begin with
+establishing a vocabulary.
+
+74
+00:03:43,680 --> 00:03:46,230
+I'm sure some of you
+have seen this before.
+
+75
+00:03:46,230 --> 00:03:48,070
+This is the way
+that chromatin can
+
+76
+00:03:48,070 --> 00:03:50,630
+be thought of being organized
+at different levels.
+
+77
+00:03:50,630 --> 00:03:53,440
+There's the primary
+DNA sequence,
+
+78
+00:03:53,440 --> 00:03:58,930
+which can include
+methylated CPGs.
+
+79
+00:03:58,930 --> 00:04:01,820
+That's cysteine,
+phosphate, guanine.
+
+80
+00:04:01,820 --> 00:04:09,470
+And the nice thing about
+that is that it's symmetrical
+
+81
+00:04:09,470 --> 00:04:15,830
+so that when you have a CPG,
+a methyltransferase during DNA
+
+82
+00:04:15,830 --> 00:04:18,050
+replication can copy
+that methy mark over.
+
+83
+00:04:18,050 --> 00:04:20,910
+So it's a mark that's heritable.
+
+84
+00:04:20,910 --> 00:04:23,880
+The next level down
+are histone tails.
+
+85
+00:04:23,880 --> 00:04:29,310
+On the amino terminus
+of histones H3 and H4,
+
+86
+00:04:29,310 --> 00:04:32,060
+different chemical
+modifications can be made,
+
+87
+00:04:32,060 --> 00:04:33,960
+and they serve as
+sign posts, as we'll
+
+88
+00:04:33,960 --> 00:04:35,739
+see, to give us
+clues about what's
+
+89
+00:04:35,739 --> 00:04:37,780
+going on in the genome in
+that proximal location.
+
+90
+00:04:40,710 --> 00:04:43,340
+The next level down
+is, whether or not
+
+91
+00:04:43,340 --> 00:04:46,830
+the chromatin is
+compacted or not.
+
+92
+00:04:46,830 --> 00:04:48,630
+Whether it's open or closed.
+
+93
+00:04:48,630 --> 00:04:50,360
+And that relates
+to whether or not
+
+94
+00:04:50,360 --> 00:04:54,260
+DNA binding proteins are
+actually on the genome.
+
+95
+00:04:54,260 --> 00:04:57,380
+And finally, certain
+domains of the genome
+
+96
+00:04:57,380 --> 00:05:00,160
+can be associated with
+the nuclear lamina.
+
+97
+00:05:00,160 --> 00:05:03,880
+And so they're different levels
+of organization of chromatin.
+
+98
+00:05:03,880 --> 00:05:08,620
+And we'll be exploring
+all of these today.
+
+99
+00:05:08,620 --> 00:05:13,690
+So the cartoon
+version of the way
+
+100
+00:05:13,690 --> 00:05:20,260
+that the genome is
+organized is that at the top
+
+101
+00:05:20,260 --> 00:05:22,080
+we have a transcribed gene.
+
+102
+00:05:22,080 --> 00:05:24,480
+And you can see that
+there's an enhancer that
+
+103
+00:05:24,480 --> 00:05:29,310
+is interacting with the RNA
+polymerase II start site.
+
+104
+00:05:29,310 --> 00:05:31,120
+And you can see
+varied histone marks
+
+105
+00:05:31,120 --> 00:05:34,920
+that are associated with
+this activated gene.
+
+106
+00:05:34,920 --> 00:05:36,640
+There are also marks
+that are associated
+
+107
+00:05:36,640 --> 00:05:37,860
+with that active enhancer.
+
+108
+00:05:40,790 --> 00:05:44,040
+Down below, you see
+an inactive gene.
+
+109
+00:05:44,040 --> 00:05:46,650
+And you can see that there's
+a boundary element that's
+
+110
+00:05:46,650 --> 00:05:50,240
+bound by CTCF, which,
+one of its function
+
+111
+00:05:50,240 --> 00:05:53,820
+is to serve as a genomic
+insulator, which insulates
+
+112
+00:05:53,820 --> 00:05:58,140
+the effect of the enhancer
+above from the gene below.
+
+113
+00:05:58,140 --> 00:06:01,790
+So through careful biochemical
+analysis over the years,
+
+114
+00:06:01,790 --> 00:06:10,620
+these different marks have been
+analyzed and characterized.
+
+115
+00:06:10,620 --> 00:06:15,340
+And a general paradigm
+for understanding
+
+116
+00:06:15,340 --> 00:06:19,410
+how the marks transition
+as genes are activated
+
+117
+00:06:19,410 --> 00:06:21,640
+is shown here.
+
+118
+00:06:21,640 --> 00:06:24,870
+So genes that are
+fairly active and cycle
+
+119
+00:06:24,870 --> 00:06:27,880
+between active and
+inactive states typically
+
+120
+00:06:27,880 --> 00:06:31,750
+have a high CPG content
+in their promoters.
+
+121
+00:06:31,750 --> 00:06:33,750
+And transition is
+shown on the left.
+
+122
+00:06:33,750 --> 00:06:37,140
+Where in the repressed
+state on the bottom,
+
+123
+00:06:37,140 --> 00:06:41,990
+they're marked by
+H3K27 trimethyl marks.
+
+124
+00:06:41,990 --> 00:06:47,210
+When they're poised, they have
+both H3K4 trimethyl and H3K27
+
+125
+00:06:47,210 --> 00:06:48,490
+trimethyl.
+
+126
+00:06:48,490 --> 00:06:55,320
+And when they're active, they
+only have H3K4 trimethyl.
+
+127
+00:06:55,320 --> 00:06:59,200
+And on the right hand side are
+genes that are less active.
+
+128
+00:06:59,200 --> 00:07:02,480
+So in their completely shut down
+state, they may have no marks,
+
+129
+00:07:02,480 --> 00:07:04,650
+but the DNA is
+methylated, silencing
+
+130
+00:07:04,650 --> 00:07:06,670
+that region of the genome.
+
+131
+00:07:06,670 --> 00:07:11,280
+And other marks then,
+culminating in H3K4 trimethyl
+
+132
+00:07:11,280 --> 00:07:15,320
+once again when they
+become active at the top.
+
+133
+00:07:15,320 --> 00:07:20,040
+So I'm summarizing
+for you here, decades
+
+134
+00:07:20,040 --> 00:07:23,590
+of research in histone marks.
+
+135
+00:07:23,590 --> 00:07:28,520
+And it has been
+summarized in figures
+
+136
+00:07:28,520 --> 00:07:33,627
+like this, where you can
+look at different classes
+
+137
+00:07:33,627 --> 00:07:35,960
+of genetic elements-- whether
+they be promoters in front
+
+138
+00:07:35,960 --> 00:07:40,330
+of genes, gene bodies
+themselves, enhancers,
+
+139
+00:07:40,330 --> 00:07:42,830
+or the large scale
+repression of the genome--
+
+140
+00:07:42,830 --> 00:07:44,840
+and you can look
+at the associated
+
+141
+00:07:44,840 --> 00:07:47,985
+marks with those
+characteristic elements.
+
+142
+00:07:52,180 --> 00:07:56,340
+OK, so, how can we
+learn this de novo?
+
+143
+00:07:56,340 --> 00:07:59,520
+That is, you could
+memorize, and of course it's
+
+144
+00:07:59,520 --> 00:08:01,694
+important to
+understand, for example,
+
+145
+00:08:01,694 --> 00:08:03,360
+if you want to look
+for active enhancers
+
+146
+00:08:03,360 --> 00:08:05,470
+in the genome, that
+looking for things
+
+147
+00:08:05,470 --> 00:08:12,657
+like H3K4 monomethyl and H3K7
+27 acetyl marks together,
+
+148
+00:08:12,657 --> 00:08:14,740
+would give you a good clue
+where the enhancers are
+
+149
+00:08:14,740 --> 00:08:17,520
+in the genome that are active.
+
+150
+00:08:17,520 --> 00:08:20,150
+But if we want to
+learn all this de novo,
+
+151
+00:08:20,150 --> 00:08:23,622
+without having to memorize it
+or rely upon the literature,
+
+152
+00:08:23,622 --> 00:08:26,080
+the great thing is that there's
+a lot of data out there now
+
+153
+00:08:26,080 --> 00:08:29,990
+that characterizes, or profiles
+all these marks, genome-wide,
+
+154
+00:08:29,990 --> 00:08:32,080
+in variety of cellular states.
+
+155
+00:08:32,080 --> 00:08:34,799
+And there's the epigenome
+roadmap initiative
+
+156
+00:08:34,799 --> 00:08:38,820
+to look at this in hundreds
+of different cell types.
+
+157
+00:08:38,820 --> 00:08:43,770
+So, what is the histone code?
+
+158
+00:08:43,770 --> 00:08:48,600
+That is, how can we
+unravel the different marks
+
+159
+00:08:48,600 --> 00:08:51,650
+present in the genome and
+understand what they mean?
+
+160
+00:08:51,650 --> 00:08:54,810
+Because the genome doesn't come
+ready-made with those little
+
+161
+00:08:54,810 --> 00:08:57,560
+cute labels that we had on
+it-- enhancer, gene body,
+
+162
+00:08:57,560 --> 00:08:59,030
+and so forth.
+
+163
+00:08:59,030 --> 00:09:00,900
+So somehow, if we
+want to understand
+
+164
+00:09:00,900 --> 00:09:03,360
+the grammar of the
+genome and its function,
+
+165
+00:09:03,360 --> 00:09:07,650
+we're going to need to be
+able to annotate it, hopefully
+
+166
+00:09:07,650 --> 00:09:11,210
+with computational help.
+
+167
+00:09:11,210 --> 00:09:13,890
+So here's a picture of
+what typical data looks
+
+168
+00:09:13,890 --> 00:09:15,970
+like along the genome.
+
+169
+00:09:15,970 --> 00:09:19,500
+So, obviously you can't
+read any of the legends
+
+170
+00:09:19,500 --> 00:09:20,480
+on the left-hand side.
+
+171
+00:09:20,480 --> 00:09:22,063
+If you want to look
+at the slides that
+
+172
+00:09:22,063 --> 00:09:24,850
+are posted on Stellar, you
+can see the actual marks.
+
+173
+00:09:24,850 --> 00:09:26,780
+But the reason I posted
+this is because you
+
+174
+00:09:26,780 --> 00:09:28,821
+can see the little pink
+thing at the top-- that's
+
+175
+00:09:28,821 --> 00:09:32,360
+where the RNA transcript has
+been mapped to the genome.
+
+176
+00:09:32,360 --> 00:09:35,450
+The actual annotated
+genes are above.
+
+177
+00:09:35,450 --> 00:09:37,740
+And then down below you
+can see a whole collection
+
+178
+00:09:37,740 --> 00:09:41,510
+of histone marks and other
+kinds of chromatin information
+
+179
+00:09:41,510 --> 00:09:43,340
+that have been
+mapped to the genome
+
+180
+00:09:43,340 --> 00:09:46,710
+and spatially
+create patterns that
+
+181
+00:09:46,710 --> 00:09:52,880
+are suggestive of the function
+of the genomic elements,
+
+182
+00:09:52,880 --> 00:09:54,600
+if they're properly interpreted.
+
+183
+00:09:54,600 --> 00:10:01,460
+And below, you see in blue,
+the binding of different TFs,
+
+184
+00:10:01,460 --> 00:10:04,670
+as determined by ChIP-seq.
+
+185
+00:10:04,670 --> 00:10:08,600
+So, what we would
+like to do then,
+
+186
+00:10:08,600 --> 00:10:13,130
+is to take this
+kind of information
+
+187
+00:10:13,130 --> 00:10:15,810
+and automatically learn,
+or automatically annotate
+
+188
+00:10:15,810 --> 00:10:20,172
+the genome as to its
+functional elements.
+
+189
+00:10:20,172 --> 00:10:21,880
+Let me stop here and
+ask, how many people
+
+190
+00:10:21,880 --> 00:10:27,630
+have seen histone mark
+information before?
+
+191
+00:10:27,630 --> 00:10:28,820
+OK.
+
+192
+00:10:28,820 --> 00:10:32,860
+And how many people have
+used it in their research?
+
+193
+00:10:32,860 --> 00:10:35,710
+Not too many-- a couple people?
+
+194
+00:10:35,710 --> 00:10:37,410
+OK.
+
+195
+00:10:37,410 --> 00:10:40,240
+So it's getting
+quite easy to collect
+
+196
+00:10:40,240 --> 00:10:45,690
+and there are a couple of ways
+of analyzing this kind of data,
+
+197
+00:10:45,690 --> 00:10:47,760
+genome-wide.
+
+198
+00:10:47,760 --> 00:10:51,640
+One way is that we could
+run a hidden Markov
+
+199
+00:10:51,640 --> 00:10:55,670
+model over these data
+and predict states
+
+200
+00:10:55,670 --> 00:10:56,730
+at regular intervals.
+
+201
+00:10:56,730 --> 00:10:59,460
+For example, every 200
+bases down the genome,
+
+202
+00:10:59,460 --> 00:11:02,920
+and see how the HMM transition
+from state to state and let
+
+203
+00:11:02,920 --> 00:11:08,330
+the state suggest what the
+underlying genome elements
+
+204
+00:11:08,330 --> 00:11:10,920
+that we're doing.
+
+205
+00:11:10,920 --> 00:11:16,220
+Another way is to use a
+dynamic Bayesian network.
+
+206
+00:11:16,220 --> 00:11:19,790
+So a dynamic Bayesian network
+is simply a Bayesian network.
+
+207
+00:11:19,790 --> 00:11:22,760
+We've talked about those before.
+
+208
+00:11:22,760 --> 00:11:25,810
+And it models data
+sampled along the genome.
+
+209
+00:11:25,810 --> 00:11:29,510
+And so it's a directed
+acyclic graph.
+
+210
+00:11:29,510 --> 00:11:31,580
+There are tools out
+there that allow
+
+211
+00:11:31,580 --> 00:11:34,850
+us to learn these
+models directly.
+
+212
+00:11:34,850 --> 00:11:40,140
+And it allows us, as we'll
+see, to analyze the genome
+
+213
+00:11:40,140 --> 00:11:45,450
+at high resolution, and
+to handle missing data.
+
+214
+00:11:45,450 --> 00:11:47,010
+So we'll be talking
+about Segway,
+
+215
+00:11:47,010 --> 00:11:50,470
+which is a particular
+dynamic Bayesian network that
+
+216
+00:11:50,470 --> 00:11:52,220
+takes the kind of data
+we saw on the slide
+
+217
+00:11:52,220 --> 00:11:58,500
+before and essentially parses
+it into labels that allow us
+
+218
+00:11:58,500 --> 00:12:01,640
+to assign function to
+different genomic elements.
+
+219
+00:12:01,640 --> 00:12:04,670
+And it does this in
+an unsupervised way.
+
+220
+00:12:04,670 --> 00:12:07,980
+What I mean by that is
+that it is automatically
+
+221
+00:12:07,980 --> 00:12:12,100
+learning the states,
+and then afterwards we
+
+222
+00:12:12,100 --> 00:12:14,950
+can look at the states and
+assign meaning to them.
+
+223
+00:12:17,660 --> 00:12:23,360
+So here is the dynamic Bayesian
+network that Segway uses.
+
+224
+00:12:23,360 --> 00:12:26,020
+And let me explain
+this somewhat scary
+
+225
+00:12:26,020 --> 00:12:28,970
+looking diagram of lots of
+little boxes and pointers
+
+226
+00:12:28,970 --> 00:12:31,160
+to you.
+
+227
+00:12:31,160 --> 00:12:36,380
+The genome is described
+through the variables
+
+228
+00:12:36,380 --> 00:12:38,880
+on the bottom-- the
+observation variables,
+
+229
+00:12:38,880 --> 00:12:41,860
+going from left to
+right, where each base is
+
+230
+00:12:41,860 --> 00:12:44,440
+a separate observation
+variable which consists
+
+231
+00:12:44,440 --> 00:12:47,730
+of the level of a
+particular histone mark
+
+232
+00:12:47,730 --> 00:12:51,720
+at a particular based position
+as described by mapped
+
+233
+00:12:51,720 --> 00:12:54,420
+reads to that location.
+
+234
+00:12:54,420 --> 00:12:56,645
+The little square
+box-- the little boxes
+
+235
+00:12:56,645 --> 00:12:59,050
+that says "x" on it with the
+other small print you can't
+
+236
+00:12:59,050 --> 00:13:01,880
+read-- is simply an
+indicator, whether or not
+
+237
+00:13:01,880 --> 00:13:03,890
+the data is present.
+
+238
+00:13:03,890 --> 00:13:06,940
+If the data is absent, we
+don't try and model it.
+
+239
+00:13:06,940 --> 00:13:09,860
+If that box contains a zero,
+we don't model the data.
+
+240
+00:13:09,860 --> 00:13:13,960
+If the box is one, then we
+attempt to model the data.
+
+241
+00:13:13,960 --> 00:13:16,710
+And the most important part of
+the dynamic Bayesian network
+
+242
+00:13:16,710 --> 00:13:20,960
+is the q box above, where
+those are the states.
+
+243
+00:13:20,960 --> 00:13:25,330
+And each state describes an
+ensemble of different histone
+
+244
+00:13:25,330 --> 00:13:27,380
+marks that are output.
+
+245
+00:13:27,380 --> 00:13:30,260
+And so the key thing
+is that for each state
+
+246
+00:13:30,260 --> 00:13:33,460
+we learn what marks
+it's outputting.
+
+247
+00:13:33,460 --> 00:13:35,240
+And the model learns
+this automatically
+
+248
+00:13:35,240 --> 00:13:37,920
+through a learning phase.
+
+249
+00:13:37,920 --> 00:13:42,970
+The boxes above
+simply are a counter.
+
+250
+00:13:42,970 --> 00:13:47,420
+And the counter allows us
+to define maximum lengths
+
+251
+00:13:47,420 --> 00:13:51,720
+for particular states, so
+states don't run on forever.
+
+252
+00:13:51,720 --> 00:13:53,650
+So unlike a hidden
+Markov model that
+
+253
+00:13:53,650 --> 00:13:55,460
+doesn't have that
+kind of control,
+
+254
+00:13:55,460 --> 00:14:00,880
+we can adjust how long we
+want the states to last.
+
+255
+00:14:00,880 --> 00:14:05,880
+So this model, if you
+turned it 90 degrees
+
+256
+00:14:05,880 --> 00:14:10,220
+and rotated it clockwise,
+would be more familiar to you
+
+257
+00:14:10,220 --> 00:14:12,585
+because all the arrows
+would be flowing
+
+258
+00:14:12,585 --> 00:14:14,200
+from the top of the screen down.
+
+259
+00:14:14,200 --> 00:14:17,990
+There are no cycles in this
+directed acyclic graph.
+
+260
+00:14:17,990 --> 00:14:21,271
+And therefore, it can be
+probabilistically viewed
+
+261
+00:14:21,271 --> 00:14:22,645
+and learned in
+the same framework
+
+262
+00:14:22,645 --> 00:14:24,970
+that we learn a
+Bayesian network.
+
+263
+00:14:24,970 --> 00:14:27,790
+In fact, it is a
+Bayesian network.
+
+264
+00:14:27,790 --> 00:14:29,660
+The reason it's
+called dynamic is
+
+265
+00:14:29,660 --> 00:14:33,310
+because we are learning
+temporal information,
+
+266
+00:14:33,310 --> 00:14:36,650
+or in this case,
+spatial information
+
+267
+00:14:36,650 --> 00:14:38,850
+with these different
+observations
+
+268
+00:14:38,850 --> 00:14:42,540
+along the bottom of the model.
+
+269
+00:14:42,540 --> 00:14:44,760
+Now before I go on,
+perhaps somebody
+
+270
+00:14:44,760 --> 00:14:46,760
+could ask me a question
+about the details
+
+271
+00:14:46,760 --> 00:14:49,180
+of these dynamic
+Bayesian networks,
+
+272
+00:14:49,180 --> 00:14:53,330
+because the ability to
+automatically assign labels
+
+273
+00:14:53,330 --> 00:14:57,790
+to genome function, given
+the histone marks is really
+
+274
+00:14:57,790 --> 00:15:00,450
+a key thing that's gone on
+the last couple of years.
+
+275
+00:15:00,450 --> 00:15:01,401
+Yes?
+
+276
+00:15:01,401 --> 00:15:03,325
+AUDIENCE: Could you
+re-explain that--
+
+277
+00:15:03,325 --> 00:15:06,700
+what the labeled-- the second
+[INAUDIBLE] was all about?
+
+278
+00:15:06,700 --> 00:15:07,610
+PROFESSOR: Sure.
+
+279
+00:15:07,610 --> 00:15:16,300
+So the Q label is right
+here, these labels.
+
+280
+00:15:16,300 --> 00:15:19,050
+And each of these
+Q labels defines
+
+281
+00:15:19,050 --> 00:15:20,290
+one of a number of states.
+
+282
+00:15:20,290 --> 00:15:23,196
+For example, 24
+different states.
+
+283
+00:15:23,196 --> 00:15:28,420
+In a given state, describes
+the expected output
+
+284
+00:15:28,420 --> 00:15:32,100
+in terms of what histone marks
+are present in that state.
+
+285
+00:15:32,100 --> 00:15:34,701
+So it's going to
+describe the means of all
+
+286
+00:15:34,701 --> 00:15:35,950
+those different histone marks.
+
+287
+00:15:35,950 --> 00:15:38,570
+24 different means,
+let's say, of the marks
+
+288
+00:15:38,570 --> 00:15:41,090
+it's going to output.
+
+289
+00:15:41,090 --> 00:15:46,160
+And the job of fitting the model
+is picking the right states,
+
+290
+00:15:46,160 --> 00:15:48,770
+or a set of 24
+states, each of which
+
+291
+00:15:48,770 --> 00:15:53,540
+is most descriptive of its
+particular subset of chromatin
+
+292
+00:15:53,540 --> 00:15:54,990
+marks.
+
+293
+00:15:54,990 --> 00:15:59,100
+And then defining how we
+transition between states.
+
+294
+00:15:59,100 --> 00:16:04,000
+So we not only need to
+define what a state means
+
+295
+00:16:04,000 --> 00:16:07,150
+in terms of the marks
+that it outputs, but also
+
+296
+00:16:07,150 --> 00:16:11,290
+when we transition from
+one state to another.
+
+297
+00:16:11,290 --> 00:16:13,244
+Does that make sense to you?
+
+298
+00:16:13,244 --> 00:16:16,632
+AUDIENCE: So I know it
+states the information that
+
+299
+00:16:16,632 --> 00:16:18,568
+tells at each of the Q boxes.
+
+300
+00:16:18,568 --> 00:16:22,260
+Is that a series
+of probabilities?
+
+301
+00:16:22,260 --> 00:16:24,592
+Or is it something else?
+
+302
+00:16:24,592 --> 00:16:26,970
+PROFESSOR: It's actually
+a discrete number, right.
+
+303
+00:16:26,970 --> 00:16:30,000
+So it actually is a
+single-- there's only
+
+304
+00:16:30,000 --> 00:16:31,520
+a single state in each Q box.
+
+305
+00:16:31,520 --> 00:16:33,570
+So it might be a
+number between 1 and 24
+
+306
+00:16:33,570 --> 00:16:35,190
+that we're going to learn.
+
+307
+00:16:35,190 --> 00:16:37,460
+And based upon
+that number, we're
+
+308
+00:16:37,460 --> 00:16:41,970
+going to have a
+description of the marks
+
+309
+00:16:41,970 --> 00:16:45,190
+that we would expect to
+see at the observation
+
+310
+00:16:45,190 --> 00:16:47,810
+at that particular
+genomic location.
+
+311
+00:16:47,810 --> 00:16:53,960
+And so our job here is to
+learn those 24 different states
+
+312
+00:16:53,960 --> 00:16:58,910
+and what they output
+in the training phase,
+
+313
+00:16:58,910 --> 00:17:00,870
+and then once we've
+trained the model,
+
+314
+00:17:00,870 --> 00:17:03,430
+we can go back and look
+at other held out data,
+
+315
+00:17:03,430 --> 00:17:04,899
+and then we can
+decode the genome.
+
+316
+00:17:04,899 --> 00:17:06,690
+Because we know what
+the states are, and we
+
+317
+00:17:06,690 --> 00:17:09,190
+know what they are
+supposed to be producing,
+
+318
+00:17:09,190 --> 00:17:13,010
+we can use a Verterbi decoder
+and go back and-- as we
+
+319
+00:17:13,010 --> 00:17:15,930
+did with the HMM and we
+learned the HMM-- go back
+
+320
+00:17:15,930 --> 00:17:19,550
+and read off on the
+histone mark sequence
+
+321
+00:17:19,550 --> 00:17:21,640
+and figure out what
+their relative states are
+
+322
+00:17:21,640 --> 00:17:25,569
+for each base position
+of the genome.
+
+323
+00:17:25,569 --> 00:17:27,079
+Is that helpful?
+
+324
+00:17:27,079 --> 00:17:29,314
+Yes?
+
+325
+00:17:29,314 --> 00:17:32,920
+Any other questions about
+dynamic Bayesian networks?
+
+326
+00:17:32,920 --> 00:17:33,790
+Yes?
+
+327
+00:17:33,790 --> 00:17:36,086
+AUDIENCE: How do you choose
+the number of states?
+
+328
+00:17:36,086 --> 00:17:37,710
+PROFESSOR: That's a
+very good question.
+
+329
+00:17:37,710 --> 00:17:40,220
+How do you choose
+the number of states?
+
+330
+00:17:40,220 --> 00:17:43,320
+Well, if you choose
+too many states,
+
+331
+00:17:43,320 --> 00:17:45,300
+they obviously don't
+really become descriptive
+
+332
+00:17:45,300 --> 00:17:46,890
+and you can become
+over fit and then
+
+333
+00:17:46,890 --> 00:17:48,985
+can start fitting
+noise to your model.
+
+334
+00:17:48,985 --> 00:17:52,260
+And if you choose too few
+states, what will happen
+
+335
+00:17:52,260 --> 00:17:54,320
+is, that states can
+get collapsed together
+
+336
+00:17:54,320 --> 00:17:56,430
+and they won't be
+adequately descriptive.
+
+337
+00:17:56,430 --> 00:17:59,010
+The answer is, it's more
+or less trial and error.
+
+338
+00:17:59,010 --> 00:18:01,160
+There really isn't
+a principled way
+
+339
+00:18:01,160 --> 00:18:03,620
+to choose the right
+number of states
+
+340
+00:18:03,620 --> 00:18:05,580
+in this particular context.
+
+341
+00:18:05,580 --> 00:18:06,930
+Now, you could do--
+
+342
+00:18:06,930 --> 00:18:08,421
+AUDIENCE: What's
+the trial, then?
+
+343
+00:18:08,421 --> 00:18:10,906
+You run it and you
+get a set of things,
+
+344
+00:18:10,906 --> 00:18:12,727
+and what do you do
+with those labels?
+
+345
+00:18:12,727 --> 00:18:14,310
+PROFESSOR: What do
+you do with labels?
+
+346
+00:18:14,310 --> 00:18:17,260
+AUDIENCE: Yeah, how
+do you evaluate it?
+
+347
+00:18:17,260 --> 00:18:19,290
+PROFESSOR: You
+typically, in both
+
+348
+00:18:19,290 --> 00:18:23,690
+of these cases-- both in the
+case of chrome HMM and this--
+
+349
+00:18:23,690 --> 00:18:26,180
+you rely upon the
+previous literature.
+
+350
+00:18:26,180 --> 00:18:29,020
+And we saw on that
+slide earlier,
+
+351
+00:18:29,020 --> 00:18:31,780
+what marks are associated
+with what kinds of features.
+
+352
+00:18:31,780 --> 00:18:33,820
+So you use the prior
+literature and you
+
+353
+00:18:33,820 --> 00:18:36,720
+use what the states are telling
+you they're describing to try
+
+354
+00:18:36,720 --> 00:18:39,190
+and associate those
+states with what's
+
+355
+00:18:39,190 --> 00:18:41,540
+known about genome function.
+
+356
+00:18:44,641 --> 00:18:45,657
+All right, yes?
+
+357
+00:18:45,657 --> 00:18:47,656
+AUDIENCE: Where does that
+information concerning
+
+358
+00:18:47,656 --> 00:18:50,280
+the distance between
+states go again?
+
+359
+00:18:50,280 --> 00:18:51,711
+Like, the counter?
+
+360
+00:18:51,711 --> 00:18:53,619
+Like, how does that
+control how long
+
+361
+00:18:53,619 --> 00:18:55,309
+the states go on
+and whether or not--
+
+362
+00:18:55,309 --> 00:18:57,850
+PROFESSOR: What happens is that
+the counter at the top, the C
+
+363
+00:18:57,850 --> 00:19:03,200
+variables, influence the J
+variables you can see there.
+
+364
+00:19:03,200 --> 00:19:04,860
+When the J variable
+terms to a 1,
+
+365
+00:19:04,860 --> 00:19:07,290
+it forces the state transition.
+
+366
+00:19:07,290 --> 00:19:11,530
+So the counters count
+down and can then
+
+367
+00:19:11,530 --> 00:19:14,240
+force a state
+transition which will
+
+368
+00:19:14,240 --> 00:19:17,800
+cause the Q variable to change.
+
+369
+00:19:17,800 --> 00:19:22,040
+It's sort of a-- that particular
+formulation of this model
+
+370
+00:19:22,040 --> 00:19:24,750
+is a bit of a, sort
+of Rube Goldberg kind
+
+371
+00:19:24,750 --> 00:19:26,570
+of hackish kind of thing.
+
+372
+00:19:26,570 --> 00:19:29,135
+I think to make it get
+out of particular states.
+
+373
+00:19:33,210 --> 00:19:38,640
+But it works, as we'll
+see in just a moment.
+
+374
+00:19:38,640 --> 00:19:39,650
+OK.
+
+375
+00:19:39,650 --> 00:19:45,480
+So here's an example
+of it operating.
+
+376
+00:19:45,480 --> 00:19:50,400
+And you can see the different
+states on the y-axis here.
+
+377
+00:19:50,400 --> 00:19:53,250
+You can see the different
+state transitions
+
+378
+00:19:53,250 --> 00:19:55,060
+as we go down the genome.
+
+379
+00:19:55,060 --> 00:19:57,670
+And you can see the
+annotations that it's
+
+380
+00:19:57,670 --> 00:20:00,730
+outputting, corresponding
+to the histone marks.
+
+381
+00:20:00,730 --> 00:20:04,020
+And so what this
+is doing is it's
+
+382
+00:20:04,020 --> 00:20:08,130
+decoding for us what it thinks
+is going on in the genome,
+
+383
+00:20:08,130 --> 00:20:10,620
+solely with reference
+to the histone marks,
+
+384
+00:20:10,620 --> 00:20:15,180
+without reference to primary
+sequence or anything else.
+
+385
+00:20:15,180 --> 00:20:17,830
+And this kind of
+decoding is most useful
+
+386
+00:20:17,830 --> 00:20:22,340
+when we want to discover things
+like regulatory elements.
+
+387
+00:20:22,340 --> 00:20:27,600
+When we want to look for H3K4
+mono or dimethyl, and H3K27
+
+388
+00:20:27,600 --> 00:20:31,200
+acetyl for example, and identify
+those regions of the genome
+
+389
+00:20:31,200 --> 00:20:33,150
+that we think are
+active enhancers.
+
+390
+00:20:33,150 --> 00:20:33,650
+OK.
+
+391
+00:20:37,129 --> 00:20:40,120
+OK.
+
+392
+00:20:40,120 --> 00:20:48,310
+So, any questions at all about
+histone marks and decoding?
+
+393
+00:20:48,310 --> 00:20:50,610
+Do you get the
+general idea that you
+
+394
+00:20:50,610 --> 00:20:55,620
+can assay these histone
+marks through ChIP-seq using
+
+395
+00:20:55,620 --> 00:20:59,590
+antibodies that are specific
+to a particular mark.
+
+396
+00:20:59,590 --> 00:21:04,250
+Pull down the histones that
+are associated with DNA
+
+397
+00:21:04,250 --> 00:21:06,130
+with that mark and map
+them to the genome.
+
+398
+00:21:06,130 --> 00:21:10,910
+So we get one track for
+each ChIP-seq experiment.
+
+399
+00:21:10,910 --> 00:21:15,180
+We can profile all the marks
+that we think are relevant,
+
+400
+00:21:15,180 --> 00:21:18,470
+and then we can look at
+what those parks imply
+
+401
+00:21:18,470 --> 00:21:22,710
+about both the static
+structure of our genome,
+
+402
+00:21:22,710 --> 00:21:31,310
+and also how it's being
+used as cells differentiate
+
+403
+00:21:31,310 --> 00:21:34,191
+or in different
+environmental conditions.
+
+404
+00:21:34,191 --> 00:21:34,690
+OK.
+
+405
+00:21:37,950 --> 00:21:39,550
+OK.
+
+406
+00:21:39,550 --> 00:21:45,730
+So, let's go on, then,
+to the next step, which
+
+407
+00:21:45,730 --> 00:21:54,310
+is that if we understand the
+sort of epigenetics state,
+
+408
+00:21:54,310 --> 00:22:02,050
+how is that established and
+how is the opening of chromatin
+
+409
+00:22:02,050 --> 00:22:06,750
+regulated and how is it that
+factors find particular places
+
+410
+00:22:06,750 --> 00:22:09,460
+in the genome to bind?
+
+411
+00:22:09,460 --> 00:22:13,770
+So, the puzzle I talked
+to you about earlier
+
+412
+00:22:13,770 --> 00:22:15,900
+was that there are
+hundreds of thousands
+
+413
+00:22:15,900 --> 00:22:18,170
+of particular motifs
+in the genome,
+
+414
+00:22:18,170 --> 00:22:20,730
+but a very small
+number are actually
+
+415
+00:22:20,730 --> 00:22:24,170
+bound by regulatory factors.
+
+416
+00:22:24,170 --> 00:22:27,550
+And you might think
+that the difference
+
+417
+00:22:27,550 --> 00:22:31,430
+is that the ones that are bound
+have different DNA sequences.
+
+418
+00:22:31,430 --> 00:22:34,410
+But in fact, on the
+right-hand side, what we see
+
+419
+00:22:34,410 --> 00:22:38,194
+is that identical DNA sequences
+are bound differentially
+
+420
+00:22:38,194 --> 00:22:39,360
+in two different conditions.
+
+421
+00:22:39,360 --> 00:22:41,280
+Shown there are
+sites that are only
+
+422
+00:22:41,280 --> 00:22:44,300
+bound, for example,
+in endodermal tissues
+
+423
+00:22:44,300 --> 00:22:46,860
+or in ES cells.
+
+424
+00:22:46,860 --> 00:22:49,840
+So it isn't the sequence
+that's controlling
+
+425
+00:22:49,840 --> 00:22:54,010
+the specificity of the
+binding, it's something else.
+
+426
+00:22:54,010 --> 00:22:56,360
+And we'd like to figure out
+what that something else is.
+
+427
+00:22:56,360 --> 00:23:00,700
+We'd like to understand
+the rules that
+
+428
+00:23:00,700 --> 00:23:03,170
+govern where those factors
+are binding in the genome.
+
+429
+00:23:06,810 --> 00:23:12,400
+So a set of factors are
+known that bind to the genome
+
+430
+00:23:12,400 --> 00:23:13,140
+and open it.
+
+431
+00:23:13,140 --> 00:23:15,200
+They're called pioneer factors.
+
+432
+00:23:15,200 --> 00:23:18,220
+There are some well known
+pioneer factors like FoxA
+
+433
+00:23:18,220 --> 00:23:22,930
+and some of the iPS
+reprogramming factors.
+
+434
+00:23:22,930 --> 00:23:26,080
+And the idea is that
+they're able to bind
+
+435
+00:23:26,080 --> 00:23:28,990
+to closed chromatin
+and to open it up
+
+436
+00:23:28,990 --> 00:23:33,220
+to provide accessibility
+to other factors.
+
+437
+00:23:33,220 --> 00:23:36,220
+So what we would
+like to do, is to see
+
+438
+00:23:36,220 --> 00:23:39,570
+if there's a way that we
+could, both understand
+
+439
+00:23:39,570 --> 00:23:41,690
+how to discover those
+factors automatically,
+
+440
+00:23:41,690 --> 00:23:45,790
+using a computational
+method, and secondarily,
+
+441
+00:23:45,790 --> 00:23:49,190
+understand where factors are
+binding in a single experiment
+
+442
+00:23:49,190 --> 00:23:50,140
+across the genome.
+
+443
+00:23:53,320 --> 00:23:57,279
+So the results I'm going to
+show you can be summarized here.
+
+444
+00:23:57,279 --> 00:23:58,820
+I'm going to show
+you a method called
+
+445
+00:23:58,820 --> 00:24:04,070
+PIQ that can predict where
+TFs bind from DNase-seq data
+
+446
+00:24:04,070 --> 00:24:05,525
+that I'll describe in a moment.
+
+447
+00:24:05,525 --> 00:24:08,020
+We'll identify pioneer factors.
+
+448
+00:24:08,020 --> 00:24:10,860
+We'll show that certain of these
+pioneer factors are directional
+
+449
+00:24:10,860 --> 00:24:14,560
+and only operate in
+one way on the genome.
+
+450
+00:24:14,560 --> 00:24:17,460
+And finally, that the
+opening of the genome
+
+451
+00:24:17,460 --> 00:24:22,350
+allow subtler factors to come
+in and to bind to the genome.
+
+452
+00:24:22,350 --> 00:24:27,280
+So let's begin with
+what DNase-seq data is,
+
+453
+00:24:27,280 --> 00:24:29,420
+and how we can use
+it to predict where
+
+454
+00:24:29,420 --> 00:24:30,670
+TFs are binding to the genome.
+
+455
+00:24:33,700 --> 00:24:37,410
+So DNase-seq is a
+methodology for exploring
+
+456
+00:24:37,410 --> 00:24:40,320
+what parts of the
+genome are open.
+
+457
+00:24:40,320 --> 00:24:42,330
+So here's the idea.
+
+458
+00:24:42,330 --> 00:24:48,190
+You take your cell
+and you expose it,
+
+459
+00:24:48,190 --> 00:24:52,280
+once you've isolated the
+chromatin to DNase-1 which
+
+460
+00:24:52,280 --> 00:24:55,670
+will cut or nick
+DNA at locations
+
+461
+00:24:55,670 --> 00:24:59,130
+where the DNA is open.
+
+462
+00:24:59,130 --> 00:25:01,885
+You then can collect the
+DNA, size separate it
+
+463
+00:25:01,885 --> 00:25:02,842
+and sequence it.
+
+464
+00:25:02,842 --> 00:25:04,300
+And thus, you're
+going to have more
+
+465
+00:25:04,300 --> 00:25:09,240
+reads where the
+DNA has been open,
+
+466
+00:25:09,240 --> 00:25:11,365
+and less reads were it's
+protected by proteins.
+
+467
+00:25:13,910 --> 00:25:16,810
+So the cartoon below
+gives you an idea
+
+468
+00:25:16,810 --> 00:25:20,670
+that, where there are
+histones-- each histone
+
+469
+00:25:20,670 --> 00:25:23,910
+has about 147 bases of
+DNA wrapped around it.
+
+470
+00:25:23,910 --> 00:25:28,230
+Or where there are other
+proteins hiding the DNA,
+
+471
+00:25:28,230 --> 00:25:32,010
+you're going to cast
+shadows on this.
+
+472
+00:25:32,010 --> 00:25:37,520
+So we're going to be looking
+at the shadows and also
+
+473
+00:25:37,520 --> 00:25:40,670
+the accessible parts,
+by looking directly
+
+474
+00:25:40,670 --> 00:25:41,845
+at the DNase-seq reads.
+
+475
+00:25:45,040 --> 00:25:48,180
+So if we sequence
+deeply enough we
+
+476
+00:25:48,180 --> 00:25:53,140
+can understand that
+each binding protein has
+
+477
+00:25:53,140 --> 00:25:58,500
+its own particular
+profile of protection.
+
+478
+00:25:58,500 --> 00:26:01,330
+So if you look at these
+different proteins,
+
+479
+00:26:01,330 --> 00:26:05,010
+they cast particular
+shadows on the genome.
+
+480
+00:26:05,010 --> 00:26:09,370
+I'm showing here a window
+that's 400 base pairs wide.
+
+481
+00:26:09,370 --> 00:26:15,630
+This is the average of thousands
+of different binding instances.
+
+482
+00:26:15,630 --> 00:26:18,480
+So this is not one binding
+instance on the top row.
+
+483
+00:26:18,480 --> 00:26:21,550
+You can see how CTCF
+and other factors
+
+484
+00:26:21,550 --> 00:26:27,470
+have particular shadows
+they cast or profiles.
+
+485
+00:26:27,470 --> 00:26:29,214
+Yes?
+
+486
+00:26:29,214 --> 00:26:33,038
+AUDIENCE: How do you know
+which factor was at which site?
+
+487
+00:26:33,038 --> 00:26:33,994
+[INAUDIBLE].
+
+488
+00:26:33,994 --> 00:26:36,384
+PROFESSOR: How do we know
+which factor is at which site?
+
+489
+00:26:36,384 --> 00:26:38,140
+By the motifs that
+are under the site.
+
+490
+00:26:41,400 --> 00:26:42,810
+And what's
+interesting about CTCF
+
+491
+00:26:42,810 --> 00:26:47,160
+is that you can actually see
+how it phase the nucleosomes.
+
+492
+00:26:47,160 --> 00:26:51,090
+You can see the, sort of,
+periodic pattern in CTCF.
+
+493
+00:26:51,090 --> 00:26:55,200
+And those dips are where
+the nucleosomes are.
+
+494
+00:26:55,200 --> 00:26:58,570
+There's a lot you can
+tell from these patterns
+
+495
+00:26:58,570 --> 00:27:04,340
+about the underlying molecular
+mechanism of what's going on.
+
+496
+00:27:04,340 --> 00:27:08,530
+Now, you can see at the very
+bottom, the aggregate CTCF
+
+497
+00:27:08,530 --> 00:27:10,020
+profile.
+
+498
+00:27:10,020 --> 00:27:13,060
+And if all the CTCF
+bindings looked like that,
+
+499
+00:27:13,060 --> 00:27:14,840
+it'd be really easy.
+
+500
+00:27:14,840 --> 00:27:18,180
+But above it, as I've shown
+you what an individual CTCF
+
+501
+00:27:18,180 --> 00:27:21,040
+site looks like, you can
+see how sparse it is.
+
+502
+00:27:21,040 --> 00:27:23,520
+We just don't get
+enough re-density to be
+
+503
+00:27:23,520 --> 00:27:28,730
+able to recover a beautiful
+protection profile like that.
+
+504
+00:27:28,730 --> 00:27:30,810
+So we're always working
+against a lot of noise
+
+505
+00:27:30,810 --> 00:27:33,330
+in this kind of
+biological environment.
+
+506
+00:27:33,330 --> 00:27:35,220
+And so our
+computational technique
+
+507
+00:27:35,220 --> 00:27:37,030
+will need to come up
+with an adequate model
+
+508
+00:27:37,030 --> 00:27:39,150
+to overcome that noise.
+
+509
+00:27:39,150 --> 00:27:41,970
+But if we can, right,
+the great promise
+
+510
+00:27:41,970 --> 00:27:44,990
+is that with a single
+experiment we'll
+
+511
+00:27:44,990 --> 00:27:47,910
+be able to identify where all
+these different factors are
+
+512
+00:27:47,910 --> 00:27:53,160
+binding to the genome
+from one set of data.
+
+513
+00:27:53,160 --> 00:28:00,100
+So, just reiterating now,
+if you think about the input
+
+514
+00:28:00,100 --> 00:28:04,460
+to this algorithm-- we're
+going to have three things
+
+515
+00:28:04,460 --> 00:28:06,200
+that we input to the algorithm.
+
+516
+00:28:06,200 --> 00:28:09,990
+We input the original
+genome sequence.
+
+517
+00:28:09,990 --> 00:28:12,780
+We input the motifs
+of the factors
+
+518
+00:28:12,780 --> 00:28:16,550
+that we care about, that
+we think are interesting.
+
+519
+00:28:16,550 --> 00:28:20,510
+And we input the
+DNase-seq data that
+
+520
+00:28:20,510 --> 00:28:23,090
+has been aligned to the genome.
+
+521
+00:28:23,090 --> 00:28:25,070
+So those are the three inputs.
+
+522
+00:28:25,070 --> 00:28:27,310
+And the output of
+the algorithm is
+
+523
+00:28:27,310 --> 00:28:31,810
+going to be the predictions
+of which motifs are occupied
+
+524
+00:28:31,810 --> 00:28:35,780
+by the factors,
+probabilistically.
+
+525
+00:28:35,780 --> 00:28:39,490
+And in order to do
+that, for each protein
+
+526
+00:28:39,490 --> 00:28:43,070
+we need to learn its
+protection profile.
+
+527
+00:28:43,070 --> 00:28:45,370
+And we need to
+score that profile
+
+528
+00:28:45,370 --> 00:28:48,040
+against each
+instance of the motif
+
+529
+00:28:48,040 --> 00:28:50,440
+to see whether or not we
+think the protein is actually
+
+530
+00:28:50,440 --> 00:28:54,498
+sitting at that
+location in the genome.
+
+531
+00:28:54,498 --> 00:28:56,704
+Any questions at all about that?
+
+532
+00:29:03,165 --> 00:29:04,160
+No?
+
+533
+00:29:04,160 --> 00:29:07,010
+OK.
+
+534
+00:29:07,010 --> 00:29:08,280
+Don't hesitate to stop me.
+
+535
+00:29:08,280 --> 00:29:12,790
+So the design goals for this
+particular computational
+
+536
+00:29:12,790 --> 00:29:16,140
+algorithm, as I said earlier,
+is resistance to low coverage
+
+537
+00:29:16,140 --> 00:29:17,110
+and lots of noise.
+
+538
+00:29:17,110 --> 00:29:20,010
+To be able to handle
+multiple experiment once,
+
+539
+00:29:20,010 --> 00:29:23,070
+it has to work on the
+entire mammalian genome.
+
+540
+00:29:23,070 --> 00:29:25,390
+It has to have high
+spatial accuracy
+
+541
+00:29:25,390 --> 00:29:31,890
+and it has to have good
+behavior in bad cases.
+
+542
+00:29:31,890 --> 00:29:36,970
+So in order to model the
+underlying re-distribution
+
+543
+00:29:36,970 --> 00:29:40,660
+of the genome, what
+we're going to do
+
+544
+00:29:40,660 --> 00:29:46,150
+is something that
+is in principle
+
+545
+00:29:46,150 --> 00:29:47,210
+quite straightforward.
+
+546
+00:29:47,210 --> 00:29:49,501
+Which is that we're going to
+model all accounts that we
+
+547
+00:29:49,501 --> 00:29:52,890
+see in the genome by a
+Poisson distribution.
+
+548
+00:29:52,890 --> 00:29:55,860
+So in each base of
+the genome, the counts
+
+549
+00:29:55,860 --> 00:29:58,940
+that we see there in
+the DNase-seq data
+
+550
+00:29:58,940 --> 00:30:01,080
+are modeled by a Poisson.
+
+551
+00:30:01,080 --> 00:30:06,160
+And this is assuming that
+there's no protein bound there.
+
+552
+00:30:06,160 --> 00:30:09,280
+So what we're trying to do
+is to model the background
+
+553
+00:30:09,280 --> 00:30:14,310
+distribution of counts
+without any kind of binding.
+
+554
+00:30:14,310 --> 00:30:17,930
+And the log rate
+of that Poisson is
+
+555
+00:30:17,930 --> 00:30:21,290
+going to be taken from
+a multivariate normal.
+
+556
+00:30:21,290 --> 00:30:24,070
+And the particular structure
+of that multivariate normal
+
+557
+00:30:24,070 --> 00:30:25,760
+provides a lot of smoothing.
+
+558
+00:30:25,760 --> 00:30:28,500
+So we can learn from
+that multivariate normal
+
+559
+00:30:28,500 --> 00:30:31,040
+how to fill in
+missing information.
+
+560
+00:30:31,040 --> 00:30:33,760
+It's very important
+to build strength
+
+561
+00:30:33,760 --> 00:30:35,700
+from neighboring bases.
+
+562
+00:30:35,700 --> 00:30:38,130
+So, even though we may not
+have lots of information
+
+563
+00:30:38,130 --> 00:30:39,750
+for this base, if
+we have information
+
+564
+00:30:39,750 --> 00:30:43,750
+for all the bases around us,
+we can use that information
+
+565
+00:30:43,750 --> 00:30:47,730
+to build strength to estimate
+what we should see at this base
+
+566
+00:30:47,730 --> 00:30:51,280
+if it's not occupied.
+
+567
+00:30:51,280 --> 00:30:56,950
+So the details of how we
+learn the mean and the sigma
+
+568
+00:30:56,950 --> 00:30:59,436
+matrix you see up
+there for estimating
+
+569
+00:30:59,436 --> 00:31:01,310
+the multivariate normal
+are outside the scope
+
+570
+00:31:01,310 --> 00:31:03,440
+of what I'm going
+to talk about today.
+
+571
+00:31:03,440 --> 00:31:07,560
+But suffice to say, they
+can be effectively learned.
+
+572
+00:31:07,560 --> 00:31:13,210
+And the second thing we need
+to learn are these profiles.
+
+573
+00:31:13,210 --> 00:31:18,170
+And so each protein is
+going to have a profile.
+
+574
+00:31:18,170 --> 00:31:20,782
+Here shown 400 bases wide.
+
+575
+00:31:20,782 --> 00:31:25,080
+And it describes how that
+protein, so to speak,
+
+576
+00:31:25,080 --> 00:31:26,455
+casts a shadow on the genome.
+
+577
+00:31:28,960 --> 00:31:32,230
+And we judge the significance
+of these profiles--
+
+578
+00:31:32,230 --> 00:31:33,940
+and remember that
+one of my points
+
+579
+00:31:33,940 --> 00:31:36,250
+was I wanted this to be robust.
+
+580
+00:31:36,250 --> 00:31:44,480
+So I will not make calls for
+proteins where I cannot get
+
+581
+00:31:44,480 --> 00:31:49,090
+a robust profile that is
+significant above background.
+
+582
+00:31:49,090 --> 00:31:52,740
+And I also exclude the
+middle region of the profile
+
+583
+00:31:52,740 --> 00:31:56,580
+because it's been shown that
+the actual cutting enzymes are
+
+584
+00:31:56,580 --> 00:31:59,260
+sequence specific
+to some extent.
+
+585
+00:31:59,260 --> 00:32:02,160
+The DNase-1 cutting enzyme.
+
+586
+00:32:02,160 --> 00:32:04,440
+And so we don't
+simply want to be
+
+587
+00:32:04,440 --> 00:32:06,985
+but picking up sequence
+bias in our profile.
+
+588
+00:32:09,740 --> 00:32:14,590
+So we learn these
+profiles that describe
+
+589
+00:32:14,590 --> 00:32:19,220
+for each particular
+motif-- and typically we
+
+590
+00:32:19,220 --> 00:32:24,090
+can take in hundreds of motifs,
+over 500 motifs at once--
+
+591
+00:32:24,090 --> 00:32:27,440
+for each motif, what its
+protection looks like.
+
+592
+00:32:30,160 --> 00:32:34,350
+So what we then have-- we're
+going to learn this, actually,
+
+593
+00:32:34,350 --> 00:32:37,480
+in an iterative process, but
+what we're going to have is--
+
+594
+00:32:37,480 --> 00:32:41,720
+now we have a model of what the
+unoccupied genome looks like.
+
+595
+00:32:41,720 --> 00:32:47,860
+And we have a model of the
+reads that a particular protein
+
+596
+00:32:47,860 --> 00:32:50,260
+at a motif location
+is going to produce.
+
+597
+00:32:52,820 --> 00:32:59,960
+And we can put those two
+things together and the way
+
+598
+00:32:59,960 --> 00:33:05,290
+that we do that is that we
+have a binding variable.
+
+599
+00:33:05,290 --> 00:33:07,120
+Showing there is delta.
+
+600
+00:33:07,120 --> 00:33:13,500
+And we can either add or
+not add the binding profile
+
+601
+00:33:13,500 --> 00:33:18,030
+of a particular protein in
+a location in the genome.
+
+602
+00:33:18,030 --> 00:33:20,960
+And that will change the
+expected number of counts
+
+603
+00:33:20,960 --> 00:33:23,670
+that we see.
+
+604
+00:33:23,670 --> 00:33:32,060
+So the key part of this is that
+we use a likelihood ratio shown
+
+605
+00:33:32,060 --> 00:33:33,362
+as the second probability.
+
+606
+00:33:33,362 --> 00:33:34,820
+It's not really a
+probability, it's
+
+607
+00:33:34,820 --> 00:33:39,600
+a ratio, which is the
+probability of a count, given
+
+608
+00:33:39,600 --> 00:33:43,530
+that a protein j is
+binding at that location,
+
+609
+00:33:43,530 --> 00:33:48,910
+versus the probability of the
+counts, were it not binding.
+
+610
+00:33:48,910 --> 00:33:52,870
+And that quantity
+is key because it's
+
+611
+00:33:52,870 --> 00:33:56,370
+going to be-- once
+we log transform it,
+
+612
+00:33:56,370 --> 00:33:59,594
+will be a key component
+of our test statistic
+
+613
+00:33:59,594 --> 00:34:01,260
+to figure out whether
+or not a protein's
+
+614
+00:34:01,260 --> 00:34:02,634
+binding at a
+particular location.
+
+615
+00:34:05,740 --> 00:34:11,630
+And so the way that we go about
+that is it we log that ratio
+
+616
+00:34:11,630 --> 00:34:14,670
+and we add it to some other
+prior information that gives us
+
+617
+00:34:14,670 --> 00:34:20,699
+an overall measure
+for whether or not
+
+618
+00:34:20,699 --> 00:34:23,260
+the protein is binding
+at a particular location.
+
+619
+00:34:23,260 --> 00:34:27,770
+And then we can rank
+these for all the motifs
+
+620
+00:34:27,770 --> 00:34:31,120
+for that particular
+protein in the genome.
+
+621
+00:34:31,120 --> 00:34:34,107
+And then we can make
+calls using a null set.
+
+622
+00:34:34,107 --> 00:34:35,940
+So we could look in the
+genome for locations
+
+623
+00:34:35,940 --> 00:34:39,179
+that we know are not occupied,
+compute a distribution
+
+624
+00:34:39,179 --> 00:34:43,800
+of that statistic,
+and then we can say,
+
+625
+00:34:43,800 --> 00:34:46,610
+for what values of this
+statistic that we observe,
+
+626
+00:34:46,610 --> 00:34:52,030
+at the actual motif sites,
+is it so unlikely that this
+
+627
+00:34:52,030 --> 00:34:53,110
+would occur at random.
+
+628
+00:34:53,110 --> 00:34:57,540
+At some desired p
+value by looking
+
+629
+00:34:57,540 --> 00:35:01,670
+at the area in the
+tail of the null set.
+
+630
+00:35:04,290 --> 00:35:09,440
+So, just summarizing, we
+learn a background model
+
+631
+00:35:09,440 --> 00:35:14,460
+of the genome, which
+is a Poisson that
+
+632
+00:35:14,460 --> 00:35:18,460
+takes log rates from
+a multivariate normal.
+
+633
+00:35:18,460 --> 00:35:24,100
+We learn patterns, or
+profiles of protection,
+
+634
+00:35:24,100 --> 00:35:30,480
+or the production of
+reads for each motif.
+
+635
+00:35:30,480 --> 00:35:34,250
+And at each motif location,
+we ask the question
+
+636
+00:35:34,250 --> 00:35:37,260
+whether or not, it's
+likely that the protein
+
+637
+00:35:37,260 --> 00:35:42,400
+was there and actually caused
+the reads that we're seeing,
+
+638
+00:35:42,400 --> 00:35:44,310
+using a log likelihood ratio.
+
+639
+00:35:49,210 --> 00:35:50,790
+So what we're
+integrating together,
+
+640
+00:35:50,790 --> 00:35:52,400
+when we take all
+these things, is
+
+641
+00:35:52,400 --> 00:35:55,280
+that we're taking our
+original DNA seq-reads,
+
+642
+00:35:55,280 --> 00:36:02,330
+we're taking our TF-specific
+specific binding profiles.
+
+643
+00:36:02,330 --> 00:36:07,130
+We can build strength across
+experiments for the background
+
+644
+00:36:07,130 --> 00:36:13,330
+model and we can also learn,
+to what extent, the strength
+
+645
+00:36:13,330 --> 00:36:18,930
+of binding is influenced by
+the match of the position--
+
+646
+00:36:18,930 --> 00:36:21,610
+a specific weight matrix--
+to a particular location
+
+647
+00:36:21,610 --> 00:36:23,970
+in the genome.
+
+648
+00:36:23,970 --> 00:36:27,560
+And then we can
+produce binding calls.
+
+649
+00:36:27,560 --> 00:36:33,480
+And when we do so,
+it works quite well.
+
+650
+00:36:33,480 --> 00:36:38,710
+So here you see three
+different mouse ESO factors.
+
+651
+00:36:38,710 --> 00:36:43,820
+And the area under
+this receiver operating
+
+652
+00:36:43,820 --> 00:36:46,000
+curve-- we've talked
+about this before.
+
+653
+00:36:46,000 --> 00:36:48,190
+Remember a receiver
+operating characteristic
+
+654
+00:36:48,190 --> 00:36:50,990
+curve-- has false
+positives increasing
+
+655
+00:36:50,990 --> 00:36:55,120
+on the x-axis and true positives
+increasing on the y-axis.
+
+656
+00:36:55,120 --> 00:36:58,040
+And if we had a perfect method,
+the area under that curve
+
+657
+00:36:58,040 --> 00:37:01,480
+would be 1.0.
+
+658
+00:37:01,480 --> 00:37:06,730
+And so for this method,
+the area under the ROC
+
+659
+00:37:06,730 --> 00:37:10,530
+curve for these three
+factors, using ChIP-seq data,
+
+660
+00:37:10,530 --> 00:37:16,869
+is the absolute gold
+standard, is over 0.9.
+
+661
+00:37:16,869 --> 00:37:18,410
+And you might say,
+well that's great,
+
+662
+00:37:18,410 --> 00:37:20,560
+but how well does
+it work in general?
+
+663
+00:37:20,560 --> 00:37:23,510
+I mean, for example,
+the On-code project
+
+664
+00:37:23,510 --> 00:37:26,241
+has used hundreds and hundreds
+of ChIP-seq experiments
+
+665
+00:37:26,241 --> 00:37:27,740
+to profile where
+factors are binding
+
+666
+00:37:27,740 --> 00:37:29,780
+in different cellular states.
+
+667
+00:37:29,780 --> 00:37:32,620
+If you take the DNase-seq data
+from those matched cell types
+
+668
+00:37:32,620 --> 00:37:35,495
+and you ask, can you reproduce
+the ChIP-seq seq data?
+
+669
+00:37:38,670 --> 00:37:42,929
+The answer is, a lot
+of the time we can,
+
+670
+00:37:42,929 --> 00:37:44,220
+using this kind of methodology.
+
+671
+00:37:44,220 --> 00:37:48,310
+And that is, the
+AUC mean is 0.93
+
+672
+00:37:48,310 --> 00:37:51,540
+compared to 313 different
+ChIP-seq experiments.
+
+673
+00:37:54,360 --> 00:37:59,090
+So this methodology of
+looking at open chromatin
+
+674
+00:37:59,090 --> 00:38:02,630
+allows us to identify where
+lots of different factors
+
+675
+00:38:02,630 --> 00:38:04,710
+bind to the genome.
+
+676
+00:38:04,710 --> 00:38:11,680
+And about 75 different
+factors are strongly
+
+677
+00:38:11,680 --> 00:38:16,150
+detectable using
+this methodology.
+
+678
+00:38:16,150 --> 00:38:20,040
+So it's detectable if
+it has a strong motif,
+
+679
+00:38:20,040 --> 00:38:22,350
+if it binds in
+DNase-accessible regions
+
+680
+00:38:22,350 --> 00:38:25,100
+and has strong
+DNA-binding affinity.
+
+681
+00:38:25,100 --> 00:38:27,550
+So I tell you this
+just so you know
+
+682
+00:38:27,550 --> 00:38:30,450
+that there are
+new methods coming
+
+683
+00:38:30,450 --> 00:38:33,600
+that allow us to take
+a single experiment
+
+684
+00:38:33,600 --> 00:38:39,830
+and analyze it and determine
+where a large number of factors
+
+685
+00:38:39,830 --> 00:38:43,730
+bind from that single
+experimental data set.
+
+686
+00:38:46,290 --> 00:38:49,130
+Now, a second question
+we wanted to answer
+
+687
+00:38:49,130 --> 00:38:54,595
+was, how is it that chrome,
+opening and closing is
+
+688
+00:38:54,595 --> 00:38:56,170
+controlled?
+
+689
+00:38:56,170 --> 00:39:01,640
+And since we had a direct read
+out of what chromatin is open,
+
+690
+00:39:01,640 --> 00:39:04,220
+because reads are
+being produced there,
+
+691
+00:39:04,220 --> 00:39:05,980
+we could look in a
+experimental system
+
+692
+00:39:05,980 --> 00:39:08,470
+where we measured
+chromatin accessibility
+
+693
+00:39:08,470 --> 00:39:11,150
+through developmental time.
+
+694
+00:39:11,150 --> 00:39:15,910
+And the idea was that as we
+measured this accessibility,
+
+695
+00:39:15,910 --> 00:39:19,850
+we could look at the
+places that changed
+
+696
+00:39:19,850 --> 00:39:25,900
+and determine what underlying
+motifs were present that
+
+697
+00:39:25,900 --> 00:39:29,405
+perhaps were causing the
+genome to undergo this opening
+
+698
+00:39:29,405 --> 00:39:29,905
+process.
+
+699
+00:39:32,760 --> 00:39:37,750
+So we developed an
+underlying theory
+
+700
+00:39:37,750 --> 00:39:42,340
+that pioneer factors would bind
+to closed chromatin as shown
+
+701
+00:39:42,340 --> 00:39:46,150
+in the middle panel
+and open it up,
+
+702
+00:39:46,150 --> 00:39:49,150
+and that we could observe those
+by looking at the differential
+
+703
+00:39:49,150 --> 00:39:51,320
+accessibility of the genome
+at two different time
+
+704
+00:39:51,320 --> 00:39:55,080
+points that were related.
+
+705
+00:39:55,080 --> 00:39:59,960
+And we couldn't observe pioneers
+they didn't open up chromatin.
+
+706
+00:39:59,960 --> 00:40:03,720
+And for non-pioneers--
+obviously the left-hand panel--
+
+707
+00:40:03,720 --> 00:40:08,340
+they would not, in
+our design here,
+
+708
+00:40:08,340 --> 00:40:09,755
+lead to increased accessibility.
+
+709
+00:40:13,050 --> 00:40:22,670
+So we then looked at designing
+computational indices that
+
+710
+00:40:22,670 --> 00:40:25,263
+measured the--
+oh, question, yes?
+
+711
+00:40:25,263 --> 00:40:27,195
+AUDIENCE: When you
+say pioneer factors,
+
+712
+00:40:27,195 --> 00:40:31,542
+are you looking at what proteins
+are pioneer factors, or are you
+
+713
+00:40:31,542 --> 00:40:34,239
+looking at what sequences they
+bind to that are [INAUDIBLE].
+
+714
+00:40:34,239 --> 00:40:35,780
+PROFESSOR: So the
+question is, are we
+
+715
+00:40:35,780 --> 00:40:38,080
+looking at what
+proteins are factors,
+
+716
+00:40:38,080 --> 00:40:40,042
+or are we looking at
+what sequence, right?
+
+717
+00:40:40,042 --> 00:40:42,000
+What we're doing is,
+we're making an assumption
+
+718
+00:40:42,000 --> 00:40:45,920
+that the underlying sequence
+denotes one or more proteins
+
+719
+00:40:45,920 --> 00:40:48,500
+and thus, we are
+hypothesizing, there's
+
+720
+00:40:48,500 --> 00:40:51,510
+the proteins that are actually
+binding to the sequence, that's
+
+721
+00:40:51,510 --> 00:40:52,860
+causing that.
+
+722
+00:40:52,860 --> 00:40:55,730
+And then later on, we'll go back
+and test that experimentally,
+
+723
+00:40:55,730 --> 00:40:57,340
+as you'll see in a second.
+
+724
+00:40:57,340 --> 00:41:00,340
+OK?
+
+725
+00:41:00,340 --> 00:41:03,330
+So here there are three
+different metrics,
+
+726
+00:41:03,330 --> 00:41:06,460
+which is the dynamic opening
+of chromatin from one time
+
+727
+00:41:06,460 --> 00:41:10,690
+point to the next, the
+static openness of chromatin
+
+728
+00:41:10,690 --> 00:41:14,230
+around a particular factor,
+and a social index showing
+
+729
+00:41:14,230 --> 00:41:16,700
+how many other factors
+are around where
+
+730
+00:41:16,700 --> 00:41:20,150
+a particular factor binds.
+
+731
+00:41:20,150 --> 00:41:24,660
+And you can see that these
+things are distributed in a way
+
+732
+00:41:24,660 --> 00:41:29,190
+that certain of the factors have
+a very high index in multiple
+
+733
+00:41:29,190 --> 00:41:30,225
+of these scores.
+
+734
+00:41:33,390 --> 00:41:39,840
+And thus, we were
+able to classify
+
+735
+00:41:39,840 --> 00:41:44,910
+a certain set of factors
+as what we classified
+
+736
+00:41:44,910 --> 00:41:48,160
+as computational pioneers,
+that would open up the genome.
+
+737
+00:41:50,730 --> 00:41:54,000
+Now, in any kind of
+computational work,
+
+738
+00:41:54,000 --> 00:41:56,400
+we're actually looking
+at correlative analysis,
+
+739
+00:41:56,400 --> 00:41:57,890
+which is never causal.
+
+740
+00:41:57,890 --> 00:41:58,390
+Right.
+
+741
+00:41:58,390 --> 00:42:02,470
+So we have to go back and we
+have to test whether or not
+
+742
+00:42:02,470 --> 00:42:06,590
+our computational
+predictions are correct.
+
+743
+00:42:06,590 --> 00:42:12,940
+So in order to do
+that, we built a test
+
+744
+00:42:12,940 --> 00:42:15,880
+construct where we
+could put the pioneers
+
+745
+00:42:15,880 --> 00:42:20,240
+in on the left-hand side
+and ask, whether or not
+
+746
+00:42:20,240 --> 00:42:22,840
+the pioneer would
+open up chromatin
+
+747
+00:42:22,840 --> 00:42:26,600
+and enable the expression
+of a GFP marker.
+
+748
+00:42:26,600 --> 00:42:28,910
+And the red bars
+show the factors
+
+749
+00:42:28,910 --> 00:42:30,940
+that we thought were pioneers.
+
+750
+00:42:30,940 --> 00:42:36,480
+And as you can see, in
+this case, all but one
+
+751
+00:42:36,480 --> 00:42:42,520
+of the predictive pioneers
+produces GFP activity.
+
+752
+00:42:42,520 --> 00:42:44,950
+And this construct was
+designed in an interesting way.
+
+753
+00:42:44,950 --> 00:42:48,960
+We had to design it so that
+the pioneers themselves
+
+754
+00:42:48,960 --> 00:42:51,930
+were not simply activators.
+
+755
+00:42:51,930 --> 00:42:54,780
+And so it was upstream of
+another activator, which
+
+756
+00:42:54,780 --> 00:42:57,750
+is a retinoic acid
+receptor site.
+
+757
+00:42:57,750 --> 00:43:00,180
+And so in the absence of
+retinoic acid receptor,
+
+758
+00:43:00,180 --> 00:43:03,410
+we had to ensure that when
+we turned on the pioneer,
+
+759
+00:43:03,410 --> 00:43:06,110
+GFP was not turned on.
+
+760
+00:43:06,110 --> 00:43:08,015
+It was only with the
+addition of the pioneer
+
+761
+00:43:08,015 --> 00:43:12,130
+to open the chromatin
+and the activator
+
+762
+00:43:12,130 --> 00:43:14,210
+that we actually
+got GFP expression.
+
+763
+00:43:17,750 --> 00:43:18,690
+OK.
+
+764
+00:43:18,690 --> 00:43:24,630
+So, through this
+methodology we discovered
+
+765
+00:43:24,630 --> 00:43:31,520
+about 120 different motifs
+corresponding to proteins
+
+766
+00:43:31,520 --> 00:43:36,320
+that we found computationally
+open-- chromatin out.
+
+767
+00:43:36,320 --> 00:43:37,227
+Yes?
+
+768
+00:43:37,227 --> 00:43:38,726
+AUDIENCE: [INAUDIBLE]
+concentrations
+
+769
+00:43:38,726 --> 00:43:41,720
+of different pioneer
+factors are different,
+
+770
+00:43:41,720 --> 00:43:44,215
+wouldn't that show up
+differentially [INAUDIBLE]?
+
+771
+00:43:49,205 --> 00:43:52,070
+PROFESSOR: The question
+is, if the concentration
+
+772
+00:43:52,070 --> 00:43:53,960
+of different pioneer
+factors was different,
+
+773
+00:43:53,960 --> 00:43:56,240
+wouldn't that show
+up differentially?
+
+774
+00:43:56,240 --> 00:43:59,170
+And that's precisely, we
+think how chromatin structures
+
+775
+00:43:59,170 --> 00:44:01,310
+are regulated.
+
+776
+00:44:01,310 --> 00:44:06,320
+That we think that the
+concentration, or presence
+
+777
+00:44:06,320 --> 00:44:10,160
+of different pioneer factors,
+is regulating the openness
+
+778
+00:44:10,160 --> 00:44:12,330
+or closeness of different
+parts of the genome,
+
+779
+00:44:12,330 --> 00:44:16,770
+based upon where their
+motifs are occurring.
+
+780
+00:44:16,770 --> 00:44:19,916
+Is that, in part,
+answering your question?
+
+781
+00:44:19,916 --> 00:44:23,360
+AUDIENCE: Yes, but,
+if a concentration
+
+782
+00:44:23,360 --> 00:44:25,820
+of a particular
+pioneer factor is low,
+
+783
+00:44:25,820 --> 00:44:30,710
+do they necessarily have lesser
+binding sites on the genome?
+
+784
+00:44:30,710 --> 00:44:32,920
+PROFESSOR: So you're
+asking, how is
+
+785
+00:44:32,920 --> 00:44:34,640
+the concentration
+of a pioneer factor
+
+786
+00:44:34,640 --> 00:44:37,720
+related to its ability
+to open chromatin
+
+787
+00:44:37,720 --> 00:44:39,780
+and whether or not a
+higher dosage would
+
+788
+00:44:39,780 --> 00:44:40,820
+open more chromatin?
+
+789
+00:44:40,820 --> 00:44:41,430
+AUDIENCE: Yes.
+
+790
+00:44:41,430 --> 00:44:44,620
+PROFESSOR: I don't have a
+good answer to that question.
+
+791
+00:44:44,620 --> 00:44:46,120
+Those experiments
+haven't been done.
+
+792
+00:44:48,940 --> 00:44:55,680
+However, one thing you may have
+noticed about these profiles--
+
+793
+00:44:55,680 --> 00:44:58,650
+remember these are the same
+profiles that we talked
+
+794
+00:44:58,650 --> 00:45:03,200
+about earlier of DNase-1
+read reproduction
+
+795
+00:45:03,200 --> 00:45:05,220
+around a particular factor.
+
+796
+00:45:05,220 --> 00:45:08,305
+And what you might notice is
+that some of these profiles
+
+797
+00:45:08,305 --> 00:45:08,930
+are asymmetric.
+
+798
+00:45:12,030 --> 00:45:14,720
+And that they appear to be
+producing more region one
+
+799
+00:45:14,720 --> 00:45:16,306
+direction than the
+other direction.
+
+800
+00:45:19,620 --> 00:45:21,684
+And so this is all
+computational analysis, right.
+
+801
+00:45:21,684 --> 00:45:23,350
+But when you see
+something like that you
+
+802
+00:45:23,350 --> 00:45:24,970
+say, well gee, why
+is that going on?
+
+803
+00:45:24,970 --> 00:45:30,130
+Why is it that for NRF-1 the
+left-hand side has a lot more
+
+804
+00:45:30,130 --> 00:45:33,960
+reads than the right hand side.
+
+805
+00:45:33,960 --> 00:45:38,280
+Now, of course, the only reason
+that we can produce an oriented
+
+806
+00:45:38,280 --> 00:45:42,530
+profile like that is that the
+NRF-1 motif is not palindromic,
+
+807
+00:45:42,530 --> 00:45:43,030
+right.
+
+808
+00:45:43,030 --> 00:45:45,400
+We can actually orient
+it in the genome
+
+809
+00:45:45,400 --> 00:45:49,190
+and so we know that the
+more reads, in this case,
+
+810
+00:45:49,190 --> 00:45:50,850
+are coming from
+the five prime end
+
+811
+00:45:50,850 --> 00:45:55,070
+then from the three prime end.
+
+812
+00:45:55,070 --> 00:45:56,890
+So what do you think
+would cause that?
+
+813
+00:45:56,890 --> 00:45:58,776
+Does anybody have a--
+when we first saw this,
+
+814
+00:45:58,776 --> 00:45:59,900
+we didn't know what it was.
+
+815
+00:45:59,900 --> 00:46:01,858
+But anybody have an idea
+of what that could be?
+
+816
+00:46:08,440 --> 00:46:09,750
+Oh, yes.
+
+817
+00:46:09,750 --> 00:46:12,060
+AUDIENCE: It's the remodelers
+that these transcription
+
+818
+00:46:12,060 --> 00:46:15,690
+factors are calling in tend to
+open the chromatin more on one
+
+819
+00:46:15,690 --> 00:46:17,440
+side of the motif
+than the other.
+
+820
+00:46:17,440 --> 00:46:19,160
+PROFESSOR: Right,
+so if the remodelers
+
+821
+00:46:19,160 --> 00:46:23,937
+are working in some sort
+of directional way, right.
+
+822
+00:46:23,937 --> 00:46:25,020
+So that's what we thought.
+
+823
+00:46:25,020 --> 00:46:28,410
+We didn't know whether
+they were or not.
+
+824
+00:46:28,410 --> 00:46:35,470
+And so we went back to our
+assay and we tested the motifs,
+
+825
+00:46:35,470 --> 00:46:38,990
+both in the forward and
+the reverse direction.
+
+826
+00:46:38,990 --> 00:46:39,670
+Right.
+
+827
+00:46:39,670 --> 00:46:41,070
+To see whether or
+not it mattered
+
+828
+00:46:41,070 --> 00:46:45,000
+which way the motif
+went into the construct,
+
+829
+00:46:45,000 --> 00:46:49,840
+based upon selecting factors,
+based upon a symmetry
+
+830
+00:46:49,840 --> 00:46:56,060
+score that we computed for
+their read profile, right?
+
+831
+00:46:56,060 --> 00:47:06,190
+And what we found was that, in
+fact, it was the case that when
+
+832
+00:47:06,190 --> 00:47:10,840
+the motif was properly
+oriented it would turn on GFP
+
+833
+00:47:10,840 --> 00:47:14,790
+and was in the other
+direction it would not.
+
+834
+00:47:14,790 --> 00:47:18,670
+So it appeared, for the
+factors that we tested,
+
+835
+00:47:18,670 --> 00:47:24,620
+that they did have directional
+chromatin opening properties.
+
+836
+00:47:24,620 --> 00:47:26,120
+And so that's an
+interesting concept
+
+837
+00:47:26,120 --> 00:47:28,060
+that you actually
+can have chromatin
+
+838
+00:47:28,060 --> 00:47:31,400
+being opened in one direction
+but not the other direction,
+
+839
+00:47:31,400 --> 00:47:33,550
+because it admits
+the idea of some sort
+
+840
+00:47:33,550 --> 00:47:38,770
+of genomic parentheses,
+where you could imagine
+
+841
+00:47:38,770 --> 00:47:41,730
+part of the genome
+being accessible where
+
+842
+00:47:41,730 --> 00:47:43,350
+the other part is not.
+
+843
+00:47:47,000 --> 00:47:54,100
+And overall this led us to
+classifying protein factors
+
+844
+00:47:54,100 --> 00:47:56,230
+that are operating in
+genome accessibility
+
+845
+00:47:56,230 --> 00:47:59,300
+into three classes.
+
+846
+00:47:59,300 --> 00:48:01,660
+Here shown as two, where
+we have pioneers which
+
+847
+00:48:01,660 --> 00:48:05,530
+are the things that
+open up the genome,
+
+848
+00:48:05,530 --> 00:48:08,190
+and settlers that follow
+behind and actually
+
+849
+00:48:08,190 --> 00:48:12,380
+bind in the regions where
+the chromatin is open.
+
+850
+00:48:12,380 --> 00:48:15,780
+That is, it's much more likely
+that those factors are going
+
+851
+00:48:15,780 --> 00:48:18,630
+to bind where the doors
+of the rooms are open,
+
+852
+00:48:18,630 --> 00:48:20,740
+and the pioneers are
+the proteins that
+
+853
+00:48:20,740 --> 00:48:24,865
+come along and open the doors,
+in particular, chromatin
+
+854
+00:48:24,865 --> 00:48:25,365
+domains.
+
+855
+00:48:27,910 --> 00:48:30,980
+And there were a couple of other
+tests that we wanted to do.
+
+856
+00:48:30,980 --> 00:48:36,600
+We wanted to test whether
+or not we could knock out
+
+857
+00:48:36,600 --> 00:48:43,260
+this pioneering activity by
+taking a pioneer and just
+
+858
+00:48:43,260 --> 00:48:45,880
+only including its
+DNA-binding domain
+
+859
+00:48:45,880 --> 00:48:47,840
+and knocking out the
+rest of its domain
+
+860
+00:48:47,840 --> 00:48:52,250
+which might be operative
+in doing this chromatin
+
+861
+00:48:52,250 --> 00:48:53,225
+remodeling.
+
+862
+00:48:53,225 --> 00:48:54,930
+And then asked,
+whether or not, when
+
+863
+00:48:54,930 --> 00:48:58,830
+we expressed this sort
+of poisoned pioneer,
+
+864
+00:48:58,830 --> 00:49:03,341
+whether or not it would affect
+the binding of nearby factors.
+
+865
+00:49:03,341 --> 00:49:06,050
+And, in fact, when
+you do express
+
+866
+00:49:06,050 --> 00:49:08,880
+the sort of poison
+pioneer, it does
+
+867
+00:49:08,880 --> 00:49:13,000
+reduce the binding
+of nearby factors.
+
+868
+00:49:13,000 --> 00:49:15,010
+Here, we have a dominant
+negative for NFYA
+
+869
+00:49:15,010 --> 00:49:16,830
+and dominant negative for NRF1.
+
+870
+00:49:16,830 --> 00:49:23,780
+It reduces the binding
+of nearby factors.
+
+871
+00:49:23,780 --> 00:49:29,830
+And finally, we wanted
+to know, if we included
+
+872
+00:49:29,830 --> 00:49:33,820
+a dominant negative for
+the directional pioneer,
+
+873
+00:49:33,820 --> 00:49:37,100
+if it actually
+would preferentially
+
+874
+00:49:37,100 --> 00:49:39,730
+affect the binding
+of [INAUDIBLE] on one
+
+875
+00:49:39,730 --> 00:49:44,290
+side of its binding
+occurrences or the other side.
+
+876
+00:49:44,290 --> 00:49:46,210
+And so we looked
+at mix sites that
+
+877
+00:49:46,210 --> 00:49:48,800
+were oriented with
+respect to NFYA.
+
+878
+00:49:48,800 --> 00:49:53,690
+And when we add
+the NFYA, you can
+
+879
+00:49:53,690 --> 00:49:59,780
+see that it actually-- the
+dominant negative NFYA-- when
+
+880
+00:49:59,780 --> 00:50:04,550
+the mix site is down of where
+we think NFYA is opening up
+
+881
+00:50:04,550 --> 00:50:08,420
+the chromatin, the binding
+is substantially reduced.
+
+882
+00:50:08,420 --> 00:50:11,170
+Whereas, when the
+Myc site is not
+
+883
+00:50:11,170 --> 00:50:14,120
+on the side where we think
+that NFYA is opening,
+
+884
+00:50:14,120 --> 00:50:16,310
+it doesn't really
+have an effect.
+
+885
+00:50:16,310 --> 00:50:19,350
+So this is further
+confirmation of the idea
+
+886
+00:50:19,350 --> 00:50:22,330
+that in vivo, these
+factors are actually
+
+887
+00:50:22,330 --> 00:50:25,716
+operating in a directional way.
+
+888
+00:50:25,716 --> 00:50:29,060
+Now I tell you all
+this because, you know,
+
+889
+00:50:29,060 --> 00:50:31,040
+we do a lot of
+computational analysis
+
+890
+00:50:31,040 --> 00:50:33,360
+and it's important to
+follow up and understand
+
+891
+00:50:33,360 --> 00:50:35,670
+what the correlations tell us.
+
+892
+00:50:35,670 --> 00:50:37,240
+So when you do
+computational analysis
+
+893
+00:50:37,240 --> 00:50:40,507
+and you see a very
+interesting pattern,
+
+894
+00:50:40,507 --> 00:50:42,715
+the thing to keep in mind
+is, what kind of experiment
+
+895
+00:50:42,715 --> 00:50:46,340
+can I design to
+test whether or not
+
+896
+00:50:46,340 --> 00:50:48,270
+my hypothesis is correct or not?
+
+897
+00:50:51,240 --> 00:50:56,910
+We also did an analysis across
+human and mouse data sets
+
+898
+00:50:56,910 --> 00:51:00,210
+and found that
+for a given motif,
+
+899
+00:51:00,210 --> 00:51:02,940
+and thus, protein
+family, it appeared
+
+900
+00:51:02,940 --> 00:51:04,980
+that the chromatin
+opening index was largely
+
+901
+00:51:04,980 --> 00:51:08,160
+preserved, evolutionarily.
+
+902
+00:51:08,160 --> 00:51:10,910
+So that there are
+similar pioneers
+
+903
+00:51:10,910 --> 00:51:12,470
+between human and mouse.
+
+904
+00:51:15,580 --> 00:51:20,000
+Are there any questions
+at all about the idea?
+
+905
+00:51:20,000 --> 00:51:22,590
+So I told you, I mean, when you
+go to cocktail party tonight,
+
+906
+00:51:22,590 --> 00:51:25,390
+you say hey, you know, did
+you know that DNase-seq
+
+907
+00:51:25,390 --> 00:51:28,420
+is this really cool technique
+that not only tells you
+
+908
+00:51:28,420 --> 00:51:31,200
+whether or not chromatin is
+open or not, but, you know,
+
+909
+00:51:31,200 --> 00:51:32,390
+where factors bind?
+
+910
+00:51:32,390 --> 00:51:34,900
+And some of those factors
+open up the chromatin itself
+
+911
+00:51:34,900 --> 00:51:38,780
+and, plus, get this,
+some of the factors only
+
+912
+00:51:38,780 --> 00:51:42,500
+do it in one direction, right.
+
+913
+00:51:42,500 --> 00:51:44,500
+That'd be a good
+conversation starter, right?
+
+914
+00:51:44,500 --> 00:51:47,320
+That'd be the end of
+the conversation, no.
+
+915
+00:51:47,320 --> 00:51:49,550
+You get the idea, right.
+
+916
+00:51:49,550 --> 00:51:52,655
+So are there any questions
+about DNase-1 seq analysis?
+
+917
+00:51:55,220 --> 00:51:55,940
+Yes?
+
+918
+00:51:55,940 --> 00:51:58,928
+AUDIENCE: A little unrelated,
+but I was just wondering--
+
+919
+00:51:58,928 --> 00:52:04,420
+in the literature where people
+have identified factors that
+
+920
+00:52:04,420 --> 00:52:07,850
+neither directly reprogram
+between different cell types,
+
+921
+00:52:07,850 --> 00:52:10,655
+or go through some sort of
+[INAUDIBLE] intermediate--
+
+922
+00:52:10,655 --> 00:52:11,280
+PROFESSOR: Yes.
+
+923
+00:52:11,280 --> 00:52:13,488
+AUDIENCE: There are a number
+of transcription factors
+
+924
+00:52:13,488 --> 00:52:16,242
+that have been
+identified. [INAUDIBLE]
+
+925
+00:52:16,242 --> 00:52:17,661
+but there are others.
+
+926
+00:52:17,661 --> 00:52:22,496
+Do you often see, or always
+see some of the pioneers
+
+927
+00:52:22,496 --> 00:52:24,400
+that you've identified
+in those cases.
+
+928
+00:52:24,400 --> 00:52:25,050
+And then--
+
+929
+00:52:25,050 --> 00:52:25,410
+PROFESSOR: Yes.
+
+930
+00:52:25,410 --> 00:52:27,076
+AUDIENCE: And then,
+a follow-up question
+
+931
+00:52:27,076 --> 00:52:29,695
+would be, do you think that if
+you took some of the pioneers
+
+932
+00:52:29,695 --> 00:52:32,120
+that you generated that
+were not known before
+
+933
+00:52:32,120 --> 00:52:35,922
+and expressed them
+in cell types,
+
+934
+00:52:35,922 --> 00:52:38,352
+that they would open
+up the chromatin
+
+935
+00:52:38,352 --> 00:52:40,550
+sufficiently to potentially
+reprogram the mistakes?
+
+936
+00:52:40,550 --> 00:52:41,258
+PROFESSOR: Right.
+
+937
+00:52:41,258 --> 00:52:43,130
+So the question
+was, is it the case
+
+938
+00:52:43,130 --> 00:52:45,870
+that known
+reprogramming factors,
+
+939
+00:52:45,870 --> 00:52:47,596
+at times are powerful pioneers?
+
+940
+00:52:47,596 --> 00:52:50,230
+The answer is yes.
+
+941
+00:52:50,230 --> 00:52:53,130
+The second question was,
+now that you have a broader
+
+942
+00:52:53,130 --> 00:52:55,370
+repertoire of pioneer
+factors, and you
+
+943
+00:52:55,370 --> 00:52:59,230
+can identify what they're
+doing, is a possible to,
+
+944
+00:52:59,230 --> 00:53:02,580
+in a principled way, engineer
+the opening of chromatin
+
+945
+00:53:02,580 --> 00:53:05,375
+by perhaps expressing those
+factors to see whether or not
+
+946
+00:53:05,375 --> 00:53:07,625
+you could match a particular
+desired epigenetic state,
+
+947
+00:53:07,625 --> 00:53:09,950
+let's say?
+
+948
+00:53:09,950 --> 00:53:12,500
+Our preliminary results are yes
+on the second count as well.
+
+949
+00:53:12,500 --> 00:53:16,430
+That there appear to
+be pioneer factors that
+
+950
+00:53:16,430 --> 00:53:18,490
+operate, sort of at a
+basal level that keep,
+
+951
+00:53:18,490 --> 00:53:23,525
+sort of, the sort of usual
+rooms open in the genome.
+
+952
+00:53:23,525 --> 00:53:25,150
+And then there are
+factors that operate
+
+953
+00:53:25,150 --> 00:53:27,600
+in a lineage-specific
+specific way.
+
+954
+00:53:27,600 --> 00:53:29,720
+And when we express
+lineage-specific pioneer
+
+955
+00:53:29,720 --> 00:53:34,160
+factors, they don't completely
+mimic but largely mimic
+
+956
+00:53:34,160 --> 00:53:35,650
+the chromatin state
+that's present
+
+957
+00:53:35,650 --> 00:53:41,560
+in the corresponding
+lineage committed cells.
+
+958
+00:53:41,560 --> 00:53:44,320
+And so we think that for
+principal reprogramming
+
+959
+00:53:44,320 --> 00:53:48,800
+of cells, the basal level
+of establishing matched
+
+960
+00:53:48,800 --> 00:53:51,300
+open states is going to be
+an interesting and important
+
+961
+00:53:51,300 --> 00:53:52,530
+avenue to explore.
+
+962
+00:53:52,530 --> 00:53:54,620
+Does that answer your question?
+
+963
+00:53:54,620 --> 00:53:55,120
+Yeah.
+
+964
+00:53:57,830 --> 00:54:00,480
+OK.
+
+965
+00:54:00,480 --> 00:54:09,880
+So, now we're going to
+turn to another-- well let
+
+966
+00:54:09,880 --> 00:54:13,190
+me just first summarise
+what I just told you about,
+
+967
+00:54:13,190 --> 00:54:14,920
+which is that we
+can predict where
+
+968
+00:54:14,920 --> 00:54:18,055
+TFs bind from DNase-seq data.
+
+969
+00:54:18,055 --> 00:54:19,895
+We can identify these
+pioneer factors.
+
+970
+00:54:19,895 --> 00:54:21,580
+Some of them are directional.
+
+971
+00:54:21,580 --> 00:54:24,860
+And other factors follow
+these pioneers and bind
+
+972
+00:54:24,860 --> 00:54:25,920
+sort of in their wake.
+
+973
+00:54:25,920 --> 00:54:30,620
+In where they are actually
+open up the chromatin.
+
+974
+00:54:30,620 --> 00:54:35,630
+And returning to our
+narrative arc for today,
+
+975
+00:54:35,630 --> 00:54:37,920
+we've talked about the
+idea of histone marks.
+
+976
+00:54:37,920 --> 00:54:40,510
+We've talked about the
+idea of chromatin openness
+
+977
+00:54:40,510 --> 00:54:42,030
+and closeness.
+
+978
+00:54:42,030 --> 00:54:45,270
+And now I'd like to talk about
+the important question of how
+
+979
+00:54:45,270 --> 00:54:49,940
+we can understand which
+regulatory regions are
+
+980
+00:54:49,940 --> 00:54:51,435
+regulating which genes.
+
+981
+00:54:54,030 --> 00:54:56,540
+Now the traditional
+way to approach this,
+
+982
+00:54:56,540 --> 00:55:02,770
+is that if you have a regulatory
+region, the thing that you do
+
+983
+00:55:02,770 --> 00:55:04,890
+is you look for
+the closest gene.
+
+984
+00:55:04,890 --> 00:55:11,100
+And you go, aha, that's the one
+that that regulatory region is
+
+985
+00:55:11,100 --> 00:55:13,060
+controlling.
+
+986
+00:55:13,060 --> 00:55:15,040
+This applies not only
+for regulatory regions
+
+987
+00:55:15,040 --> 00:55:15,950
+but for snips, right.
+
+988
+00:55:15,950 --> 00:55:19,760
+If you find a snip
+or a polymorphism
+
+989
+00:55:19,760 --> 00:55:22,630
+you are likely to
+assume that it's
+
+990
+00:55:22,630 --> 00:55:25,910
+regulating the closest gene.
+
+991
+00:55:25,910 --> 00:55:29,770
+It could have an effect
+on the closest gene.
+
+992
+00:55:29,770 --> 00:55:36,670
+But there are other ways of
+approaching that question
+
+993
+00:55:36,670 --> 00:55:39,260
+with molecular protocols.
+
+994
+00:55:39,260 --> 00:55:45,220
+And drawing you once again
+a cartoon of genome looping,
+
+995
+00:55:45,220 --> 00:55:50,180
+you can see how an enhancer is
+coming in contact with the Pol
+
+996
+00:55:50,180 --> 00:55:52,420
+II holoenzyme apparatus.
+
+997
+00:55:52,420 --> 00:55:56,080
+And this enhancer will
+include regulators
+
+998
+00:55:56,080 --> 00:56:00,920
+that will cause Pol II
+to begin transcription.
+
+999
+00:56:00,920 --> 00:56:05,590
+And if somehow we could
+capture these complexes
+
+1000
+00:56:05,590 --> 00:56:11,990
+so that we could examine them
+and figure out what bits of DNA
+
+1001
+00:56:11,990 --> 00:56:15,130
+are associated with
+one another, we
+
+1002
+00:56:15,130 --> 00:56:19,340
+could map, directly, what
+enhancers are controlling what
+
+1003
+00:56:19,340 --> 00:56:24,310
+genes, when they're
+active in this form.
+
+1004
+00:56:24,310 --> 00:56:30,490
+So the essential idea of a
+variety of different protocols,
+
+1005
+00:56:30,490 --> 00:56:36,960
+whether it be protocols
+like high c or ChIA-PET
+
+1006
+00:56:36,960 --> 00:56:39,850
+that we're going to
+talk about are the same.
+
+1007
+00:56:39,850 --> 00:56:43,570
+The difference is that
+in the case of ChIA-PET,
+
+1008
+00:56:43,570 --> 00:56:45,790
+we're only going to look
+at interactions that
+
+1009
+00:56:45,790 --> 00:56:48,780
+are defined by a
+particular protein.
+
+1010
+00:56:48,780 --> 00:56:51,460
+So what we're going to do in
+the slides I'm going to show you
+
+1011
+00:56:51,460 --> 00:56:53,625
+today, is we're
+going to only look
+
+1012
+00:56:53,625 --> 00:56:56,560
+at interactions that are
+mediated through RNA polymerase
+
+1013
+00:56:56,560 --> 00:56:57,940
+II.
+
+1014
+00:56:57,940 --> 00:57:00,190
+And those are particularly
+interesting interactions
+
+1015
+00:57:00,190 --> 00:57:03,000
+as you can see,
+because they involve
+
+1016
+00:57:03,000 --> 00:57:06,360
+actively transcribed genes.
+
+1017
+00:57:06,360 --> 00:57:09,860
+So if we could capture all
+the RNA polymerase II mediated
+
+1018
+00:57:09,860 --> 00:57:16,650
+interactions, we'd
+be in great shape.
+
+1019
+00:57:16,650 --> 00:57:23,070
+So, we have a lot of very
+talented biologists here.
+
+1020
+00:57:23,070 --> 00:57:29,100
+So would anybody like to make
+a suggestion for a protocol
+
+1021
+00:57:29,100 --> 00:57:32,075
+for actually revealing
+these interactions?
+
+1022
+00:57:34,910 --> 00:57:39,260
+Does anybody have any ideas
+how you'd go about that?
+
+1023
+00:57:39,260 --> 00:57:41,165
+Or what enzyme
+might be involved?
+
+1024
+00:57:44,980 --> 00:57:46,510
+Any ideas?
+
+1025
+00:57:46,510 --> 00:57:49,953
+Don't be bashful now.
+
+1026
+00:57:49,953 --> 00:57:50,452
+Yes.
+
+1027
+00:57:50,452 --> 00:57:55,380
+AUDIENCE: How about fixing
+everything in place where it is
+
+1028
+00:57:55,380 --> 00:57:58,967
+and then getting
+[INAUDIBLE] through DNA.
+
+1029
+00:57:58,967 --> 00:57:59,550
+PROFESSOR: OK.
+
+1030
+00:57:59,550 --> 00:58:02,160
+Fixing everything
+where it is in place.
+
+1031
+00:58:02,160 --> 00:58:03,090
+That's good.
+
+1032
+00:58:03,090 --> 00:58:06,902
+So we might cross link this
+whole thing, for example.
+
+1033
+00:58:06,902 --> 00:58:07,800
+OK.
+
+1034
+00:58:07,800 --> 00:58:11,710
+And then any other
+ideas what we would do?
+
+1035
+00:58:11,710 --> 00:58:13,817
+That's done, this
+protical-- yes.
+
+1036
+00:58:13,817 --> 00:58:19,670
+AUDIENCE: Well, [INAUDIBLE] that
+you've going to be [INAUDIBLE].
+
+1037
+00:58:19,670 --> 00:58:23,736
+And then digesting the
+DNA that's coming out,
+
+1038
+00:58:23,736 --> 00:58:26,345
+and then that lingers
+to the DNA that
+
+1039
+00:58:26,345 --> 00:58:30,950
+are closest together
+in the sequence.
+
+1040
+00:58:30,950 --> 00:58:32,060
+PROFESSOR: OK.
+
+1041
+00:58:32,060 --> 00:58:35,160
+So I think what you're
+suggesting goes something
+
+1042
+00:58:35,160 --> 00:58:36,365
+like this.
+
+1043
+00:58:36,365 --> 00:58:38,680
+All right.
+
+1044
+00:58:38,680 --> 00:58:44,770
+Which is, that imagine that
+we cross link those complexes
+
+1045
+00:58:44,770 --> 00:58:47,940
+and we precipitate them.
+
+1046
+00:58:47,940 --> 00:58:55,310
+And then what we do is we,
+in a very dilute solution,
+
+1047
+00:58:55,310 --> 00:58:58,990
+we ligate the DNA together.
+
+1048
+00:58:58,990 --> 00:59:02,430
+And so we get two kinds
+of ligation products.
+
+1049
+00:59:02,430 --> 00:59:05,060
+On the left-hand side we
+get self-ligation products
+
+1050
+00:59:05,060 --> 00:59:08,500
+where a DNA molecule
+ligates to itself.
+
+1051
+00:59:08,500 --> 00:59:12,200
+And on the right-hand side we
+get inner ligation products,
+
+1052
+00:59:12,200 --> 00:59:17,960
+where the piece of DNA
+that the enhancer was on,
+
+1053
+00:59:17,960 --> 00:59:22,790
+ligates to the pieces of DNA
+that the RNA polymerase was
+
+1054
+00:59:22,790 --> 00:59:25,540
+transcribing the gene on.
+
+1055
+00:59:25,540 --> 00:59:28,500
+And those inter-ligation
+bits of DNA,
+
+1056
+00:59:28,500 --> 00:59:32,330
+the ones that are red and blue,
+are really interesting, right.
+
+1057
+00:59:32,330 --> 00:59:35,287
+Because they contain both
+the enhancer sequence
+
+1058
+00:59:35,287 --> 00:59:36,370
+and the promoter sequence.
+
+1059
+00:59:39,030 --> 00:59:44,690
+And all we need to do now is
+to sequence those molecules
+
+1060
+00:59:44,690 --> 00:59:52,080
+from the ends and figure out
+where they are in the genome.
+
+1061
+00:59:52,080 --> 00:59:53,026
+Yes?
+
+1062
+00:59:53,026 --> 00:59:56,428
+AUDIENCE: How much variation
+would there be in the sequence?
+
+1063
+00:59:56,428 --> 01:00:00,302
+I guess I'm just wondering-- the
+RNA polymerase is not static,
+
+1064
+01:00:00,302 --> 01:00:00,802
+is it?
+
+1065
+01:00:00,802 --> 01:00:03,718
+In terms of its interaction
+with the intenser and the gene.
+
+1066
+01:00:03,718 --> 01:00:07,262
+I just don't know what
+would be capturing in this--
+
+1067
+01:00:07,262 --> 01:00:07,970
+PROFESSOR: Right.
+
+1068
+01:00:07,970 --> 01:00:08,820
+AUDIENCE: [INAUDIBLE]
+doesn't just
+
+1069
+01:00:08,820 --> 01:00:10,590
+touch at the beginning
+and then [INAUDIBLE].
+
+1070
+01:00:10,590 --> 01:00:10,980
+PROFESSOR: Right.
+
+1071
+01:00:10,980 --> 01:00:12,646
+And I think that's a
+very good question.
+
+1072
+01:00:12,646 --> 01:00:19,140
+And in fact, a PhD thesis was
+just written on this topic.
+
+1073
+01:00:19,140 --> 01:00:22,030
+Which is, when you have
+proteins that are moving down
+
+1074
+01:00:22,030 --> 01:00:24,590
+the genome, in
+some sense, you're
+
+1075
+01:00:24,590 --> 01:00:27,020
+looking at a blurred picture.
+
+1076
+01:00:27,020 --> 01:00:31,540
+So how do you
+de-blur the picture
+
+1077
+01:00:31,540 --> 01:00:34,320
+so that it's brought
+sharply into focus?
+
+1078
+01:00:34,320 --> 01:00:38,340
+And so a compute is something
+called a point spread function
+
+1079
+01:00:38,340 --> 01:00:43,210
+which describes how things are
+spread out down the genome.
+
+1080
+01:00:43,210 --> 01:00:46,480
+And then you invert that to get
+a more focused picture of where
+
+1081
+01:00:46,480 --> 01:00:49,810
+the protein is actually,
+primarily located.
+
+1082
+01:00:49,810 --> 01:00:50,650
+But you're right.
+
+1083
+01:00:50,650 --> 01:00:52,714
+Things like RNA
+polymerase II are not
+
+1084
+01:00:52,714 --> 01:00:54,255
+thought of as
+point-binding proteins.
+
+1085
+01:00:54,255 --> 01:00:56,630
+They're actually proteins
+in motion most time
+
+1086
+01:00:56,630 --> 01:00:57,950
+when they're doing their work.
+
+1087
+01:00:57,950 --> 01:01:01,950
+AUDIENCE: [INAUDIBLE]
+that it's polymerizing,
+
+1088
+01:01:01,950 --> 01:01:04,489
+does that it mean that it's
+still continually bound
+
+1089
+01:01:04,489 --> 01:01:05,280
+to the [INAUDIBLE]?
+
+1090
+01:01:05,280 --> 01:01:06,950
+PROFESSOR: No.
+
+1091
+01:01:06,950 --> 01:01:08,660
+Although, I don't
+think we really
+
+1092
+01:01:08,660 --> 01:01:14,350
+understand all of the
+details of that mechanism.
+
+1093
+01:01:14,350 --> 01:01:17,440
+But, suffice to say
+that what I can do
+
+1094
+01:01:17,440 --> 01:01:20,090
+is I can start showing
+you data and from the data
+
+1095
+01:01:20,090 --> 01:01:25,040
+we can try and
+understand mechanism.
+
+1096
+01:01:25,040 --> 01:01:27,147
+These are all great
+questions, right.
+
+1097
+01:01:27,147 --> 01:01:27,646
+Yes.
+
+1098
+01:01:27,646 --> 01:01:30,194
+AUDIENCE: When we did the
+citations and ligation,
+
+1099
+01:01:30,194 --> 01:01:32,900
+you're going to get a lot
+of random ligation, right?
+
+1100
+01:01:32,900 --> 01:01:34,400
+PROFESSOR: A lot
+of random ligation?
+
+1101
+01:01:34,400 --> 01:01:37,225
+AUDIENCE: Yeah, between DNA
+sequences that aren't aren't, I
+
+1102
+01:01:37,225 --> 01:01:38,890
+guess, as close?
+
+1103
+01:01:38,890 --> 01:01:41,240
+Or you shouldn't really be
+ligating certain things?
+
+1104
+01:01:41,240 --> 01:01:44,850
+PROFESSOR: Well, this picture is
+a little bit deceiving, right?
+
+1105
+01:01:44,850 --> 01:01:48,020
+Because there's actually another
+complex just like the one
+
+1106
+01:01:48,020 --> 01:01:51,230
+at the top, right
+to its left, right?
+
+1107
+01:01:51,230 --> 01:01:56,620
+And you could imagine those
+things ligating together.
+
+1108
+01:01:56,620 --> 01:01:59,750
+And so now you're going to
+get ligation products that
+
+1109
+01:01:59,750 --> 01:02:01,190
+are noise.
+
+1110
+01:02:01,190 --> 01:02:02,260
+They don't mean anything.
+
+1111
+01:02:02,260 --> 01:02:04,267
+AUDIENCE: Do you just
+throw those out, I guess?
+
+1112
+01:02:04,267 --> 01:02:06,850
+PROFESSOR: Well, the problem is,
+you don't know which ones are
+
+1113
+01:02:06,850 --> 01:02:08,300
+noise and which ones aren't.
+
+1114
+01:02:08,300 --> 01:02:09,920
+Right?
+
+1115
+01:02:09,920 --> 01:02:13,260
+Now, there are some clever
+tricks you can play.
+
+1116
+01:02:13,260 --> 01:02:17,730
+One clever trick is
+to change the protocol
+
+1117
+01:02:17,730 --> 01:02:23,500
+to do these kinds
+of reactions, not
+
+1118
+01:02:23,500 --> 01:02:29,430
+in solution, but
+in some sort of gel
+
+1119
+01:02:29,430 --> 01:02:32,690
+or other thing that
+keeps the products apart.
+
+1120
+01:02:32,690 --> 01:02:35,770
+The other thing you
+can do is estimate
+
+1121
+01:02:35,770 --> 01:02:38,720
+how bad the situation is.
+
+1122
+01:02:38,720 --> 01:02:40,330
+And how might you do that?
+
+1123
+01:02:40,330 --> 01:02:44,650
+What you do is, you
+take one set of-- you
+
+1124
+01:02:44,650 --> 01:02:47,860
+take your original preparation
+and you split it into two.
+
+1125
+01:02:47,860 --> 01:02:48,810
+OK.
+
+1126
+01:02:48,810 --> 01:02:54,180
+And you color this one red and
+this one blue using linkers,
+
+1127
+01:02:54,180 --> 01:02:55,310
+right.
+
+1128
+01:02:55,310 --> 01:02:59,130
+And then you put them together
+and you do this reaction.
+
+1129
+01:02:59,130 --> 01:03:01,090
+And then you ask,
+how many molecules
+
+1130
+01:03:01,090 --> 01:03:03,550
+have the red and the
+blue linkers on them.
+
+1131
+01:03:03,550 --> 01:03:06,050
+And then you know those are
+bad ones because they actually
+
+1132
+01:03:06,050 --> 01:03:08,890
+came from different
+complexes, right.
+
+1133
+01:03:08,890 --> 01:03:13,770
+And so by estimating the amount
+of critical chimeric products
+
+1134
+01:03:13,770 --> 01:03:18,260
+you get, from that split and
+then recombined approach,
+
+1135
+01:03:18,260 --> 01:03:21,750
+you can optimize the protocol to
+reduce the chimeric production
+
+1136
+01:03:21,750 --> 01:03:22,430
+rate.
+
+1137
+01:03:22,430 --> 01:03:26,010
+Current chimeric production
+rates are about 20%.
+
+1138
+01:03:26,010 --> 01:03:27,080
+Something of that order.
+
+1139
+01:03:27,080 --> 01:03:27,580
+OK.
+
+1140
+01:03:27,580 --> 01:03:30,070
+It used to be 50%,
+that's really bad.
+
+1141
+01:03:30,070 --> 01:03:31,050
+OK.
+
+1142
+01:03:31,050 --> 01:03:38,520
+So you can try
+and optimize that.
+
+1143
+01:03:38,520 --> 01:03:42,090
+Now, if the protocol
+has these issues--
+
+1144
+01:03:42,090 --> 01:03:44,660
+you have a moving protein
+that was brought up here,
+
+1145
+01:03:44,660 --> 01:03:46,600
+right, that you're
+trying to capture.
+
+1146
+01:03:46,600 --> 01:03:51,210
+You've got a lot of noise
+coming from the background
+
+1147
+01:03:51,210 --> 01:03:55,340
+of these reactions, right.
+
+1148
+01:03:55,340 --> 01:03:57,510
+Why are we doing this?
+
+1149
+01:03:57,510 --> 01:04:00,870
+Well, it's the only
+game in town right now.
+
+1150
+01:04:00,870 --> 01:04:04,030
+If you want to have
+a mechanistic way
+
+1151
+01:04:04,030 --> 01:04:07,900
+of understanding what enhancers
+are communicating with what
+
+1152
+01:04:07,900 --> 01:04:11,960
+genes, this and its
+family-- I broadly
+
+1153
+01:04:11,960 --> 01:04:14,545
+call this a family
+of protocols--
+
+1154
+01:04:14,545 --> 01:04:16,640
+is really the only way to go.
+
+1155
+01:04:16,640 --> 01:04:18,440
+OK.
+
+1156
+01:04:18,440 --> 01:04:23,260
+The interesting thing
+is that when you do,
+
+1157
+01:04:23,260 --> 01:04:25,280
+you get data like this.
+
+1158
+01:04:25,280 --> 01:04:27,540
+And so, what you're
+looking at here
+
+1159
+01:04:27,540 --> 01:04:29,880
+is exactly the same
+location in the genome.
+
+1160
+01:04:29,880 --> 01:04:33,590
+It's about 600,000 bases
+across from left to right.
+
+1161
+01:04:33,590 --> 01:04:34,375
+OK.
+
+1162
+01:04:34,375 --> 01:04:38,270
+And at the very bottom,
+you see the SOX2 gene.
+
+1163
+01:04:38,270 --> 01:04:41,840
+And you have three
+different cellular states.
+
+1164
+01:04:41,840 --> 01:04:44,070
+The top state--
+our motor neurons
+
+1165
+01:04:44,070 --> 01:04:49,520
+have been programmed through
+the ectopic expression
+
+1166
+01:04:49,520 --> 01:04:52,240
+of three transcription factors.
+
+1167
+01:04:52,240 --> 01:04:56,520
+The second set of
+interactions are motor neurons
+
+1168
+01:04:56,520 --> 01:04:59,800
+that have been
+produced by exposure
+
+1169
+01:04:59,800 --> 01:05:02,720
+to small molecules
+over a 7-day period.
+
+1170
+01:05:02,720 --> 01:05:05,030
+And the bottom set
+of interactions
+
+1171
+01:05:05,030 --> 01:05:09,824
+are from mouse ES cells
+that are plueripotent.
+
+1172
+01:05:09,824 --> 01:05:11,240
+And what's interesting
+is that you
+
+1173
+01:05:11,240 --> 01:05:16,560
+can see how-- I'm
+going to point here.
+
+1174
+01:05:16,560 --> 01:05:20,550
+You can see here-- this is the
+SOX2 gene down at the bottom.
+
+1175
+01:05:20,550 --> 01:05:24,580
+And you can see here--
+this regulatory region
+
+1176
+01:05:24,580 --> 01:05:30,460
+is interacting heavily with
+the SOX2 gene at the ESL state.
+
+1177
+01:05:30,460 --> 01:05:35,360
+And above here, I have
+put SOX2 ChIP-seq data.
+
+1178
+01:05:35,360 --> 01:05:40,310
+So you can actually see that
+SOX2 is regulating itself.
+
+1179
+01:05:40,310 --> 01:05:46,320
+And up here, we have the
+same SOX2 gene locus.
+
+1180
+01:05:46,320 --> 01:05:50,710
+And OLIG2 is a key regulator
+of this motor neuron fate.
+
+1181
+01:05:50,710 --> 01:05:53,600
+And you can see that it
+appears that OLIG2 is now
+
+1182
+01:05:53,600 --> 01:05:56,490
+regulating SOX2.
+
+1183
+01:05:56,490 --> 01:06:00,760
+And we don't have as complete
+dependence upon the SOX2 locus
+
+1184
+01:06:00,760 --> 01:06:02,760
+as we had before.
+
+1185
+01:06:02,760 --> 01:06:05,730
+And up here in the induced
+motor neuron state,
+
+1186
+01:06:05,730 --> 01:06:08,180
+LHX4 is one of the
+reprogramming factors
+
+1187
+01:06:08,180 --> 01:06:12,560
+and you can see how it is
+interacting with SOX2 here
+
+1188
+01:06:12,560 --> 01:06:15,480
+and over here.
+
+1189
+01:06:15,480 --> 01:06:19,890
+So what this methodology
+allows us to do,
+
+1190
+01:06:19,890 --> 01:06:25,380
+is to tie these regulatory
+regions to the genes
+
+1191
+01:06:25,380 --> 01:06:32,750
+that they are regulating,
+albeit it with some issues.
+
+1192
+01:06:32,750 --> 01:06:37,876
+So, we'll talk about the
+issues in just a second.
+
+1193
+01:06:37,876 --> 01:06:45,290
+Are there any questions at all
+about the idea of capturing,
+
+1194
+01:06:45,290 --> 01:06:50,000
+in essence, the folding of the
+genome with this methodology
+
+1195
+01:06:50,000 --> 01:06:53,620
+to link regulatory
+regions to genes?
+
+1196
+01:06:56,830 --> 01:06:57,350
+Yes?
+
+1197
+01:06:57,350 --> 01:06:58,646
+AUDIENCE: I have a question.
+
+1198
+01:06:58,646 --> 01:07:02,678
+So in each of
+those charts you've
+
+1199
+01:07:02,678 --> 01:07:05,392
+got parts describing regions
+that are interacting.
+
+1200
+01:07:05,392 --> 01:07:06,017
+PROFESSOR: Yes.
+
+1201
+01:07:06,017 --> 01:07:07,450
+AUDIENCE: Is that correct?
+
+1202
+01:07:07,450 --> 01:07:08,510
+PROFESSOR: Yes.
+
+1203
+01:07:08,510 --> 01:07:12,290
+The little loops underneath
+are the actual read pairs
+
+1204
+01:07:12,290 --> 01:07:14,560
+that came out of the sequencer.
+
+1205
+01:07:14,560 --> 01:07:16,780
+And the green dotted
+lines are the interactions
+
+1206
+01:07:16,780 --> 01:07:18,384
+I'm suggesting are significant.
+
+1207
+01:07:21,040 --> 01:07:23,200
+So I'm showing you
+the raw data and I'm
+
+1208
+01:07:23,200 --> 01:07:28,360
+showing you the hypothesized
+or purported interactions
+
+1209
+01:07:28,360 --> 01:07:32,168
+with the green dotted lines.
+
+1210
+01:07:32,168 --> 01:07:32,668
+Right?
+
+1211
+01:07:35,500 --> 01:07:36,640
+Right?
+
+1212
+01:07:36,640 --> 01:07:42,810
+AUDIENCE: So how is you raw
+sequencing then transformed
+
+1213
+01:07:42,810 --> 01:07:46,720
+into this set of interactions?
+
+1214
+01:07:46,720 --> 01:07:49,890
+PROFESSOR: How is the raw
+sequencing data-- remember
+
+1215
+01:07:49,890 --> 01:07:52,970
+that what came out
+of the protocol
+
+1216
+01:07:52,970 --> 01:07:59,500
+were molecules on the
+right-hand side that
+
+1217
+01:07:59,500 --> 01:08:05,307
+had little bits of DNA from two
+different places in the genome.
+
+1218
+01:08:05,307 --> 01:08:07,453
+AUDIENCE: I'm
+sorry, I meant, how
+
+1219
+01:08:07,453 --> 01:08:11,508
+did you determine-- because
+I'm assuming each of these arcs
+
+1220
+01:08:11,508 --> 01:08:14,615
+has to have a single base start
+side and a single base end
+
+1221
+01:08:14,615 --> 01:08:15,114
+site.
+
+1222
+01:08:15,114 --> 01:08:15,580
+PROFESSOR: Correct.
+
+1223
+01:08:15,580 --> 01:08:16,955
+AUDIENCE: However,
+your reads are
+
+1224
+01:08:16,955 --> 01:08:19,199
+going to span-- your
+joined paired reads are
+
+1225
+01:08:19,199 --> 01:08:21,620
+going to span a number of bases.
+
+1226
+01:08:21,620 --> 01:08:23,451
+So you have a number
+of bases coming
+
+1227
+01:08:23,451 --> 01:08:25,457
+from the red part
+and a number of bases
+
+1228
+01:08:25,457 --> 01:08:26,540
+coming from the blue part.
+
+1229
+01:08:26,540 --> 01:08:28,732
+PROFESSOR: We've got
+20, 20 something, yeah.
+
+1230
+01:08:28,732 --> 01:08:32,099
+AUDIENCE: How do you determine
+which of these red bases
+
+1231
+01:08:32,099 --> 01:08:34,504
+and which of these blue
+bases are your start
+
+1232
+01:08:34,504 --> 01:08:36,430
+and end points for
+the [INAUDIBLE].
+
+1233
+01:08:36,430 --> 01:08:38,830
+PROFESSOR: Well, you are
+looking at a 600,000 base pair
+
+1234
+01:08:38,830 --> 01:08:41,830
+window of the
+genome and we're not
+
+1235
+01:08:41,830 --> 01:08:43,813
+quite at the resolution
+of 28 bases yet.
+
+1236
+01:08:43,813 --> 01:08:44,354
+AUDIENCE: OK.
+
+1237
+01:08:44,354 --> 01:08:46,460
+PROFESSOR: So, you know--
+
+1238
+01:08:46,460 --> 01:08:49,960
+AUDIENCE: So this is not
+necessarily single base pair
+
+1239
+01:08:49,960 --> 01:08:52,044
+resolution, but this
+is a region resolution?
+
+1240
+01:08:52,044 --> 01:08:55,109
+Is that correct?
+
+1241
+01:08:55,109 --> 01:08:57,300
+PROFESSOR: Once
+again, the question
+
+1242
+01:08:57,300 --> 01:09:00,580
+of how to improve the spatial
+resolution of these results
+
+1243
+01:09:00,580 --> 01:09:02,720
+is a subject of active research.
+
+1244
+01:09:02,720 --> 01:09:05,990
+And once again, you
+can deconvolve things
+
+1245
+01:09:05,990 --> 01:09:08,590
+like the shearing to
+actually get things
+
+1246
+01:09:08,590 --> 01:09:12,779
+down to within, say, 10 to
+100 base pairs resolution.
+
+1247
+01:09:12,779 --> 01:09:13,667
+AUDIENCE: OK.
+
+1248
+01:09:13,667 --> 01:09:14,250
+PROFESSOR: OK?
+
+1249
+01:09:14,250 --> 01:09:15,770
+AUDIENCE: Got it.
+
+1250
+01:09:15,770 --> 01:09:19,659
+PROFESSOR: But you can't
+identify the exact motif
+
+1251
+01:09:19,659 --> 01:09:21,620
+that the things land on, right.
+
+1252
+01:09:21,620 --> 01:09:23,920
+They can get in the
+ballpark, so to speak, right.
+
+1253
+01:09:23,920 --> 01:09:27,970
+You can figure out where
+you need to look for motifs.
+
+1254
+01:09:27,970 --> 01:09:32,850
+And so one thing
+that we and others do
+
+1255
+01:09:32,850 --> 01:09:34,760
+is look at these
+regions and we ask
+
+1256
+01:09:34,760 --> 01:09:38,740
+what motifs are present
+into these regions.
+
+1257
+01:09:38,740 --> 01:09:42,060
+Or if you have match DNase-seq
+data, you can go back
+
+1258
+01:09:42,060 --> 01:09:44,979
+and you can say, aha,
+I have DNase-seq data.
+
+1259
+01:09:44,979 --> 01:09:48,180
+I have this data and
+I know that there's
+
+1260
+01:09:48,180 --> 01:09:50,180
+something going on at
+that region of the genome.
+
+1261
+01:09:50,180 --> 01:09:51,971
+What proteins do I
+think are sitting there,
+
+1262
+01:09:51,971 --> 01:09:55,330
+based upon the protection
+profiles I see.
+
+1263
+01:09:55,330 --> 01:09:55,830
+Right.
+
+1264
+01:09:55,830 --> 01:09:57,454
+So you can take an
+integrative approach
+
+1265
+01:09:57,454 --> 01:09:59,740
+where you use different
+data types to begin
+
+1266
+01:09:59,740 --> 01:10:02,035
+to pick apart the
+regulatory network.
+
+1267
+01:10:02,035 --> 01:10:05,600
+Where you see the connections
+directly molecularly,
+
+1268
+01:10:05,600 --> 01:10:08,070
+and you see the
+regulatory proteins
+
+1269
+01:10:08,070 --> 01:10:11,101
+that are binding
+at those locations.
+
+1270
+01:10:11,101 --> 01:10:11,600
+OK?
+
+1271
+01:10:11,600 --> 01:10:13,225
+Was that helpful?
+
+1272
+01:10:13,225 --> 01:10:13,725
+Good.
+
+1273
+01:10:13,725 --> 01:10:14,557
+Good questions.
+
+1274
+01:10:14,557 --> 01:10:15,390
+Any other questions?
+
+1275
+01:10:15,390 --> 01:10:15,925
+Yes?
+
+1276
+01:10:15,925 --> 01:10:17,550
+AUDIENCE: Would you consider
+Hi-C and 5C and all of those
+
+1277
+01:10:17,550 --> 01:10:19,059
+to be the same
+family of technique?
+
+1278
+01:10:19,059 --> 01:10:19,850
+PROFESSOR: I would.
+
+1279
+01:10:19,850 --> 01:10:25,520
+They're all, sort of the same
+family and they're improving.
+
+1280
+01:10:25,520 --> 01:10:28,860
+I'm about to tell you why
+this doesn't work very well.
+
+1281
+01:10:28,860 --> 01:10:32,770
+But, that said, it's the
+best thing we have going.
+
+1282
+01:10:32,770 --> 01:10:34,220
+Right.
+
+1283
+01:10:34,220 --> 01:10:37,060
+5C is not any to any.
+
+1284
+01:10:37,060 --> 01:10:38,920
+It's to one to any.
+
+1285
+01:10:38,920 --> 01:10:43,740
+This protocol, when you do
+one experiment with this,
+
+1286
+01:10:43,740 --> 01:10:47,170
+it tells you all the interacting
+regions in the genome.
+
+1287
+01:10:47,170 --> 01:10:49,070
+Right.
+
+1288
+01:10:49,070 --> 01:10:51,170
+I believe 5C-- help
+me if I'm wrong.
+
+1289
+01:10:51,170 --> 01:10:52,900
+You pick one anchor
+location and then
+
+1290
+01:10:52,900 --> 01:10:54,290
+you can tell all the
+regions and genomes that
+
+1291
+01:10:54,290 --> 01:10:56,150
+are interacting with
+that anchor location.
+
+1292
+01:10:56,150 --> 01:10:57,150
+AUDIENCE: Isn't that 3C?
+
+1293
+01:10:57,150 --> 01:10:58,137
+PROFESSOR: What?
+
+1294
+01:10:58,137 --> 01:10:59,220
+AUDIENCE: 3C's one to one.
+
+1295
+01:10:59,220 --> 01:11:00,916
+4C's one to any.
+
+1296
+01:11:00,916 --> 01:11:01,790
+AUDIENCE: And 5C is--
+
+1297
+01:11:01,790 --> 01:11:02,987
+AUDIENCE: 5C's any to any.
+
+1298
+01:11:02,987 --> 01:11:04,435
+PROFESSOR: And 5C's any to any?
+
+1299
+01:11:04,435 --> 01:11:04,935
+OK.
+
+1300
+01:11:04,935 --> 01:11:06,580
+I stand correct.
+
+1301
+01:11:06,580 --> 01:11:07,280
+Thank you.
+
+1302
+01:11:10,751 --> 01:11:11,250
+Yeah.
+
+1303
+01:11:14,501 --> 01:11:15,000
+OK.
+
+1304
+01:11:17,660 --> 01:11:20,950
+You didn't critique
+my bond type.
+
+1305
+01:11:20,950 --> 01:11:23,091
+See I was trying to
+get you and you didn't.
+
+1306
+01:11:23,091 --> 01:11:23,590
+OK.
+
+1307
+01:11:26,920 --> 01:11:28,240
+And other questions about this?
+
+1308
+01:11:31,520 --> 01:11:32,810
+OK.
+
+1309
+01:11:32,810 --> 01:11:34,940
+What could go wrong?
+
+1310
+01:11:34,940 --> 01:11:35,964
+What could go wrong?
+
+1311
+01:11:35,964 --> 01:11:37,630
+Well, I can tell you
+what will go wrong.
+
+1312
+01:11:37,630 --> 01:11:44,290
+What will go wrong is that it
+has a low true positive rate.
+
+1313
+01:11:44,290 --> 01:11:44,790
+OK.
+
+1314
+01:11:47,860 --> 01:11:49,200
+And how can you tell that?
+
+1315
+01:11:49,200 --> 01:11:53,080
+You do the experiment
+twice and you
+
+1316
+01:11:53,080 --> 01:11:55,680
+get thousands of interactions
+from each experiment in exactly
+
+1317
+01:11:55,680 --> 01:11:59,710
+matched conditions and
+there's a very small overlap
+
+1318
+01:11:59,710 --> 01:12:02,230
+between the conditions.
+
+1319
+01:12:02,230 --> 01:12:04,830
+Oops.
+
+1320
+01:12:04,830 --> 01:12:08,180
+So, that's a pretty
+big oops, right?
+
+1321
+01:12:08,180 --> 01:12:11,350
+Because you would like it
+to be the case that when
+
+1322
+01:12:11,350 --> 01:12:15,460
+you do an experiment multiple
+times, you get the same answer.
+
+1323
+01:12:15,460 --> 01:12:19,560
+So let us just
+suppose that you get
+
+1324
+01:12:19,560 --> 01:12:23,562
+10,000 interactions
+in experiment one.
+
+1325
+01:12:23,562 --> 01:12:27,380
+10,000 interactions in
+experiment two, but only
+
+1326
+01:12:27,380 --> 01:12:31,380
+2,000 of them are the same.
+
+1327
+01:12:31,380 --> 01:12:33,750
+What could possibly
+be going wrong?
+
+1328
+01:12:37,190 --> 01:12:37,760
+Any ideas?
+
+1329
+01:12:40,264 --> 01:12:42,430
+If you're looking at the
+data, what would you think?
+
+1330
+01:12:48,730 --> 01:12:50,080
+Well?
+
+1331
+01:12:50,080 --> 01:12:50,580
+Yeah?
+
+1332
+01:12:50,580 --> 01:12:52,371
+AUDIENCE: [INAUDIBLE]
+could be really high,
+
+1333
+01:12:52,371 --> 01:12:54,994
+so you're just seeing
+a couple of things
+
+1334
+01:12:54,994 --> 01:12:56,782
+that are above the background.
+
+1335
+01:12:56,782 --> 01:12:58,130
+And they don't necessarily--
+
+1336
+01:12:58,130 --> 01:12:58,838
+PROFESSOR: Right.
+
+1337
+01:12:58,838 --> 01:13:00,500
+So is it maybe
+that, you know, it's
+
+1338
+01:13:00,500 --> 01:13:02,280
+just tough to get
+these interactions out.
+
+1339
+01:13:02,280 --> 01:13:06,162
+And so you got a lot
+of background trash.
+
+1340
+01:13:06,162 --> 01:13:07,620
+And the things that
+are significant
+
+1341
+01:13:07,620 --> 01:13:12,185
+are tough to pick out.
+
+1342
+01:13:12,185 --> 01:13:12,685
+Yeah?
+
+1343
+01:13:12,685 --> 01:13:16,509
+AUDIENCE: Maybe it's a real
+biological noise issue?
+
+1344
+01:13:16,509 --> 01:13:20,733
+So rather than the technique,
+actually any given time that
+
+1345
+01:13:20,733 --> 01:13:24,461
+the interactions as so diverse
+that when you take the snap
+
+1346
+01:13:24,461 --> 01:13:25,460
+shot you can't--
+
+1347
+01:13:25,460 --> 01:13:26,518
+PROFESSOR: I like
+that explanation
+
+1348
+01:13:26,518 --> 01:13:28,180
+because it's very pleasing
+and makes me feel good.
+
+1349
+01:13:28,180 --> 01:13:29,470
+And I would be hopeful
+that that would be true
+
+1350
+01:13:29,470 --> 01:13:31,845
+that there's enough biological
+noise that that's actually
+
+1351
+01:13:31,845 --> 01:13:32,885
+what I'm observing.
+
+1352
+01:13:32,885 --> 01:13:34,810
+It doesn't make me feel
+too warm and fuzzy,
+
+1353
+01:13:34,810 --> 01:13:36,830
+but you know, I'd
+go with that, right.
+
+1354
+01:13:40,194 --> 01:13:41,860
+The other thing you
+might think is, gee,
+
+1355
+01:13:41,860 --> 01:13:43,720
+if we just sequenced
+that library more,
+
+1356
+01:13:43,720 --> 01:13:46,670
+we'd get more interactions
+out them, right?
+
+1357
+01:13:46,670 --> 01:13:49,120
+So you go off and you compute
+the library complexity
+
+1358
+01:13:49,120 --> 01:13:53,210
+of your library and you go,
+oops, that's not going to work.
+
+1359
+01:13:53,210 --> 01:13:55,980
+There just isn't enough
+diversity in the library.
+
+1360
+01:13:55,980 --> 01:13:59,080
+Meaning that the underlying
+biological protocol did not
+
+1361
+01:13:59,080 --> 01:14:02,400
+produce enough of those
+interesting inner ligation
+
+1362
+01:14:02,400 --> 01:14:06,560
+events to allow you to reveal
+more information about what's
+
+1363
+01:14:06,560 --> 01:14:07,840
+going on.
+
+1364
+01:14:07,840 --> 01:14:09,890
+OK.
+
+1365
+01:14:09,890 --> 01:14:15,130
+Now if I ask you to judge the
+significance of an interaction
+
+1366
+01:14:15,130 --> 01:14:16,630
+pair here.
+
+1367
+01:14:16,630 --> 01:14:19,360
+Let's think about
+this using what
+
+1368
+01:14:19,360 --> 01:14:22,060
+we know already
+from the subject.
+
+1369
+01:14:22,060 --> 01:14:23,290
+OK.
+
+1370
+01:14:23,290 --> 01:14:25,375
+So I'm going to draw a picture.
+
+1371
+01:14:28,480 --> 01:14:31,470
+So I have my genome.
+
+1372
+01:14:31,470 --> 01:14:37,400
+And let's just say that I have
+a location, CA and a location CB
+
+1373
+01:14:37,400 --> 01:14:43,690
+and I have a pile of ends that
+wind up in those two locations.
+
+1374
+01:14:43,690 --> 01:14:45,200
+OK.
+
+1375
+01:14:45,200 --> 01:14:51,080
+And what I would like
+to know is-- and I have,
+
+1376
+01:14:51,080 --> 01:14:56,230
+let me just see what
+variable I used for this.
+
+1377
+01:14:56,230 --> 01:15:01,900
+And I have a certain number of
+interactions between a and b.
+
+1378
+01:15:01,900 --> 01:15:05,840
+That is I have a certain
+number of reads that
+
+1379
+01:15:05,840 --> 01:15:09,080
+cross between these two
+locations in the genome.
+
+1380
+01:15:09,080 --> 01:15:11,511
+And I'd like to know whether
+or not this number of reads
+
+1381
+01:15:11,511 --> 01:15:12,135
+is significant.
+
+1382
+01:15:14,860 --> 01:15:17,240
+OK.
+
+1383
+01:15:17,240 --> 01:15:18,652
+How could I estimate that?
+
+1384
+01:15:21,810 --> 01:15:24,500
+Any ideas?
+
+1385
+01:15:24,500 --> 01:15:29,140
+Oh, I'm also going
+to tell you that n
+
+1386
+01:15:29,140 --> 01:15:38,160
+is the total number
+of read ends observed.
+
+1387
+01:15:42,700 --> 01:15:43,200
+OK.
+
+1388
+01:15:46,040 --> 01:15:49,530
+Well, here is the idea.
+
+1389
+01:15:49,530 --> 01:15:54,240
+I've got n total
+read ends, right?
+
+1390
+01:15:54,240 --> 01:15:57,770
+I've got ca read ends here.
+
+1391
+01:15:57,770 --> 01:16:00,720
+I've got cv read
+ends here, and I
+
+1392
+01:16:00,720 --> 01:16:05,490
+have iab that are overlapping.
+
+1393
+01:16:05,490 --> 01:16:07,890
+So now, this is just our old
+friend, the hypergeometric,
+
+1394
+01:16:07,890 --> 01:16:08,390
+right.
+
+1395
+01:16:08,390 --> 01:16:11,290
+We can ask what is the
+probability of that happening
+
+1396
+01:16:11,290 --> 01:16:12,960
+at random?
+
+1397
+01:16:12,960 --> 01:16:18,460
+This many interactions or
+fewer would happen at random.
+
+1398
+01:16:18,460 --> 01:16:20,510
+And if it's very
+unlikely, we would
+
+1399
+01:16:20,510 --> 01:16:23,330
+reject the null hypothesis
+and accept that there's really
+
+1400
+01:16:23,330 --> 01:16:25,730
+an interaction going on here.
+
+1401
+01:16:25,730 --> 01:16:27,390
+OK?
+
+1402
+01:16:27,390 --> 01:16:31,130
+So, just to be more
+precise about that.
+
+1403
+01:16:31,130 --> 01:16:32,380
+This is what it looks like.
+
+1404
+01:16:32,380 --> 01:16:34,170
+You've seen this before.
+
+1405
+01:16:34,170 --> 01:16:37,300
+That the probability of
+those interactions happening
+
+1406
+01:16:37,300 --> 01:16:40,610
+on a null model, given a total
+number of interactions end in
+
+1407
+01:16:40,610 --> 01:16:45,070
+ca and cb is given by
+the hypergeometric.
+
+1408
+01:16:45,070 --> 01:16:46,640
+OK.
+
+1409
+01:16:46,640 --> 01:16:50,690
+So that's one way of going
+about assessing whether or not
+
+1410
+01:16:50,690 --> 01:16:52,672
+the interactions we
+see are significant.
+
+1411
+01:16:56,920 --> 01:17:00,156
+Now, let me ask you a
+slightly different question.
+
+1412
+01:17:00,156 --> 01:17:00,655
+Right.
+
+1413
+01:17:04,290 --> 01:17:13,900
+Imagine that I have-- and
+I'm being very generous here.
+
+1414
+01:17:13,900 --> 01:17:20,330
+Imagine that I have
+two experiment-- that's
+
+1415
+01:17:20,330 --> 01:17:21,365
+the wrong size bubbles.
+
+1416
+01:17:24,610 --> 01:17:25,870
+I don't want to mislead you.
+
+1417
+01:17:28,772 --> 01:17:30,480
+One of your friends
+comes to you and say,
+
+1418
+01:17:30,480 --> 01:17:32,430
+"I've done this
+experiment twice."
+
+1419
+01:17:32,430 --> 01:17:34,690
+Twice, OK.
+
+1420
+01:17:34,690 --> 01:17:41,900
+"And each time I get
+1,000 interactions.
+
+1421
+01:17:41,900 --> 01:17:46,600
+So each one gives
+you 1,000, let's say.
+
+1422
+01:17:46,600 --> 01:17:54,290
+And I have 900 that are common
+between the two replicates.
+
+1423
+01:17:54,290 --> 01:17:57,150
+And your friend says,
+"how many interactions
+
+1424
+01:17:57,150 --> 01:18:02,190
+do you think there
+are in total?"
+
+1425
+01:18:02,190 --> 01:18:03,328
+How could we estimate that?
+
+1426
+01:18:07,720 --> 01:18:11,570
+Well, what's interesting
+about this problem
+
+1427
+01:18:11,570 --> 01:18:19,470
+is that what we're
+asking is what's n?
+
+1428
+01:18:19,470 --> 01:18:19,970
+Right.
+
+1429
+01:18:19,970 --> 01:18:22,670
+What's the total number of
+interactions of which we're
+
+1430
+01:18:22,670 --> 01:18:26,810
+observing this set and this set
+of which 900 is overlapping.
+
+1431
+01:18:26,810 --> 01:18:29,860
+There's the hyperlink
+geometric again.
+
+1432
+01:18:29,860 --> 01:18:36,420
+So all we need to do is to find
+the maximum value, the best
+
+1433
+01:18:36,420 --> 01:18:43,800
+value for n that predicts the
+observed overlap given that we
+
+1434
+01:18:43,800 --> 01:18:49,460
+have two experiments
+of size, with m
+
+1435
+01:18:49,460 --> 01:18:54,510
+and n different observations,
+and we have an overlap of k.
+
+1436
+01:18:54,510 --> 01:18:55,335
+OK.
+
+1437
+01:18:55,335 --> 01:18:57,820
+Does that makes
+sense to everybody?
+
+1438
+01:18:57,820 --> 01:19:02,760
+Of how to estimate the
+total number of interactions
+
+1439
+01:19:02,760 --> 01:19:06,016
+out there making a
+set of assumption that
+
+1440
+01:19:06,016 --> 01:19:07,199
+they're all equally likely.
+
+1441
+01:19:10,990 --> 01:19:12,916
+Any questions about that at all?
+
+1442
+01:19:19,540 --> 01:19:20,440
+OK.
+
+1443
+01:19:20,440 --> 01:19:26,670
+And, just so you know, you can
+approximate this, this way.
+
+1444
+01:19:26,670 --> 01:19:30,710
+Which is that the maximum
+likelihood estimate
+
+1445
+01:19:30,710 --> 01:19:32,690
+of the total number
+of interactions
+
+1446
+01:19:32,690 --> 01:19:35,280
+is approximately
+n times n over k,
+
+1447
+01:19:35,280 --> 01:19:38,780
+as seen by the
+approximation on the bottom.
+
+1448
+01:19:38,780 --> 01:19:40,780
+OK?
+
+1449
+01:19:40,780 --> 01:19:43,850
+Just so that you can
+approximate how many things
+
+1450
+01:19:43,850 --> 01:19:45,810
+are out there that you
+haven't seen when you've
+
+1451
+01:19:45,810 --> 01:19:48,460
+done a couple of replicates.
+
+1452
+01:19:48,460 --> 01:19:50,200
+OK, you guys have
+been totally great.
+
+1453
+01:19:50,200 --> 01:19:52,033
+We've talked about a
+lot of different things
+
+1454
+01:19:52,033 --> 01:19:54,830
+today in chromatin
+architecture and structure.
+
+1455
+01:19:54,830 --> 01:19:57,365
+Sort of the DC to light
+version of chromatin structure
+
+1456
+01:19:57,365 --> 01:20:00,670
+and architecture lecture.
+
+1457
+01:20:00,670 --> 01:20:03,720
+Next time we're going
+to talk about building
+
+1458
+01:20:03,720 --> 01:20:05,677
+genetic models of EQTLs.
+
+1459
+01:20:05,677 --> 01:20:07,135
+And the time after
+that we're going
+
+1460
+01:20:07,135 --> 01:20:09,220
+to talk about human genetics.
+
+1461
+01:20:09,220 --> 01:20:10,380
+Thank you so much.
+
+1462
+01:20:10,380 --> 01:20:11,730
+Have a great, long weekend.
+
+1463
+01:20:11,730 --> 01:20:13,850
+We'll see you next Thursday.

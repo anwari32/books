@@ -1,0 +1,7483 @@
+1
+00:00:00,060 --> 00:00:01,780
+The following
+content is provided
+
+2
+00:00:01,780 --> 00:00:04,019
+under a Creative
+Commons license.
+
+3
+00:00:04,019 --> 00:00:06,870
+Your support will help MIT
+OpenCourseWare continue
+
+4
+00:00:06,870 --> 00:00:10,730
+to offer high quality
+educational resources for free.
+
+5
+00:00:10,730 --> 00:00:13,330
+To make a donation or
+view additional materials
+
+6
+00:00:13,330 --> 00:00:17,217
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:17,217 --> 00:00:17,842
+at ocw.mit.edu.
+
+8
+00:00:27,170 --> 00:00:29,310
+PROFESSOR: Why don't
+we get started?
+
+9
+00:00:29,310 --> 00:00:32,540
+So today we're going to talk
+about comparative genomics.
+
+10
+00:00:32,540 --> 00:00:36,910
+And first, a brief review
+of what we did last time.
+
+11
+00:00:36,910 --> 00:00:39,790
+So last time we talked
+about global alignment
+
+12
+00:00:39,790 --> 00:00:43,420
+of protein sequences,
+including the Needleman-Wunsch
+
+13
+00:00:43,420 --> 00:00:45,570
+and Smith-Waterman algorithms.
+
+14
+00:00:45,570 --> 00:00:49,650
+And we talked about gap
+penalties a little bit
+
+15
+00:00:49,650 --> 00:00:55,620
+and started to introduce the
+PAM series of matrices which
+
+16
+00:00:55,620 --> 00:00:59,020
+are well described in the text.
+
+17
+00:00:59,020 --> 00:01:01,510
+So what I wanted to
+do is just briefly
+
+18
+00:01:01,510 --> 00:01:05,850
+go over what I started to
+talk about at the end, about
+
+19
+00:01:05,850 --> 00:01:07,780
+Markov models of evolution.
+
+20
+00:01:07,780 --> 00:01:11,380
+Because they're relevant,
+not only for the PAM series,
+
+21
+00:01:11,380 --> 00:01:16,140
+but also for some other
+topics in the course.
+
+22
+00:01:16,140 --> 00:01:19,710
+A short unit on
+molecular evolution
+
+23
+00:01:19,710 --> 00:01:22,030
+we're going to do today.
+
+24
+00:01:22,030 --> 00:01:24,540
+And then they also introduce
+hidden Markov models
+
+25
+00:01:24,540 --> 00:01:27,660
+that will come up
+later in the course.
+
+26
+00:01:27,660 --> 00:01:32,860
+So the example that we gave of
+a Markov model was DNA sequence
+
+27
+00:01:32,860 --> 00:01:37,350
+evolution in successive
+generations where
+
+28
+00:01:37,350 --> 00:01:43,090
+the observation here is that the
+base at a particular position
+
+29
+00:01:43,090 --> 00:01:53,640
+at generation n+1 here depends
+on the base at that generation
+
+30
+00:01:53,640 --> 00:01:56,780
+and the base at generation n.
+
+31
+00:01:56,780 --> 00:02:00,919
+But conditional on knowing
+the base at generation n,
+
+32
+00:02:00,919 --> 00:02:02,460
+you don't learn
+anything from knowing
+
+33
+00:02:02,460 --> 00:02:05,730
+what that base was
+at generation n-1.
+
+34
+00:02:05,730 --> 00:02:09,310
+That's the essence of
+the Markov properties.
+
+35
+00:02:09,310 --> 00:02:16,140
+So here's the formal
+definition, as we saw before.
+
+36
+00:02:16,140 --> 00:02:18,650
+Any questions on this?
+
+37
+00:02:18,650 --> 00:02:22,710
+And I asked you to review
+your conditional probability
+
+38
+00:02:22,710 --> 00:02:27,190
+if it was rusty, because
+that's very relevant.
+
+39
+00:02:31,100 --> 00:02:39,080
+OK so in this example you might,
+if you had a random variable x
+
+40
+00:02:39,080 --> 00:02:42,530
+that represented the genotype
+at a particular locus,
+
+41
+00:02:42,530 --> 00:02:45,640
+let's say the
+apolipoprotein locus,
+
+42
+00:02:45,640 --> 00:02:48,320
+and it had alleles
+A and a, then you
+
+43
+00:02:48,320 --> 00:02:52,450
+might write something
+like the probability
+
+44
+00:02:52,450 --> 00:02:57,790
+that Bart's genotype
+is a homozygous given
+
+45
+00:02:57,790 --> 00:03:00,900
+his grandfather's genotype
+and his dad's genotype
+
+46
+00:03:00,900 --> 00:03:05,080
+is equal to just the conditional
+probability given his father's
+
+47
+00:03:05,080 --> 00:03:05,920
+genotype.
+
+48
+00:03:05,920 --> 00:03:07,628
+So those are the sorts
+of things that you
+
+49
+00:03:07,628 --> 00:03:09,980
+can do with Markov chains
+
+50
+00:03:09,980 --> 00:03:13,740
+So when you're working
+with Markov chains
+
+51
+00:03:13,740 --> 00:03:16,720
+matrices are extremely useful.
+
+52
+00:03:16,720 --> 00:03:20,660
+So another thing that will
+be helpful in this part
+
+53
+00:03:20,660 --> 00:03:23,550
+of the course and then again
+in Professor Fraenkel's
+
+54
+00:03:23,550 --> 00:03:25,400
+part, where he's
+talking-- he'll use also
+
+55
+00:03:25,400 --> 00:03:28,640
+some ideas from
+linear algebra-- is
+
+56
+00:03:28,640 --> 00:03:36,340
+to review your basics
+of matrices and vector
+
+57
+00:03:36,340 --> 00:03:37,510
+multiplication.
+
+58
+00:03:37,510 --> 00:03:42,020
+OK so, if you now make a
+model of molecular evolution
+
+59
+00:03:42,020 --> 00:03:46,470
+where sn is-- so s
+is this variable that
+
+60
+00:03:46,470 --> 00:03:49,160
+represents a particular
+base in the genome
+
+61
+00:03:49,160 --> 00:03:50,820
+and is the generation.
+
+62
+00:03:50,820 --> 00:03:53,350
+And then to describe
+the evolution
+
+63
+00:03:53,350 --> 00:03:55,730
+of this base over
+time, we're going
+
+64
+00:03:55,730 --> 00:04:00,010
+to imagine that its evolution
+is described by a Markov chain.
+
+65
+00:04:00,010 --> 00:04:03,640
+And a Markov chain can be
+described by, in this case, a 4
+
+66
+00:04:03,640 --> 00:04:07,040
+by 4 matrix, since there are
+four possible nucleotides
+
+67
+00:04:07,040 --> 00:04:13,020
+at generation i, for example,
+and four possible at generation
+
+68
+00:04:13,020 --> 00:04:13,680
+i plus one.
+
+69
+00:04:13,680 --> 00:04:17,040
+And you simply need
+to specify what
+
+70
+00:04:17,040 --> 00:04:19,950
+the conditional probability
+that the base will
+
+71
+00:04:19,950 --> 00:04:24,430
+be, of any possible base, at
+the next generation, given what
+
+72
+00:04:24,430 --> 00:04:26,820
+it is at the current generation.
+
+73
+00:04:26,820 --> 00:04:29,930
+So here's the matrix up here.
+
+74
+00:04:29,930 --> 00:04:31,860
+And it describes, for
+example, the probability
+
+75
+00:04:31,860 --> 00:04:36,810
+of going from a c to an a.
+
+76
+00:04:36,810 --> 00:04:40,740
+So then in general
+you might know
+
+77
+00:04:40,740 --> 00:04:44,310
+that that base is a g
+at the first generation.
+
+78
+00:04:44,310 --> 00:04:47,360
+But in general you
+won't necessarily
+
+79
+00:04:47,360 --> 00:04:50,840
+know what base it is if
+you're modeling events that
+
+80
+00:04:50,840 --> 00:04:52,200
+may happen in the future.
+
+81
+00:04:52,200 --> 00:04:54,050
+So the most general
+way of describing
+
+82
+00:04:54,050 --> 00:04:57,100
+what's happening at
+that base is a vector
+
+83
+00:04:57,100 --> 00:05:01,175
+of probabilities of the
+four possible bases--
+
+84
+00:05:01,175 --> 00:05:08,990
+so qa, qc, qg, qt, with those
+probabilities summing up to 1.
+
+85
+00:05:08,990 --> 00:05:12,490
+And so then it turns out
+that with this notation
+
+86
+00:05:12,490 --> 00:05:17,960
+that the content of the
+vector at generation n plus 1
+
+87
+00:05:17,960 --> 00:05:22,360
+is equal to simply the
+vector at generation n
+
+88
+00:05:22,360 --> 00:05:26,170
+multiplied on the
+right by the matrix,
+
+89
+00:05:26,170 --> 00:05:34,390
+just using the standard
+vector matrix multiplication.
+
+90
+00:05:36,980 --> 00:05:41,110
+So for example,
+if we have vectors
+
+91
+00:05:41,110 --> 00:05:42,690
+with four things in
+them, and we have
+
+92
+00:05:42,690 --> 00:05:48,770
+a 4 by 4 matrix, then to get
+this term here in this vector
+
+93
+00:05:48,770 --> 00:05:51,860
+you multiply-- you basically
+take the dot product
+
+94
+00:05:51,860 --> 00:05:55,530
+of this vector times
+this first column.
+
+95
+00:05:55,530 --> 00:05:58,430
+The vector times
+the first column
+
+96
+00:05:58,430 --> 00:06:00,630
+will give you that entry.
+
+97
+00:06:00,630 --> 00:06:05,640
+And this times this
+column will give you
+
+98
+00:06:05,640 --> 00:06:08,350
+that entry in the
+vector, and so forth.
+
+99
+00:06:08,350 --> 00:06:10,870
+And you can see that the
+way this makes sense,
+
+100
+00:06:10,870 --> 00:06:16,470
+the way the matrix is defined,
+that first column tells you
+
+101
+00:06:16,470 --> 00:06:20,410
+the probability that you'll have
+an a at the next generation,
+
+102
+00:06:20,410 --> 00:06:22,470
+conditional on each
+of the four bases
+
+103
+00:06:22,470 --> 00:06:23,595
+at the previous generation.
+
+104
+00:06:23,595 --> 00:06:26,280
+And so you just multiply by
+the probabilities of those four
+
+105
+00:06:26,280 --> 00:06:29,952
+bases times the appropriate
+conditional probability here.
+
+106
+00:06:29,952 --> 00:06:31,410
+And those are all
+the ways that you
+
+107
+00:06:31,410 --> 00:06:34,060
+can be an a
+generation, n plus 1.
+
+108
+00:06:37,870 --> 00:06:43,640
+And so it's also true that if
+you want to go further in time,
+
+109
+00:06:43,640 --> 00:06:46,820
+so from generation
+n to generation n
+
+110
+00:06:46,820 --> 00:06:53,200
+plus k-- k is some integer--
+then this just corresponds
+
+111
+00:06:53,200 --> 00:06:57,800
+to sequential multiplication
+by the matrix k--
+
+112
+00:06:57,800 --> 00:06:59,690
+I'm sorry, by the matrix p.
+
+113
+00:06:59,690 --> 00:07:09,160
+So qn plus 1 equals q times p.
+
+114
+00:07:09,160 --> 00:07:16,440
+And then qn plus 2 will
+equal q-- I'm sorry.
+
+115
+00:07:16,440 --> 00:07:21,560
+That's a really bad q,
+but-- qn plus 1 times p,
+
+116
+00:07:21,560 --> 00:07:26,150
+which will equal q times p
+squared, where p squared means
+
+117
+00:07:26,150 --> 00:07:30,200
+matrix multiplication, again
+using the standard rules
+
+118
+00:07:30,200 --> 00:07:35,010
+of matrix multiplication
+that you can look up.
+
+119
+00:07:35,010 --> 00:07:37,430
+So one of the things you
+might think about here
+
+120
+00:07:37,430 --> 00:07:39,605
+is what happens
+after a long time?
+
+121
+00:07:39,605 --> 00:07:47,360
+If you start from some vector
+q-- for example, q is 0010.
+
+122
+00:07:47,360 --> 00:07:51,590
+That is, it's 100% chance of g.
+
+123
+00:07:51,590 --> 00:07:54,970
+What would happen if
+you run this matrix
+
+124
+00:07:54,970 --> 00:07:57,310
+on that over a long
+period of time.
+
+125
+00:07:57,310 --> 00:08:01,950
+And we'll come back to that
+question a little bit later.
+
+126
+00:08:01,950 --> 00:08:05,300
+So thinking about the
+Dayhoff matrices-- and again,
+
+127
+00:08:05,300 --> 00:08:07,150
+I'm not going to go
+into detail here,
+
+128
+00:08:07,150 --> 00:08:10,110
+because it's well
+described in the text.
+
+129
+00:08:10,110 --> 00:08:15,790
+Dayhoff looked at these highly
+identical alignments, these 85%
+
+130
+00:08:15,790 --> 00:08:20,080
+identical alignments, and
+calculated the mutability
+
+131
+00:08:20,080 --> 00:08:25,250
+of each residue and these
+mutation probabilities
+
+132
+00:08:25,250 --> 00:08:28,270
+for how often each residue
+changes into each other one
+
+133
+00:08:28,270 --> 00:08:32,360
+and then scaled them so that on
+average the chance of mutating
+
+134
+00:08:32,360 --> 00:08:37,840
+is 1% and then took
+these probabilities,
+
+135
+00:08:37,840 --> 00:08:41,650
+these frequencies,
+of mutation m, a, b,
+
+136
+00:08:41,650 --> 00:08:49,470
+divided by the frequency of
+the residue b, took the log,
+
+137
+00:08:49,470 --> 00:08:55,060
+and then just multiplied by
+two just for scaling purposes,
+
+138
+00:08:55,060 --> 00:08:58,780
+and came up with a-- and then
+rounded to the nearest integer,
+
+139
+00:08:58,780 --> 00:09:01,330
+again for practical purposes.
+
+140
+00:09:01,330 --> 00:09:06,800
+And that's how she came
+up with her PAM 1 matrix.
+
+141
+00:09:06,800 --> 00:09:10,830
+And then you can use
+matrix multiplication
+
+142
+00:09:10,830 --> 00:09:15,585
+to derive all the
+successive PAM series.
+
+143
+00:09:15,585 --> 00:09:20,450
+Just multiply the PAM1 matrix
+times itself to get the PAM2
+
+144
+00:09:20,450 --> 00:09:23,430
+and recalculate the scores.
+
+145
+00:09:23,430 --> 00:09:29,265
+So if you actually use
+PAM matrices in practice
+
+146
+00:09:29,265 --> 00:09:31,010
+there are some issues.
+
+147
+00:09:31,010 --> 00:09:34,110
+And these are also well
+described in the text.
+
+148
+00:09:34,110 --> 00:09:36,730
+And the fundamental
+problem seems
+
+149
+00:09:36,730 --> 00:09:44,730
+to be that the way the
+proteins evolve over
+
+150
+00:09:44,730 --> 00:09:47,630
+short periods of time and
+the way they evolve over
+
+151
+00:09:47,630 --> 00:09:50,900
+long periods of time
+is somewhat different.
+
+152
+00:09:50,900 --> 00:09:55,020
+And basically this model, this
+Markov model of evolution,
+
+153
+00:09:55,020 --> 00:10:03,120
+is not quite right, that things
+don't-- what you see in a short
+
+154
+00:10:03,120 --> 00:10:05,870
+periods of time-- it does not
+match long periods of time.
+
+155
+00:10:05,870 --> 00:10:07,190
+And why is that?
+
+156
+00:10:07,190 --> 00:10:08,700
+A number of possible reasons.
+
+157
+00:10:08,700 --> 00:10:12,620
+But keep in mind that
+in addition to proteins
+
+158
+00:10:12,620 --> 00:10:18,400
+simply changing their
+amino acid sequence,
+
+159
+00:10:18,400 --> 00:10:20,310
+other things can
+happen in evolution.
+
+160
+00:10:20,310 --> 00:10:22,350
+You can have insertions
+and deletions
+
+161
+00:10:22,350 --> 00:10:24,790
+that are not captured
+by this Markov model.
+
+162
+00:10:24,790 --> 00:10:28,940
+And you can also have birth
+and death of proteins.
+
+163
+00:10:28,940 --> 00:10:32,350
+A protein can evolve according
+to this model for millions
+
+164
+00:10:32,350 --> 00:10:33,070
+of years.
+
+165
+00:10:33,070 --> 00:10:38,290
+And then it can become unneeded,
+and just be lost, for example.
+
+166
+00:10:38,290 --> 00:10:41,620
+So real protein evolution
+is more complicated.
+
+167
+00:10:41,620 --> 00:10:49,040
+And so about 20 years ago
+or so Henikoff and Henikoff
+
+168
+00:10:49,040 --> 00:10:53,770
+decided to develop a
+new type of matrix.
+
+169
+00:10:53,770 --> 00:10:56,320
+And the way they did it was
+to identify these things
+
+170
+00:10:56,320 --> 00:11:00,860
+called blocks, which are regions
+of reasonably high similarity,
+
+171
+00:11:00,860 --> 00:11:03,310
+but not as high as
+Dayhoff required.
+
+172
+00:11:03,310 --> 00:11:06,050
+So there were many more--
+Dayhoff was working the '70s.
+
+173
+00:11:06,050 --> 00:11:07,300
+They were working in the '90s.
+
+174
+00:11:07,300 --> 00:11:09,290
+So there were many more
+proteins available.
+
+175
+00:11:09,290 --> 00:11:14,220
+And they could identify,
+with confidence, basically
+
+176
+00:11:14,220 --> 00:11:16,050
+a much larger data
+set, including
+
+177
+00:11:16,050 --> 00:11:20,471
+more distantly related, but
+still confidently alignable,
+
+178
+00:11:20,471 --> 00:11:21,220
+protein sequences.
+
+179
+00:11:21,220 --> 00:11:23,640
+And they derived new parameters.
+
+180
+00:11:23,640 --> 00:11:28,910
+And in the end this matrix they
+came up with called BLOSUM62
+
+181
+00:11:28,910 --> 00:11:31,550
+seems to work well in
+a variety of contexts
+
+182
+00:11:31,550 --> 00:11:35,880
+when comparing moderately
+distantly related
+
+183
+00:11:35,880 --> 00:11:40,280
+proteins or quite
+distantly related proteins.
+
+184
+00:11:40,280 --> 00:11:42,150
+If you're comparing
+very similar proteins
+
+185
+00:11:42,150 --> 00:11:43,700
+it almost doesn't matter.
+
+186
+00:11:43,700 --> 00:11:45,420
+Any reasonable
+matrix will probably
+
+187
+00:11:45,420 --> 00:11:46,503
+give you the right answer.
+
+188
+00:11:46,503 --> 00:11:49,150
+But when you're comparing
+the more distant ones,
+
+189
+00:11:49,150 --> 00:11:52,730
+that's where it
+becomes challenging.
+
+190
+00:11:52,730 --> 00:11:56,530
+And so this is the
+BLOSUM62 matrix here.
+
+191
+00:11:56,530 --> 00:12:05,330
+And you can see it's similar
+to the PAM matrices in that-- I
+
+192
+00:12:05,330 --> 00:12:08,160
+think we showed PAM 250
+last time-- in that you have
+
+193
+00:12:08,160 --> 00:12:10,230
+a diagonal with all
+positive numbers.
+
+194
+00:12:10,230 --> 00:12:14,390
+And it's also similar in
+that, for example, trytophan
+
+195
+00:12:14,390 --> 00:12:18,690
+down here has a higher
+positive score than others.
+
+196
+00:12:18,690 --> 00:12:19,510
+It's plus 9.
+
+197
+00:12:19,510 --> 00:12:21,550
+And cysteine is also
+one of the higher ones.
+
+198
+00:12:21,550 --> 00:12:27,050
+But those are less extreme.
+
+199
+00:12:27,050 --> 00:12:29,610
+And basically, maybe over short
+periods of evolutionary time,
+
+200
+00:12:29,610 --> 00:12:30,901
+you don't change your cysteine.
+
+201
+00:12:30,901 --> 00:12:34,330
+But over longer periods
+there is some rewiring
+
+202
+00:12:34,330 --> 00:12:37,370
+of disulfide bonding, and
+so cysteines can change.
+
+203
+00:12:37,370 --> 00:12:40,220
+Something like that
+may be going on.
+
+204
+00:12:43,330 --> 00:12:47,900
+So we've just talked about
+pairwise sequence alignments.
+
+205
+00:12:47,900 --> 00:12:49,930
+But in practice you
+often have, especially
+
+206
+00:12:49,930 --> 00:12:51,930
+these days you often have,
+many proteins though.
+
+207
+00:12:51,930 --> 00:12:55,850
+So you want to align three or
+five or 10 different proteins
+
+208
+00:12:55,850 --> 00:12:58,730
+together to find
+out which residues
+
+209
+00:12:58,730 --> 00:13:01,590
+are most conserved, for example.
+
+210
+00:13:01,590 --> 00:13:05,190
+And so basically
+the principles are
+
+211
+00:13:05,190 --> 00:13:06,710
+similar to pairwise alignment.
+
+212
+00:13:06,710 --> 00:13:10,550
+But now you want
+to find alignments
+
+213
+00:13:10,550 --> 00:13:13,110
+that bring the greatest
+number of single characters
+
+214
+00:13:13,110 --> 00:13:13,820
+into register.
+
+215
+00:13:13,820 --> 00:13:15,630
+So if you're aligning
+three proteins,
+
+216
+00:13:15,630 --> 00:13:17,940
+you really want to have
+columns where all three are
+
+217
+00:13:17,940 --> 00:13:20,270
+the same residue, or
+very similar residues.
+
+218
+00:13:20,270 --> 00:13:23,050
+And you need to then
+define scoring systems,
+
+219
+00:13:23,050 --> 00:13:27,180
+define gap penalties,
+and so forth.
+
+220
+00:13:27,180 --> 00:13:30,070
+This is also reasonably
+well described in the text.
+
+221
+00:13:30,070 --> 00:13:31,880
+I just wanted to
+make one comment
+
+222
+00:13:31,880 --> 00:13:36,070
+about the sort of computational
+complexity of multiple sequence
+
+223
+00:13:36,070 --> 00:13:36,820
+alignment.
+
+224
+00:13:36,820 --> 00:13:41,090
+So if you think about
+pairwise sequence alignment,
+
+225
+00:13:41,090 --> 00:13:47,580
+say with Needleman-Wunsch
+or Smith-Waterman,
+
+226
+00:13:47,580 --> 00:13:49,510
+with a sequence
+of length-- let's
+
+227
+00:13:49,510 --> 00:13:53,030
+say you're aligning one
+protein of sequence length n
+
+228
+00:13:53,030 --> 00:13:57,690
+to another of life n, what is
+the computational complexity
+
+229
+00:13:57,690 --> 00:14:02,949
+of that calculation in using
+this big O notation that we've
+
+230
+00:14:02,949 --> 00:14:03,490
+talked about?
+
+231
+00:14:06,430 --> 00:14:10,130
+Let's just say
+standard gap penalties,
+
+232
+00:14:10,130 --> 00:14:11,740
+linear gap penalties.
+
+233
+00:14:11,740 --> 00:14:14,330
+Anyone?
+
+234
+00:14:14,330 --> 00:14:15,310
+Or does it matter?
+
+235
+00:14:15,310 --> 00:14:16,069
+Yeah, go ahead.
+
+236
+00:14:16,069 --> 00:14:16,860
+STUDENT: n squared.
+
+237
+00:14:16,860 --> 00:14:18,360
+PROFESSOR: It's n squared.
+
+238
+00:14:18,360 --> 00:14:22,770
+So even though this has gaps,
+with local-- with ungapped
+
+239
+00:14:22,770 --> 00:14:25,760
+it was also n
+squared, or n times n,
+
+240
+00:14:25,760 --> 00:14:30,190
+So why is it that gaps
+don't make it worse?
+
+241
+00:14:30,190 --> 00:14:30,690
+Or do they?
+
+242
+00:14:35,746 --> 00:14:36,620
+Any thoughts on that?
+
+243
+00:14:36,620 --> 00:14:40,841
+STUDENT: You put a constant
+number of gaps in the sequence.
+
+244
+00:14:40,841 --> 00:14:44,538
+So it's just stating the
+essence of the complexity
+
+245
+00:14:44,538 --> 00:14:45,970
+should still be n squared.
+
+246
+00:14:45,970 --> 00:14:48,230
+PROFESSOR: You put a
+constant number of gaps?
+
+247
+00:14:48,230 --> 00:14:53,867
+The-- I mean, yeah-- let's just
+hear a few different comments.
+
+248
+00:14:53,867 --> 00:14:55,200
+And then we'll try to summarize.
+
+249
+00:14:55,200 --> 00:14:56,284
+Go ahead.
+
+250
+00:14:56,284 --> 00:14:57,950
+STUDENT: So we're
+still only filling out
+
+251
+00:14:57,950 --> 00:15:01,530
+an n by n matrix
+at any given time.
+
+252
+00:15:01,530 --> 00:15:04,300
+PROFESSOR: You're still filling
+out an n by n matrix, right.
+
+253
+00:15:04,300 --> 00:15:07,119
+There happen to be
+a few more things.
+
+254
+00:15:07,119 --> 00:15:08,910
+The recursion is slightly
+more complicated.
+
+255
+00:15:08,910 --> 00:15:10,285
+But there's a few
+more things you
+
+256
+00:15:10,285 --> 00:15:11,770
+have to calculate
+to fill in each.
+
+257
+00:15:11,770 --> 00:15:13,710
+But it's like three
+things, or four things.
+
+258
+00:15:13,710 --> 00:15:18,260
+It's not-- so it doesn't
+grow with the size.
+
+259
+00:15:18,260 --> 00:15:22,127
+So it's just still n squared,
+but with a larger constant.
+
+260
+00:15:22,127 --> 00:15:23,410
+OK, good.
+
+261
+00:15:23,410 --> 00:15:25,351
+And then if you did
+affine gap penalty,
+
+262
+00:15:25,351 --> 00:15:26,850
+remember where you
+had a gap opening
+
+263
+00:15:26,850 --> 00:15:30,451
+penalty and a gap
+extension, what then?
+
+264
+00:15:30,451 --> 00:15:31,450
+Does that make it worse?
+
+265
+00:15:31,450 --> 00:15:35,736
+Or is it still n squared?
+
+266
+00:15:35,736 --> 00:15:38,230
+STUDENT: I think
+it's still n squared.
+
+267
+00:15:38,230 --> 00:15:40,595
+PROFESSOR: Why is that?
+
+268
+00:15:40,595 --> 00:15:45,930
+STUDENT: Computing the affine
+gap penalty is no more than o
+
+269
+00:15:45,930 --> 00:15:47,981
+of n, right?
+
+270
+00:15:47,981 --> 00:15:49,730
+PROFESSOR: Yeah,
+basically with the affine
+
+271
+00:15:49,730 --> 00:15:56,330
+you have to keep track of
+two things at each place.
+
+272
+00:15:56,330 --> 00:15:56,970
+So yeah, it is.
+
+273
+00:15:56,970 --> 00:15:57,511
+You're right.
+
+274
+00:15:57,511 --> 00:15:58,525
+It's still n squared.
+
+275
+00:15:58,525 --> 00:16:02,320
+It's just you got to keep track
+of two numbers in each place
+
+276
+00:16:02,320 --> 00:16:03,070
+there.
+
+277
+00:16:03,070 --> 00:16:03,660
+OK, good.
+
+278
+00:16:03,660 --> 00:16:10,440
+And so what about when
+we go to three proteins?
+
+279
+00:16:10,440 --> 00:16:12,800
+So how would you
+generalize, let's say,
+
+280
+00:16:12,800 --> 00:16:15,780
+the Needleman-Wunsch algorithm
+to align three proteins?
+
+281
+00:16:20,730 --> 00:16:22,450
+Any ideas?
+
+282
+00:16:22,450 --> 00:16:30,530
+What structure would
+you use, or what--
+
+283
+00:16:30,530 --> 00:16:32,960
+analogous to a matrix--
+yeah, in the back.
+
+284
+00:16:32,960 --> 00:16:36,140
+STUDENT: Another way to do
+this would be have a 3D matrix.
+
+285
+00:16:36,140 --> 00:16:40,930
+PROFESSOR: OK, a 3D
+matrix, like a cube.
+
+286
+00:16:40,930 --> 00:16:45,176
+And can everyone visualize that?
+
+287
+00:16:45,176 --> 00:16:47,430
+So yeah, basically
+you could have
+
+288
+00:16:47,430 --> 00:16:51,350
+a version of Needleman-Wunsch
+that was on a cube.
+
+289
+00:16:51,350 --> 00:16:54,850
+And it started in
+the 0, 0, 0 corner
+
+290
+00:16:54,850 --> 00:17:00,440
+and went down to the n, n,
+n corner, filling in in 3D.
+
+291
+00:17:00,440 --> 00:17:03,950
+OK so what kind of
+computational complexity
+
+292
+00:17:03,950 --> 00:17:08,575
+do you think that
+algorithm would have?
+
+293
+00:17:08,575 --> 00:17:09,549
+STUDENT: n cubed?
+
+294
+00:17:09,549 --> 00:17:11,010
+PROFESSOR: n cubed.
+
+295
+00:17:11,010 --> 00:17:12,180
+Yeah, makes sense.
+
+296
+00:17:12,180 --> 00:17:15,020
+There would be a similar
+number, a few operations
+
+297
+00:17:15,020 --> 00:17:17,390
+to fill in each
+element in the cube.
+
+298
+00:17:17,390 --> 00:17:18,710
+And there's n cubed.
+
+299
+00:17:18,710 --> 00:17:23,700
+So the way that the problem
+grows with n is as n cubed.
+
+300
+00:17:23,700 --> 00:17:27,493
+And what about in general,
+if you have k sequences?
+
+301
+00:17:27,493 --> 00:17:28,326
+STUDENT: n to the k?
+
+302
+00:17:28,326 --> 00:17:30,510
+PROFESSOR: n to the k.
+
+303
+00:17:30,510 --> 00:17:32,165
+So is this practical?
+
+304
+00:17:35,000 --> 00:17:40,070
+With three proteins and modern
+computers you could do it.
+
+305
+00:17:40,070 --> 00:17:43,060
+You could implement
+Needleman-Wunsch on a cube.
+
+306
+00:17:43,060 --> 00:17:47,390
+But what about with 20 proteins?
+
+307
+00:17:47,390 --> 00:17:50,000
+Is that practical?
+
+308
+00:17:50,000 --> 00:17:51,950
+So it's really not.
+
+309
+00:17:51,950 --> 00:17:55,290
+So if proteins are 500
+residues long and there's
+
+310
+00:17:55,290 --> 00:17:57,945
+500 to the 20th, right.
+
+311
+00:17:57,945 --> 00:17:58,820
+It starts to explode.
+
+312
+00:17:58,820 --> 00:18:01,419
+So that approach
+really only works
+
+313
+00:18:01,419 --> 00:18:03,710
+in two dimensions and a little
+bit in three dimensions.
+
+314
+00:18:03,710 --> 00:18:05,320
+And it becomes impractical.
+
+315
+00:18:05,320 --> 00:18:07,540
+So you need to use a
+variety of shortcuts.
+
+316
+00:18:07,540 --> 00:18:12,360
+And so this is, again,
+described pretty well
+
+317
+00:18:12,360 --> 00:18:14,800
+in chapter six of the text.
+
+318
+00:18:14,800 --> 00:18:19,690
+And a commonly used-- if
+you're looking for a default
+
+319
+00:18:19,690 --> 00:18:23,540
+multiple sequence aligner,
+CLUSTALW is a common one.
+
+320
+00:18:23,540 --> 00:18:25,830
+There's a web
+interface if you just
+
+321
+00:18:25,830 --> 00:18:27,620
+need to do one or
+two alignments.
+
+322
+00:18:27,620 --> 00:18:28,310
+That works fine.
+
+323
+00:18:28,310 --> 00:18:30,990
+You can also download a
+version called CLUSTALX
+
+324
+00:18:30,990 --> 00:18:32,490
+and run it locally.
+
+325
+00:18:32,490 --> 00:18:35,640
+And it does a lot of things
+with pairwise alignments
+
+326
+00:18:35,640 --> 00:18:37,490
+and then combining the
+pairwise alignments.
+
+327
+00:18:37,490 --> 00:18:40,337
+It aligns the two
+closest things first
+
+328
+00:18:40,337 --> 00:18:42,420
+and then brings in the
+next closest, and so forth.
+
+329
+00:18:42,420 --> 00:18:45,590
+And it does a lot of
+tricks that are-- they're
+
+330
+00:18:45,590 --> 00:18:46,650
+basically heuristics.
+
+331
+00:18:46,650 --> 00:18:49,150
+They're things
+that usually work,
+
+332
+00:18:49,150 --> 00:18:51,540
+give you a reasonable
+answer, but don't necessarily
+
+333
+00:18:51,540 --> 00:18:57,030
+guarantee that you will find the
+optimal alignment if you were
+
+334
+00:18:57,030 --> 00:19:00,570
+to do it on a 20 dimensional
+cube, for example.
+
+335
+00:19:00,570 --> 00:19:02,280
+So they work reasonably
+well in practice.
+
+336
+00:19:02,280 --> 00:19:04,980
+And then there's a variety
+of other algorithms.
+
+337
+00:19:04,980 --> 00:19:07,420
+OK, good.
+
+338
+00:19:07,420 --> 00:19:13,650
+So that's a review of what
+we've mostly been talking about.
+
+339
+00:19:13,650 --> 00:19:17,770
+And now I want to introduce
+a couple of new topics.
+
+340
+00:19:17,770 --> 00:19:22,530
+So we're going to briefly
+talk a little bit more
+
+341
+00:19:22,530 --> 00:19:26,290
+about Markov models
+of sequence evolution.
+
+342
+00:19:26,290 --> 00:19:31,240
+And these are closely related
+to some classic evolutionary
+
+343
+00:19:31,240 --> 00:19:33,640
+theory from
+Jukes-Cantor and Kimura.
+
+344
+00:19:33,640 --> 00:19:36,680
+So we'll just
+briefly mention that.
+
+345
+00:19:36,680 --> 00:19:40,600
+And we'll talk a little
+bit about different types
+
+346
+00:19:40,600 --> 00:19:46,680
+of selection that sequences can
+undergo-- so neutral, negative,
+
+347
+00:19:46,680 --> 00:19:50,090
+and positive-- and how
+you might distinguish
+
+348
+00:19:50,090 --> 00:19:54,770
+among those for protein
+coding sequences.
+
+349
+00:19:54,770 --> 00:19:58,540
+And this will basically
+serve as an intro
+
+350
+00:19:58,540 --> 00:20:04,080
+into the main topic today,
+which is comparative genomics.
+
+351
+00:20:04,080 --> 00:20:06,980
+And comparative genomics-- it's
+not really a field, exactly.
+
+352
+00:20:06,980 --> 00:20:09,830
+It's more of an approach.
+
+353
+00:20:09,830 --> 00:20:15,070
+But I wanted to give you
+some actual concrete examples
+
+354
+00:20:15,070 --> 00:20:18,070
+of computational biology
+research, successful research
+
+355
+00:20:18,070 --> 00:20:22,740
+that has led to various types of
+insights into gene regulation,
+
+356
+00:20:22,740 --> 00:20:26,440
+in this case,
+mostly to emphasize
+
+357
+00:20:26,440 --> 00:20:31,747
+that computational biology
+is not just a bag of tools.
+
+358
+00:20:31,747 --> 00:20:33,330
+We've mostly been
+talking about tools.
+
+359
+00:20:33,330 --> 00:20:36,090
+We introduced tools
+for local alignment
+
+360
+00:20:36,090 --> 00:20:38,340
+and multiple alignment and
+statistics and so forth.
+
+361
+00:20:38,340 --> 00:20:41,050
+But really it's a
+living, breathing field
+
+362
+00:20:41,050 --> 00:20:42,580
+with active research.
+
+363
+00:20:42,580 --> 00:20:45,900
+And even using--
+comparative genomics
+
+364
+00:20:45,900 --> 00:20:48,530
+is one of my favorite
+areas within this field.
+
+365
+00:20:48,530 --> 00:20:51,240
+Because it's very powerful.
+
+366
+00:20:51,240 --> 00:20:55,300
+And you can often use
+very simple ideas.
+
+367
+00:20:55,300 --> 00:20:58,460
+And simple algorithms
+can sometimes
+
+368
+00:20:58,460 --> 00:21:01,170
+give you a really interesting
+biological result,
+
+369
+00:21:01,170 --> 00:21:04,297
+if you have the right
+sequences and ask the question
+
+370
+00:21:04,297 --> 00:21:04,880
+the right way.
+
+371
+00:21:04,880 --> 00:21:10,480
+So I have posted a dozen of my
+favorite comparative genomics
+
+372
+00:21:10,480 --> 00:21:14,200
+papers in a special
+section on the website.
+
+373
+00:21:14,200 --> 00:21:16,750
+Obviously I'm not asking
+you to read all of these.
+
+374
+00:21:16,750 --> 00:21:22,990
+But I'm going to give you a few
+insights and approaches that
+
+375
+00:21:22,990 --> 00:21:26,022
+were used in each of
+these papers here,
+
+376
+00:21:26,022 --> 00:21:27,980
+just to give you a flavor
+of some of the things
+
+377
+00:21:27,980 --> 00:21:31,440
+that you can do with
+comparative genomics,
+
+378
+00:21:31,440 --> 00:21:34,634
+in the hopes that this might
+inspire some of your projects.
+
+379
+00:21:34,634 --> 00:21:36,050
+So hopefully you're
+going to start
+
+380
+00:21:36,050 --> 00:21:39,310
+thinking about finding teammates
+and thinking about projects.
+
+381
+00:21:39,310 --> 00:21:43,105
+And this will hopefully
+help in that direction.
+
+382
+00:21:43,105 --> 00:21:45,730
+Of course, they don't have to be
+comparative genomics projects.
+
+383
+00:21:45,730 --> 00:21:48,460
+You could do anything
+in computational biology
+
+384
+00:21:48,460 --> 00:21:50,150
+or systems biology
+in this class.
+
+385
+00:21:50,150 --> 00:21:54,890
+But that's just one area
+to start thinking about.
+
+386
+00:21:58,040 --> 00:21:59,697
+Yeah, I'll also--
+I'm sorry, I think
+
+387
+00:21:59,697 --> 00:22:00,780
+I haven't posted this yet.
+
+388
+00:22:00,780 --> 00:22:03,750
+But I will also post
+this review by Sabeti
+
+389
+00:22:03,750 --> 00:22:09,020
+that has a good discussion of
+positive selection a little bit
+
+390
+00:22:09,020 --> 00:22:10,690
+later.
+
+391
+00:22:10,690 --> 00:22:12,930
+Again, not required.
+
+392
+00:22:12,930 --> 00:22:19,070
+All right, so let's go
+back to this question
+
+393
+00:22:19,070 --> 00:22:20,640
+that I posed earlier.
+
+394
+00:22:20,640 --> 00:22:25,880
+We have a Markov model of
+DNA sequence evolution.
+
+395
+00:22:25,880 --> 00:22:31,600
+And we-- sn is the
+base at generation n.
+
+396
+00:22:31,600 --> 00:22:34,120
+And then what happens
+after a long time?
+
+397
+00:22:36,670 --> 00:22:40,720
+If you take any vector--
+q, to start with,
+
+398
+00:22:40,720 --> 00:22:43,070
+might be a known
+base, for example--
+
+399
+00:22:43,070 --> 00:22:45,720
+and apply that
+matrix many times,
+
+400
+00:22:45,720 --> 00:22:48,140
+what happens as n
+goes to infinity.
+
+401
+00:22:48,140 --> 00:22:52,530
+And so it turns out that
+there's fairly classical theory
+
+402
+00:22:52,530 --> 00:22:54,836
+here that gives us an answer.
+
+403
+00:22:54,836 --> 00:22:56,460
+This is not all the
+theory that exists,
+
+404
+00:22:56,460 --> 00:23:00,150
+but this describes
+the typical case.
+
+405
+00:23:00,150 --> 00:23:04,950
+So the theory says that if all
+of the elements in the matrix
+
+406
+00:23:04,950 --> 00:23:10,420
+are greater than 0,
+and then of course
+
+407
+00:23:10,420 --> 00:23:17,200
+all of the-- pij's, when you sum
+over j, they have to equal 1.
+
+408
+00:23:17,200 --> 00:23:20,190
+That's just for it to be a
+well-defined Markov chain.
+
+409
+00:23:20,190 --> 00:23:22,800
+Because you're
+going from i to j.
+
+410
+00:23:22,800 --> 00:23:26,856
+And so from any base
+you have to go--
+
+411
+00:23:26,856 --> 00:23:28,980
+the probability of going
+to one of those four bases
+
+412
+00:23:28,980 --> 00:23:30,550
+has to sum to 1.
+
+413
+00:23:30,550 --> 00:23:34,660
+And so if those conditions
+hold, then there
+
+414
+00:23:34,660 --> 00:23:40,063
+is a unique vector r such
+that r equals r times p.
+
+415
+00:23:42,600 --> 00:23:47,950
+And the limit of
+q times p to the n
+
+416
+00:23:47,950 --> 00:23:50,964
+equals r, independent
+of what q was.
+
+417
+00:23:50,964 --> 00:23:52,630
+So basically, wherever
+you were starting
+
+418
+00:23:52,630 --> 00:23:54,088
+from-- you could
+have been starting
+
+419
+00:23:54,088 --> 00:23:57,595
+from 100% g, or 50%
+a, 50% g, or 100%
+
+420
+00:23:57,595 --> 00:24:02,010
+c-- you apply this
+matrix many, many times,
+
+421
+00:24:02,010 --> 00:24:05,800
+you will eventually
+approach this vector r.
+
+422
+00:24:05,800 --> 00:24:10,130
+And the theory doesn't
+say what r is, exactly.
+
+423
+00:24:10,130 --> 00:24:13,010
+But it says that r
+equals r times p.
+
+424
+00:24:13,010 --> 00:24:18,590
+And that turns out to basically
+implicitly define what r is.
+
+425
+00:24:18,590 --> 00:24:22,800
+That is, you can solve
+for r using that equation.
+
+426
+00:24:22,800 --> 00:24:27,660
+And r, for this reason, because
+the matrix doesn't move r,
+
+427
+00:24:27,660 --> 00:24:30,412
+r is called the
+stationary distribution.
+
+428
+00:24:30,412 --> 00:24:32,620
+And it's often also called
+the limiting distribution,
+
+429
+00:24:32,620 --> 00:24:34,050
+for obvious reasons.
+
+430
+00:24:34,050 --> 00:24:37,450
+And if you want to read more,
+like where this theory comes
+
+431
+00:24:37,450 --> 00:24:42,080
+from, here's a
+reasonable reference.
+
+432
+00:24:42,080 --> 00:24:46,642
+So any questions
+about this theory?
+
+433
+00:24:46,642 --> 00:24:48,100
+All the elements
+in the matrix have
+
+434
+00:24:48,100 --> 00:24:50,550
+to be strictly greater
+than 1-- I'm sorry,
+
+435
+00:24:50,550 --> 00:24:52,680
+strictly greater than 0.
+
+436
+00:24:52,680 --> 00:24:55,370
+Otherwise, really no conditions.
+
+437
+00:24:58,142 --> 00:24:59,370
+All right, question?
+
+438
+00:24:59,370 --> 00:25:00,612
+Yeah, go ahead.
+
+439
+00:25:00,612 --> 00:25:04,200
+STUDENT: Does the [INAUDIBLE]
+distribution ever change,
+
+440
+00:25:04,200 --> 00:25:08,325
+based on the sequence, or are
+we assuming that it doesn't?
+
+441
+00:25:08,325 --> 00:25:10,380
+PROFESSOR: The theory
+says it only depends on p.
+
+442
+00:25:10,380 --> 00:25:11,925
+It doesn't depend on q.
+
+443
+00:25:11,925 --> 00:25:16,150
+So it depends on the model
+of how the changes happen,
+
+444
+00:25:16,150 --> 00:25:19,580
+the conditional probability
+of what the base will
+
+445
+00:25:19,580 --> 00:25:21,177
+be at the next
+generation given what
+
+446
+00:25:21,177 --> 00:25:22,510
+it is at the current generation.
+
+447
+00:25:22,510 --> 00:25:24,140
+It doesn't depend
+where you start.
+
+448
+00:25:24,140 --> 00:25:28,590
+q is what your
+starting point is,
+
+449
+00:25:28,590 --> 00:25:31,876
+what base you're initially at.
+
+450
+00:25:31,876 --> 00:25:33,160
+Does that make sense?
+
+451
+00:25:35,860 --> 00:25:37,930
+And this is obviously
+a very simplified case,
+
+452
+00:25:37,930 --> 00:25:39,930
+where we're just modeling
+evolution of one base,
+
+453
+00:25:39,930 --> 00:25:43,750
+and we're not thinking
+about whether the rates vary
+
+454
+00:25:43,750 --> 00:25:46,260
+at different positions
+or within-- this
+
+455
+00:25:46,260 --> 00:25:47,530
+is the simplest case.
+
+456
+00:25:47,530 --> 00:25:49,613
+But it's important to
+understand the simplest case
+
+457
+00:25:49,613 --> 00:25:53,950
+before you start
+to generalize that.
+
+458
+00:25:53,950 --> 00:25:55,930
+OK, so let's do
+some examples here.
+
+459
+00:25:55,930 --> 00:25:58,350
+So here are some matrices.
+
+460
+00:25:58,350 --> 00:26:02,200
+So it turns out the math is
+a lot easier if you limit
+
+461
+00:26:02,200 --> 00:26:06,000
+yourself to a two-letter
+alphabet instead of four.
+
+462
+00:26:06,000 --> 00:26:08,180
+So that's what I've done here.
+
+463
+00:26:08,180 --> 00:26:12,680
+So let's look at these matrices
+and think about what they mean.
+
+464
+00:26:12,680 --> 00:26:14,110
+So we have two-letter alphabet.
+
+465
+00:26:14,110 --> 00:26:15,050
+R is purine.
+
+466
+00:26:15,050 --> 00:26:17,600
+Y is pyrimidine.
+
+467
+00:26:17,600 --> 00:26:20,470
+These matrices describe
+the conditional probability
+
+468
+00:26:20,470 --> 00:26:26,010
+that, at the next generation,
+you'll be, for example-- oops,
+
+469
+00:26:26,010 --> 00:26:27,510
+here we go.
+
+470
+00:26:27,510 --> 00:26:31,400
+That, for example, if
+you start at purine,
+
+471
+00:26:31,400 --> 00:26:33,930
+that you'll remain purine
+at the next generation.
+
+472
+00:26:33,930 --> 00:26:36,790
+That would be 1 minus P. And
+the probability that you'll
+
+473
+00:26:36,790 --> 00:26:39,930
+change to pyrimidine is P. And
+the probability of pyrimidine
+
+474
+00:26:39,930 --> 00:26:43,730
+will remain as a
+pyrimidine is 1 minus P.
+
+475
+00:26:43,730 --> 00:26:48,776
+So what is the stationary
+distribution of this matrix?
+
+476
+00:26:48,776 --> 00:26:54,260
+OK, so if p is small, this
+describes a typical model,
+
+477
+00:26:54,260 --> 00:26:58,110
+where most of the
+time you remain--
+
+478
+00:26:58,110 --> 00:27:00,440
+DNA replication and
+repair is faithful.
+
+479
+00:27:00,440 --> 00:27:04,000
+You maintain the same base.
+
+480
+00:27:04,000 --> 00:27:07,040
+But occasionally a mutation
+happens with probability p.
+
+481
+00:27:09,600 --> 00:27:13,746
+Anyone want to guess what the
+stationary distribution is
+
+482
+00:27:13,746 --> 00:27:18,470
+or describe a strategy
+for finding it?
+
+483
+00:27:18,470 --> 00:27:20,790
+Like what do we know
+about this distribution?
+
+484
+00:27:28,500 --> 00:27:30,530
+Or imagine you
+start with a purine
+
+485
+00:27:30,530 --> 00:27:32,720
+and then you apply
+this matrix many times
+
+486
+00:27:32,720 --> 00:27:36,751
+to that vector that's 1
+comma 0, what will happen?
+
+487
+00:27:39,460 --> 00:27:41,060
+Yeah, Levi.
+
+488
+00:27:41,060 --> 00:27:44,739
+STUDENT: Probably 50-50 because
+any other that way you skew it
+
+489
+00:27:44,739 --> 00:27:46,280
+it would be pushed
+towards the center
+
+490
+00:27:46,280 --> 00:27:49,720
+because there's more
+[INAUDIBLE] the other.
+
+491
+00:27:49,720 --> 00:27:51,320
+PROFESSOR: OK,
+everyone get that?
+
+492
+00:27:51,320 --> 00:27:54,350
+So Levi's comment was
+that it's probably 50-50.
+
+493
+00:27:54,350 --> 00:27:58,020
+Because mutation
+probabilities are symmetrical.
+
+494
+00:27:58,020 --> 00:28:01,250
+Purine-pyrimidine and
+pyrimidine-purine are the same.
+
+495
+00:28:01,250 --> 00:28:04,380
+So if you were to start
+with say, lots of purine,
+
+496
+00:28:04,380 --> 00:28:06,925
+then there will be more
+mutation toward pyrimidine
+
+497
+00:28:06,925 --> 00:28:08,340
+in a given generation.
+
+498
+00:28:08,340 --> 00:28:11,990
+So if you think about this
+is your population of R
+
+499
+00:28:11,990 --> 00:28:16,410
+and that's your population
+of Y, then if this is bigger
+
+500
+00:28:16,410 --> 00:28:21,550
+than that, you'll tend
+to push it more that way.
+
+501
+00:28:21,550 --> 00:28:24,130
+And there will be less
+mutation coming this way,
+
+502
+00:28:24,130 --> 00:28:25,650
+until they're equal.
+
+503
+00:28:25,650 --> 00:28:28,315
+And then you'll have equal
+flux going both directions.
+
+504
+00:28:28,315 --> 00:28:29,940
+So that's a good way
+to think about it.
+
+505
+00:28:29,940 --> 00:28:32,300
+And that's correct.
+
+506
+00:28:32,300 --> 00:28:37,430
+Can you think of how
+would you show that?
+
+507
+00:28:37,430 --> 00:28:42,240
+What's a way of solving for
+the stationary distribution?
+
+508
+00:28:46,088 --> 00:28:47,050
+Anyone?
+
+509
+00:28:47,050 --> 00:28:51,172
+So remember, we'll
+just get back one.
+
+510
+00:28:51,172 --> 00:28:54,140
+The theory says
+that R equals RP.
+
+511
+00:28:54,140 --> 00:28:56,141
+That's the key.
+
+512
+00:28:56,141 --> 00:28:56,640
+R equals RP.
+
+513
+00:29:04,710 --> 00:29:05,520
+So what is R?
+
+514
+00:29:05,520 --> 00:29:10,520
+Well we don't know R. So we
+let that be a general vector.
+
+515
+00:29:10,520 --> 00:29:13,280
+So notice there's only
+one free parameter.
+
+516
+00:29:13,280 --> 00:29:15,440
+Because the two components
+have to sum to 1.
+
+517
+00:29:15,440 --> 00:29:20,140
+It's a frequency vector,
+so x and 1 minus x.
+
+518
+00:29:20,140 --> 00:29:23,160
+And we just multiply
+this times the matrix.
+
+519
+00:29:23,160 --> 00:29:27,610
+So you take x comma 1 minus x.
+
+520
+00:29:27,610 --> 00:29:29,710
+And you multiply
+it by this matrix.
+
+521
+00:29:29,710 --> 00:29:36,190
+The matrix is 1 minus P P.
+I'm using too much space here.
+
+522
+00:29:36,190 --> 00:29:41,370
+I'll just make it a little
+smaller-- P 1 minus P.
+
+523
+00:29:41,370 --> 00:29:46,110
+And that's going
+to equal R. And so
+
+524
+00:29:46,110 --> 00:29:51,900
+we'll get x times 1
+minus P plus-- remember,
+
+525
+00:29:51,900 --> 00:29:54,700
+it's dot product of this
+times this column, right?
+
+526
+00:29:54,700 --> 00:30:00,240
+So x times 1 minus P
+plus 1 minus x times P.
+
+527
+00:30:00,240 --> 00:30:02,630
+That's the first component.
+
+528
+00:30:02,630 --> 00:30:06,950
+And the second
+component will be xp
+
+529
+00:30:06,950 --> 00:30:11,440
+plus 1 minus x times 1 minus p.
+
+530
+00:30:16,370 --> 00:30:18,170
+OK, everyone got that?
+
+531
+00:30:18,170 --> 00:30:19,340
+So now what do we do?
+
+532
+00:30:24,320 --> 00:30:24,905
+STUDENT: r.
+
+533
+00:30:24,905 --> 00:30:25,863
+PROFESSOR: What's that?
+
+534
+00:30:25,863 --> 00:30:27,970
+STUDENT: Make that
+equal to the initial r.
+
+535
+00:30:27,970 --> 00:30:30,053
+PROFESSOR: Yeah, make that
+equal to the initial r.
+
+536
+00:30:30,053 --> 00:30:33,804
+So it's two equations
+and-- well, you really
+
+537
+00:30:33,804 --> 00:30:34,970
+only need one equation here.
+
+538
+00:30:34,970 --> 00:30:36,940
+Because we've already
+simplified it.
+
+539
+00:30:36,940 --> 00:30:38,980
+In general there will
+be two equations.
+
+540
+00:30:38,980 --> 00:30:40,480
+There will be one
+equation that says
+
+541
+00:30:40,480 --> 00:30:42,334
+that the components of
+the vector sum to 1.
+
+542
+00:30:42,334 --> 00:30:44,500
+And there will be another
+equation coming from here.
+
+543
+00:30:44,500 --> 00:30:47,040
+But we can just use
+either one, either term.
+
+544
+00:30:47,040 --> 00:30:49,070
+So we know that
+the first component
+
+545
+00:30:49,070 --> 00:30:51,780
+of a vector-- if this vector
+is equal to that vector, then
+
+546
+00:30:51,780 --> 00:30:53,654
+the first components
+have to be equal, right?
+
+547
+00:30:53,654 --> 00:30:59,030
+So x equals x
+times-- times what?
+
+548
+00:30:59,030 --> 00:31:04,980
+Times 1 minus p, just
+combining these two.
+
+549
+00:31:04,980 --> 00:31:12,780
+And then plus what are all the--
+I'm sorry, that's 1 minus p-- 1
+
+550
+00:31:12,780 --> 00:31:13,430
+minus p here.
+
+551
+00:31:13,430 --> 00:31:16,090
+And then there's another
+term here, minus another p.
+
+552
+00:31:19,020 --> 00:31:20,620
+And then there's a
+term that's just p.
+
+553
+00:31:23,780 --> 00:31:26,330
+And so then what do you do?
+
+554
+00:31:26,330 --> 00:31:28,862
+You just solve for x.
+
+555
+00:31:32,510 --> 00:31:34,500
+And I think when
+you work this out
+
+556
+00:31:34,500 --> 00:31:43,590
+you'll get two p x equals
+p, so x equals 1/2.
+
+557
+00:31:46,470 --> 00:31:48,870
+Right, everyone got that?
+
+558
+00:31:51,750 --> 00:31:54,670
+OK, so yeah.
+
+559
+00:31:54,670 --> 00:31:57,380
+So if x is 1/2, then the
+vector is 1/2 comma 1/2,
+
+560
+00:31:57,380 --> 00:31:59,250
+which is the unbiased.
+
+561
+00:31:59,250 --> 00:32:01,710
+All right, what about
+this next matrix,
+
+562
+00:32:01,710 --> 00:32:06,620
+right below-- 1
+minus p 1 minus q.
+
+563
+00:32:06,620 --> 00:32:14,610
+p and q are two positive
+numbers that are different.
+
+564
+00:32:14,610 --> 00:32:16,740
+So now there's actually
+a different probability
+
+565
+00:32:16,740 --> 00:32:20,850
+of mutating purine to pyrimidine
+and pyrimidine to purine.
+
+566
+00:32:20,850 --> 00:32:23,460
+So Levi, can we
+apply your approach
+
+567
+00:32:23,460 --> 00:32:26,701
+to see what the answer is?
+
+568
+00:32:26,701 --> 00:32:27,655
+STUDENT: Not exactly.
+
+569
+00:32:27,655 --> 00:32:29,563
+PROFESSOR: Not exactly?
+
+570
+00:32:29,563 --> 00:32:32,350
+OK, yeah, it's not as obvious.
+
+571
+00:32:32,350 --> 00:32:34,200
+It's not symmetrical anymore.
+
+572
+00:32:34,200 --> 00:32:37,530
+But can anyone guess
+what the answer might be?
+
+573
+00:32:37,530 --> 00:32:39,985
+Yeah, go ahead Diego.
+
+574
+00:32:39,985 --> 00:32:41,985
+STUDENT: It'll go either
+all the way to one side
+
+575
+00:32:41,985 --> 00:32:44,780
+or depending on q and d.
+
+576
+00:32:44,780 --> 00:32:46,833
+PROFESSOR: All the way to
+one side or all the way
+
+577
+00:32:46,833 --> 00:32:47,374
+to the other?
+
+578
+00:32:47,374 --> 00:32:50,526
+So meaning it'll be all purine
+or all pyrimidine again.
+
+579
+00:32:50,526 --> 00:32:52,236
+STUDENT: Yeah,
+depending on which--
+
+580
+00:32:52,236 --> 00:32:53,841
+PROFESSOR: Which is bigger?
+
+581
+00:32:53,841 --> 00:32:58,600
+OK, anyone else have
+an alternative theory?
+
+582
+00:32:58,600 --> 00:32:59,440
+Yeah, go ahead.
+
+583
+00:32:59,440 --> 00:33:00,729
+What was your name again?
+
+584
+00:33:00,729 --> 00:33:01,395
+STUDENT: Daniel.
+
+585
+00:33:01,395 --> 00:33:02,455
+PROFESSOR: Sorry, Daniel?
+
+586
+00:33:02,455 --> 00:33:03,300
+STUDENT: Daniel, yeah.
+
+587
+00:33:03,300 --> 00:33:04,049
+PROFESSOR: Daniel.
+
+588
+00:33:04,049 --> 00:33:05,040
+OK, go ahead.
+
+589
+00:33:05,040 --> 00:33:10,908
+STUDENT: It'll reach some
+intermediate equilibrium
+
+590
+00:33:10,908 --> 00:33:14,226
+once they balance
+each other out.
+
+591
+00:33:14,226 --> 00:33:20,500
+And that would be exactly--
+I'm not sure-- some ratio of q
+
+592
+00:33:20,500 --> 00:33:21,383
+to p.
+
+593
+00:33:21,383 --> 00:33:23,700
+PROFESSOR: OK.
+
+594
+00:33:23,700 --> 00:33:27,384
+How many people think
+that might happen?
+
+595
+00:33:27,384 --> 00:33:28,050
+OK, some people.
+
+596
+00:33:28,050 --> 00:33:30,920
+OK Daniel has maybe
+slightly more supporters.
+
+597
+00:33:30,920 --> 00:33:32,470
+So let's see.
+
+598
+00:33:32,470 --> 00:33:33,950
+So how are we going
+to solve this?
+
+599
+00:33:36,730 --> 00:33:40,442
+How do we figure out what the
+stationary distribution is?
+
+600
+00:33:40,442 --> 00:33:42,740
+You just use that same approach.
+
+601
+00:33:42,740 --> 00:33:50,070
+So you can do-- you
+have x 1 minus x
+
+602
+00:33:50,070 --> 00:33:59,035
+times that matrix, which is got
+the 1 minus p p q 1 minus q.
+
+603
+00:33:59,035 --> 00:34:03,650
+OK, and so now you'll
+get x 1 minus p.
+
+604
+00:34:03,650 --> 00:34:06,920
+Anyway, go through
+the same operations.
+
+605
+00:34:06,920 --> 00:34:08,080
+Solve for x.
+
+606
+00:34:08,080 --> 00:34:12,540
+And you will get-- I think I put
+the answer on the slide here.
+
+607
+00:34:12,540 --> 00:34:15,100
+You will get q over p plus q.
+
+608
+00:34:15,100 --> 00:34:18,409
+So as Danny predicted, some
+ratio involving q's and p's.
+
+609
+00:34:18,409 --> 00:34:20,719
+And does this make sense?
+
+610
+00:34:20,719 --> 00:34:23,590
+Seeing what the
+answer is, can you
+
+611
+00:34:23,590 --> 00:34:25,300
+rationalize why that's true?
+
+612
+00:34:28,216 --> 00:34:31,132
+STUDENT: It's like a
+kind of equilibrium.
+
+613
+00:34:31,132 --> 00:34:34,725
+You have one mode of
+force play pushing
+
+614
+00:34:34,725 --> 00:34:36,704
+one way and another
+different one
+
+615
+00:34:36,704 --> 00:34:38,321
+in this case pushing the other.
+
+616
+00:34:38,321 --> 00:34:40,320
+PROFESSOR: Yeah, that's
+basically the same idea.
+
+617
+00:34:40,320 --> 00:34:42,449
+And so they have
+to be in balance.
+
+618
+00:34:42,449 --> 00:34:50,190
+So the one that has less, where
+the mutation rate is a lower,
+
+619
+00:34:50,190 --> 00:34:54,770
+will end up being bigger, so
+that the amount that flows out
+
+620
+00:34:54,770 --> 00:34:57,870
+will be the same as the
+amount that flows in.
+
+621
+00:34:57,870 --> 00:35:01,560
+You can apply Levi's
+idea of thinking
+
+622
+00:35:01,560 --> 00:35:03,850
+about how much flux
+is going in each way.
+
+623
+00:35:03,850 --> 00:35:06,380
+So there's going to be some
+flux p in one direction, q
+
+624
+00:35:06,380 --> 00:35:07,700
+in the other direction.
+
+625
+00:35:07,700 --> 00:35:16,440
+And you want x times p to
+equal 1 minus x times q.
+
+626
+00:35:16,440 --> 00:35:19,320
+And this is the
+value of that works.
+
+627
+00:35:23,590 --> 00:35:26,545
+OK, good?
+
+628
+00:35:26,545 --> 00:35:28,760
+What about this guy down here?
+
+629
+00:35:28,760 --> 00:35:31,510
+So this is a very special matrix
+called the identity matrix.
+
+630
+00:35:31,510 --> 00:35:33,570
+And what kind of model
+of evolution is this?
+
+631
+00:35:35,771 --> 00:35:36,979
+STUDENT: There's no mutation.
+
+632
+00:35:36,979 --> 00:35:38,312
+PROFESSOR: There's no evolution.
+
+633
+00:35:38,312 --> 00:35:42,610
+This is like a perfect
+replication repair system.
+
+634
+00:35:42,610 --> 00:35:44,160
+The base never changes.
+
+635
+00:35:44,160 --> 00:35:47,805
+So what's a stationary
+distribution?
+
+636
+00:35:47,805 --> 00:35:49,753
+STUDENT: It's all--
+
+637
+00:35:49,753 --> 00:35:50,727
+PROFESSOR: What's that?
+
+638
+00:35:50,727 --> 00:35:52,190
+STUDENT: It'll just
+stay where it is.
+
+639
+00:35:52,190 --> 00:35:53,156
+PROFESSOR: It'll
+stay where it is.
+
+640
+00:35:53,156 --> 00:35:54,148
+That's right.
+
+641
+00:35:54,148 --> 00:35:57,179
+So any vector is
+stationary for this matrix.
+
+642
+00:35:57,179 --> 00:35:58,720
+Remember that the
+theory said there's
+
+643
+00:35:58,720 --> 00:36:01,610
+a unique stationary
+distribution.
+
+644
+00:36:01,610 --> 00:36:05,845
+This seems to be inconsistent.
+
+645
+00:36:05,845 --> 00:36:07,250
+Why is it not inconsistent?
+
+646
+00:36:07,250 --> 00:36:08,670
+Sally?
+
+647
+00:36:08,670 --> 00:36:14,470
+STUDENT: We defined all of the
+variables to be greater than 0.
+
+648
+00:36:14,470 --> 00:36:17,500
+So when you have anything that's
+[INAUDIBLE] that is equal to 0.
+
+649
+00:36:17,500 --> 00:36:18,820
+PROFESSOR: Right, so a
+condition of the theorem
+
+650
+00:36:18,820 --> 00:36:21,130
+is that all the entries be
+strictly greater than 0.
+
+651
+00:36:21,130 --> 00:36:22,110
+And this is why.
+
+652
+00:36:22,110 --> 00:36:25,869
+If you have 0s, in there
+then crazy things can happen.
+
+653
+00:36:25,869 --> 00:36:28,410
+Wherever you start, that's where
+you end up with this matrix.
+
+654
+00:36:28,410 --> 00:36:29,870
+So every vector is stationary.
+
+655
+00:36:29,870 --> 00:36:34,260
+And what about this crazy
+matrix over here, matrix q?
+
+656
+00:36:36,980 --> 00:36:39,630
+What does it do?
+
+657
+00:36:39,630 --> 00:36:40,280
+Joe.
+
+658
+00:36:40,280 --> 00:36:42,120
+STUDENT: It's going to
+swap them back and forth.
+
+659
+00:36:42,120 --> 00:36:43,786
+PROFESSOR: It swaps
+them back and forth.
+
+660
+00:36:43,786 --> 00:36:47,860
+So this is like a
+hyper mutable organism
+
+661
+00:36:47,860 --> 00:36:50,110
+that has such a high
+mutation rate that it always
+
+662
+00:36:50,110 --> 00:36:53,056
+mutates every base
+to the other kind.
+
+663
+00:36:53,056 --> 00:36:54,430
+It's never happy
+with its genome.
+
+664
+00:36:54,430 --> 00:36:56,940
+It always wants to switch
+it, get something better.
+
+665
+00:36:56,940 --> 00:37:00,540
+And so what can you say about
+the stationary distribution
+
+666
+00:37:00,540 --> 00:37:01,415
+for this matrix?
+
+667
+00:37:04,578 --> 00:37:05,544
+Jeff?
+
+668
+00:37:05,544 --> 00:37:07,086
+STUDENT: There isn't
+going to be one.
+
+669
+00:37:07,086 --> 00:37:08,710
+PROFESSOR: There
+isn't going to be one?
+
+670
+00:37:08,710 --> 00:37:09,350
+Anyone else?
+
+671
+00:37:09,350 --> 00:37:12,334
+STUDENT: Well, actually, I
+guess 1, 1, like 0.5, 0.5.
+
+672
+00:37:12,334 --> 00:37:14,000
+PROFESSOR: 0.5, 0.5
+would be stationary.
+
+673
+00:37:14,000 --> 00:37:14,900
+Because you're--
+
+674
+00:37:14,900 --> 00:37:16,700
+STUDENT: But you
+won't converge to it.
+
+675
+00:37:16,700 --> 00:37:18,366
+PROFESSOR: But you
+won't converge to it.
+
+676
+00:37:18,366 --> 00:37:20,411
+That's right. it's
+stationary, but not limiting.
+
+677
+00:37:20,411 --> 00:37:21,910
+And again, the
+theory doesn't apply.
+
+678
+00:37:21,910 --> 00:37:23,600
+Because there's some
+0s in this matrix.
+
+679
+00:37:23,600 --> 00:37:25,058
+But you can still
+think about that.
+
+680
+00:37:25,058 --> 00:37:26,450
+OK, everyone got that?
+
+681
+00:37:26,450 --> 00:37:27,894
+All right, good.
+
+682
+00:37:30,730 --> 00:37:33,060
+OK so let's talk now
+about Jukes-Cantor.
+
+683
+00:37:33,060 --> 00:37:36,700
+So Jukes-Cantor is very
+much a Markov model
+
+684
+00:37:36,700 --> 00:37:38,690
+of DNA sequence evolution.
+
+685
+00:37:38,690 --> 00:37:41,480
+And it simply has-- now
+we've got four bases.
+
+686
+00:37:41,480 --> 00:37:46,330
+It's got probability alpha
+of mutating from each base
+
+687
+00:37:46,330 --> 00:37:47,240
+to any other base.
+
+688
+00:37:47,240 --> 00:37:51,040
+And so the overall mutation
+rate, or probability
+
+689
+00:37:51,040 --> 00:37:54,850
+of substitution, at one
+generation is three alpha.
+
+690
+00:37:54,850 --> 00:37:59,240
+Because from the base G there's
+an alpha probability mutate
+
+691
+00:37:59,240 --> 00:38:02,430
+to A, an alpha probability
+to C, an alpha to T,
+
+692
+00:38:02,430 --> 00:38:03,610
+so the three alpha.
+
+693
+00:38:03,610 --> 00:38:09,910
+And you can basically
+write a recursion
+
+694
+00:38:09,910 --> 00:38:12,490
+that describes
+what's going on here.
+
+695
+00:38:12,490 --> 00:38:16,500
+So if you start
+with a G at time 0,
+
+696
+00:38:16,500 --> 00:38:19,405
+the probability of a G at
+time 1 is 1 minus 3 alpha.
+
+697
+00:38:19,405 --> 00:38:21,910
+It's a probability
+that you didn't mutate.
+
+698
+00:38:21,910 --> 00:38:24,050
+But then, at generation
+two, you have
+
+699
+00:38:24,050 --> 00:38:27,430
+to consider two cases really.
+
+700
+00:38:27,430 --> 00:38:32,660
+First of all, if you
+didn't mutate, that's PG1.
+
+701
+00:38:32,660 --> 00:38:35,290
+Then you have a 1
+minus alpha probability
+
+702
+00:38:35,290 --> 00:38:39,490
+of not mutating
+again, so remaining G.
+
+703
+00:38:39,490 --> 00:38:40,650
+But you might have mutated.
+
+704
+00:38:43,750 --> 00:38:46,350
+With probability 1
+minus PG 1 you mutated.
+
+705
+00:38:46,350 --> 00:38:50,250
+And then whatever
+you were-- might
+
+706
+00:38:50,250 --> 00:38:52,530
+be a C-- you have
+an alpha probably
+
+707
+00:38:52,530 --> 00:38:58,224
+of mutating back to G.
+Does that make sense?
+
+708
+00:38:58,224 --> 00:39:02,600
+Everyone clear why there's a 3
+in one place and only a 1 alpha
+
+709
+00:39:02,600 --> 00:39:03,494
+in the other?
+
+710
+00:39:06,180 --> 00:39:10,370
+All right, so you can
+actually solve this recursion.
+
+711
+00:39:10,370 --> 00:39:15,430
+And you get this
+expression here, P G of t
+
+712
+00:39:15,430 --> 00:39:21,560
+equals 1/4 plus 3/4 E
+to the minus 4 alpha t.
+
+713
+00:39:21,560 --> 00:39:27,480
+OK so what does that
+tell you about-- we
+
+714
+00:39:27,480 --> 00:39:29,690
+know from our
+previous discussion
+
+715
+00:39:29,690 --> 00:39:33,710
+what the stationary distribution
+of this Markov chain
+
+716
+00:39:33,710 --> 00:39:35,220
+is going to be.
+
+717
+00:39:35,220 --> 00:39:35,910
+What will it be?
+
+718
+00:39:40,950 --> 00:39:44,048
+What's the stationary
+distribution?
+
+719
+00:39:44,048 --> 00:39:46,342
+STUDENT: 1/4 of each.
+
+720
+00:39:46,342 --> 00:39:47,300
+PROFESSOR: 1/4 of each.
+
+721
+00:39:47,300 --> 00:39:48,790
+And why, Daniel, is that?
+
+722
+00:39:48,790 --> 00:39:51,370
+STUDENT: Because the probability
+of them moving to any base
+
+723
+00:39:51,370 --> 00:39:52,134
+is the same?
+
+724
+00:39:52,134 --> 00:39:53,925
+PROFESSOR: Right, it's
+totally symmetrical.
+
+725
+00:39:53,925 --> 00:39:56,582
+So that has to be the
+answer by symmetry.
+
+726
+00:39:56,582 --> 00:39:57,540
+And you could solve it.
+
+727
+00:39:57,540 --> 00:40:00,790
+You could use this same
+approach with defining
+
+728
+00:40:00,790 --> 00:40:06,000
+a value-- the theory applies
+if alpha is greater than 0
+
+729
+00:40:06,000 --> 00:40:09,079
+and less than 1-- or
+less than-- I think
+
+730
+00:40:09,079 --> 00:40:10,870
+it has to be less than
+a quarter, actually,
+
+731
+00:40:10,870 --> 00:40:12,130
+or something like that.
+
+732
+00:40:12,130 --> 00:40:17,749
+And you can apply the theory.
+
+733
+00:40:17,749 --> 00:40:19,540
+So there will be a
+stationary distribution.
+
+734
+00:40:19,540 --> 00:40:20,920
+You can set up a vector.
+
+735
+00:40:20,920 --> 00:40:25,970
+Now you have to have four
+terms in it and multiplication.
+
+736
+00:40:25,970 --> 00:40:29,250
+And then you'll get a
+system of basically four
+
+737
+00:40:29,250 --> 00:40:31,385
+equations and four unknowns.
+
+738
+00:40:31,385 --> 00:40:36,100
+And you can solve that
+system using linear algebra
+
+739
+00:40:36,100 --> 00:40:37,650
+and get the answer.
+
+740
+00:40:37,650 --> 00:40:42,440
+And yeah, the answer will
+be 1/4, as you guessed.
+
+741
+00:40:42,440 --> 00:40:46,350
+And so what this
+Jukes-Cantor expression
+
+742
+00:40:46,350 --> 00:40:51,540
+tells you is how quickly does
+it get to that equilibrium.
+
+743
+00:40:51,540 --> 00:40:55,070
+We're thinking about G.
+You can start at 100% G.
+
+744
+00:40:55,070 --> 00:40:57,860
+And it will then approach 1/4.
+
+745
+00:40:57,860 --> 00:40:59,672
+You can see 1/4
+is clearly what's
+
+746
+00:40:59,672 --> 00:41:00,880
+going to happen in the limit.
+
+747
+00:41:00,880 --> 00:41:05,720
+Because as t gets big that
+second term is going to 0.
+
+748
+00:41:05,720 --> 00:41:08,110
+And so what does the
+distribution look like?
+
+749
+00:41:08,110 --> 00:41:10,810
+How rapidly do you approach 1/4?
+
+750
+00:41:15,080 --> 00:41:18,160
+You approach it exponentially.
+
+751
+00:41:18,160 --> 00:41:20,390
+So you start at 1 here.
+
+752
+00:41:20,390 --> 00:41:21,590
+And this is 0.
+
+753
+00:41:21,590 --> 00:41:23,530
+This is 1/4.
+
+754
+00:41:23,530 --> 00:41:24,560
+You'll start here.
+
+755
+00:41:24,560 --> 00:41:28,197
+And you'll go like that.
+
+756
+00:41:28,197 --> 00:41:29,530
+You go rapidly at the beginning.
+
+757
+00:41:29,530 --> 00:41:34,990
+And then you get just
+very gradual approach 1/4.
+
+758
+00:41:34,990 --> 00:41:41,000
+So you can do a little bit more
+algebra with this expression.
+
+759
+00:41:41,000 --> 00:41:44,710
+And here's where the really
+useful part comes in.
+
+760
+00:41:44,710 --> 00:41:48,520
+And you can show
+that K, which we'll
+
+761
+00:41:48,520 --> 00:41:51,340
+define as the true number
+of substitutions that
+
+762
+00:41:51,340 --> 00:41:57,190
+have occurred at this particular
+base that we're considering,
+
+763
+00:41:57,190 --> 00:42:04,070
+is related to D, where D is
+the fraction of positions that
+
+764
+00:42:04,070 --> 00:42:07,940
+differ when you just take
+say the parental sequence
+
+765
+00:42:07,940 --> 00:42:11,124
+and the daughter sequence,
+the eventual sequence
+
+766
+00:42:11,124 --> 00:42:11,790
+that you get to.
+
+767
+00:42:11,790 --> 00:42:13,250
+You just match those two.
+
+768
+00:42:13,250 --> 00:42:14,840
+And you count up
+the differences.
+
+769
+00:42:14,840 --> 00:42:17,825
+That's D. And then K
+is the actual number
+
+770
+00:42:17,825 --> 00:42:20,300
+of substitutions
+that have occurred.
+
+771
+00:42:20,300 --> 00:42:24,580
+And those are related by this
+equation, K equals minus 3/4,
+
+772
+00:42:24,580 --> 00:42:29,520
+natural log, 1 minus 4/3 d.
+
+773
+00:42:29,520 --> 00:42:31,220
+So let's try to
+think about, first
+
+774
+00:42:31,220 --> 00:42:36,520
+of all, what is the
+shape of that curve?
+
+775
+00:42:36,520 --> 00:42:38,150
+What does that look like?
+
+776
+00:42:45,990 --> 00:42:47,030
+Here's 0.
+
+777
+00:42:47,030 --> 00:42:49,710
+I'll put 1 over here.
+
+778
+00:42:49,710 --> 00:42:54,110
+So we all know that log--
+if it was just simply
+
+779
+00:42:54,110 --> 00:42:57,110
+log of something
+between 0 and 1,
+
+780
+00:42:57,110 --> 00:43:03,700
+it would look like
+what-- look like that.
+
+781
+00:43:03,700 --> 00:43:09,090
+Starts from negative infinity
+and comes up to 0 at 1.
+
+782
+00:43:09,090 --> 00:43:13,340
+But it's actually not log
+of D. It's log of 1 minus D,
+
+783
+00:43:13,340 --> 00:43:18,560
+or 1 minus a constant times
+D. So that will flip it.
+
+784
+00:43:18,560 --> 00:43:22,433
+So the minus infinity
+will be there.
+
+785
+00:43:22,433 --> 00:43:26,310
+It will come in like that.
+
+786
+00:43:26,310 --> 00:43:32,050
+And then we also have minus 3/4.
+
+787
+00:43:32,050 --> 00:43:34,390
+There's a minus in front
+of this whole thing.
+
+788
+00:43:34,390 --> 00:43:38,301
+So all these logs are of
+numbers that are less than 1.
+
+789
+00:43:38,301 --> 00:43:39,300
+So they're all negative.
+
+790
+00:43:39,300 --> 00:43:41,450
+But then it'll get flipped.
+
+791
+00:43:41,450 --> 00:43:46,570
+So it'll actually
+look like that.
+
+792
+00:43:46,570 --> 00:43:50,810
+And it will go to
+infinity where?
+
+793
+00:44:03,280 --> 00:44:05,000
+Where does this go to infinity?
+
+794
+00:44:05,000 --> 00:44:09,330
+So if this is now
+K is on this axis.
+
+795
+00:44:09,330 --> 00:44:11,020
+And yeah, sorry if
+that wasn't clear.
+
+796
+00:44:11,020 --> 00:44:13,120
+D is here.
+
+797
+00:44:13,120 --> 00:44:15,520
+So this is just
+again, this is if we
+
+798
+00:44:15,520 --> 00:44:17,780
+did log of D it
+would look like this.
+
+799
+00:44:17,780 --> 00:44:20,080
+If we do log of 1 minus
+something times D,
+
+800
+00:44:20,080 --> 00:44:22,240
+that'll flip it.
+
+801
+00:44:22,240 --> 00:44:25,660
+And then if we do minus that,
+it'll flip it again that way.
+
+802
+00:44:25,660 --> 00:44:29,815
+OK so now K, as a function of
+D, is going to look like this.
+
+803
+00:44:32,380 --> 00:44:38,870
+Sometimes people
+like to put-- anyway,
+
+804
+00:44:38,870 --> 00:44:40,520
+but let's just think about this.
+
+805
+00:44:40,520 --> 00:44:43,510
+So it's going to go to
+up to infinity somewhere.
+
+806
+00:44:43,510 --> 00:44:44,410
+And where is that?
+
+807
+00:44:44,410 --> 00:44:45,495
+STUDENT: 3/4.
+
+808
+00:44:45,495 --> 00:44:46,120
+PROFESSOR: 3/4.
+
+809
+00:44:48,950 --> 00:44:52,020
+So does that make sense?
+
+810
+00:44:52,020 --> 00:44:54,050
+Can someone tell
+us what's going on
+
+811
+00:44:54,050 --> 00:44:58,022
+and what is the use of
+this whole thing here?
+
+812
+00:44:58,022 --> 00:44:59,516
+Yeah, in the back.
+
+813
+00:44:59,516 --> 00:45:00,260
+What's your name?
+
+814
+00:45:00,260 --> 00:45:01,010
+STUDENT: Julianne.
+
+815
+00:45:01,010 --> 00:45:02,006
+PROFESSOR: Yeah, Julianne.
+
+816
+00:45:02,006 --> 00:45:02,506
+Go ahead.
+
+817
+00:45:02,506 --> 00:45:03,500
+STUDENT: [INAUDIBLE] 0.
+
+818
+00:45:03,500 --> 00:45:09,476
+So part, it would give
+you negative infinite.
+
+819
+00:45:09,476 --> 00:45:12,970
+And so you just
+solve for D in there.
+
+820
+00:45:12,970 --> 00:45:17,260
+PROFESSOR: OK, so when D is
+3/4 you'll get 1 minus 1.
+
+821
+00:45:17,260 --> 00:45:17,795
+You get 0.
+
+822
+00:45:17,795 --> 00:45:18,870
+That'll be negative infinity.
+
+823
+00:45:18,870 --> 00:45:20,280
+And then there's
+a minus in front,
+
+824
+00:45:20,280 --> 00:45:21,529
+so it'll be constant infinity.
+
+825
+00:45:21,529 --> 00:45:22,280
+So that's true.
+
+826
+00:45:22,280 --> 00:45:24,620
+And does that intuitively
+make sense to you?
+
+827
+00:45:32,460 --> 00:45:33,630
+We have a sequence.
+
+828
+00:45:33,630 --> 00:45:37,200
+It's evolving randomly,
+according to this model.
+
+829
+00:45:37,200 --> 00:45:39,080
+And then we have that
+ancestral sequence.
+
+830
+00:45:39,080 --> 00:45:42,461
+And then we have a modern
+descendant of that sequence,
+
+831
+00:45:42,461 --> 00:45:44,960
+millions of generations-- or
+maybe thousands of generations,
+
+832
+00:45:44,960 --> 00:45:47,020
+or some large number
+of generations away.
+
+833
+00:45:47,020 --> 00:45:48,567
+We line up those two sequences.
+
+834
+00:45:48,567 --> 00:45:50,650
+We count how many matches
+and how many mismatches.
+
+835
+00:45:50,650 --> 00:45:52,665
+What's the fraction
+of mismatches,
+
+836
+00:45:52,665 --> 00:45:53,820
+of differences we have?
+
+837
+00:45:56,610 --> 00:46:00,990
+Basically if that-- let's
+look at a different case.
+
+838
+00:46:00,990 --> 00:46:06,410
+What if d is very small?
+
+839
+00:46:06,410 --> 00:46:08,420
+What if it's like 1%.
+
+840
+00:46:08,420 --> 00:46:09,170
+Then what happens?
+
+841
+00:46:14,220 --> 00:46:19,270
+If d is small, turns out
+k is pretty much like d.
+
+842
+00:46:19,270 --> 00:46:22,960
+It grows linearly with
+d in the beginning.
+
+843
+00:46:22,960 --> 00:46:25,460
+So does that make sense?
+
+844
+00:46:27,862 --> 00:46:28,570
+That makes sense.
+
+845
+00:46:28,570 --> 00:46:31,510
+Because k is the true number
+of substitutions that happen.
+
+846
+00:46:31,510 --> 00:46:34,265
+When you go one
+generation, the true number
+
+847
+00:46:34,265 --> 00:46:36,050
+of substitutions and
+the measured number
+
+848
+00:46:36,050 --> 00:46:37,480
+of substitutions is the same.
+
+849
+00:46:37,480 --> 00:46:39,720
+Because there's
+no back mutations.
+
+850
+00:46:39,720 --> 00:46:42,374
+But when you go further,
+there's an increasing chance
+
+851
+00:46:42,374 --> 00:46:44,040
+of a back-- there's
+an increasing chance
+
+852
+00:46:44,040 --> 00:46:46,002
+of a mutation, therefore
+increasing chance
+
+853
+00:46:46,002 --> 00:46:47,460
+that you also have
+a back mutation.
+
+854
+00:46:47,460 --> 00:46:49,610
+And so this is what
+happens at long time.
+
+855
+00:46:49,610 --> 00:46:54,870
+So basically this is linear
+here and then goes up like that.
+
+856
+00:46:54,870 --> 00:46:58,010
+And so what this
+allows you to do
+
+857
+00:46:58,010 --> 00:47:00,840
+is d something that
+you can measure.
+
+858
+00:47:00,840 --> 00:47:04,400
+And then k is something
+that you want to know.
+
+859
+00:47:04,400 --> 00:47:10,020
+The point is, if I measure
+the difference between human
+
+860
+00:47:10,020 --> 00:47:14,190
+and chimp sequence, it
+might be only 1% different.
+
+861
+00:47:14,190 --> 00:47:17,420
+And if I have an idea of
+mutation rate per generation,
+
+862
+00:47:17,420 --> 00:47:19,710
+I configure out how
+many generations apart,
+
+863
+00:47:19,710 --> 00:47:24,330
+or how much time has passed,
+since humans split from chimp.
+
+864
+00:47:24,330 --> 00:47:29,880
+But if I go to mouse, where the
+average base might be-- there
+
+865
+00:47:29,880 --> 00:47:34,985
+might be only a 50%
+matching-- if that's true,
+
+866
+00:47:34,985 --> 00:47:36,610
+there have been a
+lot of changes there.
+
+867
+00:47:36,610 --> 00:47:39,270
+There will be a lot of bases
+that have changed once,
+
+868
+00:47:39,270 --> 00:47:41,460
+as well as a lot that
+may have changed twice,
+
+869
+00:47:41,460 --> 00:47:43,540
+and may have actually
+changed back.
+
+870
+00:47:43,540 --> 00:47:46,920
+And so that let's say human
+and mouse are 50% identical.
+
+871
+00:47:46,920 --> 00:47:50,040
+That 50% identical--
+I can't just
+
+872
+00:47:50,040 --> 00:47:53,080
+compare it to let's
+say the 1% with chimp
+
+873
+00:47:53,080 --> 00:47:56,680
+and say it's 50 times longer.
+
+874
+00:47:56,680 --> 00:47:58,850
+That 50% will be
+an underestimate
+
+875
+00:47:58,850 --> 00:48:01,700
+of the true difference.
+
+876
+00:48:01,700 --> 00:48:05,180
+Because there's been some
+back mutations as well.
+
+877
+00:48:05,180 --> 00:48:06,730
+And so you have to
+use this formula
+
+878
+00:48:06,730 --> 00:48:10,110
+to figure out what the
+true evolutionary time is,
+
+879
+00:48:10,110 --> 00:48:12,600
+the true number of
+changes that happened.
+
+880
+00:48:12,600 --> 00:48:13,826
+Yeah, go ahead.
+
+881
+00:48:13,826 --> 00:48:17,277
+STUDENT: Does simple count
+refer to just the difference
+
+882
+00:48:17,277 --> 00:48:20,235
+in the amount of mutations?
+
+883
+00:48:20,235 --> 00:48:21,714
+Or what's--
+
+884
+00:48:21,714 --> 00:48:25,233
+PROFESSOR: The simple count
+is what you actually observe.
+
+885
+00:48:25,233 --> 00:48:29,570
+So you have a
+stretch of sequence--
+
+886
+00:48:29,570 --> 00:48:33,520
+let's say the beta globin
+genomic locus in human.
+
+887
+00:48:33,520 --> 00:48:36,540
+You line it up to the beta
+globin locus in chimp.
+
+888
+00:48:36,540 --> 00:48:38,770
+You count what fraction
+of positions differ?
+
+889
+00:48:38,770 --> 00:48:40,060
+What fractions are different?
+
+890
+00:48:40,060 --> 00:48:40,580
+That's d.
+
+891
+00:48:43,190 --> 00:48:47,410
+And then k is-- actually, it's
+slightly complicated here.
+
+892
+00:48:47,410 --> 00:48:50,360
+Because if this is
+human and that's chimp,
+
+893
+00:48:50,360 --> 00:48:54,990
+then k is more like--
+because you don't actually
+
+894
+00:48:54,990 --> 00:48:56,190
+observe the ancestor.
+
+895
+00:48:56,190 --> 00:48:57,440
+You observe chimp.
+
+896
+00:48:57,440 --> 00:49:00,460
+So you have to go back to the
+ancestor and then forward.
+
+897
+00:49:00,460 --> 00:49:03,860
+So that's the relevant
+number of generations.
+
+898
+00:49:03,860 --> 00:49:06,060
+And so k will tell
+you how many changes
+
+899
+00:49:06,060 --> 00:49:09,540
+must have occurred to
+give you that observed
+
+900
+00:49:09,540 --> 00:49:11,280
+fraction of differences.
+
+901
+00:49:11,280 --> 00:49:13,360
+And for short
+distances, it's linear.
+
+902
+00:49:13,360 --> 00:49:16,360
+And then for long, it's
+logarithmic, basically.
+
+903
+00:49:19,020 --> 00:49:19,892
+Yeah, question.
+
+904
+00:49:19,892 --> 00:49:23,695
+STUDENT: So I'm guessing all
+of [INAUDIBLE] that selection
+
+905
+00:49:23,695 --> 00:49:24,936
+is absent.
+
+906
+00:49:24,936 --> 00:49:25,936
+PROFESSOR: Right, right.
+
+907
+00:49:25,936 --> 00:49:27,373
+This is ignoring selection.
+
+908
+00:49:27,373 --> 00:49:28,331
+That's a good point.
+
+909
+00:49:32,170 --> 00:49:34,020
+So think about this.
+
+910
+00:49:34,020 --> 00:49:37,040
+And let me if other
+questions come up.
+
+911
+00:49:37,040 --> 00:49:39,740
+So this actually
+came up the other day
+
+912
+00:49:39,740 --> 00:49:42,660
+when we were talking about
+DNA substitution models.
+
+913
+00:49:42,660 --> 00:49:45,890
+So Kimura and
+others have observed
+
+914
+00:49:45,890 --> 00:49:49,440
+that transitions occur much
+more often than transversions,
+
+915
+00:49:49,440 --> 00:49:51,240
+maybe two to three
+times as often,
+
+916
+00:49:51,240 --> 00:49:54,120
+and so proposed a
+matrix like this.
+
+917
+00:49:54,120 --> 00:49:56,290
+And now you can
+use what you know
+
+918
+00:49:56,290 --> 00:49:58,380
+about stationary
+distributions to solve
+
+919
+00:49:58,380 --> 00:50:03,800
+for the limiting or stationary
+distribution of this matrix.
+
+920
+00:50:03,800 --> 00:50:06,635
+And actually, you will find
+it's still symmetrical.
+
+921
+00:50:06,635 --> 00:50:08,260
+It's a little bit
+more complicated now,
+
+922
+00:50:08,260 --> 00:50:11,690
+but you'll still
+get that 1/4, 1/4.
+
+923
+00:50:11,690 --> 00:50:13,760
+But then more
+recently others have
+
+924
+00:50:13,760 --> 00:50:16,670
+observed that
+really, dinucleotides
+
+925
+00:50:16,670 --> 00:50:19,810
+matter in terms
+of mutation rates,
+
+926
+00:50:19,810 --> 00:50:22,600
+particularly in
+vertebrates So what's
+
+927
+00:50:22,600 --> 00:50:26,210
+special about vertebrates is
+that they have methylation
+
+928
+00:50:26,210 --> 00:50:30,372
+machinery that methylates
+CPG dinucleotides on the C.
+
+929
+00:50:30,372 --> 00:50:33,470
+And that makes those
+C's hypermutable.
+
+930
+00:50:33,470 --> 00:50:36,570
+They mutate at about 10 times
+the rate of any other base.
+
+931
+00:50:36,570 --> 00:50:40,142
+And so you can give a
+higher mutation rate to C,
+
+932
+00:50:40,142 --> 00:50:41,600
+but that doesn't
+really capture it.
+
+933
+00:50:41,600 --> 00:50:44,060
+It's really a higher mutation
+rate of C's that are next
+
+934
+00:50:44,060 --> 00:50:45,960
+to G's.
+
+935
+00:50:45,960 --> 00:50:48,880
+And so you can
+define a model that's
+
+936
+00:50:48,880 --> 00:50:51,134
+16 by 16, which has
+dinucleotide mutation rates.
+
+937
+00:50:51,134 --> 00:50:52,550
+And that's actually
+a better model
+
+938
+00:50:52,550 --> 00:50:54,130
+of DNA sequence evolution.
+
+939
+00:50:54,130 --> 00:50:57,059
+And it's just the math
+gets a little hairier
+
+940
+00:50:57,059 --> 00:50:59,100
+if you want to calculate
+stationary distribution.
+
+941
+00:50:59,100 --> 00:51:01,090
+But again, it can be done.
+
+942
+00:51:01,090 --> 00:51:03,980
+And it's actually
+pretty easy to simulate.
+
+943
+00:51:06,490 --> 00:51:08,490
+Knowing that it will
+converge to the stationary,
+
+944
+00:51:08,490 --> 00:51:10,520
+you can just run the
+thing many times.
+
+945
+00:51:10,520 --> 00:51:14,420
+And you'll get to the answer.
+
+946
+00:51:14,420 --> 00:51:17,170
+And there's even been
+strand-specific models
+
+947
+00:51:17,170 --> 00:51:20,510
+proposed, where there are
+some differences between how
+
+948
+00:51:20,510 --> 00:51:23,797
+the repair machinery treats
+the two DNA strands that
+
+949
+00:51:23,797 --> 00:51:25,630
+are related to transcription
+coupled repair.
+
+950
+00:51:25,630 --> 00:51:27,560
+So you actually get
+some asymmetries there.
+
+951
+00:51:27,560 --> 00:51:31,840
+And this is a
+reasonably rich area.
+
+952
+00:51:31,840 --> 00:51:35,780
+And you can look at some
+of these references.
+
+953
+00:51:35,780 --> 00:51:38,580
+All right, so one more
+topic, while we're on
+
+954
+00:51:38,580 --> 00:51:41,470
+evolution-- this
+is very classical.
+
+955
+00:51:41,470 --> 00:51:45,180
+But I just wanted to make sure
+that everyone has seen it.
+
+956
+00:51:45,180 --> 00:51:50,000
+If you are looking specifically
+at protein coding sequences,
+
+957
+00:51:50,000 --> 00:51:55,130
+exons, and you know the reading
+frame, you can just align them.
+
+958
+00:51:55,130 --> 00:51:57,840
+And then you can look
+at two different types
+
+959
+00:51:57,840 --> 00:51:59,500
+of substitutions.
+
+960
+00:51:59,500 --> 00:52:03,320
+You can look at what are
+called the nonsynonymous
+
+961
+00:52:03,320 --> 00:52:08,850
+substitutions, so changes
+to the codons that change
+
+962
+00:52:08,850 --> 00:52:12,830
+the underlying amino acid,
+the encoded amino acid.
+
+963
+00:52:12,830 --> 00:52:15,380
+And you define
+often a term that's
+
+964
+00:52:15,380 --> 00:52:19,790
+either called Ka or dN,
+depending who you read,
+
+965
+00:52:19,790 --> 00:52:24,260
+that is the fraction of
+nonsynonymous substitutions
+
+966
+00:52:24,260 --> 00:52:27,090
+divided by nonsynonymous sites.
+
+967
+00:52:27,090 --> 00:52:31,060
+And in this case let's
+do synonymous first.
+
+968
+00:52:31,060 --> 00:52:32,900
+So you can also look
+at the other changes.
+
+969
+00:52:32,900 --> 00:52:35,050
+So these are now
+synonymous changes
+
+970
+00:52:35,050 --> 00:52:36,920
+which are base
+changes to triplets
+
+971
+00:52:36,920 --> 00:52:40,210
+that do not change the
+encoded amino acid.
+
+972
+00:52:40,210 --> 00:52:42,970
+So in this case, there
+are three of those.
+
+973
+00:52:42,970 --> 00:52:47,300
+And a lot of
+evolutionary approaches
+
+974
+00:52:47,300 --> 00:52:50,220
+are just based on calculating
+these two numbers.
+
+975
+00:52:50,220 --> 00:52:52,040
+You count synonymous changes.
+
+976
+00:52:52,040 --> 00:52:54,100
+You divide by
+synonymous sites, count
+
+977
+00:52:54,100 --> 00:52:57,480
+non-synonymous substitutions,
+divide by non-synonymous sites.
+
+978
+00:52:57,480 --> 00:53:00,040
+And so what do we
+mean synonymous site?
+
+979
+00:53:00,040 --> 00:53:07,010
+Well if you have only amino
+acids that are fourfold,
+
+980
+00:53:07,010 --> 00:53:09,420
+that have fourfold
+degenerate codons,
+
+981
+00:53:09,420 --> 00:53:13,070
+which is all of them are
+like that in this case,
+
+982
+00:53:13,070 --> 00:53:19,410
+then for example GG-- or
+let's see what's up here.
+
+983
+00:53:19,410 --> 00:53:23,250
+Yeah, CC anything
+codes for proline.
+
+984
+00:53:23,250 --> 00:53:24,320
+Do we have any of those?
+
+985
+00:53:24,320 --> 00:53:26,320
+Actually, these are not
+all fourfold degenerate.
+
+986
+00:53:26,320 --> 00:53:27,150
+I apologize.
+
+987
+00:53:27,150 --> 00:53:30,880
+But glycine, for example--
+so GG anything is glycine.
+
+988
+00:53:30,880 --> 00:53:36,476
+So in this triplet,
+this triplet here,
+
+989
+00:53:36,476 --> 00:53:39,140
+there's one synonymous site.
+
+990
+00:53:39,140 --> 00:53:40,640
+The third side is
+a synonymous site.
+
+991
+00:53:40,640 --> 00:53:44,330
+You can change that without
+changing the amino acid.
+
+992
+00:53:44,330 --> 00:53:46,580
+But the other two
+are non-synonymous.
+
+993
+00:53:46,580 --> 00:53:50,100
+So to do first
+approximation, you
+
+994
+00:53:50,100 --> 00:53:51,650
+take non-synonymous
+substitutions
+
+995
+00:53:51,650 --> 00:53:54,030
+and divide by the number
+of codons-- I'm sorry,
+
+996
+00:53:54,030 --> 00:53:55,740
+the number of codons
+times 2, since there
+
+997
+00:53:55,740 --> 00:53:58,390
+are two non-synonymous
+positions in each codon.
+
+998
+00:53:58,390 --> 00:54:00,620
+And you take synonymous
+substitutions,
+
+999
+00:54:00,620 --> 00:54:01,989
+divide by the number of codons.
+
+1000
+00:54:01,989 --> 00:54:03,030
+OK, does that make sense?
+
+1001
+00:54:03,030 --> 00:54:04,590
+One per codon.
+
+1002
+00:54:04,590 --> 00:54:10,650
+OK and so what do you
+then do with this?
+
+1003
+00:54:10,650 --> 00:54:12,950
+You can correct this
+value using-- basically
+
+1004
+00:54:12,950 --> 00:54:15,910
+this is the
+Jukes-Cantor correction
+
+1005
+00:54:15,910 --> 00:54:20,870
+that we just calculated,
+this 3/4 log 1 minus 4/3.
+
+1006
+00:54:20,870 --> 00:54:24,570
+That applies to codon evolution
+as well as individual base
+
+1007
+00:54:24,570 --> 00:54:25,510
+evolution.
+
+1008
+00:54:25,510 --> 00:54:28,430
+And what people
+often do with this
+
+1009
+00:54:28,430 --> 00:54:33,350
+is they calculate Ka
+and Ks for a whole gene.
+
+1010
+00:54:33,350 --> 00:54:37,280
+Let's say you have
+alignments of all human genes
+
+1011
+00:54:37,280 --> 00:54:40,110
+to their orthologs
+in mouse-- that
+
+1012
+00:54:40,110 --> 00:54:42,500
+is, the corresponding
+homologous gene in mouse.
+
+1013
+00:54:42,500 --> 00:54:45,280
+And you calculate Ka Ks.
+
+1014
+00:54:45,280 --> 00:54:47,700
+And then you can
+look at those genes
+
+1015
+00:54:47,700 --> 00:54:51,190
+where this ratio is
+significantly less than 1,
+
+1016
+00:54:51,190 --> 00:54:53,959
+or around 1, or greater than 1.
+
+1017
+00:54:53,959 --> 00:54:55,500
+And that actually
+tells you something
+
+1018
+00:54:55,500 --> 00:54:59,130
+about how that-- the
+type of selection
+
+1019
+00:54:59,130 --> 00:55:03,230
+that that gene is experiencing.
+
+1020
+00:55:03,230 --> 00:55:06,090
+So what would you
+expect to see--
+
+1021
+00:55:06,090 --> 00:55:08,800
+or if I told you
+we've got two genes
+
+1022
+00:55:08,800 --> 00:55:12,640
+and the Ka/Ks ratio
+is much less than 1.
+
+1023
+00:55:12,640 --> 00:55:15,270
+It's like 0.2.
+
+1024
+00:55:15,270 --> 00:55:16,700
+What would that tell you?
+
+1025
+00:55:16,700 --> 00:55:20,320
+Or what could you infer
+about the selection
+
+1026
+00:55:20,320 --> 00:55:22,294
+that's happening to that gene?
+
+1027
+00:55:27,140 --> 00:55:30,100
+Ka/Ks is much less than 1.
+
+1028
+00:55:30,100 --> 00:55:31,600
+Any ideas?
+
+1029
+00:55:31,600 --> 00:55:32,515
+Julianne, yeah.
+
+1030
+00:55:32,515 --> 00:55:34,495
+STUDENT: The protein
+sequence is important--
+
+1031
+00:55:34,495 --> 00:55:35,649
+or the amino acid sequence.
+
+1032
+00:55:35,649 --> 00:55:36,690
+PROFESSOR: Yeah, exactly.
+
+1033
+00:55:36,690 --> 00:55:39,340
+The amino acid
+sequence is important.
+
+1034
+00:55:39,340 --> 00:55:43,010
+Because you assume
+that those synonymous
+
+1035
+00:55:43,010 --> 00:55:44,694
+sites and non-synonymous
+sites-- they're
+
+1036
+00:55:44,694 --> 00:55:46,360
+going to mutate at
+the same rate, right?
+
+1037
+00:55:46,360 --> 00:55:49,640
+The mutation processes don't
+know about protein coding.
+
+1038
+00:55:49,640 --> 00:55:54,430
+So what you're seeing
+is an absence, a loss,
+
+1039
+00:55:54,430 --> 00:55:56,020
+of the non-synonymous changes.
+
+1040
+00:55:56,020 --> 00:55:57,860
+80% of those
+non-synonymous changes
+
+1041
+00:55:57,860 --> 00:55:59,570
+have been kicked
+out by evolution.
+
+1042
+00:55:59,570 --> 00:56:01,580
+You're only seeing 20%.
+
+1043
+00:56:01,580 --> 00:56:04,810
+And you're using, assuming
+the non-synonymous are
+
+1044
+00:56:04,810 --> 00:56:08,014
+neutral-- I'm sorry.
+
+1045
+00:56:08,014 --> 00:56:09,930
+I seem to have trouble
+with these words today.
+
+1046
+00:56:09,930 --> 00:56:13,120
+But you assume that the
+synonymous ones are neutral.
+
+1047
+00:56:13,120 --> 00:56:15,067
+And then that's
+calibrates everything.
+
+1048
+00:56:15,067 --> 00:56:17,400
+And then you see that the
+non-synonymous are much lower.
+
+1049
+00:56:17,400 --> 00:56:19,323
+Therefore you must have
+lost-- these ones must
+
+1050
+00:56:19,323 --> 00:56:20,740
+have been kicked
+out by evolution.
+
+1051
+00:56:20,740 --> 00:56:22,690
+So the amino acid
+sequence is important.
+
+1052
+00:56:22,690 --> 00:56:25,860
+And it's optimal in some sense.
+
+1053
+00:56:25,860 --> 00:56:29,160
+The protein works-- the organism
+does not want to change it.
+
+1054
+00:56:29,160 --> 00:56:32,080
+Or changes to that
+protein sequence
+
+1055
+00:56:32,080 --> 00:56:34,160
+make the protein worse.
+
+1056
+00:56:34,160 --> 00:56:35,530
+And so you don't see them.
+
+1057
+00:56:35,530 --> 00:56:37,750
+And that's what you see
+for most protein coding
+
+1058
+00:56:37,750 --> 00:56:41,970
+genes in the genome-- a Ka/Ks
+ratio that's well below one.
+
+1059
+00:56:41,970 --> 00:56:44,700
+It says we care
+what the protein is.
+
+1060
+00:56:44,700 --> 00:56:45,940
+And it's pretty good already.
+
+1061
+00:56:45,940 --> 00:56:48,150
+And we don't want to change it.
+
+1062
+00:56:48,150 --> 00:56:50,110
+All right, what
+about a gene that
+
+1063
+00:56:50,110 --> 00:56:54,180
+has a Ka/Ks ratio of around 1?
+
+1064
+00:56:54,180 --> 00:56:58,063
+Anyone have an idea what would
+that tell you about that gene?
+
+1065
+00:57:01,930 --> 00:57:03,330
+There are some-- Daniel?
+
+1066
+00:57:03,330 --> 00:57:06,620
+STUDENT: The sequence is-- it
+doesn't particularly matter.
+
+1067
+00:57:06,620 --> 00:57:12,088
+Maybe it's a non-coding,
+non-regulatory patch of DNA.
+
+1068
+00:57:12,088 --> 00:57:14,665
+I assume there
+must be something.
+
+1069
+00:57:14,665 --> 00:57:16,880
+PROFESSOR: Yeah, so it could
+be that it's not really
+
+1070
+00:57:16,880 --> 00:57:17,921
+protein coding after all.
+
+1071
+00:57:17,921 --> 00:57:18,860
+It's non-coding.
+
+1072
+00:57:18,860 --> 00:57:22,210
+Then this whole triplet thing we
+were doing to it is arbitrary.
+
+1073
+00:57:22,210 --> 00:57:26,060
+So you don't expect any
+particular distribution.
+
+1074
+00:57:26,060 --> 00:57:26,700
+That's true.
+
+1075
+00:57:26,700 --> 00:57:28,125
+Any other possibilities?
+
+1076
+00:57:28,125 --> 00:57:29,340
+Yeah, Tim.
+
+1077
+00:57:29,340 --> 00:57:32,752
+STUDENT: Could be that there
+are opposite forces that
+
+1078
+00:57:32,752 --> 00:57:33,664
+are equilibrating.
+
+1079
+00:57:33,664 --> 00:57:35,570
+For example, we're
+taking the unit of the G.
+
+1080
+00:57:35,570 --> 00:57:39,200
+But maybe in one
+half of the G there's
+
+1081
+00:57:39,200 --> 00:57:41,777
+a strong selective
+pressure for non-synonymous
+
+1082
+00:57:41,777 --> 00:57:44,222
+and in the other half it's
+strong selective pressure
+
+1083
+00:57:44,222 --> 00:57:45,690
+for synonymous.
+
+1084
+00:57:45,690 --> 00:57:47,982
+Alternatively, it could be
+in the same par of the gene,
+
+1085
+00:57:47,982 --> 00:57:49,856
+but it's involved in
+two different processes.
+
+1086
+00:57:49,856 --> 00:57:50,734
+It's diatropic.
+
+1087
+00:57:50,734 --> 00:57:54,478
+So in one process it's
+selecting this one thing.
+
+1088
+00:57:54,478 --> 00:57:56,865
+PROFESSOR: Yeah, or
+one period of time,
+
+1089
+00:57:56,865 --> 00:57:58,990
+if you're looking at 10
+million years of evolution,
+
+1090
+00:57:58,990 --> 00:58:01,186
+it could have been for this
+first five million years it was
+
+1091
+00:58:01,186 --> 00:58:03,560
+under negative selection, and
+then it was under positive.
+
+1092
+00:58:03,560 --> 00:58:04,950
+And it averages out.
+
+1093
+00:58:04,950 --> 00:58:09,740
+Yes, all those things are
+possible, but kind of unusual.
+
+1094
+00:58:09,740 --> 00:58:12,800
+And so maybe if
+you saw that the--
+
+1095
+00:58:12,800 --> 00:58:14,791
+if you plotted
+Ka/Ks along the gene
+
+1096
+00:58:14,791 --> 00:58:17,290
+and you saw that it was high
+in one area and low in another,
+
+1097
+00:58:17,290 --> 00:58:18,460
+then that would tell
+you that you probably
+
+1098
+00:58:18,460 --> 00:58:20,100
+shouldn't be taking the
+average across the gene.
+
+1099
+00:58:20,100 --> 00:58:22,120
+And that would be a
+good thing to look for.
+
+1100
+00:58:22,120 --> 00:58:25,517
+But what if-- again, so
+we said if Ka/Ks is near 1
+
+1101
+00:58:25,517 --> 00:58:28,100
+it could be that it's not really
+a protein coding gene at all.
+
+1102
+00:58:28,100 --> 00:58:29,330
+That's certainly possible.
+
+1103
+00:58:29,330 --> 00:58:31,470
+It could also be though
+that it's a pseudogene.
+
+1104
+00:58:34,020 --> 00:58:37,080
+Or it's a gene that is no
+longer needed by the organism.
+
+1105
+00:58:37,080 --> 00:58:39,380
+It still codes for protein,
+but the organism just
+
+1106
+00:58:39,380 --> 00:58:41,060
+could care less
+about its function.
+
+1107
+00:58:41,060 --> 00:58:43,920
+It's something that maybe
+evolved in some other time.
+
+1108
+00:58:43,920 --> 00:58:49,630
+It helps you adapt to
+when the temperature gets
+
+1109
+00:58:49,630 --> 00:58:50,720
+below minus 20.
+
+1110
+00:58:50,720 --> 00:58:52,810
+But it never gets
+below minus 20 anymore.
+
+1111
+00:58:52,810 --> 00:58:57,250
+And so there's no selection
+on it, or something like that.
+
+1112
+00:58:57,250 --> 00:59:02,020
+So neutral indicates-- this
+is called neutral evolution.
+
+1113
+00:59:02,020 --> 00:59:07,720
+And then what about a gene which
+has a Ka/Ks ratio significantly
+
+1114
+00:59:07,720 --> 00:59:10,980
+greater than 1?
+
+1115
+00:59:10,980 --> 00:59:14,940
+Any thoughts on what that might
+mean and what kind of genes
+
+1116
+00:59:14,940 --> 00:59:19,054
+might happen to--
+yes, what's your name?
+
+1117
+00:59:19,054 --> 00:59:19,720
+STUDENT: Simona.
+
+1118
+00:59:19,720 --> 00:59:20,065
+PROFESSOR: Simona, go ahead.
+
+1119
+00:59:20,065 --> 00:59:22,585
+STUDENT: It might be a gene
+that's selected against,
+
+1120
+00:59:22,585 --> 00:59:25,736
+so something that's detrimental
+to the cell or the organism.
+
+1121
+00:59:25,736 --> 00:59:28,950
+PROFESSOR: It's detrimental--
+so the existing protein is
+
+1122
+00:59:28,950 --> 00:59:31,350
+bad for you, so you
+want to change it.
+
+1123
+00:59:31,350 --> 00:59:33,920
+So it's better to change
+it to something else.
+
+1124
+00:59:33,920 --> 00:59:34,480
+That's true.
+
+1125
+00:59:34,480 --> 00:59:37,065
+Can you think of an example
+where that might be the case?
+
+1126
+00:59:37,065 --> 00:59:39,490
+STUDENT: A gene that
+produces a toxin.
+
+1127
+00:59:39,490 --> 00:59:42,470
+PROFESSOR: A gene
+that produces toxin.
+
+1128
+00:59:42,470 --> 00:59:44,160
+You might just lose
+the gene completely
+
+1129
+00:59:44,160 --> 00:59:47,110
+if it produced a toxin.
+
+1130
+00:59:47,110 --> 00:59:49,770
+Any other examples you can
+think of or other people?
+
+1131
+00:59:53,880 --> 00:59:55,080
+Yeah, Jeff.
+
+1132
+00:59:55,080 --> 00:59:58,440
+STUDENT: Maybe a
+pigment that makes
+
+1133
+00:59:58,440 --> 01:00:03,090
+the organism more susceptible
+to being eaten by a predator.
+
+1134
+01:00:03,090 --> 01:00:07,305
+PROFESSOR: OK, yeah if
+it was a polar organism
+
+1135
+01:00:07,305 --> 01:00:09,964
+and it happened to have this
+gene that made the fur dark
+
+1136
+01:00:09,964 --> 01:00:12,380
+and it showed up against the
+snow, or something like that.
+
+1137
+01:00:12,380 --> 01:00:13,421
+And you can imagine that.
+
+1138
+01:00:13,421 --> 01:00:17,090
+Or a very common
+case is, for example,
+
+1139
+01:00:17,090 --> 01:00:21,190
+a receptor that's used by
+a virus to enter the cell.
+
+1140
+01:00:21,190 --> 01:00:24,095
+It probably had
+some other purpose.
+
+1141
+01:00:24,095 --> 01:00:28,030
+But if the virus
+is very virulent,
+
+1142
+01:00:28,030 --> 01:00:30,490
+you really just want
+to change that receptor
+
+1143
+01:00:30,490 --> 01:00:32,980
+so that the virus can't
+attack it anymore.
+
+1144
+01:00:32,980 --> 01:00:35,620
+So you see this kind
+of thing is much rarer.
+
+1145
+01:00:35,620 --> 01:00:38,060
+It's only less than
+1% of genes probably
+
+1146
+01:00:38,060 --> 01:00:41,160
+are under positive selection,
+depending on how you measure it
+
+1147
+01:00:41,160 --> 01:00:42,670
+and what time
+period you look at.
+
+1148
+01:00:42,670 --> 01:00:46,910
+But it tends to be really
+recent, really strong selection
+
+1149
+01:00:46,910 --> 01:00:48,880
+for changing the
+protein sequence.
+
+1150
+01:00:48,880 --> 01:00:52,315
+And the most common-- well,
+probably the most common--
+
+1151
+01:00:52,315 --> 01:00:57,040
+is these immune arms races
+between a host and a pathogen.
+
+1152
+01:00:57,040 --> 01:00:59,154
+But there are other cases too.
+
+1153
+01:00:59,154 --> 01:01:00,570
+You can have very
+strong selection
+
+1154
+01:01:00,570 --> 01:01:03,740
+where-- well, I don't
+want to-- basically where
+
+1155
+01:01:03,740 --> 01:01:07,140
+a protein is maladapted, like
+the organism moves from a very
+
+1156
+01:01:07,140 --> 01:01:09,140
+cold environment to a
+very warm environment.
+
+1157
+01:01:09,140 --> 01:01:10,920
+And you just need to
+change a lot of stuff
+
+1158
+01:01:10,920 --> 01:01:12,920
+to make those proteins
+better adapted.
+
+1159
+01:01:12,920 --> 01:01:16,056
+Occasionally you can get
+positive selection there.
+
+1160
+01:01:16,056 --> 01:01:17,550
+Yeah, go ahead.
+
+1161
+01:01:17,550 --> 01:01:20,670
+STUDENT: So the situation
+where K or Ks is 1--
+
+1162
+01:01:20,670 --> 01:01:26,019
+could it be possible that
+the mRNA is under selection?
+
+1163
+01:01:26,019 --> 01:01:28,060
+PROFESSOR: Yeah, so that
+basically we have always
+
+1164
+01:01:28,060 --> 01:01:31,092
+been implicitly assuming that
+the synonymous substitution
+
+1165
+01:01:31,092 --> 01:01:31,800
+rate was neutral.
+
+1166
+01:01:31,800 --> 01:01:34,621
+But it could actually
+be it's not neutral.
+
+1167
+01:01:34,621 --> 01:01:36,120
+That's under negative
+selection too.
+
+1168
+01:01:36,120 --> 01:01:37,660
+And it happens
+that they balance.
+
+1169
+01:01:37,660 --> 01:01:38,537
+That's also possible.
+
+1170
+01:01:38,537 --> 01:01:40,120
+So for that, to
+assess that, you might
+
+1171
+01:01:40,120 --> 01:01:44,410
+want to compare the synonymous
+substitution rate of that gene
+
+1172
+01:01:44,410 --> 01:01:45,759
+to neighboring genes.
+
+1173
+01:01:45,759 --> 01:01:47,300
+And if you find it's
+much lower, that
+
+1174
+01:01:47,300 --> 01:01:50,700
+could indicate that
+the coding sequences--
+
+1175
+01:01:50,700 --> 01:01:54,510
+the third base of codons
+is under selection--
+
+1176
+01:01:54,510 --> 01:01:56,050
+could be for splicing, maybe.
+
+1177
+01:01:56,050 --> 01:01:59,070
+It could be for RNA secondary
+structure, translation,
+
+1178
+01:01:59,070 --> 01:02:01,240
+different other--
+that's a good point.
+
+1179
+01:02:01,240 --> 01:02:05,180
+So yeah, you guys have
+already poked holes in this.
+
+1180
+01:02:05,180 --> 01:02:06,470
+This is a method.
+
+1181
+01:02:06,470 --> 01:02:07,740
+It gives you something.
+
+1182
+01:02:07,740 --> 01:02:09,200
+You'll see it used.
+
+1183
+01:02:09,200 --> 01:02:10,600
+It gives you some inferences.
+
+1184
+01:02:10,600 --> 01:02:14,170
+But there are cases where
+it doesn't fully work.
+
+1185
+01:02:14,170 --> 01:02:16,570
+OK, good.
+
+1186
+01:02:16,570 --> 01:02:18,400
+So in the remaining
+time I wanted
+
+1187
+01:02:18,400 --> 01:02:24,170
+to do some examples of
+comparative genomics.
+
+1188
+01:02:24,170 --> 01:02:27,670
+So as I mentioned
+before, these are
+
+1189
+01:02:27,670 --> 01:02:31,210
+chosen to just give you some
+examples of types of things
+
+1190
+01:02:31,210 --> 01:02:32,860
+you can learn about
+gene regulation
+
+1191
+01:02:32,860 --> 01:02:35,980
+by comparing genomes again,
+often by using really
+
+1192
+01:02:35,980 --> 01:02:37,770
+simple methods,
+just blasting all
+
+1193
+01:02:37,770 --> 01:02:42,090
+the genes against each
+other or things like this.
+
+1194
+01:02:45,000 --> 01:02:49,570
+And also, if you do choose
+to read some of these papers,
+
+1195
+01:02:49,570 --> 01:02:51,780
+it can give you some
+experience looking
+
+1196
+01:02:51,780 --> 01:02:55,420
+at this literature in
+regulatory genomics.
+
+1197
+01:02:55,420 --> 01:03:01,600
+So the papers I've chosen--
+we'll start with Bejerano et al
+
+1198
+01:03:01,600 --> 01:03:07,570
+from 2002, who basically sought
+to identify regulatory elements
+
+1199
+01:03:07,570 --> 01:03:10,490
+that are things that are
+under evolutionary constraint.
+
+1200
+01:03:10,490 --> 01:03:13,360
+That's all he was
+trying to find.
+
+1201
+01:03:13,360 --> 01:03:15,650
+Didn't know what
+their functions were.
+
+1202
+01:03:15,650 --> 01:03:19,142
+But they turned out to be
+interesting nonetheless,
+
+1203
+01:03:19,142 --> 01:03:20,600
+which is maybe a
+little surprising.
+
+1204
+01:03:20,600 --> 01:03:27,270
+And then this other work from
+Eddy Rubin's lab and others--
+
+1205
+01:03:27,270 --> 01:03:29,290
+Steve Brenner's lab--
+actually characterized
+
+1206
+01:03:29,290 --> 01:03:31,590
+some of these extremely
+conserved regions
+
+1207
+01:03:31,590 --> 01:03:33,610
+and assessed their function.
+
+1208
+01:03:33,610 --> 01:03:35,740
+And then Bejerano came
+back a few years later
+
+1209
+01:03:35,740 --> 01:03:39,700
+and actually had a paper about
+where these extremely conserved
+
+1210
+01:03:39,700 --> 01:03:42,080
+regions actually came from.
+
+1211
+01:03:42,080 --> 01:03:43,550
+So we'll talk about those.
+
+1212
+01:03:43,550 --> 01:03:45,910
+Then we'll look at
+some papers that
+
+1213
+01:03:45,910 --> 01:03:50,640
+have to do with inferring
+the regulatory targets
+
+1214
+01:03:50,640 --> 01:03:52,104
+of a transacting factor.
+
+1215
+01:03:52,104 --> 01:03:53,770
+And the factors that
+we'll consider here
+
+1216
+01:03:53,770 --> 01:03:58,050
+will be microRNAs,
+mostly, Either trying
+
+1217
+01:03:58,050 --> 01:04:00,100
+to understand what the
+rules are for microRNA
+
+1218
+01:04:00,100 --> 01:04:02,660
+targeting and these
+Lewis et al papers,
+
+1219
+01:04:02,660 --> 01:04:06,000
+or trying to identify
+the regulatory targets
+
+1220
+01:04:06,000 --> 01:04:07,750
+in the genome.
+
+1221
+01:04:07,750 --> 01:04:10,800
+And then, time permitting, we'll
+talk about a few other examples
+
+1222
+01:04:10,800 --> 01:04:13,740
+of slightly more exotic things.
+
+1223
+01:04:13,740 --> 01:04:18,750
+Graveley identified
+a pair-- or pairs--
+
+1224
+01:04:18,750 --> 01:04:21,400
+of interacting
+regulatory elements
+
+1225
+01:04:21,400 --> 01:04:26,391
+through a clever comparative
+genomic approach.
+
+1226
+01:04:26,391 --> 01:04:28,640
+And then I'll talk about
+these two examples at the end
+
+1227
+01:04:28,640 --> 01:04:32,840
+if there's time, where a new
+class of transacting factors
+
+1228
+01:04:32,840 --> 01:04:38,420
+was inferred from the
+locations of the encoded genes
+
+1229
+01:04:38,420 --> 01:04:39,500
+in the genome.
+
+1230
+01:04:39,500 --> 01:04:43,330
+And also an inference was
+made about the functions
+
+1231
+01:04:43,330 --> 01:04:45,800
+of some repetitive
+elements from, again,
+
+1232
+01:04:45,800 --> 01:04:49,320
+looking at the matching
+between these elements
+
+1233
+01:04:49,320 --> 01:04:51,610
+and another genome.
+
+1234
+01:04:51,610 --> 01:04:54,350
+All right, so first
+example-- Bejerano
+
+1235
+01:04:54,350 --> 01:04:55,530
+"Ultraconserved elements."
+
+1236
+01:04:55,530 --> 01:04:58,840
+So they defined, in a fairly
+arbitrary way, ultraconserved
+
+1237
+01:04:58,840 --> 01:05:00,410
+elements as unusually
+long segments
+
+1238
+01:05:00,410 --> 01:05:03,530
+that 100% identical between
+human, mouse, and rat.
+
+1239
+01:05:03,530 --> 01:05:05,840
+This was in 2000--
+I'm sorry, I might
+
+1240
+01:05:05,840 --> 01:05:07,800
+have the wrong-- it's
+either 2004 or 2002.
+
+1241
+01:05:07,800 --> 01:05:10,240
+I forget.
+
+1242
+01:05:10,240 --> 01:05:12,652
+This was basically when the
+first three mammalian genomes
+
+1243
+01:05:12,652 --> 01:05:14,860
+had been sequenced, which
+were human, mouse, and rat.
+
+1244
+01:05:14,860 --> 01:05:17,510
+And there were whole
+genome alignments.
+
+1245
+01:05:17,510 --> 01:05:20,110
+So they basically said let's
+try to use these whole genome
+
+1246
+01:05:20,110 --> 01:05:22,390
+alignments to find
+what's the most
+
+1247
+01:05:22,390 --> 01:05:25,150
+conserved thing in mammals.
+
+1248
+01:05:25,150 --> 01:05:28,460
+So they wanted to see if
+there's anything 100% conserved.
+
+1249
+01:05:28,460 --> 01:05:31,720
+And so they did
+statistics to say
+
+1250
+01:05:31,720 --> 01:05:37,030
+what's an unusually long
+region of 100% identity.
+
+1251
+01:05:37,030 --> 01:05:41,280
+Any ideas how you would do
+that calculation, what kind
+
+1252
+01:05:41,280 --> 01:05:43,160
+of statistics you would use?
+
+1253
+01:05:43,160 --> 01:05:44,856
+They used a really
+simple approach.
+
+1254
+01:05:48,830 --> 01:05:51,600
+What they did was they
+took one megabase segments
+
+1255
+01:05:51,600 --> 01:05:54,590
+of the genome, assuming it
+might vary across the genome.
+
+1256
+01:05:54,590 --> 01:05:56,986
+They took ancestral repetitive
+elements-- so repetitive
+
+1257
+01:05:56,986 --> 01:05:58,360
+elements that were
+inserted, that
+
+1258
+01:05:58,360 --> 01:06:00,440
+were present in mouse,
+rat, and human--
+
+1259
+01:06:00,440 --> 01:06:02,981
+and assumed that they
+were neutrally evolving,
+
+1260
+01:06:02,981 --> 01:06:04,230
+they were not under selection.
+
+1261
+01:06:04,230 --> 01:06:06,460
+And then therefor you could look
+at the number of differences
+
+1262
+01:06:06,460 --> 01:06:09,010
+and get an idea what the
+background rate of mutation is.
+
+1263
+01:06:09,010 --> 01:06:09,760
+And they use that.
+
+1264
+01:06:09,760 --> 01:06:12,787
+And they found that
+that rate was--
+
+1265
+01:06:12,787 --> 01:06:15,370
+this is from their supplementary
+data-- that was never greater
+
+1266
+01:06:15,370 --> 01:06:18,420
+than 0.68.
+
+1267
+01:06:18,420 --> 01:06:26,270
+And so they just said well, if
+we have a probability of-- I'm
+
+1268
+01:06:26,270 --> 01:06:27,620
+sorry.
+
+1269
+01:06:27,620 --> 01:06:28,470
+One is heads.
+
+1270
+01:06:28,470 --> 01:06:31,370
+So if they're all
+three the same-- yeah,
+
+1271
+01:06:31,370 --> 01:06:35,384
+so if we have a probability
+of 0.7 of heads,
+
+1272
+01:06:35,384 --> 01:06:37,050
+meaning that they're
+all three the same,
+
+1273
+01:06:37,050 --> 01:06:39,960
+then the chance that you
+have 200 heads in a row
+
+1274
+01:06:39,960 --> 01:06:47,570
+would be 1 minus P P to the 200,
+just like [INAUDIBLE] trials.
+
+1275
+01:06:47,570 --> 01:06:50,070
+And you can just multiply that
+times the size of the genome.
+
+1276
+01:06:50,070 --> 01:06:52,420
+And you say it's extremely
+unlikely that you'll ever
+
+1277
+01:06:52,420 --> 01:06:57,970
+see anything where there's 200
+identical nucleotides in a row.
+
+1278
+01:06:57,970 --> 01:07:01,630
+So that's what they defined
+as an ultraconserved element.
+
+1279
+01:07:01,630 --> 01:07:04,500
+So it all seems
+very silly for now,
+
+1280
+01:07:04,500 --> 01:07:06,880
+until you actually
+get to what they find.
+
+1281
+01:07:06,880 --> 01:07:09,080
+So they looked at where
+are these elements
+
+1282
+01:07:09,080 --> 01:07:10,210
+around the genome.
+
+1283
+01:07:10,210 --> 01:07:13,310
+They found about 100 overlapped
+exons of known protein coding
+
+1284
+01:07:13,310 --> 01:07:16,850
+genes, 100 are in
+introns, and the remainder
+
+1285
+01:07:16,850 --> 01:07:19,030
+are in intergenic regions.
+
+1286
+01:07:19,030 --> 01:07:21,810
+So then they looked at
+well what kind of genes
+
+1287
+01:07:21,810 --> 01:07:26,460
+contain exons with
+overlapping-- or contain
+
+1288
+01:07:26,460 --> 01:07:28,420
+ultraconserved elements
+that overlap exons?
+
+1289
+01:07:28,420 --> 01:07:29,430
+Those are type 1 genes.
+
+1290
+01:07:29,430 --> 01:07:32,320
+And what kind of
+genes are next to
+
+1291
+01:07:32,320 --> 01:07:33,970
+the intergenic
+ultraconserved elements,
+
+1292
+01:07:33,970 --> 01:07:37,300
+to try to get some clues about
+the function of these elements.
+
+1293
+01:07:37,300 --> 01:07:42,670
+And so they did this early
+gene ontology analysis.
+
+1294
+01:07:42,670 --> 01:07:46,890
+And what they found was that
+the ultraconserved elements that
+
+1295
+01:07:46,890 --> 01:07:51,660
+overlapped exons
+tended to fall in genes
+
+1296
+01:07:51,660 --> 01:07:56,160
+that encoded RNA-binding
+proteins, particular splicing
+
+1297
+01:07:56,160 --> 01:08:02,094
+factors, by an order of
+magnitude more frequent.
+
+1298
+01:08:02,094 --> 01:08:03,760
+And then the type 2
+genes, the ones that
+
+1299
+01:08:03,760 --> 01:08:07,390
+were next to these intergenic
+ultraconserved regions,
+
+1300
+01:08:07,390 --> 01:08:09,820
+tended to be
+transcription factors.
+
+1301
+01:08:09,820 --> 01:08:11,930
+In particular, homeobox
+transcription factors
+
+1302
+01:08:11,930 --> 01:08:15,500
+were the most enriched class.
+
+1303
+01:08:15,500 --> 01:08:18,270
+So this gave them some clues
+about what might be going on.
+
+1304
+01:08:18,270 --> 01:08:20,550
+Particularly the second
+class was followed up
+
+1305
+01:08:20,550 --> 01:08:25,029
+by Eddy Rubins's
+lab at Berkeley.
+
+1306
+01:08:25,029 --> 01:08:29,595
+And they tested 167 extremely
+conserved sequences.
+
+1307
+01:08:29,595 --> 01:08:31,720
+So some of them were these
+ultraconserved elements.
+
+1308
+01:08:31,720 --> 01:08:33,553
+And some of them were
+just highly conserved,
+
+1309
+01:08:33,553 --> 01:08:36,540
+but not quite 100% conserved.
+
+1310
+01:08:36,540 --> 01:08:39,609
+And they had an assay
+where they have a reporter.
+
+1311
+01:08:39,609 --> 01:08:44,020
+It's a lacZ with a-- you
+take a minimal promoter, fuse
+
+1312
+01:08:44,020 --> 01:08:45,930
+in to lacZ, and then
+you take your element
+
+1313
+01:08:45,930 --> 01:08:48,590
+of interest and
+fuse it upstream.
+
+1314
+01:08:48,590 --> 01:08:51,810
+And then you do staining
+of whole mount embryos.
+
+1315
+01:08:51,810 --> 01:08:55,200
+And you say what pattern
+of gene expression
+
+1316
+01:08:55,200 --> 01:08:57,319
+does this element
+drive, or does it
+
+1317
+01:08:57,319 --> 01:08:59,380
+drive a pattern of
+gene expression?
+
+1318
+01:08:59,380 --> 01:09:03,319
+And so 45% of the time it
+drove a particular pattern
+
+1319
+01:09:03,319 --> 01:09:05,560
+of gene expression.
+
+1320
+01:09:05,560 --> 01:09:07,990
+So it functioned as an enhancer.
+
+1321
+01:09:07,990 --> 01:09:14,210
+And these are the types
+of patterns that they saw.
+
+1322
+01:09:14,210 --> 01:09:16,120
+So they saw often
+forebrain, sometimes
+
+1323
+01:09:16,120 --> 01:09:19,689
+midbrain, neural
+tube, lim, et cetera.
+
+1324
+01:09:19,689 --> 01:09:24,029
+So many of these
+things are enhancers
+
+1325
+01:09:24,029 --> 01:09:27,710
+that drive particular
+developmental patterns of gene
+
+1326
+01:09:27,710 --> 01:09:28,729
+expression.
+
+1327
+01:09:28,729 --> 01:09:31,410
+So that out to be actually--
+that was a pretty good way
+
+1328
+01:09:31,410 --> 01:09:34,779
+to identify
+developmental enhancers.
+
+1329
+01:09:34,779 --> 01:09:37,180
+So they wondered, is
+there anything special
+
+1330
+01:09:37,180 --> 01:09:39,200
+about these ultraconserved
+regions, these 100%
+
+1331
+01:09:39,200 --> 01:09:42,359
+identical regions, versus
+others that are 95% identical.
+
+1332
+01:09:42,359 --> 01:09:44,090
+And so they tested
+a bunch of each.
+
+1333
+01:09:44,090 --> 01:09:47,120
+And they found absolutely
+no difference there.
+
+1334
+01:09:47,120 --> 01:09:49,270
+They drive similar
+types of expression.
+
+1335
+01:09:49,270 --> 01:09:52,950
+And you can even find
+individual instances of them
+
+1336
+01:09:52,950 --> 01:09:57,520
+that drive pretty much exactly
+the same pattern of expression.
+
+1337
+01:09:57,520 --> 01:09:59,510
+So this whole 100%
+identical thing
+
+1338
+01:09:59,510 --> 01:10:03,020
+was just a purely-- it
+was purely arbitrary.
+
+1339
+01:10:03,020 --> 01:10:06,530
+But still, it's useful.
+
+1340
+01:10:06,530 --> 01:10:11,270
+These things are among the
+most interesting enhancers
+
+1341
+01:10:11,270 --> 01:10:13,220
+that have been identified.
+
+1342
+01:10:13,220 --> 01:10:17,520
+So what about the-- oh yeah,
+so where did they come from?
+
+1343
+01:10:17,520 --> 01:10:22,940
+OK, so this is totally
+from left field.
+
+1344
+01:10:22,940 --> 01:10:26,390
+Bejerano was looking at some of
+these ultraconserved elements,
+
+1345
+01:10:26,390 --> 01:10:30,280
+probably just blasting them
+against different genomes
+
+1346
+01:10:30,280 --> 01:10:35,370
+as they came out, and noticed
+something very, very strange.
+
+1347
+01:10:35,370 --> 01:10:37,750
+And that was there
+had recently been
+
+1348
+01:10:37,750 --> 01:10:40,120
+some sequencing from coelacanth.
+
+1349
+01:10:40,120 --> 01:10:44,340
+So for those of you who
+aren't fish experts,
+
+1350
+01:10:44,340 --> 01:10:48,980
+this is a lobed fin fish,
+where they found fossils
+
+1351
+01:10:48,980 --> 01:10:51,160
+from dating back to
+400 million years.
+
+1352
+01:10:51,160 --> 01:10:53,930
+And they noticed that these
+fossils-- the morphology never
+
+1353
+01:10:53,930 --> 01:10:54,430
+changed.
+
+1354
+01:10:54,430 --> 01:10:57,769
+From 400 million, 300 million
+years, you could see this fish.
+
+1355
+01:10:57,769 --> 01:10:58,810
+It was exactly like this.
+
+1356
+01:10:58,810 --> 01:11:00,030
+And it has lobed fins.
+
+1357
+01:11:00,030 --> 01:11:01,613
+That was why they're
+interested in it.
+
+1358
+01:11:01,613 --> 01:11:03,750
+Because the fins-- they
+have a round structure.
+
+1359
+01:11:03,750 --> 01:11:05,750
+They look almost like
+limbs, like maybe this guy
+
+1360
+01:11:05,750 --> 01:11:08,041
+could have evolved into
+something that would eventually
+
+1361
+01:11:08,041 --> 01:11:10,374
+live on land.
+
+1362
+01:11:10,374 --> 01:11:12,040
+Anyway, but they
+thought it was extinct.
+
+1363
+01:11:12,040 --> 01:11:16,270
+And then somebody caught one.
+
+1364
+01:11:16,270 --> 01:11:20,150
+In the '70s, in the West Indian
+Ocean, from deep water fishing,
+
+1365
+01:11:20,150 --> 01:11:21,940
+they pulled one up,
+and it looked exactly
+
+1366
+01:11:21,940 --> 01:11:25,400
+like these fossils from
+400 million years before.
+
+1367
+01:11:25,400 --> 01:11:27,520
+And so then of course
+somebody took some DNA
+
+1368
+01:11:27,520 --> 01:11:28,840
+and did some sequencing.
+
+1369
+01:11:28,840 --> 01:11:34,090
+And what Bejerano noticed is
+that this one megabase or so
+
+1370
+01:11:34,090 --> 01:11:38,520
+coelacanth sequence had a
+very common repeat in it that
+
+1371
+01:11:38,520 --> 01:11:44,170
+was around 500 bases or so,
+that looked like a SINE element.
+
+1372
+01:11:44,170 --> 01:11:46,980
+SINE elements-- short,
+interspersed nuclear element,
+
+1373
+01:11:46,980 --> 01:11:50,437
+like Alus, if you're
+familiar with those, so
+
+1374
+01:11:50,437 --> 01:11:51,770
+some sort of repetitive element.
+
+1375
+01:11:51,770 --> 01:11:53,310
+And this repetitive
+element was very
+
+1376
+01:11:53,310 --> 01:11:59,220
+similar to these ultraconserved
+enhancers in mammals.
+
+1377
+01:11:59,220 --> 01:12:00,700
+So something that
+we normally think
+
+1378
+01:12:00,700 --> 01:12:03,770
+of as the least
+conserved of all,
+
+1379
+01:12:03,770 --> 01:12:06,540
+like a repetitive element
+that inserts itself randomly
+
+1380
+01:12:06,540 --> 01:12:09,280
+in the genome, had become--
+some of these elements
+
+1381
+01:12:09,280 --> 01:12:12,090
+had become among the
+most conserved sequences
+
+1382
+01:12:12,090 --> 01:12:15,120
+later in evolution.
+
+1383
+01:12:15,120 --> 01:12:22,240
+So how does that make
+any sense at all?
+
+1384
+01:12:22,240 --> 01:12:25,950
+Anyone have a theory on that?
+
+1385
+01:12:25,950 --> 01:12:27,845
+I can tell you how
+they interpreted it.
+
+1386
+01:12:31,650 --> 01:12:36,150
+So their theory-- here's some
+text from their-- anyway,
+
+1387
+01:12:36,150 --> 01:12:38,130
+you can look at the paper
+for the details here.
+
+1388
+01:12:38,130 --> 01:12:44,870
+But their theory is basically
+that once you have a repetitive
+
+1389
+01:12:44,870 --> 01:12:46,970
+element-- initially it's
+a parasitic element,
+
+1390
+01:12:46,970 --> 01:12:49,110
+inserts itself
+randomly in the genome,
+
+1391
+01:12:49,110 --> 01:12:51,340
+doesn't actually do anything.
+
+1392
+01:12:51,340 --> 01:12:54,790
+But once you have hundreds
+of them, by chance
+
+1393
+01:12:54,790 --> 01:12:57,580
+there will be perhaps
+a set of genes
+
+1394
+01:12:57,580 --> 01:13:00,400
+that have this
+element next to them,
+
+1395
+01:13:00,400 --> 01:13:03,220
+where you'd like to
+control them coordinately.
+
+1396
+01:13:03,220 --> 01:13:06,700
+You'd like to turn all those
+genes on or all those genes off
+
+1397
+01:13:06,700 --> 01:13:09,084
+in a particular circumstance--
+a stress response,
+
+1398
+01:13:09,084 --> 01:13:10,750
+during development,
+something like that.
+
+1399
+01:13:10,750 --> 01:13:14,470
+And so then it's relatively
+easy to evolve a transcription
+
+1400
+01:13:14,470 --> 01:13:16,360
+factor, for example,
+that will bind
+
+1401
+01:13:16,360 --> 01:13:18,280
+to some sequence
+in that element.
+
+1402
+01:13:18,280 --> 01:13:20,420
+And then it'll turn
+on all those genes.
+
+1403
+01:13:20,420 --> 01:13:22,256
+Of course, it'll turn
+out all the genes
+
+1404
+01:13:22,256 --> 01:13:23,630
+that have the
+elements near them.
+
+1405
+01:13:23,630 --> 01:13:25,190
+So it'll probably turn
+on some extra genes
+
+1406
+01:13:25,190 --> 01:13:26,030
+that you don't want.
+
+1407
+01:13:26,030 --> 01:13:30,490
+But you can then-- selection
+will then tune these elements.
+
+1408
+01:13:30,490 --> 01:13:37,450
+It gives you a quick way of
+generating a large-scale gene
+
+1409
+01:13:37,450 --> 01:13:38,489
+expression response.
+
+1410
+01:13:38,489 --> 01:13:40,655
+Because you've got so many
+of these things scattered
+
+1411
+01:13:40,655 --> 01:13:41,660
+across the genome.
+
+1412
+01:13:41,660 --> 01:13:45,660
+And so this-- that's as good
+as an explanation as we have,
+
+1413
+01:13:45,660 --> 01:13:49,560
+I would say, for what
+is going on here.
+
+1414
+01:13:49,560 --> 01:13:52,150
+And there's been some
+theories about this.
+
+1415
+01:13:52,150 --> 01:13:55,490
+And they point out
+that actually something
+
+1416
+01:13:55,490 --> 01:13:58,560
+like 50% of our genome actually
+comes from transposons,
+
+1417
+01:13:58,560 --> 01:14:01,080
+if you go back far enough.
+
+1418
+01:14:01,080 --> 01:14:03,260
+Some are recent,
+some are ancient.
+
+1419
+01:14:03,260 --> 01:14:06,200
+And that maybe a lot of the
+regulatory elements-- not just
+
+1420
+01:14:06,200 --> 01:14:08,280
+these ultraconserved
+enhancers, but others--
+
+1421
+01:14:08,280 --> 01:14:11,660
+may have evolved in this way.
+
+1422
+01:14:11,660 --> 01:14:14,480
+So basically you insert a bunch
+of random junk throughout.
+
+1423
+01:14:14,480 --> 01:14:17,740
+And then the fact that
+it's all identical,
+
+1424
+01:14:17,740 --> 01:14:20,600
+because it derived
+from a common source,
+
+1425
+01:14:20,600 --> 01:14:23,980
+you use-- that fact
+actually turns it
+
+1426
+01:14:23,980 --> 01:14:27,622
+into something that's useful,
+a useful regulatory element.
+
+1427
+01:14:27,622 --> 01:14:29,330
+All right, just wanted
+to throw that out.
+
+1428
+01:14:29,330 --> 01:14:31,970
+So what about the exonic
+ultraconserved elements?
+
+1429
+01:14:31,970 --> 01:14:32,830
+So here's one.
+
+1430
+01:14:32,830 --> 01:14:36,095
+This is a 600 18
+nucleotide region
+
+1431
+01:14:36,095 --> 01:14:38,220
+that's 10% identical between
+human, mouse, and rat.
+
+1432
+01:14:38,220 --> 01:14:40,790
+It's one of the
+longest in the genome.
+
+1433
+01:14:40,790 --> 01:14:41,790
+And where is it?
+
+1434
+01:14:41,790 --> 01:14:46,420
+It's in a splicing
+factor gene called SRp20.
+
+1435
+01:14:46,420 --> 01:14:51,750
+And it's actually not in
+the protein coding part.
+
+1436
+01:14:51,750 --> 01:14:56,720
+It's in a essentially non-coding
+exon of this splicing factor.
+
+1437
+01:14:56,720 --> 01:14:58,750
+So it's this yellow exon here.
+
+1438
+01:14:58,750 --> 01:15:01,460
+And what you'll notice is
+there's this little red thing
+
+1439
+01:15:01,460 --> 01:15:02,240
+here.
+
+1440
+01:15:02,240 --> 01:15:04,960
+That's a stop codon.
+
+1441
+01:15:04,960 --> 01:15:07,550
+So this gene is
+spliced-- produces
+
+1442
+01:15:07,550 --> 01:15:08,820
+two different isoforms.
+
+1443
+01:15:08,820 --> 01:15:10,780
+The full length is the
+blue, when you just
+
+1444
+01:15:10,780 --> 01:15:11,930
+use all the blue exons.
+
+1445
+01:15:11,930 --> 01:15:13,850
+But when you include
+this yellow exon,
+
+1446
+01:15:13,850 --> 01:15:16,280
+there's a premature
+termination codon that you hit.
+
+1447
+01:15:16,280 --> 01:15:18,300
+So you don't make
+full-length protein.
+
+1448
+01:15:18,300 --> 01:15:23,600
+Instead, that mRNA is
+degraded in a pathway called
+
+1449
+01:15:23,600 --> 01:15:26,590
+nonsense mediated mRNA decay.
+
+1450
+01:15:26,590 --> 01:15:28,470
+So the purpose of
+this exon appears
+
+1451
+01:15:28,470 --> 01:15:34,020
+to be so that this gene
+can regulate expression
+
+1452
+01:15:34,020 --> 01:15:36,480
+of the protein at the
+level of splicing.
+
+1453
+01:15:36,480 --> 01:15:39,500
+And others have shown that this
+protein, the protein product,
+
+1454
+01:15:39,500 --> 01:15:42,255
+actually binds to
+that exon and promotes
+
+1455
+01:15:42,255 --> 01:15:43,870
+the splicing of that exon.
+
+1456
+01:15:43,870 --> 01:15:47,410
+So it's basically a form of
+negative auto regulation.
+
+1457
+01:15:47,410 --> 01:15:50,220
+The gene-- when the
+protein gets high,
+
+1458
+01:15:50,220 --> 01:15:54,210
+it comes back and shifts the
+splicing of its own transcripts
+
+1459
+01:15:54,210 --> 01:15:56,850
+to produce a non-functional
+form of the message
+
+1460
+01:15:56,850 --> 01:15:58,310
+and reduce the
+protein expression.
+
+1461
+01:15:58,310 --> 01:16:01,400
+So the theory is that this
+helps to keep this splicing
+
+1462
+01:16:01,400 --> 01:16:03,780
+factor at a constant
+level throughout time
+
+1463
+01:16:03,780 --> 01:16:05,527
+and between different
+cells, which
+
+1464
+01:16:05,527 --> 01:16:06,860
+might be important for splicing.
+
+1465
+01:16:06,860 --> 01:16:09,495
+But that's only a theory.
+
+1466
+01:16:09,495 --> 01:16:10,620
+It could be something else.
+
+1467
+01:16:10,620 --> 01:16:14,740
+And it does not explain why you
+need 600 nucleotides perfectly
+
+1468
+01:16:14,740 --> 01:16:16,940
+conserved in order to
+have this function.
+
+1469
+01:16:16,940 --> 01:16:19,680
+So I think these exonic
+ones are still fairly
+
+1470
+01:16:19,680 --> 01:16:22,020
+mysterious and
+worth investigating.
+
+1471
+01:16:26,160 --> 01:16:29,510
+A couple examples
+from microRNAs--
+
+1472
+01:16:29,510 --> 01:16:31,780
+you probably it's just a
+brief review on microRNAs.
+
+1473
+01:16:31,780 --> 01:16:35,410
+They are these small,
+non-coding RNAs,
+
+1474
+01:16:35,410 --> 01:16:38,180
+typically 20 to 22
+nucleotides or so.
+
+1475
+01:16:38,180 --> 01:16:40,730
+They have a characteristic
+RNA secondary structure
+
+1476
+01:16:40,730 --> 01:16:44,100
+in their precursor,
+often called miRNAs.
+
+1477
+01:16:44,100 --> 01:16:48,510
+And they're produced from
+primary transcripts typically,
+
+1478
+01:16:48,510 --> 01:16:50,450
+or introns, or
+protein coding genes,
+
+1479
+01:16:50,450 --> 01:16:53,090
+which are then processed in
+the nucleus of an enzyme called
+
+1480
+01:16:53,090 --> 01:16:57,940
+drosha into a hairpin
+structure, like so.
+
+1481
+01:16:57,940 --> 01:17:00,770
+And then that is exported
+to the cytoplasm,
+
+1482
+01:17:00,770 --> 01:17:03,340
+where it's further processed
+by an enzyme called dicer
+
+1483
+01:17:03,340 --> 01:17:07,990
+to produce the mature microRNA,
+which enters the risk complex,
+
+1484
+01:17:07,990 --> 01:17:12,090
+and which then pairs the
+microRNA with mRNA targets,
+
+1485
+01:17:12,090 --> 01:17:13,410
+usually in the 3'-UTR.
+
+1486
+01:17:13,410 --> 01:17:15,760
+And that either inhibits
+their translation
+
+1487
+01:17:15,760 --> 01:17:19,710
+or triggers the decay
+of those messages.
+
+1488
+01:17:19,710 --> 01:17:25,480
+So microRNAs can do-- they
+can be really important.
+
+1489
+01:17:25,480 --> 01:17:27,640
+Weird animation--
+but for example,
+
+1490
+01:17:27,640 --> 01:17:32,800
+this bantam microRNA in flies
+inhibits a proapoptotic gene
+
+1491
+01:17:32,800 --> 01:17:33,510
+hid.
+
+1492
+01:17:33,510 --> 01:17:38,690
+If you delete bantam,
+apoptosis goes crazy.
+
+1493
+01:17:38,690 --> 01:17:41,655
+And you can see this
+is a normal fly.
+
+1494
+01:17:41,655 --> 01:17:44,030
+There's a little fly in there
+with red eyes and so forth.
+
+1495
+01:17:44,030 --> 01:17:46,150
+In this guy there's
+just a sack of mush.
+
+1496
+01:17:46,150 --> 01:17:48,670
+All the cells-- most of
+the cells actually died.
+
+1497
+01:17:48,670 --> 01:17:51,270
+So microRNAs play
+important roles
+
+1498
+01:17:51,270 --> 01:17:53,540
+in developmental pathways.
+
+1499
+01:17:53,540 --> 01:17:58,400
+And so we wanted to figure out
+the rules for their targeting.
+
+1500
+01:17:58,400 --> 01:18:01,720
+And so this was an early
+study from Ben Lewis,
+
+1501
+01:18:01,720 --> 01:18:08,570
+where he looked for conserved
+instances of segments,
+
+1502
+01:18:08,570 --> 01:18:12,630
+short oligonucleotides,
+that match perfectly
+
+1503
+01:18:12,630 --> 01:18:15,560
+to different parts
+of the microRNA,
+
+1504
+01:18:15,560 --> 01:18:18,440
+using again these human,
+mouse, rat alignments,
+
+1505
+01:18:18,440 --> 01:18:21,090
+which were what was
+available at the time.
+
+1506
+01:18:21,090 --> 01:18:26,360
+And what he found was that if
+you took the set of microRNAs
+
+1507
+01:18:26,360 --> 01:18:31,940
+which were known, and you
+identified targets of these
+
+1508
+01:18:31,940 --> 01:18:35,000
+defined as 7-mers that
+are perfectly conserved
+
+1509
+01:18:35,000 --> 01:18:38,180
+in 3'-UTRs of
+mammalian messages,
+
+1510
+01:18:38,180 --> 01:18:41,260
+and then you looked at how many
+you got and you compared that
+
+1511
+01:18:41,260 --> 01:18:45,965
+to the number of targets
+of shuffled microRNA--
+
+1512
+01:18:45,965 --> 01:18:47,840
+so where you take the
+whole set of microRNAs,
+
+1513
+01:18:47,840 --> 01:18:50,540
+randomly permute their sequences
+so you generate random stuff,
+
+1514
+01:18:50,540 --> 01:18:52,900
+look at how many conserve
+targets they have--
+
+1515
+01:18:52,900 --> 01:18:56,760
+that there was a significant
+signal above background,
+
+1516
+01:18:56,760 --> 01:18:59,820
+in the sense of real
+conserved targets,
+
+1517
+01:18:59,820 --> 01:19:03,490
+specifically only for the
+5'-end of the microRNA.
+
+1518
+01:19:03,490 --> 01:19:07,700
+Especially, bases 2 to 8 of
+the microRNA gave a signal.
+
+1519
+01:19:07,700 --> 01:19:10,500
+And no other positions
+in the microRNA
+
+1520
+01:19:10,500 --> 01:19:13,060
+gave a significant
+signal above background.
+
+1521
+01:19:13,060 --> 01:19:17,683
+And so that led to the inference
+that the 5'-end of the microRNA
+
+1522
+01:19:17,683 --> 01:19:24,200
+is what matters,
+specifically these bases.
+
+1523
+01:19:24,200 --> 01:19:27,900
+And then later,
+alignments of actually
+
+1524
+01:19:27,900 --> 01:19:31,550
+paralogous microRNA
+genes, shown here--
+
+1525
+01:19:31,550 --> 01:19:34,380
+so these are
+different let-7 genes.
+
+1526
+01:19:34,380 --> 01:19:37,870
+You can actually see that
+the 5'-end of the microRNA,
+
+1527
+01:19:37,870 --> 01:19:39,800
+which the microRNA's
+shown here in blue--
+
+1528
+01:19:39,800 --> 01:19:40,870
+this is the fold-back.
+
+1529
+01:19:40,870 --> 01:19:45,850
+So you get conservation of the
+microRNA and of the other arm
+
+1530
+01:19:45,850 --> 01:19:48,350
+of the fold-back,
+which is complimentary.
+
+1531
+01:19:48,350 --> 01:19:51,280
+Little conservation of the loop,
+but the most conserved part
+
+1532
+01:19:51,280 --> 01:19:54,745
+of the microRNA is the very
+5'-end, consistent with that
+
+1533
+01:19:54,745 --> 01:19:55,245
+idea.
+
+1534
+01:19:58,815 --> 01:20:00,690
+Just one more example,
+because it's so cool--
+
+1535
+01:20:00,690 --> 01:20:05,470
+so this is the dscam
+gene in drosophila.
+
+1536
+01:20:05,470 --> 01:20:11,630
+And this gene has four different
+alternative spliced regions
+
+1537
+01:20:11,630 --> 01:20:14,560
+which are each spliced by
+mutually exclusive splicing.
+
+1538
+01:20:14,560 --> 01:20:17,200
+So there are actually
+12 copies of exon 4
+
+1539
+01:20:17,200 --> 01:20:19,670
+and 48 different
+copies of exon 6.
+
+1540
+01:20:19,670 --> 01:20:22,996
+And messages from this
+gene only ever contain
+
+1541
+01:20:22,996 --> 01:20:25,290
+one of those particular exons.
+
+1542
+01:20:25,290 --> 01:20:31,470
+And so Brent Graveley asked
+how does this gene get spliced
+
+1543
+01:20:31,470 --> 01:20:32,750
+in a mutually exclusive way?
+
+1544
+01:20:32,750 --> 01:20:36,310
+How do you only choose one of
+those 48 different versions
+
+1545
+01:20:36,310 --> 01:20:37,020
+of exon 6?
+
+1546
+01:20:37,020 --> 01:20:44,500
+And so what he did was did some
+sequencing from various fly
+
+1547
+01:20:44,500 --> 01:20:48,935
+and other insect species of
+this locus, did some alignments.
+
+1548
+01:20:48,935 --> 01:20:53,830
+And he noticed that there was
+this very conserved sequence
+
+1549
+01:20:53,830 --> 01:20:58,630
+just stream of exon 5, right
+upstream of this cluster.
+
+1550
+01:20:58,630 --> 01:21:01,130
+And then, looking
+more carefully,
+
+1551
+01:21:01,130 --> 01:21:06,000
+he saw that there is another
+sequence, just immediately
+
+1552
+01:21:06,000 --> 01:21:07,950
+upstream of each of
+the alternative exons,
+
+1553
+01:21:07,950 --> 01:21:11,860
+that was very similar
+between all those exons,
+
+1554
+01:21:11,860 --> 01:21:15,420
+and also conserved
+across the insects.
+
+1555
+01:21:15,420 --> 01:21:17,950
+And then he started
+at these for a while,
+
+1556
+01:21:17,950 --> 01:21:21,510
+and recognized that
+actually this sequence up
+
+1557
+01:21:21,510 --> 01:21:25,980
+at the 5'-end is-- its consensus
+is perfectly complimentary
+
+1558
+01:21:25,980 --> 01:21:30,860
+to the sequence that's found
+upstream of all of the other
+
+1559
+01:21:30,860 --> 01:21:31,360
+exons.
+
+1560
+01:21:31,360 --> 01:21:33,560
+And so what that
+suggested, immediately,
+
+1561
+01:21:33,560 --> 01:21:37,940
+is that splicing
+requires the pairing
+
+1562
+01:21:37,940 --> 01:21:40,710
+of this sequence
+from exon 5 to one
+
+1563
+01:21:40,710 --> 01:21:42,140
+of those downstream sequences.
+
+1564
+01:21:42,140 --> 01:21:44,560
+And then you'll splice
+to the next exons that's
+
+1565
+01:21:44,560 --> 01:21:48,420
+immediately downstream and
+skip out all of the others.
+
+1566
+01:21:48,420 --> 01:21:51,677
+And that's been
+subsequently confirmed,
+
+1567
+01:21:51,677 --> 01:21:52,760
+that that's the mechanism.
+
+1568
+01:21:52,760 --> 01:21:56,124
+So this just shows you
+that to figure this out
+
+1569
+01:21:56,124 --> 01:21:58,540
+by molecular genetics would
+have been extremely difficult.
+
+1570
+01:21:58,540 --> 01:22:00,680
+But sometimes
+comparative genomics,
+
+1571
+01:22:00,680 --> 01:22:04,010
+when you ask the right question,
+you get a really clear--
+
+1572
+01:22:04,010 --> 01:22:08,550
+you can actually get mechanistic
+insights from sequences.
+
+1573
+01:22:08,550 --> 01:22:10,220
+So that's it.
+
+1574
+01:22:10,220 --> 01:22:14,750
+And I'm actually passing
+the baton over to David,
+
+1575
+01:22:14,750 --> 01:22:19,030
+who will be-- take
+over next week.

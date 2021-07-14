@@ -1,0 +1,4927 @@
+1
+00:00:00,060 --> 00:00:01,780
+The following
+content is provided
+
+2
+00:00:01,780 --> 00:00:04,019
+under a Creative
+Commons license.
+
+3
+00:00:04,019 --> 00:00:06,870
+Your support will help MIT
+OpenCourseWare continue
+
+4
+00:00:06,870 --> 00:00:10,730
+to offer high-quality
+educational resources for free.
+
+5
+00:00:10,730 --> 00:00:13,330
+To make a donation or
+view additional materials
+
+6
+00:00:13,330 --> 00:00:15,780
+from hundreds of
+MIT courses, visit
+
+7
+00:00:15,780 --> 00:00:26,370
+MIT OpenCourseWare
+at ocw.mit.edu
+
+8
+00:00:26,370 --> 00:00:27,980
+PROFESSOR: Thank you.
+
+9
+00:00:27,980 --> 00:00:29,700
+And please feel
+free to interrupt.
+
+10
+00:00:29,700 --> 00:00:33,370
+I'd just as soon run this as
+a discussion, if you'd like.
+
+11
+00:00:33,370 --> 00:00:34,664
+Is that permitted, do you know?
+
+12
+00:00:34,664 --> 00:00:35,580
+MODERATOR: Absolutely.
+
+13
+00:00:35,580 --> 00:00:38,210
+PROFESSOR: OK, so
+these are conflicts
+
+14
+00:00:38,210 --> 00:00:40,160
+of interests for
+those of you who care,
+
+15
+00:00:40,160 --> 00:00:46,650
+or you can get it in more detail
+here by going to this website.
+
+16
+00:00:46,650 --> 00:00:52,070
+And I thought I will talk
+about this topic of causality.
+
+17
+00:00:52,070 --> 00:00:54,330
+You've learned quite a
+bit already in this course
+
+18
+00:00:54,330 --> 00:01:01,120
+about tools for analyzing
+genomes from various aspects,
+
+19
+00:01:01,120 --> 00:01:03,180
+but what you do after
+you analyze it is you
+
+20
+00:01:03,180 --> 00:01:05,010
+want to test your hypotheses.
+
+21
+00:01:05,010 --> 00:01:11,340
+And this is a very richly
+enabling idea, in the sense
+
+22
+00:01:11,340 --> 00:01:13,600
+that you can go to very
+small cohort sizes,
+
+23
+00:01:13,600 --> 00:01:16,480
+as we'll see-- N of
+one cohort sizes--
+
+24
+00:01:16,480 --> 00:01:20,370
+and your false positives
+are less of a concern
+
+25
+00:01:20,370 --> 00:01:22,690
+if you have a high throughput
+way of testing them.
+
+26
+00:01:22,690 --> 00:01:24,150
+And so I think
+it's very important
+
+27
+00:01:24,150 --> 00:01:28,060
+to know the possibilities
+for testing causality.
+
+28
+00:01:28,060 --> 00:01:30,620
+And that gets us into
+engineering genomes--
+
+29
+00:01:30,620 --> 00:01:33,520
+and, in a particular, about
+computer-aided design.
+
+30
+00:01:33,520 --> 00:01:36,180
+So you've talked about
+computer-aided analysis;
+
+31
+00:01:36,180 --> 00:01:38,340
+now let's talk about
+computer-aided design
+
+32
+00:01:38,340 --> 00:01:43,020
+of genomes, both
+bacterial and human.
+
+33
+00:01:43,020 --> 00:01:45,770
+So I just want to
+illustrate the idea.
+
+34
+00:01:45,770 --> 00:01:50,060
+You might say, well, why would
+we want to design genomes?
+
+35
+00:01:50,060 --> 00:01:51,790
+You can test
+causality, typically,
+
+36
+00:01:51,790 --> 00:01:53,580
+by changing one base pair.
+
+37
+00:01:53,580 --> 00:01:56,270
+Why would you want to change
+more than one base pair?
+
+38
+00:01:56,270 --> 00:01:58,200
+If you have a SNP, that's great.
+
+39
+00:01:58,200 --> 00:02:00,840
+Well, sometimes you have
+multiple SNPs interacting
+
+40
+00:02:00,840 --> 00:02:05,740
+in multigenic-- and we'll
+get to humans in a moment.
+
+41
+00:02:05,740 --> 00:02:07,873
+But here's a radical
+example, something
+
+42
+00:02:07,873 --> 00:02:09,289
+from the extreme
+edge, where you'd
+
+43
+00:02:09,289 --> 00:02:11,850
+want to change almost every
+base pair in the genome--
+
+44
+00:02:11,850 --> 00:02:14,523
+not make a copy of a
+genome but actually design,
+
+45
+00:02:14,523 --> 00:02:19,660
+in an intelligent way--
+semi-intelligent--
+
+46
+00:02:19,660 --> 00:02:22,460
+combinatorial as
+well-- a genome that
+
+47
+00:02:22,460 --> 00:02:24,240
+has new functions,
+new properties.
+
+48
+00:02:24,240 --> 00:02:26,760
+And the four functions I
+submit for your consideration
+
+49
+00:02:26,760 --> 00:02:29,055
+here is that you might
+want to be genetically
+
+50
+00:02:29,055 --> 00:02:33,040
+and metabolically
+isolated for safety
+
+51
+00:02:33,040 --> 00:02:37,180
+reasons or public
+relations reasons or both.
+
+52
+00:02:37,180 --> 00:02:39,150
+You want to have new
+chemistry, new protein
+
+53
+00:02:39,150 --> 00:02:40,830
+chemistry, new amino acids.
+
+54
+00:02:40,830 --> 00:02:44,590
+And finally, you want to
+have multi-virus resistance.
+
+55
+00:02:44,590 --> 00:02:47,250
+This is probably the most
+powerful of the four,
+
+56
+00:02:47,250 --> 00:02:50,540
+where imagine that you have
+an organism-- whether it's
+
+57
+00:02:50,540 --> 00:02:53,940
+industrial, agricultural,
+or even human-- that
+
+58
+00:02:53,940 --> 00:02:58,010
+was resistant to all viruses,
+past and present-- even ones
+
+59
+00:02:58,010 --> 00:02:59,995
+you haven't analyzed.
+
+60
+00:02:59,995 --> 00:03:00,870
+So how do we do this?
+
+61
+00:03:00,870 --> 00:03:02,390
+How do we get new functionality?
+
+62
+00:03:02,390 --> 00:03:06,330
+How do we design a genome in
+such a way that doesn't break?
+
+63
+00:03:06,330 --> 00:03:09,390
+Because if you change
+the genome enough,
+
+64
+00:03:09,390 --> 00:03:10,819
+you get your comeuppance.
+
+65
+00:03:10,819 --> 00:03:13,110
+You learn you don't know as
+much as you think you know.
+
+66
+00:03:13,110 --> 00:03:16,330
+You have your beautiful computer
+simulations from your analysis,
+
+67
+00:03:16,330 --> 00:03:21,030
+and as soon as you test them,
+you start getting surprises.
+
+68
+00:03:21,030 --> 00:03:26,530
+So anyway, I'm going to focus
+on this process of designing
+
+69
+00:03:26,530 --> 00:03:29,360
+and building and then testing.
+
+70
+00:03:29,360 --> 00:03:30,860
+And then, so this
+part of the design
+
+71
+00:03:30,860 --> 00:03:32,276
+has to have an
+analytic component.
+
+72
+00:03:32,276 --> 00:03:35,160
+So we'll get back to your
+old friends in analytics.
+
+73
+00:03:35,160 --> 00:03:39,690
+So as I go down this list, maybe
+just show of hands of how many
+
+74
+00:03:39,690 --> 00:03:44,670
+have been exposed to these
+computational tools already.
+
+75
+00:03:44,670 --> 00:03:47,450
+So Bowtie, anybody?
+
+76
+00:03:47,450 --> 00:03:48,150
+OK, good.
+
+77
+00:03:48,150 --> 00:03:51,400
+See, you covered that, so
+I don't need to cover that.
+
+78
+00:03:51,400 --> 00:03:54,150
+Number two-- no?
+
+79
+00:03:54,150 --> 00:03:54,910
+Some?
+
+80
+00:03:54,910 --> 00:03:57,300
+SnpEff?
+
+81
+00:03:57,300 --> 00:03:59,410
+JBrowse-- SQL, you've
+all heard of SQL, right?
+
+82
+00:03:59,410 --> 00:04:01,455
+OK, good.
+
+83
+00:04:01,455 --> 00:04:02,940
+Let's see.
+
+84
+00:04:02,940 --> 00:04:05,200
+So the point is
+each of these things
+
+85
+00:04:05,200 --> 00:04:09,360
+is integrated into this system
+we call "Millstone," which
+
+86
+00:04:09,360 --> 00:04:12,130
+is all about design
+and analysis.
+
+87
+00:04:12,130 --> 00:04:14,630
+So it's this loop that goes
+around and around, as you'll
+
+88
+00:04:14,630 --> 00:04:17,440
+see in just a moment--
+actually, may have seen already
+
+89
+00:04:17,440 --> 00:04:19,209
+back here.
+
+90
+00:04:19,209 --> 00:04:20,760
+So we design it.
+
+91
+00:04:20,760 --> 00:04:21,260
+We build it.
+
+92
+00:04:21,260 --> 00:04:22,110
+We test it.
+
+93
+00:04:22,110 --> 00:04:22,930
+And we analyze it.
+
+94
+00:04:22,930 --> 00:04:28,080
+And the analysis--
+sometimes when you build it,
+
+95
+00:04:28,080 --> 00:04:29,540
+you build a large number.
+
+96
+00:04:29,540 --> 00:04:31,560
+You build a combinatorial set.
+
+97
+00:04:31,560 --> 00:04:35,530
+So this is something
+that's fairly unique
+
+98
+00:04:35,530 --> 00:04:37,550
+to biological
+engineering-- or even
+
+99
+00:04:37,550 --> 00:04:39,710
+to certain branches of
+biological engineering--
+
+100
+00:04:39,710 --> 00:04:43,720
+that you don't see every
+day in civil engineering
+
+101
+00:04:43,720 --> 00:04:45,340
+or aeronautics.
+
+102
+00:04:45,340 --> 00:04:49,970
+You don't build a
+trillion different 787s
+
+103
+00:04:49,970 --> 00:04:53,720
+and see which one
+works the best.
+
+104
+00:04:53,720 --> 00:04:54,840
+But you can in biology.
+
+105
+00:04:54,840 --> 00:04:56,507
+And I'll give you
+some examples of that.
+
+106
+00:04:56,507 --> 00:04:58,131
+And part of the reason
+we could do this
+
+107
+00:04:58,131 --> 00:05:00,170
+is just as there's
+next-generation sequencing,
+
+108
+00:05:00,170 --> 00:05:04,080
+which you've heard
+about in this course--
+
+109
+00:05:04,080 --> 00:05:07,430
+and we were also involved
+in next-generation synthesis
+
+110
+00:05:07,430 --> 00:05:11,040
+and next-generation inserting
+synthetic DNA into genomes.
+
+111
+00:05:11,040 --> 00:05:12,357
+And you'll see all about that.
+
+112
+00:05:12,357 --> 00:05:13,940
+There are four
+different ways of doing
+
+113
+00:05:13,940 --> 00:05:20,120
+next-generation
+synthesis, and it's not
+
+114
+00:05:20,120 --> 00:05:22,602
+important for this
+particular class.
+
+115
+00:05:22,602 --> 00:05:24,810
+And there are various ways
+of doing error correction.
+
+116
+00:05:24,810 --> 00:05:27,645
+And these are kind of analogous
+to the kind of error correction
+
+117
+00:05:27,645 --> 00:05:31,980
+that you have in electronics
+and computational systems,
+
+118
+00:05:31,980 --> 00:05:35,100
+but we won't stress
+that analogy too much.
+
+119
+00:05:35,100 --> 00:05:37,360
+Here's an example,
+just practically,
+
+120
+00:05:37,360 --> 00:05:40,460
+what you get when you build
+these oligonucleotides
+
+121
+00:05:40,460 --> 00:05:41,430
+on chips.
+
+122
+00:05:41,430 --> 00:05:45,520
+You might get oligos up
+to 300 nucleotides long.
+
+123
+00:05:45,520 --> 00:05:49,660
+As they get longer, they tend to
+accumulate errors a little bit
+
+124
+00:05:49,660 --> 00:05:52,570
+more towards the end.
+
+125
+00:05:52,570 --> 00:05:55,360
+And so you can see that with
+the length, the number of errors
+
+126
+00:05:55,360 --> 00:06:01,310
+goes up from 1 in 1,300
+raw error rate to 1
+
+127
+00:06:01,310 --> 00:06:04,450
+in 250 raw error rate.
+
+128
+00:06:04,450 --> 00:06:08,350
+And then we can get rid
+of some of those errors
+
+129
+00:06:08,350 --> 00:06:11,650
+with a enzymatic system called
+ErASE-- it doesn't really
+
+130
+00:06:11,650 --> 00:06:12,800
+matter in this case.
+
+131
+00:06:12,800 --> 00:06:14,942
+We can get to 1 in 6,000
+without sequencing.
+
+132
+00:06:14,942 --> 00:06:16,400
+And then with
+sequencing, if you're
+
+133
+00:06:16,400 --> 00:06:18,620
+willing to clone
+in sequence, you
+
+134
+00:06:18,620 --> 00:06:20,660
+can get error rates even lower.
+
+135
+00:06:20,660 --> 00:06:24,440
+And it's important to know
+that fundamental limitation.
+
+136
+00:06:24,440 --> 00:06:29,910
+You always need to think about
+background error in computing
+
+137
+00:06:29,910 --> 00:06:32,770
+as well as synthesis.
+
+138
+00:06:32,770 --> 00:06:36,900
+You can now do combined
+synthesis and sequencing
+
+139
+00:06:36,900 --> 00:06:40,120
+very closely by making
+cis-regulatory elements, which
+
+140
+00:06:40,120 --> 00:06:47,290
+we did in this paper that's
+published-- Sri Kosuri and Dan
+
+141
+00:06:47,290 --> 00:06:50,250
+Goodman, in particular-- where
+you could basically synthesize
+
+142
+00:06:50,250 --> 00:06:54,940
+cis-regulatory elements in
+the genome or in a plasmid.
+
+143
+00:06:54,940 --> 00:06:57,680
+And then you could read out the
+RNA simply by RNA sequencing.
+
+144
+00:06:57,680 --> 00:06:59,896
+The number of times you see
+this bar code in the RNA
+
+145
+00:06:59,896 --> 00:07:02,270
+tells you how many times that
+particular construct, which
+
+146
+00:07:02,270 --> 00:07:05,910
+could be heavily
+engineered-- it isn't like
+
+147
+00:07:05,910 --> 00:07:09,801
+randomers-- you're making
+interesting, cis-regulatory
+
+148
+00:07:09,801 --> 00:07:10,300
+elements.
+
+149
+00:07:10,300 --> 00:07:11,590
+And you can make
+10s of thousands
+
+150
+00:07:11,590 --> 00:07:13,256
+of these-- millions
+of these constructs.
+
+151
+00:07:13,256 --> 00:07:14,380
+We did 10s of thousands.
+
+152
+00:07:17,060 --> 00:07:18,930
+Then you can measure
+protein levels
+
+153
+00:07:18,930 --> 00:07:20,180
+as a result of cis-regulatory.
+
+154
+00:07:20,180 --> 00:07:22,450
+So you can have
+promoter elements,
+
+155
+00:07:22,450 --> 00:07:25,750
+ribosome binding sites,
+and coding region mutations
+
+156
+00:07:25,750 --> 00:07:30,460
+that you think might
+influence RNA and protein.
+
+157
+00:07:30,460 --> 00:07:33,230
+And here we do
+proteins by having
+
+158
+00:07:33,230 --> 00:07:35,990
+two fluorescent proteins--
+a red and a green.
+
+159
+00:07:35,990 --> 00:07:38,950
+The red is the control, and it
+has a very tight distribution,
+
+160
+00:07:38,950 --> 00:07:41,000
+as you can see here.
+
+161
+00:07:41,000 --> 00:07:44,610
+And then the green is subject
+to this cis-regulatory mutations
+
+162
+00:07:44,610 --> 00:07:46,100
+made on chips.
+
+163
+00:07:46,100 --> 00:07:47,570
+And it has a big distribution.
+
+164
+00:07:47,570 --> 00:07:50,410
+And you divide it up in a
+fluorescence-activated sorter.
+
+165
+00:07:50,410 --> 00:07:51,650
+And you can read it out.
+
+166
+00:07:51,650 --> 00:07:55,590
+So here, every pixel on these
+two plots for RNA and protein
+
+167
+00:07:55,590 --> 00:07:58,050
+is a separate experiment.
+
+168
+00:07:58,050 --> 00:08:01,132
+And you can drill down and
+get some more information
+
+169
+00:08:01,132 --> 00:08:01,840
+on each of these.
+
+170
+00:08:01,840 --> 00:08:04,940
+But the basic idea is each
+of these was individually
+
+171
+00:08:04,940 --> 00:08:10,520
+synthesized on the chip and
+individually sequenced later
+
+172
+00:08:10,520 --> 00:08:11,950
+to determine.
+
+173
+00:08:11,950 --> 00:08:16,010
+And the bar codes can be
+read out of proportion
+
+174
+00:08:16,010 --> 00:08:18,302
+to the RNA and
+protein expression.
+
+175
+00:08:18,302 --> 00:08:20,510
+And here's an example of
+some surprises that come out
+
+176
+00:08:20,510 --> 00:08:27,480
+of such studies-- and we're not
+just doing this for our health.
+
+177
+00:08:27,480 --> 00:08:29,490
+So, for example, when
+we went into this,
+
+178
+00:08:29,490 --> 00:08:32,390
+it was well known that
+codon usage effect
+
+179
+00:08:32,390 --> 00:08:37,990
+was correlated with, and could
+even causally influence--
+
+180
+00:08:37,990 --> 00:08:39,990
+so here's an example
+of causality--
+
+181
+00:08:39,990 --> 00:08:42,390
+the expression of a protein.
+
+182
+00:08:42,390 --> 00:08:47,230
+If you have very commonly
+used codons, which typically
+
+183
+00:08:47,230 --> 00:08:49,920
+have high levels of the
+corresponding transfer
+
+184
+00:08:49,920 --> 00:08:54,180
+RNA in the cell, that the
+observation-- and it makes
+
+185
+00:08:54,180 --> 00:08:56,770
+sense-- is that
+those proteins would
+
+186
+00:08:56,770 --> 00:08:58,950
+be expressed at higher levels.
+
+187
+00:08:58,950 --> 00:09:00,810
+The thing that was
+new was we discovered
+
+188
+00:09:00,810 --> 00:09:04,370
+that at the end terminus, close
+to the cis-regulatory elements,
+
+189
+00:09:04,370 --> 00:09:05,040
+it flips.
+
+190
+00:09:05,040 --> 00:09:06,200
+It's the opposite.
+
+191
+00:09:06,200 --> 00:09:11,190
+There's almost no correlation
+with abundant codons,
+
+192
+00:09:11,190 --> 00:09:13,310
+and there's essentially
+a negative correlation
+
+193
+00:09:13,310 --> 00:09:18,900
+here with an r squared
+of 0.73, right here,
+
+194
+00:09:18,900 --> 00:09:27,740
+that shows that there's a
+higher expression with very
+
+195
+00:09:27,740 --> 00:09:28,890
+rare codons.
+
+196
+00:09:28,890 --> 00:09:30,500
+This was published in Science.
+
+197
+00:09:30,500 --> 00:09:35,340
+And so a lot of them
+tend to be AT-rich,
+
+198
+00:09:35,340 --> 00:09:38,580
+but we can separate
+out that component.
+
+199
+00:09:38,580 --> 00:09:40,840
+We can separate out things
+like ribosome binding
+
+200
+00:09:40,840 --> 00:09:43,690
+sites, which are AG-rich.
+
+201
+00:09:43,690 --> 00:09:48,540
+And there's just a general
+trend where rare codons help
+
+202
+00:09:48,540 --> 00:09:51,086
+expression if they're at
+the beginning of the gene.
+
+203
+00:09:51,086 --> 00:09:53,460
+And you could find that out
+from this kind of experiment.
+
+204
+00:09:57,190 --> 00:10:05,430
+So now we want, if we're going
+to build the genome that's
+
+205
+00:10:05,430 --> 00:10:08,360
+radically different-- let's say
+"radically different," here,
+
+206
+00:10:08,360 --> 00:10:14,000
+defined as 7 to 13 codons,
+chains, genome-wide freed up--
+
+207
+00:10:14,000 --> 00:10:19,310
+liberated-- meaning
+that we use the synonyms
+
+208
+00:10:19,310 --> 00:10:21,360
+in the genetic code.
+
+209
+00:10:24,480 --> 00:10:27,340
+So there's anywhere
+from one to six codons
+
+210
+00:10:27,340 --> 00:10:31,230
+for each amino acid-- three
+codons for stop codons.
+
+211
+00:10:31,230 --> 00:10:35,910
+We can use that synonymous
+substitution table
+
+212
+00:10:35,910 --> 00:10:37,590
+to move things
+around and completely
+
+213
+00:10:37,590 --> 00:10:39,755
+free up-- get rid of
+every instance of a UAG
+
+214
+00:10:39,755 --> 00:10:41,620
+and turn it into UAA.
+
+215
+00:10:41,620 --> 00:10:43,180
+That's the first example.
+
+216
+00:10:43,180 --> 00:10:46,300
+And we did that genome-wide
+and thereby derisked it.
+
+217
+00:10:46,300 --> 00:10:48,750
+We can now build on
+top of that, because we
+
+218
+00:10:48,750 --> 00:10:52,660
+can get genomes that grow well
+under a variety of conditions.
+
+219
+00:10:52,660 --> 00:10:54,640
+They're still
+genetically engineerable.
+
+220
+00:10:54,640 --> 00:10:57,710
+And everywhere
+there's a bar there,
+
+221
+00:10:57,710 --> 00:11:03,740
+this refers to a
+successful mutation
+
+222
+00:11:03,740 --> 00:11:05,310
+in the height of
+the bar as refers
+
+223
+00:11:05,310 --> 00:11:07,615
+to the efficiency of
+introducing those mutations.
+
+224
+00:11:10,470 --> 00:11:16,500
+Now we wanted to derisk another
+special category-- remember,
+
+225
+00:11:16,500 --> 00:11:20,710
+I said AGA and AGG are
+special, in that they're
+
+226
+00:11:20,710 --> 00:11:24,480
+the rarest coding codons.
+
+227
+00:11:24,480 --> 00:11:26,360
+So UGA is a stop codon.
+
+228
+00:11:26,360 --> 00:11:31,432
+AGA and AGG are
+arginine-encoding codons.
+
+229
+00:11:31,432 --> 00:11:32,390
+And they're the rarest.
+
+230
+00:11:32,390 --> 00:11:34,590
+And they also are
+complicated, because they
+
+231
+00:11:34,590 --> 00:11:36,660
+tend to represent
+Shine-Dalgarno sites, which
+
+232
+00:11:36,660 --> 00:11:40,765
+tend to be AG-rich regions
+that are involved in initiation
+
+233
+00:11:40,765 --> 00:11:42,960
+of protein synthesis.
+
+234
+00:11:42,960 --> 00:11:46,910
+Anyway, so there, the
+number was a little large
+
+235
+00:11:46,910 --> 00:11:50,480
+to do genome-wide, so we
+focused on essential genes.
+
+236
+00:11:50,480 --> 00:11:55,000
+And so you can computationally
+find all the essential genes
+
+237
+00:11:55,000 --> 00:12:01,770
+and design strategies for
+getting all the AGG and AGAs.
+
+238
+00:12:01,770 --> 00:12:04,925
+And then when you
+synthesize those genomes,
+
+239
+00:12:04,925 --> 00:12:07,050
+you can do them one at a
+time with a process called
+
+240
+00:12:07,050 --> 00:12:10,330
+[? MAIDS, ?] which we won't
+go into-- too experimental.
+
+241
+00:12:10,330 --> 00:12:12,130
+But basically, you
+can essentially just
+
+242
+00:12:12,130 --> 00:12:14,280
+go straight from
+oligos into the genome,
+
+243
+00:12:14,280 --> 00:12:16,834
+and you can do multiple
+ones simultaneously.
+
+244
+00:12:16,834 --> 00:12:18,625
+And you can see which
+ones are hard to make
+
+245
+00:12:18,625 --> 00:12:21,350
+and which ones are easy-- again,
+that's the sort of efficiency
+
+246
+00:12:21,350 --> 00:12:22,352
+number there.
+
+247
+00:12:22,352 --> 00:12:24,560
+You can see which ones-- if
+they're selected against.
+
+248
+00:12:24,560 --> 00:12:26,559
+And some of them were
+actually selected against.
+
+249
+00:12:26,559 --> 00:12:28,510
+We could not find them.
+
+250
+00:12:28,510 --> 00:12:30,550
+And so these are discoveries.
+
+251
+00:12:30,550 --> 00:12:35,480
+These are examples where
+synonymous is not synonymous.
+
+252
+00:12:35,480 --> 00:12:39,740
+It could mean that there's
+some other function, hidden,
+
+253
+00:12:39,740 --> 00:12:43,850
+layered on top of
+the synonyms-- might
+
+254
+00:12:43,850 --> 00:12:45,300
+be a ribosome binding site.
+
+255
+00:12:45,300 --> 00:12:49,810
+And so what we find is
+that we can try other,
+
+256
+00:12:49,810 --> 00:12:51,900
+let's say other arginine
+codons, rather than
+
+257
+00:12:51,900 --> 00:12:53,440
+the one we targeted.
+
+258
+00:12:53,440 --> 00:12:55,700
+Or you sometimes can
+try out other codons
+
+259
+00:12:55,700 --> 00:12:58,440
+that are not even synonymous.
+
+260
+00:12:58,440 --> 00:13:01,460
+And eventually we found
+every single one of them.
+
+261
+00:13:01,460 --> 00:13:03,510
+So there were about a dozen.
+
+262
+00:13:03,510 --> 00:13:05,220
+They were hard at
+first, and then
+
+263
+00:13:05,220 --> 00:13:08,930
+we eventually found an
+engineering workaround.
+
+264
+00:13:08,930 --> 00:13:12,400
+And that illustrates a
+number of interesting points.
+
+265
+00:13:12,400 --> 00:13:14,640
+So those were all successful
+in essential genes.
+
+266
+00:13:14,640 --> 00:13:17,432
+And it's our
+observation that if you
+
+267
+00:13:17,432 --> 00:13:18,890
+get it to work for
+essential genes,
+
+268
+00:13:18,890 --> 00:13:20,765
+getting it to work for
+the nonessential genes
+
+269
+00:13:20,765 --> 00:13:21,900
+is even easier.
+
+270
+00:13:21,900 --> 00:13:25,520
+So then we went on, and so
+that's one codon at a time,
+
+271
+00:13:25,520 --> 00:13:26,470
+two more at time.
+
+272
+00:13:26,470 --> 00:13:29,130
+So we've derisked three
+codons at this point.
+
+273
+00:13:29,130 --> 00:13:35,770
+So we went on to derisk all
+13 codons-- or 13 of the 64.
+
+274
+00:13:35,770 --> 00:13:39,280
+And we did that in even
+smaller set of genes.
+
+275
+00:13:39,280 --> 00:13:42,400
+So there are 290 essential
+genes in E. coli.
+
+276
+00:13:42,400 --> 00:13:44,610
+We did 42.
+
+277
+00:13:44,610 --> 00:13:50,200
+And in that case,
+there were 400.
+
+278
+00:13:50,200 --> 00:13:53,080
+And some examples of those--
+and every one of them
+
+279
+00:13:53,080 --> 00:13:54,490
+worked except for one.
+
+280
+00:13:54,490 --> 00:13:58,620
+And just like the arginine
+codons-- that one,
+
+281
+00:13:58,620 --> 00:14:00,210
+we tried a number
+of different codons,
+
+282
+00:14:00,210 --> 00:14:03,760
+and they worked-- including
+non-synonymous codons.
+
+283
+00:14:03,760 --> 00:14:08,970
+So in almost every case, you
+can find something that works.
+
+284
+00:14:08,970 --> 00:14:13,045
+And then we do biological
+assays that the four functions
+
+285
+00:14:13,045 --> 00:14:17,440
+that we felt should be
+changed were actually changed.
+
+286
+00:14:17,440 --> 00:14:22,290
+And here's two slides
+on the virus resistance.
+
+287
+00:14:22,290 --> 00:14:24,340
+You can do, in a
+variety of ways,
+
+288
+00:14:24,340 --> 00:14:29,800
+of determining how effective
+the virus resistance is.
+
+289
+00:14:29,800 --> 00:14:32,260
+Here you have about
+a factor of 1,000
+
+290
+00:14:32,260 --> 00:14:36,705
+for phage lambda,
+which has been mutated
+
+291
+00:14:36,705 --> 00:14:39,000
+to be highly
+virulent in E. coli.
+
+292
+00:14:39,000 --> 00:14:42,310
+This is a very pathogenic
+version of phage lambda.
+
+293
+00:14:42,310 --> 00:14:46,010
+This is T7, which is
+naturally quite lytic.
+
+294
+00:14:46,010 --> 00:14:50,717
+And you can show that this is
+resistant to two of the three
+
+295
+00:14:50,717 --> 00:14:52,200
+viruses that we tested.
+
+296
+00:14:52,200 --> 00:14:55,260
+And our hypothesis is
+if we change more codons
+
+297
+00:14:55,260 --> 00:14:57,620
+than just-- that
+was just one codon.
+
+298
+00:14:57,620 --> 00:15:02,090
+If we change seven or so,
+which is what we're doing now,
+
+299
+00:15:02,090 --> 00:15:03,840
+then it will be resistant
+to all viruses--
+
+300
+00:15:03,840 --> 00:15:05,730
+and very heavily
+resistant-- so resistant
+
+301
+00:15:05,730 --> 00:15:10,710
+that the population
+of viruses can't
+
+302
+00:15:10,710 --> 00:15:13,432
+mutate enough to
+become resistant.
+
+303
+00:15:13,432 --> 00:15:14,890
+So all of you should
+be questioning
+
+304
+00:15:14,890 --> 00:15:18,500
+that-- do I really believe that?
+
+305
+00:15:18,500 --> 00:15:21,200
+And we can talk about
+that in the discussion.
+
+306
+00:15:21,200 --> 00:15:23,680
+So now the other
+big functionality
+
+307
+00:15:23,680 --> 00:15:28,870
+is-- can we genetically,
+metabolically isolate these?
+
+308
+00:15:28,870 --> 00:15:32,650
+And to do this,
+we took advantage
+
+309
+00:15:32,650 --> 00:15:34,765
+of its new genetic code.
+
+310
+00:15:34,765 --> 00:15:37,690
+Not only we've
+freed up a codon, we
+
+311
+00:15:37,690 --> 00:15:41,862
+can now make that codon
+code for a new amino acid
+
+312
+00:15:41,862 --> 00:15:44,260
+by another set of biochemistry.
+
+313
+00:15:44,260 --> 00:15:47,720
+And here's some examples.
+
+314
+00:15:47,720 --> 00:15:51,030
+The amino acids look kind of
+like tyrosine or phenylalanine.
+
+315
+00:15:51,030 --> 00:15:54,510
+Here's one that's
+a biphenylalanine,
+
+316
+00:15:54,510 --> 00:15:57,330
+so it's got two benzene
+rings instead of one.
+
+317
+00:15:57,330 --> 00:15:58,470
+And so it's bulkier.
+
+318
+00:15:58,470 --> 00:16:00,650
+It's bulkier than any
+other amino acid, any
+
+319
+00:16:00,650 --> 00:16:01,910
+naturally occurring one.
+
+320
+00:16:01,910 --> 00:16:04,487
+And we wanted to ask-- can
+we make those essential genes
+
+321
+00:16:04,487 --> 00:16:06,070
+that we've been
+talking about-- can we
+
+322
+00:16:06,070 --> 00:16:09,080
+make them addicted
+to this amino acid?
+
+323
+00:16:09,080 --> 00:16:13,660
+And so we did by this
+computational protein design
+
+324
+00:16:13,660 --> 00:16:14,340
+strategy.
+
+325
+00:16:14,340 --> 00:16:18,840
+And the idea is we looked
+through every crystal structure
+
+326
+00:16:18,840 --> 00:16:24,120
+of every essential protein in E.
+coli-- there's 129 or something
+
+327
+00:16:24,120 --> 00:16:29,950
+like that, 120
+crystal structures--
+
+328
+00:16:29,950 --> 00:16:32,490
+and systematically
+ask, were there
+
+329
+00:16:32,490 --> 00:16:37,030
+any places where we could
+fit in a larger amino acid
+
+330
+00:16:37,030 --> 00:16:41,300
+by carving away
+adjacent amino acids,
+
+331
+00:16:41,300 --> 00:16:46,560
+such that when we then replace
+that larger one with a smaller
+
+332
+00:16:46,560 --> 00:16:50,270
+one-- still keeping its
+surroundings mutated,
+
+333
+00:16:50,270 --> 00:16:55,210
+so we could mutate it two,
+three, four, eight times--
+
+334
+00:16:55,210 --> 00:16:56,730
+however many amino
+acids nearby you
+
+335
+00:16:56,730 --> 00:16:59,090
+need to accommodate the
+big amino acid-- if it
+
+336
+00:16:59,090 --> 00:17:01,244
+no longer accommodates
+the small amino acids?
+
+337
+00:17:01,244 --> 00:17:02,660
+So you basically
+systematically go
+
+338
+00:17:02,660 --> 00:17:08,069
+through every amino acid
+for every crystal structure
+
+339
+00:17:08,069 --> 00:17:11,380
+and found a short list
+of a half dozen or so
+
+340
+00:17:11,380 --> 00:17:12,880
+that looked promising.
+
+341
+00:17:12,880 --> 00:17:16,420
+And so the idea is, you put
+in these 2-phenol groups--
+
+342
+00:17:16,420 --> 00:17:20,210
+and now, when you accommodate
+it and shrink it down,
+
+343
+00:17:20,210 --> 00:17:22,203
+it won't work.
+
+344
+00:17:22,203 --> 00:17:24,020
+OK, that's the basic idea.
+
+345
+00:17:27,400 --> 00:17:28,920
+And in context,
+we wanted to have
+
+346
+00:17:28,920 --> 00:17:30,394
+a really tough test for this.
+
+347
+00:17:30,394 --> 00:17:33,060
+We wanted to say, not only do we
+want it to be addicted to this,
+
+348
+00:17:33,060 --> 00:17:37,515
+but we don't want it to be able
+to escape-- either by mutation
+
+349
+00:17:37,515 --> 00:17:39,609
+and evolution, we don't
+want it to escape.
+
+350
+00:17:39,609 --> 00:17:41,150
+We don't want it to
+be able to escape
+
+351
+00:17:41,150 --> 00:17:48,960
+by eating it's fellow-- its
+classmates-- its other E. coli.
+
+352
+00:17:48,960 --> 00:17:52,050
+And so the test
+we do is we do a--
+
+353
+00:17:52,050 --> 00:17:55,100
+did you have a
+question, anybody?
+
+354
+00:17:55,100 --> 00:18:01,165
+We would lyse the cells--
+lyse cells of a wild-type E.
+
+355
+00:18:01,165 --> 00:18:05,500
+coli or certain
+mutant strains that
+
+356
+00:18:05,500 --> 00:18:07,410
+would produce large
+amounts of these.
+
+357
+00:18:07,410 --> 00:18:11,550
+And one of the more classic ways
+of making an organism that's
+
+358
+00:18:11,550 --> 00:18:13,990
+metabolically isolated so it
+can't survive in the wild--
+
+359
+00:18:13,990 --> 00:18:16,680
+it can only survive
+in an industrial plant
+
+360
+00:18:16,680 --> 00:18:19,020
+or in a laboratory--
+and we did this
+
+361
+00:18:19,020 --> 00:18:22,340
+with the classic ones,
+which people have avoided
+
+362
+00:18:22,340 --> 00:18:24,640
+using lysates, because it
+gives them bad news, which
+
+363
+00:18:24,640 --> 00:18:30,116
+is if you grow them on lysates,
+you get a lot of survivors.
+
+364
+00:18:30,116 --> 00:18:31,240
+These are the classic ones.
+
+365
+00:18:31,240 --> 00:18:37,870
+The deletions of these
+two genes makes them--
+
+366
+00:18:37,870 --> 00:18:39,760
+they will still grow.
+
+367
+00:18:39,760 --> 00:18:45,330
+But this is an example of one
+of our designed, nonstandard
+
+368
+00:18:45,330 --> 00:18:47,080
+amino acid strains.
+
+369
+00:18:47,080 --> 00:18:51,310
+And we get much
+lower escape rates.
+
+370
+00:18:51,310 --> 00:18:53,090
+And you'll say, even
+this low number here,
+
+371
+00:18:53,090 --> 00:18:54,680
+we want to get
+that down to zero.
+
+372
+00:18:54,680 --> 00:18:56,670
+And you'll see how
+we do that a moment.
+
+373
+00:18:56,670 --> 00:18:59,050
+This is Mike Mee as
+a graduate student.
+
+374
+00:18:59,050 --> 00:19:02,720
+So here's a close-up of-- this
+is not of the active site.
+
+375
+00:19:02,720 --> 00:19:05,030
+This just could be any
+place in the protein
+
+376
+00:19:05,030 --> 00:19:08,560
+where putting in a big amino
+acid is going to be disruptive.
+
+377
+00:19:08,560 --> 00:19:12,890
+So we change this
+leucine, innocent leucine,
+
+378
+00:19:12,890 --> 00:19:15,480
+that's packed all around
+with other amino acids.
+
+379
+00:19:15,480 --> 00:19:19,295
+Have you guys done protein
+design in this class at all?
+
+380
+00:19:19,295 --> 00:19:19,795
+Yeah?
+
+381
+00:19:19,795 --> 00:19:21,570
+OK, so you know what
+I'm talking about.
+
+382
+00:19:21,570 --> 00:19:22,910
+Rosetta, right?
+
+383
+00:19:22,910 --> 00:19:23,597
+OK.
+
+384
+00:19:23,597 --> 00:19:24,930
+So that's what we're using here.
+
+385
+00:19:24,930 --> 00:19:27,970
+We had to modify it to use
+nonstandard amino acids,
+
+386
+00:19:27,970 --> 00:19:31,180
+because normally people design
+proteins with 20 amino acids.
+
+387
+00:19:31,180 --> 00:19:34,705
+So we took this leucine--
+we made it into this bipA.
+
+388
+00:19:34,705 --> 00:19:36,330
+And you can see now,
+it's got all kinds
+
+389
+00:19:36,330 --> 00:19:38,390
+of clashes-- three
+initial clashes.
+
+390
+00:19:38,390 --> 00:19:40,120
+That's not good.
+
+391
+00:19:40,120 --> 00:19:44,270
+So we identify those clashes
+and we make them smaller--
+
+392
+00:19:44,270 --> 00:19:45,135
+no clashes anymore.
+
+393
+00:19:45,135 --> 00:19:46,510
+This is all done
+in the computer.
+
+394
+00:19:46,510 --> 00:19:47,670
+This is all theoretical.
+
+395
+00:19:47,670 --> 00:19:50,775
+Can you believe that?
+
+396
+00:19:50,775 --> 00:19:51,275
+We'll see.
+
+397
+00:19:53,850 --> 00:19:58,842
+So then-- this is putting
+back in a small amino acid.
+
+398
+00:19:58,842 --> 00:20:00,550
+These are some of the
+people that did it.
+
+399
+00:20:00,550 --> 00:20:05,010
+So Marc and Dan are
+post-docs in the lab,
+
+400
+00:20:05,010 --> 00:20:09,420
+and Ryo and Barry did
+the crystallography.
+
+401
+00:20:09,420 --> 00:20:10,880
+I'm a crystallographer
+by training,
+
+402
+00:20:10,880 --> 00:20:13,750
+but I'm a little
+out of practice.
+
+403
+00:20:13,750 --> 00:20:18,760
+So here is the design again, and
+there's the electron density.
+
+404
+00:20:18,760 --> 00:20:20,160
+So now you can
+believe it, right?
+
+405
+00:20:20,160 --> 00:20:21,784
+Because it's not just
+a computer model.
+
+406
+00:20:21,784 --> 00:20:24,900
+Well, it's still a computer
+model, but it's based on data.
+
+407
+00:20:24,900 --> 00:20:27,670
+And here's a comparison of
+the design with the X-ray
+
+408
+00:20:27,670 --> 00:20:29,640
+structure-- not too shabby.
+
+409
+00:20:29,640 --> 00:20:30,920
+OK.
+
+410
+00:20:30,920 --> 00:20:37,330
+But the question is, how well
+does this work in living cells?
+
+411
+00:20:37,330 --> 00:20:41,440
+So these are cells where we've
+gone-- changed the whole genome
+
+412
+00:20:41,440 --> 00:20:45,260
+so that now the stop
+codon, UAG, is free.
+
+413
+00:20:45,260 --> 00:20:50,340
+It's never used, which means
+we can delete the release
+
+414
+00:20:50,340 --> 00:20:52,970
+factor that normally recognizes
+a stop codon, which otherwise
+
+415
+00:20:52,970 --> 00:20:54,070
+would have been lethal.
+
+416
+00:20:54,070 --> 00:20:55,970
+And we can replace it
+with a transfer RNA
+
+417
+00:20:55,970 --> 00:21:00,220
+in a tRNA synthetase that brings
+in this [INAUDIBLE] amino acid.
+
+418
+00:21:00,220 --> 00:21:03,270
+And now-- this is the one
+we were just looking at,
+
+419
+00:21:03,270 --> 00:21:05,600
+the crystal structure
+in bold here.
+
+420
+00:21:05,600 --> 00:21:08,480
+And it has an escape
+frequency which
+
+421
+00:21:08,480 --> 00:21:14,240
+is higher-- we can
+crank up mutagenesis
+
+422
+00:21:14,240 --> 00:21:16,497
+by putting it in a
+mutS minus background.
+
+423
+00:21:16,497 --> 00:21:18,580
+Basically, one of the
+mismatched repair proteins--
+
+424
+00:21:18,580 --> 00:21:21,690
+we can knock it out, which
+increases, sort of accelerates,
+
+425
+00:21:21,690 --> 00:21:23,080
+evolution.
+
+426
+00:21:23,080 --> 00:21:27,230
+And it has a noticeable
+escape frequency.
+
+427
+00:21:27,230 --> 00:21:32,654
+So a more realistic scenario
+would be this mutS plus.
+
+428
+00:21:32,654 --> 00:21:34,570
+And we can get escape
+frequencies as low as 10
+
+429
+00:21:34,570 --> 00:21:35,540
+to the minus 8th.
+
+430
+00:21:35,540 --> 00:21:38,520
+These are for other mutations
+in that same protein.
+
+431
+00:21:38,520 --> 00:21:41,540
+And here are mutations
+in another protein.
+
+432
+00:21:41,540 --> 00:21:44,330
+So then we said, OK, but
+none of these are perfect.
+
+433
+00:21:44,330 --> 00:21:48,580
+We want something that's
+undetectable levels of escape.
+
+434
+00:21:48,580 --> 00:21:53,510
+So how would we, how
+would you, fix this?
+
+435
+00:21:53,510 --> 00:21:55,857
+Anybody?
+
+436
+00:21:55,857 --> 00:21:57,690
+I'm trying to encourage
+you to interrupt me,
+
+437
+00:21:57,690 --> 00:22:00,480
+so I'm interrupting you.
+
+438
+00:22:00,480 --> 00:22:01,980
+Anybody?
+
+439
+00:22:01,980 --> 00:22:08,000
+You've got these things
+that are escaping
+
+440
+00:22:08,000 --> 00:22:09,350
+at very low frequencies.
+
+441
+00:22:09,350 --> 00:22:10,590
+We should be proud of that.
+
+442
+00:22:10,590 --> 00:22:12,131
+But we want to
+drive it even more.
+
+443
+00:22:12,131 --> 00:22:13,630
+Rather than 10 to
+the minus 8th, you
+
+444
+00:22:13,630 --> 00:22:16,050
+want get down to 10 to minus
+10th, or something like that.
+
+445
+00:22:16,050 --> 00:22:16,760
+Suggestions?
+
+446
+00:22:16,760 --> 00:22:18,731
+AUDIENCE: So this is
+reversion of the mutations
+
+447
+00:22:18,731 --> 00:22:20,270
+of the [INAUDIBLE].
+
+448
+00:22:20,270 --> 00:22:25,440
+PROFESSOR: Well, so this means
+that you can take the bipA,
+
+449
+00:22:25,440 --> 00:22:27,935
+and you mutate the codon so it
+doesn't encode bipA anymore.
+
+450
+00:22:27,935 --> 00:22:29,060
+It encodes something else.
+
+451
+00:22:29,060 --> 00:22:32,710
+So it doesn't need
+bipA from the media.
+
+452
+00:22:32,710 --> 00:22:35,320
+And it puts in another amino
+acid, and it somehow survives.
+
+453
+00:22:35,320 --> 00:22:37,810
+So even though it's
+not a perfect fit,
+
+454
+00:22:37,810 --> 00:22:43,190
+it does well enough
+that the enzyme is made.
+
+455
+00:22:43,190 --> 00:22:46,070
+AUDIENCE: So then modified
+multiple essential genes?
+
+456
+00:22:46,070 --> 00:22:48,320
+PROFESSOR: Multiple
+essential genes-- wow.
+
+457
+00:22:48,320 --> 00:22:50,100
+Couldn't have said
+it better myself.
+
+458
+00:22:50,100 --> 00:22:52,200
+That's what we did.
+
+459
+00:22:52,200 --> 00:22:57,980
+So before we could choose
+which two we wanted
+
+460
+00:22:57,980 --> 00:23:01,080
+to use-- or three-- we wanted
+to know what the spectrum was.
+
+461
+00:23:01,080 --> 00:23:04,860
+So we forced in all 20
+standard amino acids
+
+462
+00:23:04,860 --> 00:23:06,750
+to replace the bipA.
+
+463
+00:23:06,750 --> 00:23:10,690
+So we said, let's mutate them
+intentionally-- synthetically--
+
+464
+00:23:10,690 --> 00:23:12,800
+and see what the spectrum is.
+
+465
+00:23:12,800 --> 00:23:15,620
+Now this is not going to be
+the natural spectrum, the sort
+
+466
+00:23:15,620 --> 00:23:20,000
+of mutagenic spectrum--
+this is our intentional--
+
+467
+00:23:20,000 --> 00:23:22,190
+so what we do is, we
+put in each of the 20.
+
+468
+00:23:22,190 --> 00:23:26,340
+And then we do a quick
+selection at 20 doublings.
+
+469
+00:23:26,340 --> 00:23:29,910
+It's a very fast evolution,
+not three billion years.
+
+470
+00:23:29,910 --> 00:23:32,470
+My students didn't want to wait.
+
+471
+00:23:32,470 --> 00:23:34,610
+So in 20 doublings,
+you get a spectrum
+
+472
+00:23:34,610 --> 00:23:37,147
+of which amino acids
+will substitute for bipA.
+
+473
+00:23:37,147 --> 00:23:38,730
+In an ideal world,
+none of them would.
+
+474
+00:23:38,730 --> 00:23:41,960
+But we forced them to, and
+these are the survivors.
+
+475
+00:23:41,960 --> 00:23:45,210
+And so the ones we've
+been talking about here,
+
+476
+00:23:45,210 --> 00:23:47,892
+W, tryptofan, is what
+we'll substitute for bipA.
+
+477
+00:23:47,892 --> 00:23:49,100
+And that kind of makes sense.
+
+478
+00:23:49,100 --> 00:23:51,390
+It's the biggest amino acid.
+
+479
+00:23:51,390 --> 00:23:53,335
+And that works for
+the [? tyrS ?],
+
+480
+00:23:53,335 --> 00:23:56,440
+which happens to be
+the tRNA sythetase.
+
+481
+00:23:56,440 --> 00:23:57,880
+And then we picked
+this other one
+
+482
+00:23:57,880 --> 00:24:06,130
+under this big red arrow
+for AdK-- adenosine kinase--
+
+483
+00:24:06,130 --> 00:24:08,540
+[INAUDIBLE] kinase--
+where there's
+
+484
+00:24:08,540 --> 00:24:10,950
+very little tryptophan
+that will work in that one.
+
+485
+00:24:10,950 --> 00:24:12,990
+But you get some
+escapees if you force
+
+486
+00:24:12,990 --> 00:24:16,140
+it to take these hydrophobic
+aliphatics like leucine.
+
+487
+00:24:18,710 --> 00:24:24,620
+So we made the double mutant of
+the-- we don't have it here--
+
+488
+00:24:24,620 --> 00:24:29,690
+but we've made the double
+mutant of the AdK and the tyrS,
+
+489
+00:24:29,690 --> 00:24:33,230
+and it's vanishingly small.
+
+490
+00:24:33,230 --> 00:24:34,230
+We're probably not done.
+
+491
+00:24:34,230 --> 00:24:35,400
+We'll keep doing this.
+
+492
+00:24:35,400 --> 00:24:40,249
+But this is the way that
+you do a radical recoding
+
+493
+00:24:40,249 --> 00:24:41,165
+and get new functions.
+
+494
+00:24:47,705 --> 00:24:48,830
+Any questions on that part?
+
+495
+00:24:48,830 --> 00:24:51,468
+We're going to move onto
+human genome engineering.
+
+496
+00:24:51,468 --> 00:24:51,968
+Yeah.
+
+497
+00:24:51,968 --> 00:24:54,129
+AUDIENCE: [INAUDIBLE]
+and recognize
+
+498
+00:24:54,129 --> 00:24:55,170
+the different amino acid.
+
+499
+00:24:55,170 --> 00:24:57,041
+PROFESSOR: Yeah, I skipped
+over that because that's
+
+500
+00:24:57,041 --> 00:24:58,957
+a little more on the
+biological, a little less
+
+501
+00:24:58,957 --> 00:25:00,840
+on the computational side.
+
+502
+00:25:00,840 --> 00:25:05,200
+So this was a work from Peter
+Shultz' lab and other groups.
+
+503
+00:25:05,200 --> 00:25:10,235
+And what you do is you take a
+synthetase that's orthogonal,
+
+504
+00:25:10,235 --> 00:25:12,360
+meaning it's from a completely
+different organism--
+
+505
+00:25:12,360 --> 00:25:14,920
+in this case,
+Methanococcus jannaschii,
+
+506
+00:25:14,920 --> 00:25:17,290
+which is a hyperthermalphile.
+
+507
+00:25:17,290 --> 00:25:21,620
+You take that synthetase--
+it's about as far as you
+
+508
+00:25:21,620 --> 00:25:24,235
+can get on the evolutionary
+phylogenetic tree-- you bring
+
+509
+00:25:24,235 --> 00:25:26,420
+it into E. coli.
+
+510
+00:25:26,420 --> 00:25:29,220
+You bring in its cognate, tRNA.
+
+511
+00:25:29,220 --> 00:25:30,870
+You change the
+anticodon so that it
+
+512
+00:25:30,870 --> 00:25:35,910
+will recognize UAG, which
+is not what typically
+
+513
+00:25:35,910 --> 00:25:39,976
+any tRNA normally recognizes.
+
+514
+00:25:39,976 --> 00:25:41,850
+And that only works with
+certain synthetases.
+
+515
+00:25:41,850 --> 00:25:46,780
+So only certain synthetases are
+blind to the anticodon-- mainly
+
+516
+00:25:46,780 --> 00:25:50,350
+serine and leucine
+synthetase is in E. coli.
+
+517
+00:25:50,350 --> 00:25:58,170
+Anyway, so you can now
+evolve the active site
+
+518
+00:25:58,170 --> 00:26:02,400
+that binds to the
+amino acid and the ATP.
+
+519
+00:26:02,400 --> 00:26:06,280
+So the amino acid and
+ATP cause the amino acid
+
+520
+00:26:06,280 --> 00:26:08,910
+to be [INAUDIBLE]
+the transfer RNA.
+
+521
+00:26:08,910 --> 00:26:10,730
+Anyway, you can
+change the active site
+
+522
+00:26:10,730 --> 00:26:12,540
+so that now it
+recognizes any amino acid
+
+523
+00:26:12,540 --> 00:26:14,649
+you want to a first
+approximation.
+
+524
+00:26:14,649 --> 00:26:16,440
+And you could do that
+through a combination
+
+525
+00:26:16,440 --> 00:26:22,600
+of intelligent design
+and random mutagenesis,
+
+526
+00:26:22,600 --> 00:26:25,750
+and there are selections
+for that as well.
+
+527
+00:26:25,750 --> 00:26:27,490
+So in general, if
+you're going to be
+
+528
+00:26:27,490 --> 00:26:30,690
+doing random or
+semirandom mutagenesis,
+
+529
+00:26:30,690 --> 00:26:32,322
+it's always great
+to have a selection
+
+530
+00:26:32,322 --> 00:26:34,030
+so there are selections
+for these things.
+
+531
+00:26:34,030 --> 00:26:36,840
+And there now are
+dozens of amino acids
+
+532
+00:26:36,840 --> 00:26:38,675
+that work fairly well
+in that scenario.
+
+533
+00:26:41,454 --> 00:26:43,120
+The main thing that
+was limiting was not
+
+534
+00:26:43,120 --> 00:26:45,610
+the synthetase-- I mean,
+you could get synthetases.
+
+535
+00:26:45,610 --> 00:26:47,910
+It's the tRNA then had to
+compete with the release
+
+536
+00:26:47,910 --> 00:26:51,060
+factor in the stop codon or had
+to compete with another tRNA
+
+537
+00:26:51,060 --> 00:26:53,240
+if you use a
+different anticodon.
+
+538
+00:26:53,240 --> 00:26:58,680
+And so freeing up this codon
+means there's no competition.
+
+539
+00:26:58,680 --> 00:27:03,120
+And now it works about as
+well as a regular amino acid.
+
+540
+00:27:03,120 --> 00:27:06,770
+But when it has to compete,
+it's at a great disadvantage.
+
+541
+00:27:06,770 --> 00:27:07,527
+Yeah.
+
+542
+00:27:07,527 --> 00:27:10,866
+AUDIENCE: Can you explain
+why changing the genetic code
+
+543
+00:27:10,866 --> 00:27:14,450
+will cause all virus resistance?
+
+544
+00:27:14,450 --> 00:27:16,450
+PROFESSOR: I planted that,
+but thank you anyway.
+
+545
+00:27:23,940 --> 00:27:26,320
+So there's a genetic code
+up there in circular form--
+
+546
+00:27:26,320 --> 00:27:29,200
+probably you're more used
+to seeing it in rectangular.
+
+547
+00:27:29,200 --> 00:27:37,900
+But imagine that we've now
+derisked this UAG stop codon
+
+548
+00:27:37,900 --> 00:27:43,580
+and these AGA and AGG codons
+here-- R for arginine.
+
+549
+00:27:43,580 --> 00:27:47,150
+And we're in the process
+of putting all those three
+
+550
+00:27:47,150 --> 00:27:51,309
+codons together with another
+four for serine and leucine.
+
+551
+00:27:51,309 --> 00:27:53,600
+And remember, I said serine
+and leucine is interesting,
+
+552
+00:27:53,600 --> 00:27:56,570
+because you could swap
+out the anticodon--
+
+553
+00:27:56,570 --> 00:27:58,310
+the synthetase doesn't care.
+
+554
+00:27:58,310 --> 00:28:02,750
+So that's why we picked those
+ones-- the three rarest ones,
+
+555
+00:28:02,750 --> 00:28:05,480
+plus four where you can
+swap out the anticodon.
+
+556
+00:28:05,480 --> 00:28:09,600
+So we could swap serine
+and leucine, for example.
+
+557
+00:28:09,600 --> 00:28:13,110
+So serine and leucine
+also are examples of tRNAs
+
+558
+00:28:13,110 --> 00:28:15,980
+that bind to six
+different codons.
+
+559
+00:28:15,980 --> 00:28:18,920
+So moving two of them
+is not a big deal.
+
+560
+00:28:18,920 --> 00:28:20,750
+So you still got four left.
+
+561
+00:28:20,750 --> 00:28:24,290
+So anyway, imagine that we
+remove them or swap them
+
+562
+00:28:24,290 --> 00:28:26,320
+and do weird stuff with them.
+
+563
+00:28:26,320 --> 00:28:27,770
+Every time the
+phage comes in, it
+
+564
+00:28:27,770 --> 00:28:31,370
+has lots of serines and
+leucines that are using these,
+
+565
+00:28:31,370 --> 00:28:32,950
+and arginines and stops.
+
+566
+00:28:32,950 --> 00:28:37,200
+And every time it wants
+to put in a leucine,
+
+567
+00:28:37,200 --> 00:28:40,580
+the ribosome puts in a serine.
+
+568
+00:28:40,580 --> 00:28:44,570
+Well, you can note, leucine
+and serine aren't that similar,
+
+569
+00:28:44,570 --> 00:28:47,400
+and that's going to cause a
+mess for every single protein it
+
+570
+00:28:47,400 --> 00:28:48,370
+makes.
+
+571
+00:28:48,370 --> 00:28:52,570
+And there might be dozens--
+maybe even hundreds
+
+572
+00:28:52,570 --> 00:28:55,700
+for big phage-- of those codons.
+
+573
+00:28:55,700 --> 00:28:59,700
+And so you can do the math--
+that the chance of mutating
+
+574
+00:28:59,700 --> 00:29:03,730
+one of those codons to something
+that will work is fairly high.
+
+575
+00:29:03,730 --> 00:29:08,180
+Two is squared, three
+to the n power, where
+
+576
+00:29:08,180 --> 00:29:10,100
+n is the number of
+changes it has to make.
+
+577
+00:29:10,100 --> 00:29:15,610
+And so if you make
+enough changes,
+
+578
+00:29:15,610 --> 00:29:18,100
+population sizes have to
+become astronomical in order
+
+579
+00:29:18,100 --> 00:29:23,710
+to contain one member that
+has changed all of its codons
+
+580
+00:29:23,710 --> 00:29:25,500
+the right way and
+hasn't changed a bunch
+
+581
+00:29:25,500 --> 00:29:27,726
+of codons that would be lethal.
+
+582
+00:29:27,726 --> 00:29:30,141
+AUDIENCE: So the ones
+that you chose, were they
+
+583
+00:29:30,141 --> 00:29:32,080
+the rarest of the codons--
+
+584
+00:29:32,080 --> 00:29:34,412
+PROFESSOR: So the first
+three were the rarest.
+
+585
+00:29:34,412 --> 00:29:35,870
+And part of that
+is because we felt
+
+586
+00:29:35,870 --> 00:29:38,665
+we would run into the
+most trouble there.
+
+587
+00:29:38,665 --> 00:29:40,260
+They may be rare for a reason.
+
+588
+00:29:40,260 --> 00:29:42,210
+And we wanted to
+discover those reasons,
+
+589
+00:29:42,210 --> 00:29:44,450
+both for biological
+curiosity, but also
+
+590
+00:29:44,450 --> 00:29:49,070
+to derisk the
+subsequent engineering.
+
+591
+00:29:49,070 --> 00:29:51,320
+But the leucine and
+serine ones are normal.
+
+592
+00:29:51,320 --> 00:29:53,930
+They're not that rare.
+
+593
+00:29:53,930 --> 00:29:54,960
+But we derisked them.
+
+594
+00:29:54,960 --> 00:29:59,780
+And remember that one
+where we did 13 codons
+
+595
+00:29:59,780 --> 00:30:01,200
+on 42 essential genes?
+
+596
+00:30:01,200 --> 00:30:03,910
+That's how we showed
+that, in general, it's
+
+597
+00:30:03,910 --> 00:30:06,114
+not toxic to individual genes.
+
+598
+00:30:06,114 --> 00:30:08,280
+But there are examples of
+things where you derisk it
+
+599
+00:30:08,280 --> 00:30:11,434
+on individual genes and you
+start making lots of them,
+
+600
+00:30:11,434 --> 00:30:13,350
+and then you get so-called
+"synthetic lethals"
+
+601
+00:30:13,350 --> 00:30:17,780
+where various pairs
+of genes conspire.
+
+602
+00:30:17,780 --> 00:30:21,780
+But so far, most of
+the deleterious nature
+
+603
+00:30:21,780 --> 00:30:24,360
+of the genomes-- where the
+genomes are a little bit slower
+
+604
+00:30:24,360 --> 00:30:27,020
+growing-- it's usually due
+to hitchhiker mutations,
+
+605
+00:30:27,020 --> 00:30:31,274
+not due to our design-- except
+in cases where it's completely
+
+606
+00:30:31,274 --> 00:30:32,690
+not working, in
+which case we have
+
+607
+00:30:32,690 --> 00:30:36,000
+to find an alternative codon.
+
+608
+00:30:36,000 --> 00:30:38,160
+But we have to deal
+with all these things--
+
+609
+00:30:38,160 --> 00:30:42,180
+design errors, biological
+discovery, and hitchhikers.
+
+610
+00:30:45,550 --> 00:30:46,130
+Yeah.
+
+611
+00:30:46,130 --> 00:30:47,505
+AUDIENCE: If you've
+already found
+
+612
+00:30:47,505 --> 00:30:50,549
+that multiple, simultaneous
+mutations is unlikely,
+
+613
+00:30:50,549 --> 00:30:52,927
+works, if they all had
+happened at the same time,
+
+614
+00:30:52,927 --> 00:30:54,843
+but if you have this
+engineered system, if you
+
+615
+00:30:54,843 --> 00:30:58,405
+have some way of migrating
+code to other-- you
+
+616
+00:30:58,405 --> 00:31:01,964
+could end up with the spreading
+of your non-secret codes
+
+617
+00:31:01,964 --> 00:31:04,250
+so that you can mutate
+things, one of them at a time,
+
+618
+00:31:04,250 --> 00:31:06,530
+and accumulate.
+
+619
+00:31:06,530 --> 00:31:09,170
+PROFESSOR: Well, so,
+first of all, a phage
+
+620
+00:31:09,170 --> 00:31:13,120
+doesn't carry
+along its own code.
+
+621
+00:31:13,120 --> 00:31:21,060
+If it did, we could preempt
+that by making lethal genes--
+
+622
+00:31:21,060 --> 00:31:24,540
+that if you bring in the
+tRNA that has the old code,
+
+623
+00:31:24,540 --> 00:31:27,040
+you activate the lethal gene.
+
+624
+00:31:27,040 --> 00:31:30,140
+But I think you were
+talking about more
+
+625
+00:31:30,140 --> 00:31:31,910
+a Darwinian
+perspective, where you
+
+626
+00:31:31,910 --> 00:31:34,990
+have incremental changes
+that allow you to slog along
+
+627
+00:31:34,990 --> 00:31:36,930
+well enough that you
+can get more mutations.
+
+628
+00:31:36,930 --> 00:31:40,780
+The problem is, this
+collection of mutations--
+
+629
+00:31:40,780 --> 00:31:43,340
+there is no growth.
+
+630
+00:31:43,340 --> 00:31:46,880
+Every protein is
+majorly messed up.
+
+631
+00:31:46,880 --> 00:31:50,940
+And so you're not talking about,
+say, antibiotic resistance,
+
+632
+00:31:50,940 --> 00:31:54,070
+where there will be kind of
+a gradient of antibiotics.
+
+633
+00:31:54,070 --> 00:31:55,820
+And somewhere on the
+edge of the gradient,
+
+634
+00:31:55,820 --> 00:31:59,320
+there will be just enough
+antibiotic to be selective,
+
+635
+00:31:59,320 --> 00:32:00,720
+but not enough to kill it.
+
+636
+00:32:00,720 --> 00:32:03,610
+This is something where, the
+instant they get into the cell,
+
+637
+00:32:03,610 --> 00:32:04,450
+there's no gradient.
+
+638
+00:32:04,450 --> 00:32:08,445
+They only have one code choice,
+and that code is something--
+
+639
+00:32:08,445 --> 00:32:10,820
+I think the difference between
+this and regular evolution
+
+640
+00:32:10,820 --> 00:32:14,680
+is, regular evolution-- if the
+bacteria tried this strategy,
+
+641
+00:32:14,680 --> 00:32:16,560
+it would be changing
+a little bit at a time
+
+642
+00:32:16,560 --> 00:32:18,380
+and the phage be
+keeping up with it.
+
+643
+00:32:18,380 --> 00:32:22,900
+But we took it offline, so to
+speak, did major code revision,
+
+644
+00:32:22,900 --> 00:32:24,190
+and moved it back.
+
+645
+00:32:24,190 --> 00:32:27,880
+And the phage was not watching.
+
+646
+00:32:27,880 --> 00:32:31,750
+And the phage isn't as
+intelligent as hackers are.
+
+647
+00:32:31,750 --> 00:32:35,564
+OK, any other questions?
+
+648
+00:32:35,564 --> 00:32:36,730
+We could stay on this topic.
+
+649
+00:32:36,730 --> 00:32:39,540
+We don't have to
+go on to humans.
+
+650
+00:32:39,540 --> 00:32:43,170
+OK, just for fun let's
+go on to human genome.
+
+651
+00:32:43,170 --> 00:32:46,860
+How many people here want
+to have their genome edited?
+
+652
+00:32:46,860 --> 00:32:47,805
+All right.
+
+653
+00:32:47,805 --> 00:32:50,180
+We'll ask in just a moment
+what you want to have changed.
+
+654
+00:32:53,170 --> 00:32:56,170
+So these are some of the
+tools that my colleagues and I
+
+655
+00:32:56,170 --> 00:32:57,350
+have worked on.
+
+656
+00:32:57,350 --> 00:32:59,480
+I've been doing this
+most of my career,
+
+657
+00:32:59,480 --> 00:33:01,860
+is coming up with new tools
+for engineering genomes
+
+658
+00:33:01,860 --> 00:33:03,430
+and sequencing genomes.
+
+659
+00:33:03,430 --> 00:33:05,620
+And the one I've been
+talking about so far
+
+660
+00:33:05,620 --> 00:33:09,795
+is down here at the bottom--
+is Rec A and Red Beta.
+
+661
+00:33:12,810 --> 00:33:17,760
+And the star for going
+forward is this Cas9 protein.
+
+662
+00:33:17,760 --> 00:33:22,410
+But we color-coded them here
+so that the recognition--
+
+663
+00:33:22,410 --> 00:33:24,100
+the critical thing
+about genome editing
+
+664
+00:33:24,100 --> 00:33:25,750
+is finding the needle
+in the haystack.
+
+665
+00:33:25,750 --> 00:33:27,124
+You want to change
+one base pair.
+
+666
+00:33:27,124 --> 00:33:29,510
+You don't want to
+change anything else.
+
+667
+00:33:29,510 --> 00:33:31,430
+And so something has
+to do that recognition.
+
+668
+00:33:31,430 --> 00:33:33,380
+That recognition
+can be Watson-Crick,
+
+669
+00:33:33,380 --> 00:33:36,670
+so you can have
+DNA-DNA-- searching
+
+670
+00:33:36,670 --> 00:33:40,070
+through the entire genome
+with DNA-DNA interactions,
+
+671
+00:33:40,070 --> 00:33:42,670
+or RNA-DNA interactions,
+or Watson-Crick,
+
+672
+00:33:42,670 --> 00:33:44,620
+or protein-DNA
+interactions, which
+
+673
+00:33:44,620 --> 00:33:46,370
+I'm sure you've learned
+about quite a bit.
+
+674
+00:33:46,370 --> 00:33:49,150
+And so we have examples of
+each of these-- two examples
+
+675
+00:33:49,150 --> 00:33:53,950
+are RNA, in blue; two examples
+of DNA, down in the box;
+
+676
+00:33:53,950 --> 00:33:55,470
+and then all the
+rest are protein,
+
+677
+00:33:55,470 --> 00:33:58,570
+where the protein-- the
+amino acid side chains
+
+678
+00:33:58,570 --> 00:34:00,790
+are recognizing, typically,
+some kind of alpha
+
+679
+00:34:00,790 --> 00:34:02,690
+helix in the major groove.
+
+680
+00:34:06,670 --> 00:34:11,010
+OK, so Cas9 was
+something that was
+
+681
+00:34:11,010 --> 00:34:13,750
+a nice case of computational
+biology, in my opinion.
+
+682
+00:34:13,750 --> 00:34:20,500
+It was found in 1987 in E.
+coli by Ishino and colleagues.
+
+683
+00:34:20,500 --> 00:34:23,730
+And it was essentially junk DNA.
+
+684
+00:34:23,730 --> 00:34:25,389
+It was not conserved.
+
+685
+00:34:25,389 --> 00:34:28,210
+It was repetitive,
+which were two
+
+686
+00:34:28,210 --> 00:34:30,690
+of the hallmarks
+of junk DNA, which
+
+687
+00:34:30,690 --> 00:34:32,371
+were very popular
+talk about in 1987.
+
+688
+00:34:32,371 --> 00:34:34,370
+They were trying to shut
+down the Genome Project
+
+689
+00:34:34,370 --> 00:34:37,310
+before it started, three
+years before it started--
+
+690
+00:34:37,310 --> 00:34:40,120
+before the NIH part of it
+started-- because they didn't
+
+691
+00:34:40,120 --> 00:34:44,120
+want to sequence anything
+in the human genome that
+
+692
+00:34:44,120 --> 00:34:46,124
+wasn't coding for proteins.
+
+693
+00:34:46,124 --> 00:34:46,624
+I'm serious.
+
+694
+00:34:50,239 --> 00:34:53,570
+So anyway, this languished
+as junk DNA for many years.
+
+695
+00:34:53,570 --> 00:34:57,820
+It eventually became
+clear to the cognoscenti
+
+696
+00:34:57,820 --> 00:35:01,560
+bacteriologists that it might
+be an interesting, adaptive
+
+697
+00:35:01,560 --> 00:35:03,920
+immunity-- kind of
+like antibodies--
+
+698
+00:35:03,920 --> 00:35:06,729
+rather than the fixed or
+native immunity, which
+
+699
+00:35:06,729 --> 00:35:07,770
+were restriction enzymes.
+
+700
+00:35:07,770 --> 00:35:10,542
+So this is kind of the adaptive
+version of restriction enzymes.
+
+701
+00:35:10,542 --> 00:35:12,000
+But it still didn't
+really catch on
+
+702
+00:35:12,000 --> 00:35:17,570
+until 2013, when a
+couple of my post-docs
+
+703
+00:35:17,570 --> 00:35:23,150
+and ex-post-doc and
+graduate students in January
+
+704
+00:35:23,150 --> 00:35:24,950
+got it to work in
+humans-- so moved it
+
+705
+00:35:24,950 --> 00:35:28,070
+from bacteria to humans--
+kind of a big jump.
+
+706
+00:35:28,070 --> 00:35:31,660
+And then it became
+surprisingly easy,
+
+707
+00:35:31,660 --> 00:35:34,950
+once it made that jump, to get
+it to work in every organism
+
+708
+00:35:34,950 --> 00:35:37,270
+that we and others have tried.
+
+709
+00:35:37,270 --> 00:35:39,830
+So now 20 different
+organisms, at least,
+
+710
+00:35:39,830 --> 00:35:43,750
+that this works in-- fungi,
+plants, and even elephants.
+
+711
+00:35:47,220 --> 00:35:48,850
+We haven't published
+the elephant yet,
+
+712
+00:35:48,850 --> 00:35:53,150
+but we have our
+reasons for doing that.
+
+713
+00:35:53,150 --> 00:35:56,200
+And the most frequently asked
+question-- and this, of course,
+
+714
+00:35:56,200 --> 00:36:00,320
+should appeal to computational
+biologists trying
+
+715
+00:36:00,320 --> 00:36:03,780
+to do design-- is,
+what about off-target?
+
+716
+00:36:03,780 --> 00:36:06,590
+And it turns out now there
+are many ways of dealing
+
+717
+00:36:06,590 --> 00:36:10,090
+with off-target-- so much
+so that I would be so bold--
+
+718
+00:36:10,090 --> 00:36:12,560
+and this is a
+slight speculation--
+
+719
+00:36:12,560 --> 00:36:14,680
+but I would say we're
+currently at the point
+
+720
+00:36:14,680 --> 00:36:18,410
+where it's almost not
+measurable, the off-target.
+
+721
+00:36:18,410 --> 00:36:20,540
+And these are the different
+ways you can do it.
+
+722
+00:36:20,540 --> 00:36:24,700
+So we started out,
+in our January 2013,
+
+723
+00:36:24,700 --> 00:36:26,780
+with theoretical, where
+you would basically
+
+724
+00:36:26,780 --> 00:36:29,980
+look for-- anybody in this
+room would know immediately
+
+725
+00:36:29,980 --> 00:36:33,490
+how to do this-- would look
+for potential off-targets that
+
+726
+00:36:33,490 --> 00:36:35,840
+are off by one or
+two nucleotides
+
+727
+00:36:35,840 --> 00:36:38,590
+and ban those from
+consideration.
+
+728
+00:36:38,590 --> 00:36:41,920
+And then you take a shorter
+list and do an empirical search,
+
+729
+00:36:41,920 --> 00:36:43,490
+because this is so inexpensive.
+
+730
+00:36:43,490 --> 00:36:49,070
+Basically, you
+have this guide RNA
+
+731
+00:36:49,070 --> 00:36:50,400
+which is making a triple helix.
+
+732
+00:36:50,400 --> 00:36:52,025
+It's binding the one
+strand of the DNA.
+
+733
+00:36:52,025 --> 00:36:53,608
+It's so easy to make
+those guide RNAs.
+
+734
+00:36:53,608 --> 00:36:55,440
+It's just 20 nucleotides
+you have to make.
+
+735
+00:36:55,440 --> 00:36:57,360
+You pop it into a vector
+where everything else
+
+736
+00:36:57,360 --> 00:36:58,460
+is taken care of.
+
+737
+00:36:58,460 --> 00:37:01,369
+It's so easy to do that that
+you can make a lot of them,
+
+738
+00:37:01,369 --> 00:37:02,660
+and you do an empirical search.
+
+739
+00:37:02,660 --> 00:37:04,430
+You find places that
+are particularly
+
+740
+00:37:04,430 --> 00:37:09,060
+hot for the right sites and very
+cold for the wrong off-targets.
+
+741
+00:37:09,060 --> 00:37:10,930
+So those are the
+first two methods.
+
+742
+00:37:10,930 --> 00:37:16,210
+Then paired nickases--
+they don't make
+
+743
+00:37:16,210 --> 00:37:17,890
+a double-strand
+break, which is what
+
+744
+00:37:17,890 --> 00:37:19,600
+it does out of the
+box from nature.
+
+745
+00:37:19,600 --> 00:37:21,020
+It makes a double-strand break.
+
+746
+00:37:21,020 --> 00:37:22,730
+You have it make a
+single-strand nick.
+
+747
+00:37:22,730 --> 00:37:25,190
+Then you require two of these
+to be coincident and near one
+
+748
+00:37:25,190 --> 00:37:25,690
+another.
+
+749
+00:37:25,690 --> 00:37:27,550
+It's like the concept of PCR.
+
+750
+00:37:27,550 --> 00:37:30,144
+You have to have two primers
+that are near one another.
+
+751
+00:37:30,144 --> 00:37:31,060
+So it's a coincidence.
+
+752
+00:37:31,060 --> 00:37:35,290
+So it's like a p squared--
+if the probability is
+
+753
+00:37:35,290 --> 00:37:41,182
+one is off by one or two
+or however many it takes,
+
+754
+00:37:41,182 --> 00:37:43,390
+the chances of getting two
+such sites near each other
+
+755
+00:37:43,390 --> 00:37:47,050
+is roughly p squared.
+
+756
+00:37:47,050 --> 00:37:48,970
+Truncated guide RNA
+is not something
+
+757
+00:37:48,970 --> 00:37:51,880
+that you would necessarily guess
+that, if you make the guide RNA
+
+758
+00:37:51,880 --> 00:37:53,660
+smaller, it's
+going to be better.
+
+759
+00:37:53,660 --> 00:37:55,160
+But there's obviously
+some optimum.
+
+760
+00:37:55,160 --> 00:38:00,790
+If you make it too long, then
+it can bind by any subset--
+
+761
+00:38:00,790 --> 00:38:03,390
+any kind of mismatched subset.
+
+762
+00:38:03,390 --> 00:38:08,750
+If you make it too short, then
+from informatics standpoint,
+
+763
+00:38:08,750 --> 00:38:11,380
+it doesn't have enough
+bits to recognize
+
+764
+00:38:11,380 --> 00:38:12,490
+a place in the genome.
+
+765
+00:38:12,490 --> 00:38:14,660
+So it turned out that
+the optimal length
+
+766
+00:38:14,660 --> 00:38:16,784
+was a little bit different
+from the natural length.
+
+767
+00:38:16,784 --> 00:38:18,100
+It was about two shorter.
+
+768
+00:38:18,100 --> 00:38:20,810
+And finally-- and
+this just came out.
+
+769
+00:38:20,810 --> 00:38:27,080
+And this is from Keith
+Joung and David Liu's lab,
+
+770
+00:38:27,080 --> 00:38:33,190
+where you get rid of the
+beautiful, double-strand break
+
+771
+00:38:33,190 --> 00:38:34,330
+capacity.
+
+772
+00:38:34,330 --> 00:38:36,490
+You can turn into
+a nickase, or you
+
+773
+00:38:36,490 --> 00:38:39,410
+can make it completely
+nonfunctinal as a nucleus
+
+774
+00:38:39,410 --> 00:38:41,260
+and then add nucleus
+domains back.
+
+775
+00:38:41,260 --> 00:38:43,567
+And you say, well, it
+seems kind of bizarre
+
+776
+00:38:43,567 --> 00:38:45,650
+that you're doing all that
+work-- that you get rid
+
+777
+00:38:45,650 --> 00:38:47,150
+of the nucleus and
+you add it back--
+
+778
+00:38:47,150 --> 00:38:51,030
+add in a different one, the
+FokI bacterial restriction
+
+779
+00:38:51,030 --> 00:38:52,080
+in the nucleus.
+
+780
+00:38:52,080 --> 00:38:55,561
+But it turns out this
+is the way that people
+
+781
+00:38:55,561 --> 00:38:57,560
+have taken other DNA-binding
+proteins-- the zinc
+
+782
+00:38:57,560 --> 00:38:59,890
+fingers and then
+the tau proteins.
+
+783
+00:38:59,890 --> 00:39:04,792
+And so it had to be tried,
+and it works extremely well.
+
+784
+00:39:04,792 --> 00:39:06,250
+And it's like the
+paired nickases--
+
+785
+00:39:06,250 --> 00:39:10,260
+you need two of these sites
+in order to get cleavage.
+
+786
+00:39:10,260 --> 00:39:11,040
+And stay tuned.
+
+787
+00:39:11,040 --> 00:39:13,240
+I'm sure there's more.
+
+788
+00:39:13,240 --> 00:39:16,690
+So I just want to close on
+this idea of causality again.
+
+789
+00:39:16,690 --> 00:39:17,510
+I opened on it.
+
+790
+00:39:17,510 --> 00:39:19,030
+I'll close on it.
+
+791
+00:39:19,030 --> 00:39:24,200
+Here's an example of a
+double null-- myostatin
+
+792
+00:39:24,200 --> 00:39:28,420
+double null, as the both
+maternal and paternal copies
+
+793
+00:39:28,420 --> 00:39:29,167
+are missing.
+
+794
+00:39:29,167 --> 00:39:31,000
+There are a lot of
+examples of double nulls.
+
+795
+00:39:31,000 --> 00:39:35,240
+We could talk about some later.
+
+796
+00:39:35,240 --> 00:39:36,460
+And they're often rare.
+
+797
+00:39:36,460 --> 00:39:38,454
+So at one point, there
+was only one person
+
+798
+00:39:38,454 --> 00:39:40,370
+in the world that was
+characterized with this.
+
+799
+00:39:40,370 --> 00:39:47,580
+And it's hard to do a
+large cohort study on this.
+
+800
+00:39:47,580 --> 00:39:49,150
+And they weren't really sick.
+
+801
+00:39:49,150 --> 00:39:54,570
+The phenotype-- this little
+baby had heavy musculature,
+
+802
+00:39:54,570 --> 00:39:58,490
+as if he was working out next
+to Arnold Schwarzenegger.
+
+803
+00:39:58,490 --> 00:40:03,050
+But he came out this way,
+and he stayed that way.
+
+804
+00:40:03,050 --> 00:40:04,472
+But it's striking.
+
+805
+00:40:04,472 --> 00:40:05,930
+You look at the
+genome and you say,
+
+806
+00:40:05,930 --> 00:40:08,940
+wow-- a double null and a
+highly conserved protein.
+
+807
+00:40:08,940 --> 00:40:10,634
+That's got to mean something.
+
+808
+00:40:10,634 --> 00:40:12,050
+And then you can
+have a hypothesis
+
+809
+00:40:12,050 --> 00:40:15,950
+of what it means based on what
+was known about that pathway.
+
+810
+00:40:15,950 --> 00:40:17,490
+And it coincides
+with the phenotype.
+
+811
+00:40:17,490 --> 00:40:18,990
+And so you have a
+strong hypothesis,
+
+812
+00:40:18,990 --> 00:40:20,490
+and you can test it in animals.
+
+813
+00:40:20,490 --> 00:40:23,490
+And so here, you
+don't normally test it
+
+814
+00:40:23,490 --> 00:40:24,920
+in three different
+animal species.
+
+815
+00:40:24,920 --> 00:40:30,040
+But this one, there happened to
+be either preexisting or easy
+
+816
+00:40:30,040 --> 00:40:33,190
+tests in cows, dogs, and mice.
+
+817
+00:40:36,750 --> 00:40:39,030
+So that's one thing you
+can do to get a causality.
+
+818
+00:40:39,030 --> 00:40:40,404
+And the other
+thing is, there are
+
+819
+00:40:40,404 --> 00:40:42,385
+cases where the animal
+models don't work.
+
+820
+00:40:42,385 --> 00:40:44,010
+Either you knew in
+advance they weren't
+
+821
+00:40:44,010 --> 00:40:47,860
+going to work because they
+don't have that brain structure.
+
+822
+00:40:47,860 --> 00:40:49,522
+There's nothing
+other than humans
+
+823
+00:40:49,522 --> 00:40:51,480
+that have a particular
+kind of brain structure,
+
+824
+00:40:51,480 --> 00:40:55,030
+so it's hard to make mutants,
+because you're already
+
+825
+00:40:55,030 --> 00:40:57,400
+a mutant.
+
+826
+00:40:57,400 --> 00:41:03,490
+And so another option is
+organs on chips or organoids,
+
+827
+00:41:03,490 --> 00:41:06,690
+because they're not really
+fully physiologically faithful.
+
+828
+00:41:06,690 --> 00:41:11,590
+And this, at least, is human,
+but just like animal models
+
+829
+00:41:11,590 --> 00:41:13,860
+can have artifacts,
+human organoids
+
+830
+00:41:13,860 --> 00:41:15,372
+can have artifacts as well.
+
+831
+00:41:15,372 --> 00:41:16,830
+Here's an example
+of something that
+
+832
+00:41:16,830 --> 00:41:21,490
+will be coming out in a few
+days that we did together
+
+833
+00:41:21,490 --> 00:41:25,780
+with Keith Parker's
+lab and Bill Pu's lab.
+
+834
+00:41:25,780 --> 00:41:28,250
+And I think this
+is a nice example
+
+835
+00:41:28,250 --> 00:41:30,870
+of where you can take a
+hypothesis, where one base here
+
+836
+00:41:30,870 --> 00:41:37,300
+is changed-- this G
+right here, is deleted--
+
+837
+00:41:37,300 --> 00:41:40,950
+and that's putatively what
+causes this cardiomyopathy that
+
+838
+00:41:40,950 --> 00:41:42,920
+affects mitochondrial function.
+
+839
+00:41:42,920 --> 00:41:47,260
+And you can mutate that
+using the CRISPR technology
+
+840
+00:41:47,260 --> 00:41:49,510
+I was talking about, where
+you use homologous remedies
+
+841
+00:41:49,510 --> 00:41:51,710
+to go in, find that
+one base, change it.
+
+842
+00:41:51,710 --> 00:41:53,850
+Or you can just make
+a mess near there.
+
+843
+00:41:53,850 --> 00:41:56,190
+So one control is
+to not change it,
+
+844
+00:41:56,190 --> 00:41:59,670
+and the other control is to put
+a little insertion, deletion
+
+845
+00:41:59,670 --> 00:42:01,020
+in there.
+
+846
+00:42:01,020 --> 00:42:04,250
+And of course that
+messes it up as well.
+
+847
+00:42:04,250 --> 00:42:11,390
+And so you've now constructed
+three isogenic strains.
+
+848
+00:42:11,390 --> 00:42:12,940
+These are actually my cells.
+
+849
+00:42:12,940 --> 00:42:17,480
+In the Personal Genome Project,
+we take volunteers like myself
+
+850
+00:42:17,480 --> 00:42:18,974
+and establish stem cell lines.
+
+851
+00:42:18,974 --> 00:42:20,390
+And then from the
+stem cell lines,
+
+852
+00:42:20,390 --> 00:42:23,620
+we can establish, in this
+case, very well-ordered
+
+853
+00:42:23,620 --> 00:42:26,680
+cardiac tissue we'll
+see in the next slide.
+
+854
+00:42:26,680 --> 00:42:31,860
+And that cardiac tissue, you
+can test for lipid biochemistry,
+
+855
+00:42:31,860 --> 00:42:35,990
+for other physiological
+parameters,
+
+856
+00:42:35,990 --> 00:42:39,160
+for the morphology and
+the contractility-- so
+
+857
+00:42:39,160 --> 00:42:43,609
+diastole and systole that you
+get in the cardiac muscle.
+
+858
+00:42:43,609 --> 00:42:45,650
+So you basically make
+something where you've only
+
+859
+00:42:45,650 --> 00:42:47,470
+changed one base
+pair in my genome,
+
+860
+00:42:47,470 --> 00:42:51,210
+and we've made, essentially,
+a version of me that's mutant.
+
+861
+00:42:51,210 --> 00:42:55,120
+Unfortunately, I don't think
+I had the picture of that.
+
+862
+00:42:55,120 --> 00:42:56,160
+I thought I did.
+
+863
+00:43:03,390 --> 00:43:04,480
+Oh, there it is.
+
+864
+00:43:07,070 --> 00:43:08,950
+So here's an
+example-- how you get
+
+865
+00:43:08,950 --> 00:43:11,790
+this beautiful, ribbon-like
+striated pattern
+
+866
+00:43:11,790 --> 00:43:14,620
+that you expect
+of cardiac muscle.
+
+867
+00:43:14,620 --> 00:43:17,540
+This is programmed from
+my fibroblast turned
+
+868
+00:43:17,540 --> 00:43:19,795
+into stem cells into muscle.
+
+869
+00:43:19,795 --> 00:43:21,670
+And then if you introduce
+the two mutations--
+
+870
+00:43:21,670 --> 00:43:25,120
+either the one that corresponds
+to a patient or one that's just
+
+871
+00:43:25,120 --> 00:43:28,920
+a mess-- you get a
+morphological mess.
+
+872
+00:43:28,920 --> 00:43:32,020
+And then you can restore those
+by putting in the messenger
+
+873
+00:43:32,020 --> 00:43:36,580
+RNA that will cover
+for the mutation.
+
+874
+00:43:36,580 --> 00:43:41,330
+So I'm going to open it up
+for questions at that point.
+
+875
+00:43:41,330 --> 00:43:45,576
+That's causality-- I think.
+
+876
+00:43:45,576 --> 00:43:46,075
+Questions?
+
+877
+00:43:48,870 --> 00:43:50,556
+While we're waiting,
+anybody wants
+
+878
+00:43:50,556 --> 00:43:51,930
+to volunteer what
+they would like
+
+879
+00:43:51,930 --> 00:43:54,860
+to change about themselves?
+
+880
+00:43:54,860 --> 00:43:56,970
+You can mention a
+specific base pair or kind
+
+881
+00:43:56,970 --> 00:44:02,122
+of a general idea of what
+you'd like to change,
+
+882
+00:44:02,122 --> 00:44:04,580
+whether you think there's any
+safety considerations that we
+
+883
+00:44:04,580 --> 00:44:05,720
+should keep in mind.
+
+884
+00:44:09,224 --> 00:44:10,890
+AUDIENCE: The problem's
+delivery, right?
+
+885
+00:44:10,890 --> 00:44:11,370
+That's the--
+
+886
+00:44:11,370 --> 00:44:11,825
+PROFESSOR: Delivery.
+
+887
+00:44:11,825 --> 00:44:12,757
+AUDIENCE: Yeah.
+
+888
+00:44:12,757 --> 00:44:14,190
+PROFESSOR: Yeah, fair enough.
+
+889
+00:44:14,190 --> 00:44:21,190
+So gene therapy had a crack.
+
+890
+00:44:21,190 --> 00:44:22,565
+People were a
+little overanxious,
+
+891
+00:44:22,565 --> 00:44:27,280
+a little overambitious
+about over a decade ago.
+
+892
+00:44:27,280 --> 00:44:34,000
+And a small number of
+patients died from cancers,
+
+893
+00:44:34,000 --> 00:44:36,000
+because there was
+random integration.
+
+894
+00:44:36,000 --> 00:44:37,902
+Rather than this precise
+genome manipulation
+
+895
+00:44:37,902 --> 00:44:39,360
+we're talking about
+here, there was
+
+896
+00:44:39,360 --> 00:44:41,370
+kind of random
+lentiviral integration
+
+897
+00:44:41,370 --> 00:44:43,580
+of extra copies of genes.
+
+898
+00:44:43,580 --> 00:44:45,150
+And if you land in
+the wrong place,
+
+899
+00:44:45,150 --> 00:44:48,500
+then your lentiviral
+or retroviral promoter
+
+900
+00:44:48,500 --> 00:44:51,920
+will go off into
+oncogenes, like LMO2.
+
+901
+00:44:51,920 --> 00:44:54,060
+So that delivery
+was viral delivery,
+
+902
+00:44:54,060 --> 00:44:55,990
+and it was random integration.
+
+903
+00:44:55,990 --> 00:44:57,710
+We now have delivery
+mechanisms that
+
+904
+00:44:57,710 --> 00:45:01,180
+are nonintegrative or
+integrative in a specific place
+
+905
+00:45:01,180 --> 00:45:05,642
+or, in this case, can make
+precise base pair changes.
+
+906
+00:45:05,642 --> 00:45:07,100
+So there's two
+levels of delivery--
+
+907
+00:45:07,100 --> 00:45:08,440
+one is to get it to
+the right tissue,
+
+908
+00:45:08,440 --> 00:45:10,580
+and the other is to get
+it to the right base pair.
+
+909
+00:45:10,580 --> 00:45:14,580
+I think both are
+semisolved problems.
+
+910
+00:45:14,580 --> 00:45:17,970
+So you can do ex vivo delivery.
+
+911
+00:45:17,970 --> 00:45:20,100
+So you can take T
+cells out of a body.
+
+912
+00:45:20,100 --> 00:45:23,370
+You can use a previous
+generation-- the zinc finger
+
+913
+00:45:23,370 --> 00:45:26,700
+nucleus-- to cleave both
+copies of the CCR5 gene.
+
+914
+00:45:26,700 --> 00:45:31,120
+And now people that
+had full-blown AIDS,
+
+915
+00:45:31,120 --> 00:45:33,220
+you put these T cells
+back in their body,
+
+916
+00:45:33,220 --> 00:45:35,800
+and then now they're
+AIDS resistant.
+
+917
+00:45:35,800 --> 00:45:38,990
+Those T cells that have
+both copies of the CCR5 gene
+
+918
+00:45:38,990 --> 00:45:46,810
+missing, which is the AIDS
+coreceptor, are now resistant.
+
+919
+00:45:46,810 --> 00:45:48,040
+So that's ex vivo.
+
+920
+00:45:48,040 --> 00:45:49,980
+That's one way to do it.
+
+921
+00:45:49,980 --> 00:45:51,970
+Delivery to the
+liver is quite easy.
+
+922
+00:45:51,970 --> 00:45:54,780
+You can do that with
+nonviral vectors,
+
+923
+00:45:54,780 --> 00:45:57,290
+and a [INAUDIBLE] virus is
+one that's very popular.
+
+924
+00:45:57,290 --> 00:45:59,970
+You can get it to go to
+almost every cell in the body,
+
+925
+00:45:59,970 --> 00:46:02,826
+either selectively or generally.
+
+926
+00:46:02,826 --> 00:46:05,075
+So you just want to make
+sure that once it goes there,
+
+927
+00:46:05,075 --> 00:46:08,626
+it doesn't cause any
+damage other than the base
+
+928
+00:46:08,626 --> 00:46:09,625
+pair you want to change.
+
+929
+00:46:12,930 --> 00:46:16,740
+So there are now 2,000
+gene therapy trials
+
+930
+00:46:16,740 --> 00:46:19,396
+in phase one, two, and three.
+
+931
+00:46:19,396 --> 00:46:21,520
+It's a big change
+from a decade ago,
+
+932
+00:46:21,520 --> 00:46:25,645
+where I think people had pretty
+much given up on gene therapy.
+
+933
+00:46:25,645 --> 00:46:27,520
+There's now 2,000
+clinical trials.
+
+934
+00:46:27,520 --> 00:46:31,920
+And one has emerged all
+the way out of phase three
+
+935
+00:46:31,920 --> 00:46:35,690
+into full approval in Europe.
+
+936
+00:46:35,690 --> 00:46:40,580
+Ironically, they now have
+genetically engineered humans
+
+937
+00:46:40,580 --> 00:46:43,950
+in a land where they don't eat
+genetically modified foods.
+
+938
+00:46:47,010 --> 00:46:50,550
+But I think they're
+better for it So far, it's
+
+939
+00:46:50,550 --> 00:46:52,910
+curing diseases.
+
+940
+00:46:52,910 --> 00:46:53,410
+Yeah.
+
+941
+00:46:53,410 --> 00:46:56,812
+AUDIENCE: For your
+noncanonical amino acids,
+
+942
+00:46:56,812 --> 00:46:59,890
+does this open up
+enzymatic reactions that
+
+943
+00:46:59,890 --> 00:47:02,158
+would be, say,
+impossible, do you think,
+
+944
+00:47:02,158 --> 00:47:07,020
+with if you add a new amino
+acid that can [INAUDIBLE]?
+
+945
+00:47:07,020 --> 00:47:10,270
+PROFESSOR: So I'll just repeat
+the question for our viewing
+
+946
+00:47:10,270 --> 00:47:12,820
+audience.
+
+947
+00:47:12,820 --> 00:47:16,480
+Do nonstandard amino acids open
+up new enzymatic reactions?
+
+948
+00:47:16,480 --> 00:47:20,160
+And there's already a couple
+of examples in the literature.
+
+949
+00:47:20,160 --> 00:47:23,352
+This was done prior to this
+wonderful strain, where
+
+950
+00:47:23,352 --> 00:47:24,310
+there's no competition.
+
+951
+00:47:24,310 --> 00:47:26,162
+It was done at low efficiency.
+
+952
+00:47:26,162 --> 00:47:28,370
+But putting in one amino
+acid at low efficiency-- you
+
+953
+00:47:28,370 --> 00:47:30,190
+could still get an enzyme.
+
+954
+00:47:30,190 --> 00:47:33,870
+So even if it's,
+like, 10% efficiency,
+
+955
+00:47:33,870 --> 00:47:36,350
+you produce 10 times as
+much enzyme, and it works.
+
+956
+00:47:36,350 --> 00:47:39,220
+So there were some
+redox-coumarin derivatives
+
+957
+00:47:39,220 --> 00:47:40,920
+of amino acids.
+
+958
+00:47:40,920 --> 00:47:43,420
+So coumarin-redox
+capabilities is not
+
+959
+00:47:43,420 --> 00:47:46,040
+present in any of the
+other amino acids.
+
+960
+00:47:46,040 --> 00:47:51,730
+And they took a protein that
+was very well studied-- where
+
+961
+00:47:51,730 --> 00:47:55,980
+they had by protein design,
+and by random mutagenesis,
+
+962
+00:47:55,980 --> 00:47:58,610
+and they threw the book
+at it-- and they could not
+
+963
+00:47:58,610 --> 00:48:03,220
+budge the activity beyond
+the apparently optimal,
+
+964
+00:48:03,220 --> 00:48:05,900
+naturally occurring activity.
+
+965
+00:48:05,900 --> 00:48:08,410
+They put in this amino
+acid, which was not randomly
+
+966
+00:48:08,410 --> 00:48:11,600
+chosen-- it was a redox-coumarin
+derivative-- they put it
+
+967
+00:48:11,600 --> 00:48:15,380
+in the active site.
+
+968
+00:48:15,380 --> 00:48:18,562
+I think they tried out a
+few different things that
+
+969
+00:48:18,562 --> 00:48:20,020
+made a small
+combinatorial library.
+
+970
+00:48:20,020 --> 00:48:23,370
+But the point is, they
+got a tenfold improvement
+
+971
+00:48:23,370 --> 00:48:25,740
+in the catalytic rate constants.
+
+972
+00:48:25,740 --> 00:48:27,170
+So that's an example.
+
+973
+00:48:27,170 --> 00:48:29,370
+Another example, which
+isn't really catalytic,
+
+974
+00:48:29,370 --> 00:48:33,400
+but it's very popular, is that
+you can put in polyethylene
+
+975
+00:48:33,400 --> 00:48:40,290
+glycol-modified amino
+acids wherever you want
+
+976
+00:48:40,290 --> 00:48:41,510
+rather than kind of randomly.
+
+977
+00:48:41,510 --> 00:48:42,760
+You can put it in precisely.
+
+978
+00:48:42,760 --> 00:48:47,480
+And this will greatly
+extend the serum half-life,
+
+979
+00:48:47,480 --> 00:48:51,910
+so that normal proteins like
+human growth hormone, which
+
+980
+00:48:51,910 --> 00:48:55,655
+is a approved pharmaceutical
+for certain uses--
+
+981
+00:48:55,655 --> 00:48:58,920
+not all the uses that you find
+on the internet, but other
+
+982
+00:48:58,920 --> 00:49:03,010
+uses-- but it turns over
+very quickly in the serum.
+
+983
+00:49:03,010 --> 00:49:05,540
+And so if you put a polyethylene
+glycol in the right place
+
+984
+00:49:05,540 --> 00:49:08,190
+on human growth hormone--
+or other human protein
+
+985
+00:49:08,190 --> 00:49:11,040
+pharmaceuticals--
+they last longer.
+
+986
+00:49:11,040 --> 00:49:14,580
+Those are two examples-- one
+of them definitely active site.
+
+987
+00:49:17,050 --> 00:49:17,550
+Yeah.
+
+988
+00:49:17,550 --> 00:49:19,258
+AUDIENCE: This is
+actually a small detail
+
+989
+00:49:19,258 --> 00:49:22,144
+from your [INAUDIBLE]
+study, where
+
+990
+00:49:22,144 --> 00:49:26,369
+you looked at the structure and
+mutated one of the amino acids
+
+991
+00:49:26,369 --> 00:49:28,348
+to this phenyl
+thing, and then you
+
+992
+00:49:28,348 --> 00:49:29,848
+changed a bunch of
+other amino acids
+
+993
+00:49:29,848 --> 00:49:31,836
+to compensate for that size.
+
+994
+00:49:31,836 --> 00:49:36,425
+So I noticed most of the changes
+were to either [INAUDIBLE],
+
+995
+00:49:36,425 --> 00:49:37,800
+but one of them
+was a tryptophan.
+
+996
+00:49:37,800 --> 00:49:39,241
+So why was that?
+
+997
+00:49:39,241 --> 00:49:40,615
+PROFESSOR: Let's
+go back to that,
+
+998
+00:49:40,615 --> 00:49:43,267
+and see if we can find that.
+
+999
+00:49:43,267 --> 00:49:44,758
+AUDIENCE: It was
+a previous slide.
+
+1000
+00:49:44,758 --> 00:49:45,752
+Yeah, this one.
+
+1001
+00:49:45,752 --> 00:49:50,730
+So it was amino acid 271.
+
+1002
+00:49:50,730 --> 00:49:51,580
+PROFESSOR: Yeah, OK.
+
+1003
+00:49:51,580 --> 00:49:54,666
+So in each of these lines--
+I didn't spend much time
+
+1004
+00:49:54,666 --> 00:49:56,040
+on this-- in each
+of these lines,
+
+1005
+00:49:56,040 --> 00:49:59,410
+there's one amino acid
+we've changed to bipA.
+
+1006
+00:49:59,410 --> 00:50:02,670
+So these three are
+all the same protein,
+
+1007
+00:50:02,670 --> 00:50:06,890
+and it's all the same
+mutation-- leucine 303 to bipA.
+
+1008
+00:50:06,890 --> 00:50:09,420
+And then all the other
+ones are compensating.
+
+1009
+00:50:09,420 --> 00:50:14,010
+And then here, you can see
+it's a different leucine
+
+1010
+00:50:14,010 --> 00:50:16,570
+and a different protein.
+
+1011
+00:50:16,570 --> 00:50:18,600
+They're all leucines--
+different proteins.
+
+1012
+00:50:18,600 --> 00:50:20,595
+Now what's your question about?
+
+1013
+00:50:20,595 --> 00:50:22,920
+AUDIENCE: My question
+was the compensating
+
+1014
+00:50:22,920 --> 00:50:25,710
+mutations are generally all
+the smaller amino acids, right?
+
+1015
+00:50:25,710 --> 00:50:26,623
+PROFESSOR: Oh, I see.
+
+1016
+00:50:26,623 --> 00:50:28,122
+So why phenylalanine
+and tryptophan?
+
+1017
+00:50:28,122 --> 00:50:29,358
+AUDIENCE: Yeah.
+
+1018
+00:50:29,358 --> 00:50:32,990
+PROFESSOR: Well, those
+are pretty close.
+
+1019
+00:50:32,990 --> 00:50:36,600
+So these are done by
+energy, not by eyeball.
+
+1020
+00:50:36,600 --> 00:50:40,130
+They're done all by
+COMP ROSETTA, where
+
+1021
+00:50:40,130 --> 00:50:43,990
+we combinatorially go
+through lots of side chains.
+
+1022
+00:50:43,990 --> 00:50:45,750
+So we combinatorially
+went through lots
+
+1023
+00:50:45,750 --> 00:50:49,650
+of proteins, lots of positions
+to substitute amino acid,
+
+1024
+00:50:49,650 --> 00:50:53,200
+then lots of accommodating
+mutations-- which
+
+1025
+00:50:53,200 --> 00:50:56,840
+is not necessarily the typical
+way you use this software.
+
+1026
+00:50:56,840 --> 00:50:59,410
+Anyway, that probably
+is some stacking
+
+1027
+00:50:59,410 --> 00:51:05,656
+of one of the two aromatic
+rings onto the tryptophan.
+
+1028
+00:51:05,656 --> 00:51:06,156
+Yeah.
+
+1029
+00:51:10,490 --> 00:51:12,360
+And we tried many combinations.
+
+1030
+00:51:12,360 --> 00:51:14,780
+No doubt, we tried
+the phenylalanine
+
+1031
+00:51:14,780 --> 00:51:16,750
+and the tryptophan in
+various combinations
+
+1032
+00:51:16,750 --> 00:51:18,410
+with the other ones, and
+the tryptophan empirically
+
+1033
+00:51:18,410 --> 00:51:19,010
+works better.
+
+1034
+00:51:22,310 --> 00:51:24,160
+MODERATOR: Are there
+any more questions?

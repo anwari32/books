@@ -1,0 +1,6827 @@
+1
+00:00:00,060 --> 00:00:01,780
+The following
+content is provided
+
+2
+00:00:01,780 --> 00:00:04,019
+under a Creative
+Commons license.
+
+3
+00:00:04,019 --> 00:00:06,870
+Your support will help MIT
+OpenCourseWare continue
+
+4
+00:00:06,870 --> 00:00:10,730
+to offer high quality
+educational resources for free.
+
+5
+00:00:10,730 --> 00:00:13,340
+To make a donation or
+view additional materials
+
+6
+00:00:13,340 --> 00:00:17,217
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:17,217 --> 00:00:17,842
+at ocw.mit.edu.
+
+8
+00:00:26,167 --> 00:00:29,715
+PROFESSOR: So everybody
+ready to rock and roll today?
+
+9
+00:00:29,715 --> 00:00:31,140
+Or at least roll?
+
+10
+00:00:31,140 --> 00:00:33,350
+OK, if not rock.
+
+11
+00:00:33,350 --> 00:00:36,100
+Welcome back to lecture 20.
+
+12
+00:00:36,100 --> 00:00:40,900
+On Thursday, we have a special
+guest appearance just for you
+
+13
+00:00:40,900 --> 00:00:42,260
+from Professor Ron Weiss.
+
+14
+00:00:42,260 --> 00:00:45,102
+He's going to be talking
+about synthetic biology.
+
+15
+00:00:45,102 --> 00:00:48,220
+You know, on Richard
+Feynman's blackboard,
+
+16
+00:00:48,220 --> 00:00:51,520
+when he died, was a little
+statement I've always
+
+17
+00:00:51,520 --> 00:00:55,340
+really enjoyed that was actually
+encased in a little chalk line.
+
+18
+00:00:55,340 --> 00:00:58,820
+And it said, "What I cannot
+create, I do not understand."
+
+19
+00:00:58,820 --> 00:01:01,220
+And so synthetic
+biology is one way
+
+20
+00:01:01,220 --> 00:01:04,027
+to approach questions in
+the biological sciences
+
+21
+00:01:04,027 --> 00:01:05,610
+by seeing what we
+can make-- you know,
+
+22
+00:01:05,610 --> 00:01:08,789
+whole organisms, new
+genomes, rewiring circuitry.
+
+23
+00:01:08,789 --> 00:01:11,330
+So I think you'll find it to be
+a very interesting discussion
+
+24
+00:01:11,330 --> 00:01:12,720
+on Thursday.
+
+25
+00:01:12,720 --> 00:01:16,170
+But first, before we talk
+about synthetic biology,
+
+26
+00:01:16,170 --> 00:01:19,300
+we have the very
+exciting discussion today
+
+27
+00:01:19,300 --> 00:01:22,150
+on human genetics, which of
+course concerns all of us.
+
+28
+00:01:22,150 --> 00:01:24,670
+And so we're going to
+have an exploration today.
+
+29
+00:01:24,670 --> 00:01:27,350
+And you know, as I
+prepared today's lecture,
+
+30
+00:01:27,350 --> 00:01:31,110
+I wanted to give you the latest
+and greatest research findings.
+
+31
+00:01:31,110 --> 00:01:33,910
+So we're going to talk today
+from fundamental techniques
+
+32
+00:01:33,910 --> 00:01:37,560
+to things that are very
+controversial that have caused
+
+33
+00:01:37,560 --> 00:01:40,300
+fistfights in bars, so
+I'm hopeful that you'll
+
+34
+00:01:40,300 --> 00:01:43,310
+be as engaged as the
+people drinking beer are.
+
+35
+00:01:43,310 --> 00:01:46,270
+So we'll be turning to that
+at the end of the lecture,
+
+36
+00:01:46,270 --> 00:01:51,810
+but first I wanted to tell you
+about the broad narrative arc
+
+37
+00:01:51,810 --> 00:01:54,230
+once again that we're going
+to be talking about today.
+
+38
+00:01:54,230 --> 00:01:56,510
+And we're going to
+be looking at how
+
+39
+00:01:56,510 --> 00:01:59,000
+to discover human variation.
+
+40
+00:01:59,000 --> 00:02:02,450
+We're all different, about
+1 based in every 1,000.
+
+41
+00:02:02,450 --> 00:02:06,920
+And there are two different
+broad approaches historically
+
+42
+00:02:06,920 --> 00:02:08,639
+people have used.
+
+43
+00:02:08,639 --> 00:02:10,816
+Microarrays for
+discovering variants,
+
+44
+00:02:10,816 --> 00:02:12,690
+and we'll talk about
+how those were designed.
+
+45
+00:02:12,690 --> 00:02:14,926
+And we'll talk about
+how to actually test
+
+46
+00:02:14,926 --> 00:02:16,550
+for the significance
+of human variation
+
+47
+00:02:16,550 --> 00:02:19,930
+with respect to a particular
+disease in a case and control
+
+48
+00:02:19,930 --> 00:02:20,890
+study.
+
+49
+00:02:20,890 --> 00:02:25,530
+And then we'll talk about how
+to use whole genome read data
+
+50
+00:02:25,530 --> 00:02:27,750
+to detect variation
+between humans
+
+51
+00:02:27,750 --> 00:02:29,610
+and some of the
+challenges in that,
+
+52
+00:02:29,610 --> 00:02:32,870
+because it does not
+make as many assumptions
+
+53
+00:02:32,870 --> 00:02:37,230
+as the microarray studies,
+and therefore is much, much
+
+54
+00:02:37,230 --> 00:02:39,220
+more complicated to process.
+
+55
+00:02:39,220 --> 00:02:41,930
+And so we're going to
+take a view into the best
+
+56
+00:02:41,930 --> 00:02:45,280
+practices of processing
+human read data
+
+57
+00:02:45,280 --> 00:02:48,000
+so you can understand what
+the state of the art is.
+
+58
+00:02:48,000 --> 00:02:51,450
+And then we're going to
+turn to a study showing
+
+59
+00:02:51,450 --> 00:02:54,090
+how we can bring together
+different threads we've
+
+60
+00:02:54,090 --> 00:02:57,170
+talked about in this subject.
+
+61
+00:02:57,170 --> 00:02:59,440
+In particular, we've
+talked about the idea
+
+62
+00:02:59,440 --> 00:03:04,090
+that we can use other genomic
+signals such as histone marks
+
+63
+00:03:04,090 --> 00:03:06,860
+to identify things like
+regulatory elements.
+
+64
+00:03:06,860 --> 00:03:10,470
+So we're going to talk about
+how we can take that lens
+
+65
+00:03:10,470 --> 00:03:12,610
+and focus it on the
+genome to discover
+
+66
+00:03:12,610 --> 00:03:17,770
+particular genomic variants that
+have been revealed to be very
+
+67
+00:03:17,770 --> 00:03:21,700
+important in a
+particular disease.
+
+68
+00:03:21,700 --> 00:03:24,500
+And finally, we'll
+talk about the idea
+
+69
+00:03:24,500 --> 00:03:26,900
+that what-- the beginning
+we're going to talk about today
+
+70
+00:03:26,900 --> 00:03:29,950
+is all about correlation.
+
+71
+00:03:29,950 --> 00:03:34,280
+And as all of you go forward
+in your scientific career,
+
+72
+00:03:34,280 --> 00:03:38,170
+I'm hopeful that you'll always
+be careful to not confuse
+
+73
+00:03:38,170 --> 00:03:42,630
+association or correlation
+with causation.
+
+74
+00:03:42,630 --> 00:03:44,424
+You're always respected
+when you clearly
+
+75
+00:03:44,424 --> 00:03:46,840
+articulate the difference when
+you're giving a talk saying
+
+76
+00:03:46,840 --> 00:03:49,670
+that this is correlated,
+but we don't necessarily
+
+77
+00:03:49,670 --> 00:03:54,490
+know it's causative until we do
+the right set of experiments.
+
+78
+00:03:54,490 --> 00:03:59,917
+OK, on that note, we'll turn
+to the computational approaches
+
+79
+00:03:59,917 --> 00:04:01,000
+we're going to talk about.
+
+80
+00:04:01,000 --> 00:04:03,920
+We'll talk about contingency
+tables and various ways
+
+81
+00:04:03,920 --> 00:04:07,210
+of thinking about
+them when we discuss
+
+82
+00:04:07,210 --> 00:04:11,710
+how to identify whether or not
+a particular SNP is associated
+
+83
+00:04:11,710 --> 00:04:16,500
+with a disease using
+various kinds of tests.
+
+84
+00:04:16,500 --> 00:04:18,269
+And then we talk
+about read data,
+
+85
+00:04:18,269 --> 00:04:21,170
+and we'll talk about
+likelihood based tests.
+
+86
+00:04:21,170 --> 00:04:23,830
+How to do things like
+take a population
+
+87
+00:04:23,830 --> 00:04:25,540
+of individuals and
+their read data
+
+88
+00:04:25,540 --> 00:04:27,900
+and estimate the
+genotypic frequencies
+
+89
+00:04:27,900 --> 00:04:30,410
+at a particular
+locus using that data
+
+90
+00:04:30,410 --> 00:04:33,660
+in toto using EM
+based techniques.
+
+91
+00:04:33,660 --> 00:04:34,670
+OK?
+
+92
+00:04:34,670 --> 00:04:36,740
+So let us begin then.
+
+93
+00:04:39,300 --> 00:04:41,300
+Some of the things we're
+not going to talk about
+
+94
+00:04:41,300 --> 00:04:45,470
+include non-random
+genotyping failure,
+
+95
+00:04:45,470 --> 00:04:48,410
+methods to correct for
+population stratification,
+
+96
+00:04:48,410 --> 00:04:51,880
+and structural variants
+and copy number variations.
+
+97
+00:04:51,880 --> 00:04:54,480
+Point three we'll
+just briefly touch on,
+
+98
+00:04:54,480 --> 00:04:57,910
+but fundamentally they're
+just embellishments
+
+99
+00:04:57,910 --> 00:05:00,360
+on the fundamental techniques
+we're talking about,
+
+100
+00:05:00,360 --> 00:05:06,170
+and so I didn't really want
+to confuse today's discussion.
+
+101
+00:05:06,170 --> 00:05:11,300
+Now a Mendelian
+disorder is a disorder
+
+102
+00:05:11,300 --> 00:05:17,250
+defined by a single gene,
+and therefore, they're
+
+103
+00:05:17,250 --> 00:05:19,930
+relatively easy to map.
+
+104
+00:05:19,930 --> 00:05:23,060
+And they also tend to
+be in low frequency
+
+105
+00:05:23,060 --> 00:05:26,220
+in the population because
+they're selected against,
+
+106
+00:05:26,220 --> 00:05:29,290
+especially the more severe
+Mendelian disorders.
+
+107
+00:05:29,290 --> 00:05:32,210
+And therefore, they correspond
+to very rare mutations
+
+108
+00:05:32,210 --> 00:05:35,100
+in the population.
+
+109
+00:05:35,100 --> 00:05:38,460
+By point of contrast, if you
+thought about the genetics
+
+110
+00:05:38,460 --> 00:05:40,802
+we discussed last
+time, if you think
+
+111
+00:05:40,802 --> 00:05:42,260
+about a trait that
+actually perhaps
+
+112
+00:05:42,260 --> 00:05:47,410
+is influenced by 200 genes and
+maybe that one of those genes
+
+113
+00:05:47,410 --> 00:05:51,140
+is not necessary or sufficient
+for a particular disease.
+
+114
+00:05:51,140 --> 00:05:54,340
+As a consequence, it could
+be a fairly common variant
+
+115
+00:05:54,340 --> 00:05:58,030
+and it's only if you're unlucky
+enough to get all the other 199
+
+116
+00:05:58,030 --> 00:06:01,720
+variants will you actually
+come down with that syndrome.
+
+117
+00:06:01,720 --> 00:06:05,380
+And therefore, you can see
+that the effect of variation
+
+118
+00:06:05,380 --> 00:06:08,210
+in the human genome
+is inversely related
+
+119
+00:06:08,210 --> 00:06:12,660
+to its frequency-- that
+fairly rare variants can have
+
+120
+00:06:12,660 --> 00:06:16,990
+very serious effects, whereas
+fairly common variants tend
+
+121
+00:06:16,990 --> 00:06:20,220
+to have fewer effects.
+
+122
+00:06:20,220 --> 00:06:23,360
+And in the first phase of
+mapping human variation,
+
+123
+00:06:23,360 --> 00:06:25,120
+people thought that
+common variants
+
+124
+00:06:25,120 --> 00:06:27,030
+were things that had
+an allelic frequency
+
+125
+00:06:27,030 --> 00:06:30,980
+in the population
+of 5% or greater.
+
+126
+00:06:30,980 --> 00:06:34,940
+And then to burrow down deeper,
+the 1000 Genomes Project
+
+127
+00:06:34,940 --> 00:06:38,220
+surveyed a collection of
+different populations.
+
+128
+00:06:38,220 --> 00:06:41,930
+And therefore, if you
+thought that a variant was
+
+129
+00:06:41,930 --> 00:06:43,800
+prevalent in the
+population at frequency
+
+130
+00:06:43,800 --> 00:06:46,840
+of 0.5%, how many people
+would have in the 1000 Genomes
+
+131
+00:06:46,840 --> 00:06:47,620
+Project roughly?
+
+132
+00:06:51,700 --> 00:06:55,140
+Just make sure among you
+we're phase-locked here.
+
+133
+00:06:55,140 --> 00:06:57,630
+0.5%, 1,000 people--
+
+134
+00:06:57,630 --> 00:06:58,130
+AUDIENCE: 5.
+
+135
+00:06:58,130 --> 00:06:59,100
+PROFESSOR: 5, great.
+
+136
+00:06:59,100 --> 00:07:00,070
+OK.
+
+137
+00:07:00,070 --> 00:07:01,930
+Good.
+
+138
+00:07:01,930 --> 00:07:04,530
+Now of course, these are three
+different populations or more,
+
+139
+00:07:04,530 --> 00:07:07,430
+and so it might be that,
+in fact, that variant's
+
+140
+00:07:07,430 --> 00:07:09,120
+only present in one
+of the population.
+
+141
+00:07:09,120 --> 00:07:10,661
+So it just might be
+one or two people
+
+142
+00:07:10,661 --> 00:07:13,170
+that actually have a
+particular variant.
+
+143
+00:07:13,170 --> 00:07:19,320
+So the idea is that the way that
+you design SNP chips to detect
+
+144
+00:07:19,320 --> 00:07:23,430
+single nucleotide polymorphisms,
+otherwise known as "SNPs,"
+
+145
+00:07:23,430 --> 00:07:26,110
+is that you do these
+population-based sequencing
+
+146
+00:07:26,110 --> 00:07:29,790
+studies and you
+design the array based
+
+147
+00:07:29,790 --> 00:07:34,880
+upon all of the common
+variants that you find, OK?
+
+148
+00:07:34,880 --> 00:07:37,300
+And therefore, the array
+gives you a direct readout
+
+149
+00:07:37,300 --> 00:07:38,790
+in terms of the
+variation, in terms
+
+150
+00:07:38,790 --> 00:07:40,920
+of all of these common variants.
+
+151
+00:07:40,920 --> 00:07:42,810
+That's where we'll start today.
+
+152
+00:07:42,810 --> 00:07:46,540
+And where we'll end today is
+sequencing based approaches,
+
+153
+00:07:46,540 --> 00:07:50,800
+which make no assumptions
+whatsoever and just all hell
+
+154
+00:07:50,800 --> 00:07:52,310
+breaks loose.
+
+155
+00:07:52,310 --> 00:07:54,640
+So you'll see what happens, OK?
+
+156
+00:07:54,640 --> 00:07:57,050
+But I wanted just to
+reinforce the idea
+
+157
+00:07:57,050 --> 00:08:00,970
+that there are different
+allelic frequencies of variants
+
+158
+00:08:00,970 --> 00:08:05,630
+and that as we get down to
+rarer and rarer alleles, right,
+
+159
+00:08:05,630 --> 00:08:07,670
+we have larger effects.
+
+160
+00:08:07,670 --> 00:08:09,300
+But these higher
+frequency alleles
+
+161
+00:08:09,300 --> 00:08:14,810
+could also have effects even
+though they're much smaller.
+
+162
+00:08:14,810 --> 00:08:19,490
+OK, so let's talk about
+how these variants arise
+
+163
+00:08:19,490 --> 00:08:24,730
+and what they mean in terms
+of a small little cartoon.
+
+164
+00:08:24,730 --> 00:08:28,040
+So long, long ago,
+in a world far,
+
+165
+00:08:28,040 --> 00:08:31,930
+far away, a mutation
+occurred where
+
+166
+00:08:31,930 --> 00:08:36,980
+a base G got mutated
+to a base A, OK?
+
+167
+00:08:36,980 --> 00:08:42,510
+And this was in the context of
+a population of individuals--
+
+168
+00:08:42,510 --> 00:08:45,809
+all happy, smiling individuals
+because they all actually
+
+169
+00:08:45,809 --> 00:08:46,725
+do not have a disease.
+
+170
+00:08:49,860 --> 00:08:52,360
+And our story goes,
+what happens is
+
+171
+00:08:52,360 --> 00:08:54,620
+that we had yet another
+generation of people who
+
+172
+00:08:54,620 --> 00:08:57,931
+are all happy, smiling because
+they do not have the disease.
+
+173
+00:08:57,931 --> 00:08:58,430
+Right?
+
+174
+00:09:01,340 --> 00:09:04,800
+Yes, I do tell
+stories at night, too.
+
+175
+00:09:04,800 --> 00:09:12,290
+And then another
+mutation occurred.
+
+176
+00:09:12,290 --> 00:09:15,660
+And that mutation caused
+some subset of those people
+
+177
+00:09:15,660 --> 00:09:18,730
+to get the mutation and for
+them to get the disease.
+
+178
+00:09:18,730 --> 00:09:23,700
+So the original mutation was
+not sufficient for people
+
+179
+00:09:23,700 --> 00:09:25,560
+to get this genetic disease.
+
+180
+00:09:25,560 --> 00:09:27,600
+It required a second
+mutation for them
+
+181
+00:09:27,600 --> 00:09:30,380
+to get the genetic disease, OK?
+
+182
+00:09:30,380 --> 00:09:33,093
+So we got at least two
+genes involved in it.
+
+183
+00:09:37,830 --> 00:09:39,710
+OK, the other thing
+that we know is
+
+184
+00:09:39,710 --> 00:09:42,870
+that, in this particular
+case, some of the people
+
+185
+00:09:42,870 --> 00:09:46,750
+have the disease that
+don't have this mutation.
+
+186
+00:09:46,750 --> 00:09:50,640
+And therefore, this
+mutation is not necessary.
+
+187
+00:09:50,640 --> 00:09:54,700
+It's neither necessary
+nor sufficient.
+
+188
+00:09:54,700 --> 00:10:00,790
+Still, it is a marker of a
+gene that increases risk.
+
+189
+00:10:00,790 --> 00:10:02,540
+And that's a
+fundamental idea, right,
+
+190
+00:10:02,540 --> 00:10:04,760
+that you can increase
+risk without being
+
+191
+00:10:04,760 --> 00:10:10,470
+necessary or sufficient to cause
+a particular genetic disorder.
+
+192
+00:10:10,470 --> 00:10:11,570
+OK?
+
+193
+00:10:11,570 --> 00:10:15,080
+And so you get this association
+then between genotype
+
+194
+00:10:15,080 --> 00:10:16,580
+and phenotype, and
+that's what we're
+
+195
+00:10:16,580 --> 00:10:18,220
+going to go looking
+for right now.
+
+196
+00:10:18,220 --> 00:10:19,340
+We're on the hunt.
+
+197
+00:10:19,340 --> 00:10:23,360
+We're going to go looking
+for this relationship.
+
+198
+00:10:23,360 --> 00:10:28,550
+So in certain older
+individuals-- hopefully,
+
+199
+00:10:28,550 --> 00:10:31,620
+not myself in the
+future-- what happens
+
+200
+00:10:31,620 --> 00:10:35,890
+is that your maculus, which
+is the center of your eye,
+
+201
+00:10:35,890 --> 00:10:38,140
+degenerates as shown here.
+
+202
+00:10:38,140 --> 00:10:40,460
+And you get this
+unfortunate property
+
+203
+00:10:40,460 --> 00:10:42,820
+where you can't actually
+see in the center
+
+204
+00:10:42,820 --> 00:10:44,590
+of your field of vision.
+
+205
+00:10:44,590 --> 00:10:48,400
+It's called age-related
+macular degeneration.
+
+206
+00:10:48,400 --> 00:10:50,900
+So to look for the
+causes of this, which
+
+207
+00:10:50,900 --> 00:10:53,950
+is known to be
+genetically related,
+
+208
+00:10:53,950 --> 00:10:57,140
+the authors of the study
+collected a collection--
+
+209
+00:10:57,140 --> 00:11:00,380
+a cohort, as it's called--
+of these European-descent
+
+210
+00:11:00,380 --> 00:11:05,330
+individuals, all who are at
+least 60 years old, to study
+
+211
+00:11:05,330 --> 00:11:08,180
+the genetic foundations
+for this disorder.
+
+212
+00:11:10,820 --> 00:11:17,950
+And so they found
+934 controls that
+
+213
+00:11:17,950 --> 00:11:24,720
+were unaffected by age-related
+macular degeneration and 1,238
+
+214
+00:11:24,720 --> 00:11:28,525
+cases, and they genotyped
+them all using arrays.
+
+215
+00:11:31,130 --> 00:11:34,190
+Now the question is, are
+any of the identified
+
+216
+00:11:34,190 --> 00:11:40,410
+SNPs on the array related
+to this particular disorder?
+
+217
+00:11:43,340 --> 00:11:44,854
+So I'll give you
+the answer first
+
+218
+00:11:44,854 --> 00:11:46,270
+and then we'll
+talk about a couple
+
+219
+00:11:46,270 --> 00:11:50,210
+of different ways of
+thinking about this data, OK?
+
+220
+00:11:50,210 --> 00:11:52,260
+So here's the answer.
+
+221
+00:11:52,260 --> 00:11:57,330
+Here's a particular
+SNP, rs1061170.
+
+222
+00:11:57,330 --> 00:12:01,272
+There are the individuals
+with AMD and the controls.
+
+223
+00:12:01,272 --> 00:12:02,730
+And what you're
+looking at up here,
+
+224
+00:12:02,730 --> 00:12:05,010
+these numbers are the
+allelic counts, all right?
+
+225
+00:12:05,010 --> 00:12:08,360
+So each person has
+how many alleles?
+
+226
+00:12:08,360 --> 00:12:09,760
+Two, right?
+
+227
+00:12:09,760 --> 00:12:12,580
+That's double the
+number of individuals.
+
+228
+00:12:12,580 --> 00:12:17,460
+And the question is,
+are the C and T alleles
+
+229
+00:12:17,460 --> 00:12:24,770
+associated with the cases
+or controls significantly?
+
+230
+00:12:24,770 --> 00:12:27,670
+And so you can compute
+a Chi-square metric
+
+231
+00:12:27,670 --> 00:12:29,820
+on this so-called
+contingency table.
+
+232
+00:12:29,820 --> 00:12:32,217
+And one of the things
+about contingency tables
+
+233
+00:12:32,217 --> 00:12:33,800
+that I think is
+important to point out
+
+234
+00:12:33,800 --> 00:12:36,910
+is that you hear about
+marginal probabilities, right?
+
+235
+00:12:36,910 --> 00:12:38,640
+And people probably
+know that originally
+
+236
+00:12:38,640 --> 00:12:40,340
+derived from the
+idea of these margins
+
+237
+00:12:40,340 --> 00:12:43,390
+along the side of a
+contingency table, right?
+
+238
+00:12:43,390 --> 00:12:46,490
+If you think about the marginal
+probability of somebody
+
+239
+00:12:46,490 --> 00:12:49,470
+having a C allele, regardless
+of whether a case or control,
+
+240
+00:12:49,470 --> 00:12:55,980
+it would be 2,192
+over 4,344, right?
+
+241
+00:12:55,980 --> 00:12:58,440
+So the formula for computing
+the Chi-square statistic
+
+242
+00:12:58,440 --> 00:12:59,710
+is shown here.
+
+243
+00:12:59,710 --> 00:13:03,460
+It's this sort of
+scary-looking polynomial.
+
+244
+00:13:03,460 --> 00:13:06,730
+And the number of
+degrees of freedom is 1.
+
+245
+00:13:06,730 --> 00:13:09,950
+It's the number of rows
+minus 1 times the number
+
+246
+00:13:09,950 --> 00:13:11,880
+of columns minus 1.
+
+247
+00:13:11,880 --> 00:13:15,420
+And the P-value we get is
+indeed quite small-- 10
+
+248
+00:13:15,420 --> 00:13:17,450
+to the minus 62.
+
+249
+00:13:17,450 --> 00:13:18,920
+Therefore, the
+chance this happened
+
+250
+00:13:18,920 --> 00:13:21,670
+at random-- even with
+multiple hypothesis
+
+251
+00:13:21,670 --> 00:13:25,240
+correction, given that we're
+testing a million SNPs--
+
+252
+00:13:25,240 --> 00:13:28,600
+is indeed very, very low.
+
+253
+00:13:28,600 --> 00:13:29,680
+This looks like a winner.
+
+254
+00:13:29,680 --> 00:13:32,940
+Looks like we've got a
+SNP that is associated
+
+255
+00:13:32,940 --> 00:13:36,530
+with this particular disease.
+
+256
+00:13:36,530 --> 00:13:40,110
+Now just to remind you about
+Chi-square statistics--
+
+257
+00:13:40,110 --> 00:13:44,090
+I'm sure people have seen this
+before-- the usual formulation
+
+258
+00:13:44,090 --> 00:13:50,150
+is that you compute this
+Chi-square polynomial
+
+259
+00:13:50,150 --> 00:13:52,454
+on the right-hand side,
+which is the observed
+
+260
+00:13:52,454 --> 00:13:54,870
+number of something minus the
+expected number of something
+
+261
+00:13:54,870 --> 00:13:58,560
+squared over the expected
+number or something, right?
+
+262
+00:13:58,560 --> 00:14:01,874
+And you sum it up over
+all the different cases.
+
+263
+00:14:01,874 --> 00:14:03,790
+And you can see that the
+expected number of As
+
+264
+00:14:03,790 --> 00:14:07,350
+is given by the little
+formula on the left.
+
+265
+00:14:07,350 --> 00:14:11,380
+Suffice to say, if you expand
+that formula and manipulate it,
+
+266
+00:14:11,380 --> 00:14:14,230
+you get the equation we
+had on the previous slide.
+
+267
+00:14:14,230 --> 00:14:17,060
+So it's still that fuzzy,
+friendly Chi-square formula
+
+268
+00:14:17,060 --> 00:14:22,780
+you always knew, just
+in a different form, OK?
+
+269
+00:14:22,780 --> 00:14:25,150
+Now is there
+another way to think
+
+270
+00:14:25,150 --> 00:14:30,140
+about computing the likelihood
+of seeing data in a contingency
+
+271
+00:14:30,140 --> 00:14:31,910
+table at random, right?
+
+272
+00:14:31,910 --> 00:14:35,260
+Because we're always asking,
+could this just be random?
+
+273
+00:14:35,260 --> 00:14:37,380
+I mean, could this have
+occurred by chance,
+
+274
+00:14:37,380 --> 00:14:42,130
+that we see the data arranged
+in this particular form?
+
+275
+00:14:42,130 --> 00:14:44,460
+Well, we've another
+convenient way
+
+276
+00:14:44,460 --> 00:14:48,240
+of thinking about
+this, which is we could
+
+277
+00:14:48,240 --> 00:14:52,400
+do Fisher's Exact Test,
+which is very related
+
+278
+00:14:52,400 --> 00:14:55,477
+to the idea of the
+hypergeometric test
+
+279
+00:14:55,477 --> 00:14:57,060
+that we've talked
+about before, right?
+
+280
+00:14:57,060 --> 00:15:03,810
+What are the chances we would
+see exactly this arrangement?
+
+281
+00:15:03,810 --> 00:15:07,640
+Well, we would need to have,
+out of a plus b C alleles,
+
+282
+00:15:07,640 --> 00:15:14,150
+we'd have 8 of them be cases,
+which is the first term there
+
+283
+00:15:14,150 --> 00:15:19,000
+in that equation.
+
+284
+00:15:19,000 --> 00:15:22,536
+And of the T alleles, we need to
+have c of them out of c plus d
+
+285
+00:15:22,536 --> 00:15:23,540
+be there.
+
+286
+00:15:23,540 --> 00:15:26,260
+And then we need to have a
+plus b plus c plus d choose
+
+287
+00:15:26,260 --> 00:15:29,080
+a plus c-- that's the
+total number of chances
+
+288
+00:15:29,080 --> 00:15:30,290
+of seeing things.
+
+289
+00:15:30,290 --> 00:15:33,440
+So this is the probability
+of the arrangement
+
+290
+00:15:33,440 --> 00:15:36,970
+in the table in this
+particular form.
+
+291
+00:15:36,970 --> 00:15:39,750
+Now people-- I'll let
+you digest that for one
+
+292
+00:15:39,750 --> 00:15:41,040
+second before I go on.
+
+293
+00:15:44,730 --> 00:15:51,380
+So this is the number of ways
+on the numerator of arranging
+
+294
+00:15:51,380 --> 00:15:53,830
+things to get the table
+the way that we see it
+
+295
+00:15:53,830 --> 00:15:56,280
+over the total number or
+ways of arranging the table,
+
+296
+00:15:56,280 --> 00:15:59,180
+keeping the marginal
+totals the same.
+
+297
+00:16:01,930 --> 00:16:03,960
+Is that clear?
+
+298
+00:16:03,960 --> 00:16:07,390
+So this is the probability,
+the exact probability,
+
+299
+00:16:07,390 --> 00:16:10,080
+of seeing the table
+in this configuration.
+
+300
+00:16:10,080 --> 00:16:12,555
+And then what you do is you
+take that probability and all
+
+301
+00:16:12,555 --> 00:16:19,220
+of the probabilities for all the
+more extreme values, say, of a.
+
+302
+00:16:19,220 --> 00:16:21,960
+And you sum them all
+up and that gives you
+
+303
+00:16:21,960 --> 00:16:24,930
+the probability of
+a null hypothesis.
+
+304
+00:16:24,930 --> 00:16:28,850
+So this is another
+way to approach
+
+305
+00:16:28,850 --> 00:16:32,660
+looking at the chance a
+particular contingency table
+
+306
+00:16:32,660 --> 00:16:35,160
+set of values would
+occur at random.
+
+307
+00:16:35,160 --> 00:16:37,860
+So if people talk about
+Fisher's Exact Test-- you know,
+
+308
+00:16:37,860 --> 00:16:39,264
+tonight at that cocktail party.
+
+309
+00:16:39,264 --> 00:16:40,430
+"Oh yeah, I know about that.
+
+310
+00:16:40,430 --> 00:16:41,680
+Yeah, it's like
+the hypergeometric.
+
+311
+00:16:41,680 --> 00:16:42,410
+It's no big deal."
+
+312
+00:16:42,410 --> 00:16:42,880
+You know?
+
+313
+00:16:42,880 --> 00:16:43,379
+Right.
+
+314
+00:16:45,880 --> 00:16:47,930
+All right.
+
+315
+00:16:47,930 --> 00:16:55,390
+So now let us suppose that
+we do an association test
+
+316
+00:16:55,390 --> 00:16:57,060
+and you do the following design.
+
+317
+00:16:57,060 --> 00:17:00,330
+You say, well, I've
+got all my cases.
+
+318
+00:17:00,330 --> 00:17:05,663
+They're all at Mass General and
+I want to genotype them all.
+
+319
+00:17:05,663 --> 00:17:07,079
+And Mass General
+is the best place
+
+320
+00:17:07,079 --> 00:17:09,454
+for this particular disease,
+so I'm going to go up there.
+
+321
+00:17:09,454 --> 00:17:12,680
+I need some controls but I'm
+running out of budgetary money,
+
+322
+00:17:12,680 --> 00:17:15,974
+so I'm going to do all my
+controls in China, right?
+
+323
+00:17:15,974 --> 00:17:18,140
+Because I know it's going
+to be less expensive there
+
+324
+00:17:18,140 --> 00:17:18,990
+to genotype them.
+
+325
+00:17:18,990 --> 00:17:23,350
+And furthermore--
+as a little aside,
+
+326
+00:17:23,350 --> 00:17:24,849
+I was once meeting
+with this guy who
+
+327
+00:17:24,849 --> 00:17:30,000
+is like one of the ministers
+of research in China.
+
+328
+00:17:30,000 --> 00:17:31,010
+He came to my office.
+
+329
+00:17:31,010 --> 00:17:33,135
+I said, so what do
+you do in China?
+
+330
+00:17:33,135 --> 00:17:35,260
+And he said, well, I guess
+the best way to describe
+
+331
+00:17:35,260 --> 00:17:37,990
+it is that I'm in charge of the
+equivalent of the NSF, DARPA,
+
+332
+00:17:37,990 --> 00:17:39,345
+and the NIH.
+
+333
+00:17:39,345 --> 00:17:41,810
+I said, oh.
+
+334
+00:17:41,810 --> 00:17:44,200
+I said, would like to
+meet the president?
+
+335
+00:17:44,200 --> 00:17:46,290
+Because I'd be happy to
+call MIT's president.
+
+336
+00:17:46,290 --> 00:17:47,350
+I'm sure they'd be
+happy to meet with you.
+
+337
+00:17:47,350 --> 00:17:48,230
+He said, no.
+
+338
+00:17:48,230 --> 00:17:50,430
+He said, I like going direct.
+
+339
+00:17:50,430 --> 00:17:53,150
+So, at any rate,
+I told him I was
+
+340
+00:17:53,150 --> 00:17:54,680
+working in stem cell research.
+
+341
+00:17:54,680 --> 00:17:57,590
+He said, you know, one thing I
+can say about China-- in China,
+
+342
+00:17:57,590 --> 00:17:59,370
+stem cells, ethics, no problem.
+
+343
+00:17:59,370 --> 00:18:04,350
+[LAUGHTER]
+
+344
+00:18:04,350 --> 00:18:09,510
+At any rate, so you go to
+China to do your controls, OK?
+
+345
+00:18:09,510 --> 00:18:13,180
+And why is that a bad
+experimental design?
+
+346
+00:18:13,180 --> 00:18:14,020
+Can anybody tell me?
+
+347
+00:18:18,128 --> 00:18:20,544
+You do all your cases here,
+you do your controls in China.
+
+348
+00:18:20,544 --> 00:18:20,996
+Yes?
+
+349
+00:18:20,996 --> 00:18:22,454
+AUDIENCE: Because
+the SNPs in China
+
+350
+00:18:22,454 --> 00:18:23,710
+are not necessarily the same.
+
+351
+00:18:23,710 --> 00:18:24,390
+PROFESSOR: Yes.
+
+352
+00:18:24,390 --> 00:18:26,340
+The Chinese population's
+going to have
+
+353
+00:18:26,340 --> 00:18:28,193
+a different set of SNPs,
+right, because it's
+
+354
+00:18:28,193 --> 00:18:29,392
+been a contained population.
+
+355
+00:18:29,392 --> 00:18:31,100
+So you're going to
+pick up all these SNPs
+
+356
+00:18:31,100 --> 00:18:33,720
+that you think are going to
+be related to the disease that
+
+357
+00:18:33,720 --> 00:18:36,770
+are simply a consequence of
+population stratification,
+
+358
+00:18:36,770 --> 00:18:37,870
+right?
+
+359
+00:18:37,870 --> 00:18:40,990
+So what you need to do
+is to control for that.
+
+360
+00:18:40,990 --> 00:18:44,030
+And the way you do that is you
+pick a bunch of control SNPs
+
+361
+00:18:44,030 --> 00:18:46,570
+that you think are
+unrelated to a disease
+
+362
+00:18:46,570 --> 00:18:48,560
+and you do a Chi-square
+test on those
+
+363
+00:18:48,560 --> 00:18:52,950
+to make sure that they're
+not significant, right?
+
+364
+00:18:52,950 --> 00:18:55,630
+And methodologies for
+controlling for population
+
+365
+00:18:55,630 --> 00:18:58,650
+stratification by picking
+apart your individuals
+
+366
+00:18:58,650 --> 00:19:00,861
+and re-clustering
+them is something
+
+367
+00:19:00,861 --> 00:19:02,360
+that is a topic of
+current research.
+
+368
+00:19:05,840 --> 00:19:09,630
+And finally, the good news
+about age-related macular
+
+369
+00:19:09,630 --> 00:19:12,540
+degeneration is that
+there are three genes
+
+370
+00:19:12,540 --> 00:19:15,680
+with five common variants
+that explain 50% of the risk.
+
+371
+00:19:15,680 --> 00:19:20,840
+And so it has been viewed as
+sort of a very successful study
+
+372
+00:19:20,840 --> 00:19:24,220
+of a polygenic-- that
+is, multiple gene--
+
+373
+00:19:24,220 --> 00:19:26,240
+genetic disorder that
+has been dissected
+
+374
+00:19:26,240 --> 00:19:27,480
+using this methodology.
+
+375
+00:19:27,480 --> 00:19:30,790
+And with these genes, now
+people can go after them
+
+376
+00:19:30,790 --> 00:19:35,010
+and see if they can come up
+appropriate therapeutics.
+
+377
+00:19:35,010 --> 00:19:41,340
+Now using the same idea-- cases,
+controls-- you look at each SNP
+
+378
+00:19:41,340 --> 00:19:45,570
+individually and you
+query it for significance
+
+379
+00:19:45,570 --> 00:19:47,470
+based upon a null model.
+
+380
+00:19:47,470 --> 00:19:53,000
+You can take a wide
+range of common diseases
+
+381
+00:19:53,000 --> 00:19:56,380
+and ask whether or
+not you can detect
+
+382
+00:19:56,380 --> 00:20:03,450
+any genetic elements that
+might influence risk.
+
+383
+00:20:03,450 --> 00:20:06,250
+And so here are a set
+of different diseases,
+
+384
+00:20:06,250 --> 00:20:08,000
+starting with bipolar
+disorder at the top,
+
+385
+00:20:08,000 --> 00:20:10,740
+going down to type 2
+diabetes at the bottom.
+
+386
+00:20:10,740 --> 00:20:14,220
+This is a so-called
+Manhattan plot,
+
+387
+00:20:14,220 --> 00:20:17,222
+because you see the buildings
+along the plot, right?
+
+388
+00:20:17,222 --> 00:20:18,680
+And when there are
+skyscrapers, you
+
+389
+00:20:18,680 --> 00:20:21,820
+go, whoa, that could be
+a problem, all right?
+
+390
+00:20:21,820 --> 00:20:24,630
+And so this is the
+style-- you see,
+
+391
+00:20:24,630 --> 00:20:28,250
+this came out in
+2007-- of research
+
+392
+00:20:28,250 --> 00:20:32,272
+that attempts to do genome
+wide scans for loci that
+
+393
+00:20:32,272 --> 00:20:33,730
+are related to
+particular diseases.
+
+394
+00:20:36,890 --> 00:20:42,500
+OK, now, I'd like to go on
+and talk about other ways
+
+395
+00:20:42,500 --> 00:20:50,390
+that these studies can
+be influenced, which
+
+396
+00:20:50,390 --> 00:20:58,490
+is the idea of linkage
+disequilibrium.
+
+397
+00:20:58,490 --> 00:21:14,810
+So for example, let us say that
+I have a particular individual
+
+398
+00:21:14,810 --> 00:21:20,470
+who's going to produce a
+gamete and the gamete's going
+
+399
+00:21:20,470 --> 00:21:24,490
+to be haploid, right?
+
+400
+00:21:24,490 --> 00:21:30,320
+And it's going have one
+allele from one of these two
+
+401
+00:21:30,320 --> 00:21:33,830
+chromosomes and one allele from
+one of these two chromosomes.
+
+402
+00:21:33,830 --> 00:21:36,590
+We've talked about
+this before last time.
+
+403
+00:21:36,590 --> 00:21:38,670
+And there are four
+possibilities--
+
+404
+00:21:38,670 --> 00:21:48,520
+AB, aB, Ab, and ab, OK?
+
+405
+00:21:48,520 --> 00:21:52,820
+And if this was a
+coin flip, then each
+
+406
+00:21:52,820 --> 00:21:56,570
+of these genotypes
+for this gamete
+
+407
+00:21:56,570 --> 00:22:00,800
+would be identical, right?
+
+408
+00:22:00,800 --> 00:22:03,460
+But let us suppose
+that I tell you
+
+409
+00:22:03,460 --> 00:22:10,270
+that there are only two
+that result-- this one, AB,
+
+410
+00:22:10,270 --> 00:22:13,975
+and the small one, ab, OK?
+
+411
+00:22:16,670 --> 00:22:19,880
+If you look at this, you
+say, aha, these two things
+
+412
+00:22:19,880 --> 00:22:24,270
+are linked and they're
+very closely linked.
+
+413
+00:22:24,270 --> 00:22:27,960
+And so, if they're always
+inherited together,
+
+414
+00:22:27,960 --> 00:22:35,550
+we might think that the distance
+between them on the genome
+
+415
+00:22:35,550 --> 00:22:36,820
+is small.
+
+416
+00:22:39,670 --> 00:22:42,870
+So in the human genome,
+what's the average distance
+
+417
+00:22:42,870 --> 00:22:45,950
+between crossover events
+during a meiotic event?
+
+418
+00:22:45,950 --> 00:22:49,641
+Does anybody know, roughly
+speaking, how many bases?
+
+419
+00:22:49,641 --> 00:22:50,140
+Hm?
+
+420
+00:22:50,140 --> 00:22:51,014
+AUDIENCE: A megabase?
+
+421
+00:22:51,014 --> 00:22:51,950
+PROFESSOR: A megabase.
+
+422
+00:22:51,950 --> 00:22:53,130
+Little low.
+
+423
+00:22:56,220 --> 00:22:59,460
+How many centimorgans
+long is the human genome?
+
+424
+00:23:03,460 --> 00:23:05,211
+All right?
+
+425
+00:23:05,211 --> 00:23:08,150
+Anybody know?
+
+426
+00:23:08,150 --> 00:23:08,900
+3,000?
+
+427
+00:23:08,900 --> 00:23:10,676
+4,000?
+
+428
+00:23:10,676 --> 00:23:13,120
+Something like that?
+
+429
+00:23:13,120 --> 00:23:19,240
+So maybe 50 to 100 megabases
+between crossover events, OK?
+
+430
+00:23:19,240 --> 00:23:28,620
+So if these markers
+are very closely
+
+431
+00:23:28,620 --> 00:23:31,660
+organized along the genome,
+the likelihood of a crossover
+
+432
+00:23:31,660 --> 00:23:33,930
+is very small.
+
+433
+00:23:33,930 --> 00:23:37,460
+And therefore, they're going
+to be in very high LD, right?
+
+434
+00:23:40,160 --> 00:23:46,340
+And a way to measure that is
+with the following formula,
+
+435
+00:23:46,340 --> 00:23:49,810
+which is that if you link the
+two locuses-- we have L1 and L2
+
+436
+00:23:49,810 --> 00:23:50,830
+here.
+
+437
+00:23:50,830 --> 00:23:53,740
+And now we're talking about
+the population instead
+
+438
+00:23:53,740 --> 00:23:57,080
+of a particular individual.
+
+439
+00:23:57,080 --> 00:24:03,740
+If the likelihood of the
+capital allele A is piece of A
+
+440
+00:24:03,740 --> 00:24:06,650
+and the probability
+of the big B allele
+
+441
+00:24:06,650 --> 00:24:12,434
+is piece of B, then if they
+were completely unlinked,
+
+442
+00:24:12,434 --> 00:24:14,350
+then the likelihood of
+inheriting both of them
+
+443
+00:24:14,350 --> 00:24:18,320
+together with would be
+piece of A times piece of B,
+
+444
+00:24:18,320 --> 00:24:20,520
+showing independence.
+
+445
+00:24:20,520 --> 00:24:22,720
+However if they
+aren't independent,
+
+446
+00:24:22,720 --> 00:24:24,340
+we can come up
+with a single value
+
+447
+00:24:24,340 --> 00:24:30,150
+D which allows us to quantify
+the amount of disequilibrium
+
+448
+00:24:30,150 --> 00:24:32,550
+between those two alleles.
+
+449
+00:24:32,550 --> 00:24:37,090
+And the formula for D
+is given on the slide.
+
+450
+00:24:37,090 --> 00:24:39,570
+And furthermore, if it's
+more convenient for you
+
+451
+00:24:39,570 --> 00:24:42,190
+to think about in terms
+of r-squared correlation,
+
+452
+00:24:42,190 --> 00:24:44,420
+we can define the
+r-squared correlation
+
+453
+00:24:44,420 --> 00:24:47,420
+as D squared over
+PA, QA, PB, QB,
+
+454
+00:24:47,420 --> 00:24:51,660
+as shown in the lower left
+hand part of this slide, OK?
+
+455
+00:24:51,660 --> 00:24:55,530
+This is simply a
+way of describing
+
+456
+00:24:55,530 --> 00:24:58,490
+how skewed the
+probabilities are from being
+
+457
+00:24:58,490 --> 00:25:02,360
+independent for
+inheriting these two
+
+458
+00:25:02,360 --> 00:25:07,850
+different loci in a population.
+
+459
+00:25:07,850 --> 00:25:10,880
+Are there any questions
+at all about that,
+
+460
+00:25:10,880 --> 00:25:14,140
+the details of that?
+
+461
+00:25:14,140 --> 00:25:14,940
+OK.
+
+462
+00:25:14,940 --> 00:25:20,800
+So just to give you an example,
+if you look at chromosome 22,
+
+463
+00:25:20,800 --> 00:25:24,460
+the physical distance on
+the bottom is in kilobases,
+
+464
+00:25:24,460 --> 00:25:28,910
+so that's from 0 to 1
+megabase on the bottom.
+
+465
+00:25:28,910 --> 00:25:31,140
+And you look at the
+r-squared values,
+
+466
+00:25:31,140 --> 00:25:34,640
+you can see things that
+are quite physically close,
+
+467
+00:25:34,640 --> 00:25:37,860
+as we suggested earlier,
+have a high r-squared value.
+
+468
+00:25:37,860 --> 00:25:39,360
+But there are still
+some things that
+
+469
+00:25:39,360 --> 00:25:42,230
+are pretty far away
+that have surprisingly
+
+470
+00:25:42,230 --> 00:25:43,505
+high r-squared values.
+
+471
+00:25:46,170 --> 00:25:48,890
+There are recombination
+hot spots in the genome.
+
+472
+00:25:48,890 --> 00:25:52,690
+And it's, once again, a topic
+of current research trying
+
+473
+00:25:52,690 --> 00:25:56,020
+to figure out how the genome
+recombines and recombination is
+
+474
+00:25:56,020 --> 00:25:56,717
+targeted.
+
+475
+00:25:56,717 --> 00:25:59,050
+But suffice it to say, as you
+can see, it's not uniform.
+
+476
+00:26:02,190 --> 00:26:05,140
+Now what happens as
+a consequence of this
+
+477
+00:26:05,140 --> 00:26:08,640
+is that you get regions
+of the genome where
+
+478
+00:26:08,640 --> 00:26:10,060
+things stick together, right?
+
+479
+00:26:10,060 --> 00:26:11,560
+They're all drinking
+buddies, right?
+
+480
+00:26:11,560 --> 00:26:14,870
+They all hang out together, OK?
+
+481
+00:26:14,870 --> 00:26:17,740
+But here's what I'm going to ask
+you-- how much of your genome
+
+482
+00:26:17,740 --> 00:26:18,740
+came from your dad?
+
+483
+00:26:21,392 --> 00:26:22,280
+Half.
+
+484
+00:26:22,280 --> 00:26:23,762
+How much came from
+your dad's dad?
+
+485
+00:26:23,762 --> 00:26:24,908
+AUDIENCE: A quarter.
+
+486
+00:26:24,908 --> 00:26:26,616
+PROFESSOR: And from
+your dad's dad's dad?
+
+487
+00:26:26,616 --> 00:26:27,449
+AUDIENCE: An eighth.
+
+488
+00:26:27,449 --> 00:26:28,600
+PROFESSOR: An eighth, OK?
+
+489
+00:26:28,600 --> 00:26:31,730
+So the amount of your genome
+going back up the family tree
+
+490
+00:26:31,730 --> 00:26:35,660
+is falling off exponentially
+up a particular path, right?
+
+491
+00:26:35,660 --> 00:26:38,970
+So if you think about groups
+of things that came together
+
+492
+00:26:38,970 --> 00:26:40,440
+from your great,
+great grandfather
+
+493
+00:26:40,440 --> 00:26:42,910
+or his great, great
+grandfather, right,
+
+494
+00:26:42,910 --> 00:26:46,159
+the further back you go, the
+less and less contribution
+
+495
+00:26:46,159 --> 00:26:47,700
+they're going to
+have to your genome.
+
+496
+00:26:47,700 --> 00:26:50,580
+And so the blocks are
+going to be smaller--
+
+497
+00:26:50,580 --> 00:26:52,470
+that is, the amount
+of information
+
+498
+00:26:52,470 --> 00:26:56,200
+you're getting from
+way back up the tree.
+
+499
+00:26:56,200 --> 00:26:59,060
+So if you think about
+this, the question
+
+500
+00:26:59,060 --> 00:27:02,570
+of what blocks of things
+are inherited together
+
+501
+00:27:02,570 --> 00:27:05,390
+is not something that you
+can write an equation for.
+
+502
+00:27:05,390 --> 00:27:07,580
+It's something that you
+study in a population.
+
+503
+00:27:07,580 --> 00:27:09,860
+You go out and you
+ask, what things do we
+
+504
+00:27:09,860 --> 00:27:11,390
+observe coming together?
+
+505
+00:27:11,390 --> 00:27:15,340
+And generally, larger
+blocks of things
+
+506
+00:27:15,340 --> 00:27:19,760
+are inherited together, occur
+in more recent generations,
+
+507
+00:27:19,760 --> 00:27:21,930
+because there's less
+dilution, right?
+
+508
+00:27:21,930 --> 00:27:24,256
+Whereas if you go way
+back in time-- not quite
+
+509
+00:27:24,256 --> 00:27:25,880
+to where the dinosaurs
+roamed the land,
+
+510
+00:27:25,880 --> 00:27:29,720
+but you get the idea-- the
+blocks are, fact, quite small.
+
+511
+00:27:29,720 --> 00:27:34,890
+And so, the HapMap project
+went about looking at blocks
+
+512
+00:27:34,890 --> 00:27:37,700
+and how they were
+inherited in the genome.
+
+513
+00:27:37,700 --> 00:27:42,430
+And what suffices to know is
+that they found blocks-- here
+
+514
+00:27:42,430 --> 00:27:46,460
+you can see three
+different blocks.
+
+515
+00:27:46,460 --> 00:27:48,450
+And these are called
+haplotype blocks
+
+516
+00:27:48,450 --> 00:27:50,400
+and the things that
+are colored red
+
+517
+00:27:50,400 --> 00:27:52,820
+are high r-squared
+values between
+
+518
+00:27:52,820 --> 00:27:55,360
+different genetic markers.
+
+519
+00:27:55,360 --> 00:27:57,110
+And we talked earlier
+about how to compute
+
+520
+00:27:57,110 --> 00:27:58,600
+that r-squared value.
+
+521
+00:27:58,600 --> 00:28:02,650
+So those blocks typically
+are inherited together.
+
+522
+00:28:02,650 --> 00:28:03,150
+Yes?
+
+523
+00:28:03,150 --> 00:28:06,776
+AUDIENCE: Are these blocks
+like fuzzy boundaries?
+
+524
+00:28:06,776 --> 00:28:07,580
+PROFESSOR: No.
+
+525
+00:28:07,580 --> 00:28:11,520
+Well, remember in this
+particular example,
+
+526
+00:28:11,520 --> 00:28:14,910
+we're only querying at
+specified markers which
+
+527
+00:28:14,910 --> 00:28:19,010
+are not necessarily at regular
+intervals along the genome.
+
+528
+00:28:19,010 --> 00:28:21,660
+So in this case, the blocks
+don't have fuzzy boundaries.
+
+529
+00:28:21,660 --> 00:28:24,122
+As we get into
+sequencing-based approaches,
+
+530
+00:28:24,122 --> 00:28:25,580
+they could have
+fuzzier boundaries.
+
+531
+00:28:25,580 --> 00:28:27,080
+But haplotype
+blocks are typically
+
+532
+00:28:27,080 --> 00:28:31,080
+thought to be discrete blocks
+that are inherited, OK?
+
+533
+00:28:31,080 --> 00:28:31,690
+Good question.
+
+534
+00:28:31,690 --> 00:28:32,523
+Any other questions?
+
+535
+00:28:36,840 --> 00:28:37,350
+OK.
+
+536
+00:28:37,350 --> 00:28:41,040
+So I want to impress
+upon the idea
+
+537
+00:28:41,040 --> 00:28:43,050
+that this is empirical, right?
+
+538
+00:28:43,050 --> 00:28:47,010
+There's no magic here in
+terms of fundamental theory
+
+539
+00:28:47,010 --> 00:28:49,640
+about what things should
+be haplotype blocks.
+
+540
+00:28:49,640 --> 00:28:51,550
+It's simply that you
+look at a population
+
+541
+00:28:51,550 --> 00:28:54,680
+and you're look at what
+markers are drinking buddies
+
+542
+00:28:54,680 --> 00:28:58,750
+and those make haplotype blocks
+and you empirically categorize
+
+543
+00:28:58,750 --> 00:29:04,220
+and catalog them-- which can
+be very helpful, as you'll see.
+
+544
+00:29:04,220 --> 00:29:07,150
+And thus, when we think
+about genetic studies,
+
+545
+00:29:07,150 --> 00:29:10,990
+when we think about the
+length of shared segments,
+
+546
+00:29:10,990 --> 00:29:12,980
+if you're thinking
+about studying a family,
+
+547
+00:29:12,980 --> 00:29:16,934
+like a trio-- a trio is a mom,
+a dad, and a child, right?
+
+548
+00:29:16,934 --> 00:29:19,100
+They're going to share a
+lot of genetic information,
+
+549
+00:29:19,100 --> 00:29:21,960
+and so the haplotype blocks that
+are shared amongst those three
+
+550
+00:29:21,960 --> 00:29:25,390
+individuals are going
+to be very large indeed.
+
+551
+00:29:25,390 --> 00:29:27,310
+Whereas if you go
+back generations,
+
+552
+00:29:27,310 --> 00:29:30,090
+the blocks-- like the
+second cousins or things
+
+553
+00:29:30,090 --> 00:29:32,180
+like that-- the
+blocks get smaller.
+
+554
+00:29:32,180 --> 00:29:36,260
+So the x-axis on this
+plot is the median length
+
+555
+00:29:36,260 --> 00:29:38,480
+of a shared segment.
+
+556
+00:29:38,480 --> 00:29:40,410
+And as an association
+study, which
+
+557
+00:29:40,410 --> 00:29:44,260
+is taking random people
+out of the population,
+
+558
+00:29:44,260 --> 00:29:48,154
+has very small shared
+blocks indeed, OK?
+
+559
+00:29:48,154 --> 00:29:50,070
+And so the techniques
+that we're talking about
+
+560
+00:29:50,070 --> 00:29:53,030
+today are applicable
+almost in any range,
+
+561
+00:29:53,030 --> 00:29:55,660
+but they're particularly
+useful where
+
+562
+00:29:55,660 --> 00:29:57,780
+you can't depend upon
+the fact that you're
+
+563
+00:29:57,780 --> 00:30:00,250
+sharing a lot of information
+along the genome proximal
+
+564
+00:30:00,250 --> 00:30:02,162
+to where the marker
+is that's associated
+
+565
+00:30:02,162 --> 00:30:03,245
+with a particular disease.
+
+566
+00:30:07,210 --> 00:30:10,770
+Now the other thing
+that is true is
+
+567
+00:30:10,770 --> 00:30:15,120
+that we should note that
+the fact that markers have
+
+568
+00:30:15,120 --> 00:30:18,110
+this LD associated
+with them means
+
+569
+00:30:18,110 --> 00:30:25,300
+that it may be that a particular
+marker is bang on-- what's
+
+570
+00:30:25,300 --> 00:30:27,190
+called a causative SNP.
+
+571
+00:30:27,190 --> 00:30:29,230
+Or something that,
+for example, sits
+
+572
+00:30:29,230 --> 00:30:33,650
+in the middle of a gene
+causing a missense mutation.
+
+573
+00:30:33,650 --> 00:30:36,610
+Or it sits right in the middle
+of a protein binding site,
+
+574
+00:30:36,610 --> 00:30:39,490
+causing the factor
+not to bind anymore.
+
+575
+00:30:39,490 --> 00:30:42,320
+But also it could be something
+that is actually a little bit
+
+576
+00:30:42,320 --> 00:30:48,080
+away, but is highly correlated
+to the causative SNP.
+
+577
+00:30:48,080 --> 00:30:50,530
+So just keep in mind that
+when you have an association
+
+578
+00:30:50,530 --> 00:30:55,930
+and you're looking at a SNP, it
+may not be the causative SNP.
+
+579
+00:30:55,930 --> 00:30:58,644
+It might be just linked
+to the causative SNP.
+
+580
+00:30:58,644 --> 00:31:00,685
+And sometimes these things
+are called proxy SNPs.
+
+581
+00:31:03,290 --> 00:31:12,530
+OK, so we've talked
+about the idea of SNPs
+
+582
+00:31:12,530 --> 00:31:14,460
+and discovering them.
+
+583
+00:31:14,460 --> 00:31:19,515
+Let me ask you one more question
+about where these SNPs reside
+
+584
+00:31:19,515 --> 00:31:21,230
+and see if you
+could help me out.
+
+585
+00:31:30,680 --> 00:31:38,500
+OK, this is a really
+important gene, OK?
+
+586
+00:31:38,500 --> 00:31:40,920
+Call it RIG for short, OK?
+
+587
+00:31:40,920 --> 00:31:44,350
+Now let us suppose that
+you know that there
+
+588
+00:31:44,350 --> 00:31:46,100
+are some mutations here.
+
+589
+00:31:46,100 --> 00:31:52,080
+And my question for you is,
+does it matter whether or not
+
+590
+00:31:52,080 --> 00:31:58,410
+the two mutations look
+like this or the mutations
+
+591
+00:31:58,410 --> 00:32:03,260
+look like this, in your opinion?
+
+592
+00:32:06,990 --> 00:32:09,470
+That is, both mutations
+occur in one copy
+
+593
+00:32:09,470 --> 00:32:12,330
+or on one chromosome
+of the gene,
+
+594
+00:32:12,330 --> 00:32:15,340
+whereas in the other case, we
+see two different SNPs that
+
+595
+00:32:15,340 --> 00:32:17,110
+are different than
+reference, but they're
+
+596
+00:32:17,110 --> 00:32:19,240
+referring in both
+mom and dad alleles.
+
+597
+00:32:24,260 --> 00:32:28,391
+Is there a difference
+between those two cases?
+
+598
+00:32:28,391 --> 00:32:28,890
+Yeah?
+
+599
+00:32:28,890 --> 00:32:30,846
+AUDIENCE: In terms of
+the phenotype displayed?
+
+600
+00:32:30,846 --> 00:32:33,291
+PROFESSOR: In terms of
+the phenotype, sorry.
+
+601
+00:32:33,291 --> 00:32:34,758
+AUDIENCE: It depends.
+
+602
+00:32:34,758 --> 00:32:35,736
+PROFESSOR: It depends?
+
+603
+00:32:35,736 --> 00:32:36,319
+AUDIENCE: Yes.
+
+604
+00:32:36,319 --> 00:32:37,203
+PROFESSOR: OK.
+
+605
+00:32:37,203 --> 00:32:41,115
+AUDIENCE: So if it causes a
+recessive mutation, then no,
+
+606
+00:32:41,115 --> 00:32:46,494
+because other genes will
+be able to rescue it.
+
+607
+00:32:46,494 --> 00:32:48,161
+But if it's dominant,
+then it'll still--
+
+608
+00:32:48,161 --> 00:32:50,077
+PROFESSOR: It's actually
+the other way around.
+
+609
+00:32:50,077 --> 00:32:51,880
+If it's recessive,
+this does matter.
+
+610
+00:32:51,880 --> 00:32:53,470
+AUDIENCE: Oh, I see.
+
+611
+00:32:53,470 --> 00:32:55,720
+PROFESSOR: Because in this
+case, with the purple ones,
+
+612
+00:32:55,720 --> 00:32:59,240
+you still have one good
+copy of the gene, right?
+
+613
+00:32:59,240 --> 00:33:01,100
+However, with the
+green ones, it's
+
+614
+00:33:01,100 --> 00:33:04,310
+possible that you have
+ablated both good copies
+
+615
+00:33:04,310 --> 00:33:06,680
+of the gene, this
+really important gene,
+
+616
+00:33:06,680 --> 00:33:08,910
+and therefore, you're
+going to get a higher
+
+617
+00:33:08,910 --> 00:33:12,280
+risk of having a
+genetic disorder.
+
+618
+00:33:12,280 --> 00:33:17,430
+So when you're scanning down
+the genome then-- you know,
+
+619
+00:33:17,430 --> 00:33:20,680
+we've been asking where
+are there differences
+
+620
+00:33:20,680 --> 00:33:24,440
+from reference or from
+between cases and controls
+
+621
+00:33:24,440 --> 00:33:28,330
+down the genome, but we
+haven't asked whether or not
+
+622
+00:33:28,330 --> 00:33:31,299
+they're on mom or dad, right?
+
+623
+00:33:31,299 --> 00:33:32,715
+We're just asking,
+are they there?
+
+624
+00:33:35,410 --> 00:33:39,200
+But it turns out that
+for questions like this,
+
+625
+00:33:39,200 --> 00:33:44,550
+we have to know whether or
+not the mutation occurred
+
+626
+00:33:44,550 --> 00:33:48,450
+in only in mom's chromosome
+or in both chromosomes
+
+627
+00:33:48,450 --> 00:33:53,200
+in this particular
+neighborhood, all right?
+
+628
+00:33:53,200 --> 00:33:58,060
+This is called phasing
+of the variants.
+
+629
+00:33:58,060 --> 00:34:00,260
+Phasing means
+placing the variants
+
+630
+00:34:00,260 --> 00:34:05,340
+on a particular chromosome.
+
+631
+00:34:05,340 --> 00:34:07,300
+And then, by phasing
+the variants,
+
+632
+00:34:07,300 --> 00:34:10,139
+you can figure out some
+of the possible phenotypic
+
+633
+00:34:10,139 --> 00:34:11,830
+consequences of them.
+
+634
+00:34:11,830 --> 00:34:15,830
+Because if they're not
+they phased, in this case,
+
+635
+00:34:15,830 --> 00:34:19,844
+it's going to be much less
+clear what's going on.
+
+636
+00:34:19,844 --> 00:34:21,219
+So then the question
+becomes, how
+
+637
+00:34:21,219 --> 00:34:24,020
+do we phase variants, right?
+
+638
+00:34:24,020 --> 00:34:28,670
+So phasing assigns alleles
+to the parental chromosomes.
+
+639
+00:34:28,670 --> 00:34:33,000
+And so, the set of alleles along
+a chromosomes is a haplotype.
+
+640
+00:34:33,000 --> 00:34:35,980
+We've talked about the
+idea of haplotypes.
+
+641
+00:34:35,980 --> 00:34:41,780
+So imagine one way to phase
+is that if I tell you,
+
+642
+00:34:41,780 --> 00:34:44,880
+by magic, in this population
+you're looking at,
+
+643
+00:34:44,880 --> 00:34:48,040
+here are all the
+haplotypes and these
+
+644
+00:34:48,040 --> 00:34:50,610
+are the only ones that exist.
+
+645
+00:34:50,610 --> 00:34:54,590
+You look in your
+haplotypes and you go, aha,
+
+646
+00:34:54,590 --> 00:35:00,560
+this haplotype exists but
+this one does not, right?
+
+647
+00:35:00,560 --> 00:35:03,540
+That this is a haplotype--
+this two purples together
+
+648
+00:35:03,540 --> 00:35:05,310
+is a haplotype, and
+this green without one
+
+649
+00:35:05,310 --> 00:35:06,555
+is another haplotype.
+
+650
+00:35:06,555 --> 00:35:10,690
+So you see which
+haplotypes exist-- that is,
+
+651
+00:35:10,690 --> 00:35:15,370
+what patterns of inheritance
+of alleles along a chromosome
+
+652
+00:35:15,370 --> 00:35:17,600
+you can detect.
+
+653
+00:35:17,600 --> 00:35:21,080
+And using the established
+empirical haplotypes,
+
+654
+00:35:21,080 --> 00:35:25,190
+you can phase the variants, OK?
+
+655
+00:35:25,190 --> 00:35:27,580
+Now the other way to
+phase the variants
+
+656
+00:35:27,580 --> 00:35:32,084
+is much, much simpler
+and much better, right?
+
+657
+00:35:32,084 --> 00:35:33,500
+The other way to
+phase variants is
+
+658
+00:35:33,500 --> 00:35:39,330
+you just have a single read that
+covers the entire thing, right?
+
+659
+00:35:39,330 --> 00:35:42,110
+And then the read, it
+will be manifest, right?
+
+660
+00:35:42,110 --> 00:35:44,230
+The read will cover
+the entire region
+
+661
+00:35:44,230 --> 00:35:46,990
+and then you see
+the two mutations
+
+662
+00:35:46,990 --> 00:35:48,850
+in that single
+region of the genome.
+
+663
+00:35:48,850 --> 00:35:51,410
+The problem we're up against
+is that most of our reads
+
+664
+00:35:51,410 --> 00:35:56,340
+are quite short and we're
+reassembling our genotypes
+
+665
+00:35:56,340 --> 00:35:59,140
+from a shattered genome.
+
+666
+00:35:59,140 --> 00:36:01,320
+If the genome wasn't
+shattered, then we
+
+667
+00:36:01,320 --> 00:36:03,320
+wouldn't have this problem.
+
+668
+00:36:03,320 --> 00:36:06,780
+So everybody's
+working to fix this.
+
+669
+00:36:06,780 --> 00:36:12,090
+Illumina has sort of a
+cute trick for fixing this.
+
+670
+00:36:12,090 --> 00:36:15,350
+And PacBio, which is
+another sequence instrument
+
+671
+00:36:15,350 --> 00:36:18,970
+manufacturer, can produce reads
+that are tens of thousands
+
+672
+00:36:18,970 --> 00:36:22,174
+of bases long, which allows
+you to directly phase
+
+673
+00:36:22,174 --> 00:36:23,340
+the variants from the reads.
+
+674
+00:36:25,519 --> 00:36:27,060
+But if somebody,
+once again, comes up
+
+675
+00:36:27,060 --> 00:36:29,650
+to you at the cocktail party
+tonight and says, you know,
+
+676
+00:36:29,650 --> 00:36:34,250
+I've never understood why
+you have to phase variants.
+
+677
+00:36:34,250 --> 00:36:37,010
+You know, this is a popular
+question I get all the time.
+
+678
+00:36:37,010 --> 00:36:38,754
+[LAUGHTER]
+
+679
+00:36:38,754 --> 00:36:41,420
+You can tell them,
+hey, you know,
+
+680
+00:36:41,420 --> 00:36:44,620
+you have to know whether or
+not mom and dad both have
+
+681
+00:36:44,620 --> 00:36:49,040
+got big problems or just all
+the problems are with mom, OK?
+
+682
+00:36:49,040 --> 00:36:50,450
+Or dad.
+
+683
+00:36:50,450 --> 00:36:53,680
+So you can put
+their mind at ease
+
+684
+00:36:53,680 --> 00:36:55,610
+as you're finishing
+off the hors d'oeuvres.
+
+685
+00:36:55,610 --> 00:36:59,240
+OK, so I wanted just to tell
+you about phasing variants
+
+686
+00:36:59,240 --> 00:37:03,400
+because we're about to go on to
+the next part of our discussion
+
+687
+00:37:03,400 --> 00:37:04,860
+today.
+
+688
+00:37:04,860 --> 00:37:08,030
+We are leaving the very
+clean and pristine world
+
+689
+00:37:08,030 --> 00:37:11,550
+of very defined SNPs,
+defined by microarrays,
+
+690
+00:37:11,550 --> 00:37:16,030
+into the wild and woolly world
+of sequencing data, right?
+
+691
+00:37:16,030 --> 00:37:18,840
+Which is all bets are off.
+
+692
+00:37:18,840 --> 00:37:21,370
+It's all raw
+sequencing data and you
+
+693
+00:37:21,370 --> 00:37:24,500
+have to make sense
+of it-- hundreds
+
+694
+00:37:24,500 --> 00:37:27,430
+of millions of sequencing reads.
+
+695
+00:37:27,430 --> 00:37:32,480
+So today's lecture is drawn from
+a couple of different sources.
+
+696
+00:37:32,480 --> 00:37:35,720
+I've posted some of
+them on the internet.
+
+697
+00:37:35,720 --> 00:37:38,600
+There's a very nice article
+by Heng Li on the underlying
+
+698
+00:37:38,600 --> 00:37:43,010
+mathematics of SNP calling and
+variation which I've posted.
+
+699
+00:37:43,010 --> 00:37:45,750
+In addition, some of
+the material today
+
+700
+00:37:45,750 --> 00:37:48,180
+is taken from the Genome
+Analysis Toolkit, which
+
+701
+00:37:48,180 --> 00:37:50,360
+is a set of tools
+over at the Broad,
+
+702
+00:37:50,360 --> 00:37:53,922
+and we'll be talking about
+that during today's lecture.
+
+703
+00:37:53,922 --> 00:37:56,380
+The best possible case when
+you're looking at sequence data
+
+704
+00:37:56,380 --> 00:37:59,000
+today is that you get
+something like this, all right?
+
+705
+00:37:59,000 --> 00:38:01,340
+Which is that you have
+a collection of reads
+
+706
+00:38:01,340 --> 00:38:07,370
+for one individual and you
+align them to the genome
+
+707
+00:38:07,370 --> 00:38:09,380
+and then you see that
+some of the reads
+
+708
+00:38:09,380 --> 00:38:12,690
+have a C at a particular base
+position and other of the reads
+
+709
+00:38:12,690 --> 00:38:16,490
+have a T at that base position.
+
+710
+00:38:16,490 --> 00:38:18,660
+And so it's a very
+clean call, right?
+
+711
+00:38:18,660 --> 00:38:22,980
+You have a CT heterozygote
+at that position-- that
+
+712
+00:38:22,980 --> 00:38:27,240
+is, whatever person that
+is is a heterozygote there.
+
+713
+00:38:27,240 --> 00:38:29,816
+You can see the reference genome
+at the very bottom, right?
+
+714
+00:38:29,816 --> 00:38:31,940
+So it's very difficult for
+you to read in the back,
+
+715
+00:38:31,940 --> 00:38:34,750
+but C is the reference allele.
+
+716
+00:38:34,750 --> 00:38:38,570
+And the way that
+the IGV viewer works
+
+717
+00:38:38,570 --> 00:38:41,140
+is that it shows non-reference
+alleles in color,
+
+718
+00:38:41,140 --> 00:38:46,410
+so all those are the T alleles
+you see there in red, OK?
+
+719
+00:38:46,410 --> 00:38:49,667
+And it's very, very
+beautiful, right?
+
+720
+00:38:49,667 --> 00:38:51,500
+I mean you can tell
+exactly what's going on.
+
+721
+00:38:51,500 --> 00:38:55,890
+Now we don't know whether
+or not the C or the T allele
+
+722
+00:38:55,890 --> 00:38:57,827
+are a mom and dad
+respectively, right?
+
+723
+00:38:57,827 --> 00:38:59,910
+We don't know which of the
+chromosomes they're on,
+
+724
+00:38:59,910 --> 00:39:04,340
+but suffice to say,
+it's very clean.
+
+725
+00:39:04,340 --> 00:39:06,300
+And the way that all of
+this starts, of course,
+
+726
+00:39:06,300 --> 00:39:08,880
+is with a BAM file.
+
+727
+00:39:08,880 --> 00:39:10,760
+You guys have seen
+BAM files before.
+
+728
+00:39:10,760 --> 00:39:12,370
+I'm not going to belabor this.
+
+729
+00:39:12,370 --> 00:39:14,470
+There's a definition
+here and you
+
+730
+00:39:14,470 --> 00:39:16,482
+can add extra
+annotations on BAM files.
+
+731
+00:39:16,482 --> 00:39:18,190
+But the other thing
+I wanted to point out
+
+732
+00:39:18,190 --> 00:39:21,750
+is that you know that BAM
+files include quality scores.
+
+733
+00:39:21,750 --> 00:39:25,450
+So we'll be using those quality
+scores in our discussion.
+
+734
+00:39:25,450 --> 00:39:28,050
+The output of all
+this typically is
+
+735
+00:39:28,050 --> 00:39:34,320
+something called a variant
+call file or a VCF file.
+
+736
+00:39:34,320 --> 00:39:40,810
+And just so you are
+not completely scared
+
+737
+00:39:40,810 --> 00:39:42,990
+by these files, I want to
+describe just a little bit
+
+738
+00:39:42,990 --> 00:39:44,510
+about their structure.
+
+739
+00:39:44,510 --> 00:39:46,800
+So there's a header
+at the top telling you
+
+740
+00:39:46,800 --> 00:39:48,560
+what you actually did.
+
+741
+00:39:48,560 --> 00:39:53,270
+And then chromosome 20 at this
+base location has this SNP.
+
+742
+00:39:53,270 --> 00:39:56,110
+The reference allele is
+G, the alternative allele
+
+743
+00:39:56,110 --> 00:40:00,444
+is A. This is some
+of the statistics
+
+744
+00:40:00,444 --> 00:40:02,110
+as described by this
+header information,
+
+745
+00:40:02,110 --> 00:40:05,240
+like DP is the read depth.
+
+746
+00:40:05,240 --> 00:40:09,870
+And this tells you the status
+of a trio that you processed.
+
+747
+00:40:09,870 --> 00:40:21,969
+So this is the
+allele number for one
+
+748
+00:40:21,969 --> 00:40:23,510
+of the chromosomes,
+which is 0, which
+
+749
+00:40:23,510 --> 00:40:26,610
+is a G. The other one's
+a G, and so forth.
+
+750
+00:40:26,610 --> 00:40:30,657
+And then this data right
+here is GT, GQ, GP,
+
+751
+00:40:30,657 --> 00:40:31,740
+which are defined up here.
+
+752
+00:40:31,740 --> 00:40:35,820
+So you have one person,
+second person, third person,
+
+753
+00:40:35,820 --> 00:40:39,990
+along with which one
+of the alleles, 0 or 1,
+
+754
+00:40:39,990 --> 00:40:43,110
+they have on each of
+their chromosomes, OK?
+
+755
+00:40:43,110 --> 00:40:44,480
+So this is the output.
+
+756
+00:40:44,480 --> 00:40:46,850
+You put in raw reads
+and what you get out
+
+757
+00:40:46,850 --> 00:40:50,250
+is a VCF file that for
+bases along the genome
+
+758
+00:40:50,250 --> 00:40:55,260
+calls variance, OK?
+
+759
+00:40:55,260 --> 00:40:57,190
+So that's all there
+is to it, right?
+
+760
+00:40:57,190 --> 00:40:59,530
+You take in your read data.
+
+761
+00:40:59,530 --> 00:41:02,670
+You take your genome, throw
+it through the sequencer.
+
+762
+00:41:02,670 --> 00:41:06,300
+You take the BAM file,
+you call the variants,
+
+763
+00:41:06,300 --> 00:41:09,900
+and then you make your
+medical diagnosis, right?
+
+764
+00:41:09,900 --> 00:41:12,390
+So what we're going to
+talk about is what goes on
+
+765
+00:41:12,390 --> 00:41:14,300
+in the middle there,
+that little step-- how
+
+766
+00:41:14,300 --> 00:41:16,510
+do you actually
+call the variants?
+
+767
+00:41:16,510 --> 00:41:18,689
+And you might say, gee,
+that does not seem too hard.
+
+768
+00:41:18,689 --> 00:41:20,480
+I mean, I looked at
+the slide you showed me
+
+769
+00:41:20,480 --> 00:41:21,970
+with the CT heterozygote.
+
+770
+00:41:21,970 --> 00:41:23,670
+That looked beautiful, right?
+
+771
+00:41:23,670 --> 00:41:25,490
+I mean, that was just gorgeous.
+
+772
+00:41:25,490 --> 00:41:28,440
+I mean, these sequencers are
+so great and do so many reads,
+
+773
+00:41:28,440 --> 00:41:30,870
+what can be hard
+about this, after all?
+
+774
+00:41:30,870 --> 00:41:34,310
+You know, it's a quarter
+to 2:00, time to go home.
+
+775
+00:41:34,310 --> 00:41:35,170
+Not quite, OK?
+
+776
+00:41:35,170 --> 00:41:35,670
+Not quite.
+
+777
+00:41:35,670 --> 00:41:40,390
+The reason is actual
+data looks like this.
+
+778
+00:41:40,390 --> 00:41:42,260
+So these are all reads
+aligned to the genome
+
+779
+00:41:42,260 --> 00:41:44,134
+and, as I told you
+before, all the colors are
+
+780
+00:41:44,134 --> 00:41:46,510
+non-reference bases.
+
+781
+00:41:46,510 --> 00:41:50,520
+And so you can see that
+the reads that come out
+
+782
+00:41:50,520 --> 00:41:54,070
+of an individual are
+very messy indeed.
+
+783
+00:41:54,070 --> 00:41:56,640
+And so we need to deal with
+those in a principled way.
+
+784
+00:41:56,640 --> 00:42:00,050
+We need to make good,
+probabilistic assessments of
+
+785
+00:42:00,050 --> 00:42:04,340
+whether or not there's a
+variant at a particular base.
+
+786
+00:42:04,340 --> 00:42:08,400
+And I'm not going to belabor
+all the steps of the Genome
+
+787
+00:42:08,400 --> 00:42:10,380
+Analysis Toolkit,
+suffice to say,
+
+788
+00:42:10,380 --> 00:42:13,620
+here is a flow chart of all
+the steps that go through it.
+
+789
+00:42:13,620 --> 00:42:15,920
+First, you map your reads.
+
+790
+00:42:15,920 --> 00:42:18,720
+You recalibrate the scores.
+
+791
+00:42:18,720 --> 00:42:21,120
+You compress the
+read set and then
+
+792
+00:42:21,120 --> 00:42:24,950
+you have read sets for
+n different individuals.
+
+793
+00:42:24,950 --> 00:42:27,430
+And then you jointly call
+the variants and then you
+
+794
+00:42:27,430 --> 00:42:32,130
+improve upon the variants
+and then you evaluate, OK?
+
+795
+00:42:32,130 --> 00:42:35,080
+So I'll touch upon some of
+the aspects of this pipeline,
+
+796
+00:42:35,080 --> 00:42:37,090
+the ones that I think
+are most relevant,
+
+797
+00:42:37,090 --> 00:42:41,400
+so that you can appreciate
+some of the complexity
+
+798
+00:42:41,400 --> 00:42:43,232
+in dealing with this.
+
+799
+00:42:43,232 --> 00:42:44,940
+Let me begin with the
+following question.
+
+800
+00:42:47,460 --> 00:42:54,750
+Let us suppose that you have
+a reference genome here,
+
+801
+00:42:54,750 --> 00:42:58,180
+indicated by this line,
+and you align a read to it.
+
+802
+00:42:58,180 --> 00:43:01,705
+And then there's some base
+errors that are non-reference,
+
+803
+00:43:01,705 --> 00:43:05,470
+so it's variants calls down
+at this end of the read, OK?
+
+804
+00:43:05,470 --> 00:43:07,950
+So this is the five
+prime, three prime.
+
+805
+00:43:07,950 --> 00:43:14,000
+And then you align a read
+from the opposite strand
+
+806
+00:43:14,000 --> 00:43:20,710
+and you have some variant
+calls on the opposite end
+
+807
+00:43:20,710 --> 00:43:21,660
+of the read like this.
+
+808
+00:43:24,137 --> 00:43:26,470
+And you'll say to yourself,
+what could be going on here,
+
+809
+00:43:26,470 --> 00:43:27,420
+you know?
+
+810
+00:43:27,420 --> 00:43:31,470
+Why is it that they're
+not concordant, right,
+
+811
+00:43:31,470 --> 00:43:35,310
+when they're mapped, but
+they're in the same region
+
+812
+00:43:35,310 --> 00:43:35,910
+of the genome?
+
+813
+00:43:38,710 --> 00:43:40,910
+And then you think
+to yourself, well,
+
+814
+00:43:40,910 --> 00:43:45,737
+what happens if I map this
+successfully here correctly
+
+815
+00:43:45,737 --> 00:43:47,486
+to the reference genome
+and this correctly
+
+816
+00:43:47,486 --> 00:43:52,010
+to the reference genome here,
+but this individual actually
+
+817
+00:43:52,010 --> 00:44:01,236
+had a chromosome that had
+a deletion right here, OK?
+
+818
+00:44:01,236 --> 00:44:03,610
+Then what would happen would
+be that all these reads down
+
+819
+00:44:03,610 --> 00:44:06,344
+here are going to be
+misaligned, all of these bases
+
+820
+00:44:06,344 --> 00:44:08,260
+are going to be misaligned
+with the reference.
+
+821
+00:44:08,260 --> 00:44:10,590
+And so you're going
+to get variant calls.
+
+822
+00:44:10,590 --> 00:44:13,660
+And these bases will be also
+misaligned with the reference,
+
+823
+00:44:13,660 --> 00:44:16,200
+you'll get variant calls.
+
+824
+00:44:16,200 --> 00:44:20,410
+So deletions in
+an individual can
+
+825
+00:44:20,410 --> 00:44:23,160
+cause things to
+be mapped but you
+
+826
+00:44:23,160 --> 00:44:27,540
+get variant calls at the end.
+
+827
+00:44:27,540 --> 00:44:30,750
+And so that is shown
+here, where you
+
+828
+00:44:30,750 --> 00:44:34,620
+have reads that are being mapped
+and you have variant calls
+
+829
+00:44:34,620 --> 00:44:37,330
+at the end of the reads.
+
+830
+00:44:37,330 --> 00:44:38,810
+And it's also a
+little suspicious
+
+831
+00:44:38,810 --> 00:44:44,980
+because in the middle here is
+a seven-base pair homopolymer
+
+832
+00:44:44,980 --> 00:44:46,950
+which is all T's.
+
+833
+00:44:46,950 --> 00:44:49,520
+And as we know,
+sequencers are notoriously
+
+834
+00:44:49,520 --> 00:44:53,610
+bad at correctly
+reading homopolymers.
+
+835
+00:44:53,610 --> 00:44:57,700
+So if you then
+correct things, you
+
+836
+00:44:57,700 --> 00:45:00,470
+discover that some
+fraction of the reads
+
+837
+00:45:00,470 --> 00:45:07,070
+actually have one of the T's
+missing and all the variants
+
+838
+00:45:07,070 --> 00:45:10,890
+that were present
+before go away.
+
+839
+00:45:10,890 --> 00:45:15,800
+So this is a process
+of INDEL adjustment
+
+840
+00:45:15,800 --> 00:45:19,730
+when you are mapping the
+region looking for variants.
+
+841
+00:45:19,730 --> 00:45:26,190
+Now this does not occur we're
+talking about SNP microarrays.
+
+842
+00:45:26,190 --> 00:45:29,200
+So this is a problem
+that's unique to the fact
+
+843
+00:45:29,200 --> 00:45:32,020
+that we're making many
+fewer assumptions when
+
+844
+00:45:32,020 --> 00:45:34,350
+we map reads to
+the genome de novo.
+
+845
+00:45:37,070 --> 00:45:39,470
+The second and another
+very important step
+
+846
+00:45:39,470 --> 00:45:44,090
+that they're very proud
+of is essentially--
+
+847
+00:45:44,090 --> 00:45:46,400
+I guess how to put this
+politely-- finding out
+
+848
+00:45:46,400 --> 00:45:49,120
+that manufacturers of
+sequencing instruments,
+
+849
+00:45:49,120 --> 00:45:51,162
+as you know, for every
+base that they give you,
+
+850
+00:45:51,162 --> 00:45:52,995
+they give you an estimate
+of the probability
+
+851
+00:45:52,995 --> 00:45:56,240
+that the base is correct--
+or it's wrong, actually.
+
+852
+00:45:56,240 --> 00:45:59,350
+A so-called Phred score--
+we've talked about that before.
+
+853
+00:45:59,350 --> 00:46:03,080
+And as you would imagine,
+manufacturers' instruments
+
+854
+00:46:03,080 --> 00:46:06,320
+are sometimes optimistic,
+to say the least, about
+
+855
+00:46:06,320 --> 00:46:08,300
+the quality of their scores.
+
+856
+00:46:08,300 --> 00:46:12,310
+And so they did a survey of
+a whole bunch of instruments
+
+857
+00:46:12,310 --> 00:46:17,002
+and they plotted the reported
+score against the actual score,
+
+858
+00:46:17,002 --> 00:46:18,360
+OK?
+
+859
+00:46:18,360 --> 00:46:20,510
+And then they have a whole
+step in their pipeline
+
+860
+00:46:20,510 --> 00:46:24,850
+to adjust the scores, whether
+you be a Solexa GA instrument,
+
+861
+00:46:24,850 --> 00:46:28,370
+a 454 instrument, a SOLiD
+instrument, a HiSeq instrument,
+
+862
+00:46:28,370 --> 00:46:30,210
+or what have you.
+
+863
+00:46:30,210 --> 00:46:35,210
+And there is a way to adjust the
+score based upon the raw score
+
+864
+00:46:35,210 --> 00:46:37,810
+and also how far down
+the read you are,
+
+865
+00:46:37,810 --> 00:46:39,990
+as the second line shows.
+
+866
+00:46:39,990 --> 00:46:43,240
+The second line is a
+function of score correction
+
+867
+00:46:43,240 --> 00:46:47,150
+versus how far down the read or
+number of cycles you have gone.
+
+868
+00:46:47,150 --> 00:46:53,304
+And the bottom is adjustments
+for dinucleotides,
+
+869
+00:46:53,304 --> 00:46:54,720
+because some
+instruments are worse
+
+870
+00:46:54,720 --> 00:46:56,566
+a certain dinucleotides
+than others.
+
+871
+00:46:56,566 --> 00:46:58,940
+As you can see, they're very
+proud of the upper left hand
+
+872
+00:46:58,940 --> 00:46:59,440
+part.
+
+873
+00:46:59,440 --> 00:47:01,500
+This is one of the major
+methodological advances
+
+874
+00:47:01,500 --> 00:47:04,610
+of 1000 Genome
+Project, figuring out
+
+875
+00:47:04,610 --> 00:47:11,370
+how to recalibrate quality
+scores for instruments.
+
+876
+00:47:11,370 --> 00:47:14,320
+Why is this so important?
+
+877
+00:47:14,320 --> 00:47:18,290
+The reason it's important
+is that the estimate
+
+878
+00:47:18,290 --> 00:47:23,080
+of the veracity of
+bases figures centrally
+
+879
+00:47:23,080 --> 00:47:27,240
+in determining whether or
+not a variant is real or not.
+
+880
+00:47:27,240 --> 00:47:30,530
+So you need to have as best
+an estimate as you possibly
+
+881
+00:47:30,530 --> 00:47:34,550
+can of whether or not a base
+coming out of the sequencer
+
+882
+00:47:34,550 --> 00:47:36,660
+is correct, OK?
+
+883
+00:47:40,720 --> 00:47:44,060
+Now if you're doing
+lots of sequencing
+
+884
+00:47:44,060 --> 00:47:46,980
+of either individuals
+or exomes--
+
+885
+00:47:46,980 --> 00:47:50,710
+I should talk about exome
+sequencing for a moment.
+
+886
+00:47:50,710 --> 00:47:52,210
+Up until recently,
+it has not really
+
+887
+00:47:52,210 --> 00:47:54,150
+been practical to
+do whole genome
+
+888
+00:47:54,150 --> 00:47:56,580
+sequencing of individuals.
+
+889
+00:47:56,580 --> 00:48:00,300
+That's why these SNP arrays
+were originally invented.
+
+890
+00:48:00,300 --> 00:48:04,550
+Instead, people sequenced the
+expressed part of the genome,
+
+891
+00:48:04,550 --> 00:48:05,050
+right?
+
+892
+00:48:05,050 --> 00:48:08,150
+All of the genes.
+
+893
+00:48:08,150 --> 00:48:10,160
+And they can do this
+by capture, right?
+
+894
+00:48:10,160 --> 00:48:12,950
+They go fishing.
+
+895
+00:48:12,950 --> 00:48:19,480
+They create fishing poles out of
+the genes that they care about
+
+896
+00:48:19,480 --> 00:48:22,550
+and they pull out the
+sequences of those genes
+
+897
+00:48:22,550 --> 00:48:23,610
+and they sequence them.
+
+898
+00:48:23,610 --> 00:48:26,310
+So you're looking at a
+subset of the genome,
+
+899
+00:48:26,310 --> 00:48:28,970
+but it's an important part.
+
+900
+00:48:28,970 --> 00:48:32,130
+Nonetheless, whether or
+not you do exome sequencing
+
+901
+00:48:32,130 --> 00:48:35,020
+or you do sequencing
+of the entire genome,
+
+902
+00:48:35,020 --> 00:48:36,590
+you have a lot of reads.
+
+903
+00:48:36,590 --> 00:48:40,180
+And so the reads that you
+care about are the reads that
+
+904
+00:48:40,180 --> 00:48:43,150
+are different from reference.
+
+905
+00:48:43,150 --> 00:48:47,120
+And so you can reduce the
+representation of their BAM
+
+906
+00:48:47,120 --> 00:48:50,510
+file simply by throwing all
+the reads on the floor that
+
+907
+00:48:50,510 --> 00:48:52,180
+don't matter, right?
+
+908
+00:48:52,180 --> 00:48:55,100
+And so here's an example of
+the original BAM file and all
+
+909
+00:48:55,100 --> 00:48:57,060
+the reads, and what
+you do is you just
+
+910
+00:48:57,060 --> 00:49:01,730
+trim it to only the
+variable regions, right?
+
+911
+00:49:01,730 --> 00:49:05,340
+And so you are
+stripping information
+
+912
+00:49:05,340 --> 00:49:11,940
+around the variant regions
+out of the BAM file
+
+913
+00:49:11,940 --> 00:49:15,790
+and things greatly compress
+and the downstream processing
+
+914
+00:49:15,790 --> 00:49:16,965
+becomes much more efficient.
+
+915
+00:49:19,540 --> 00:49:21,470
+OK.
+
+916
+00:49:21,470 --> 00:49:26,240
+Now let's turn to the
+methodological approaches
+
+917
+00:49:26,240 --> 00:49:28,770
+once we have gotten the
+data in as good a form
+
+918
+00:49:28,770 --> 00:49:32,500
+as we possibly can get it, we
+have the best quality scores
+
+919
+00:49:32,500 --> 00:49:34,930
+that we can possibly
+come up with,
+
+920
+00:49:34,930 --> 00:49:40,430
+and for every base position,
+we have an indication
+
+921
+00:49:40,430 --> 00:49:43,160
+of how many reads say
+that the base is this
+
+922
+00:49:43,160 --> 00:49:46,000
+and how many reads say
+the base is that, OK?
+
+923
+00:49:46,000 --> 00:49:51,860
+So we have these raw read counts
+of the different allelic forms.
+
+924
+00:49:51,860 --> 00:49:56,250
+And returning to this,
+we now can go back
+
+925
+00:49:56,250 --> 00:49:59,060
+and we can attempt
+to take these reads
+
+926
+00:49:59,060 --> 00:50:02,891
+and determine what the
+underlying genotypes are
+
+927
+00:50:02,891 --> 00:50:03,640
+for an individual.
+
+928
+00:50:06,419 --> 00:50:08,210
+Now I want to be clear
+about the difference
+
+929
+00:50:08,210 --> 00:50:09,810
+between a genotype
+for an individual
+
+930
+00:50:09,810 --> 00:50:13,310
+and an allelic spectrum
+for a population.
+
+931
+00:50:13,310 --> 00:50:15,820
+A genotype for an
+individual thinks
+
+932
+00:50:15,820 --> 00:50:18,570
+about both of the alleles
+that that individual has,
+
+933
+00:50:18,570 --> 00:50:20,830
+and they can be phased
+or unphased, right?
+
+934
+00:50:20,830 --> 00:50:22,400
+If they're phased,
+it means you know
+
+935
+00:50:22,400 --> 00:50:25,460
+which allele belongs to mom and
+which allele belongs to dad,
+
+936
+00:50:25,460 --> 00:50:27,660
+so to speak, right?
+
+937
+00:50:27,660 --> 00:50:31,580
+If they're unphased, you
+simply know the number
+
+938
+00:50:31,580 --> 00:50:35,360
+of reference alleles that
+you have in that individual.
+
+939
+00:50:35,360 --> 00:50:38,570
+Typically, people think about
+there being a reference allele
+
+940
+00:50:38,570 --> 00:50:45,440
+and an alternative allele,
+which means that a genotype can
+
+941
+00:50:45,440 --> 00:50:49,160
+be expressed as
+0, 1, or 2, which
+
+942
+00:50:49,160 --> 00:50:50,680
+is the number of
+reference alleles
+
+943
+00:50:50,680 --> 00:50:55,660
+present at a particular base
+if it's unphased, right?
+
+944
+00:50:55,660 --> 00:50:59,270
+0, 1, or 2-- 0 mean there are
+no reference alleles there,
+
+945
+00:50:59,270 --> 00:51:01,150
+1 meaning that it's
+a heterozygote,
+
+946
+00:51:01,150 --> 00:51:05,920
+2 mean there are two reference
+alleles in that individual.
+
+947
+00:51:05,920 --> 00:51:07,692
+OK?
+
+948
+00:51:07,692 --> 00:51:09,900
+So there are different ways
+of representing genotype,
+
+949
+00:51:09,900 --> 00:51:14,610
+but once again, it represents
+the different allelic forms
+
+950
+00:51:14,610 --> 00:51:17,440
+of the two chromosomes.
+
+951
+00:51:17,440 --> 00:51:21,440
+And whatever form you
+choose, the probability
+
+952
+00:51:21,440 --> 00:51:24,114
+over those genotypes
+has to sum to 1.
+
+953
+00:51:24,114 --> 00:51:25,780
+You can think about
+the genotype ranging
+
+954
+00:51:25,780 --> 00:51:31,930
+over all the possible bases from
+mom and from dad or over 0, 1,
+
+955
+00:51:31,930 --> 00:51:32,465
+and 2.
+
+956
+00:51:32,465 --> 00:51:34,590
+Doesn't really matter,
+depending upon which way you
+
+957
+00:51:34,590 --> 00:51:37,970
+want to simplify the problem.
+
+958
+00:51:37,970 --> 00:51:42,200
+And what we would like to do
+is, for a given population--
+
+959
+00:51:42,200 --> 00:51:44,720
+let's say cases
+or controls-- we'd
+
+960
+00:51:44,720 --> 00:51:47,870
+like to compute the
+probability over the genotypes
+
+961
+00:51:47,870 --> 00:51:54,410
+with high veracity, OK?
+
+962
+00:51:54,410 --> 00:51:59,200
+So in order to do
+that, we'll start
+
+963
+00:51:59,200 --> 00:52:01,330
+by taking all the
+reads for each one
+
+964
+00:52:01,330 --> 00:52:05,025
+of the individuals
+in a population, OK?
+
+965
+00:52:05,025 --> 00:52:07,280
+And we're going to compute
+the genotype likelihoods
+
+966
+00:52:07,280 --> 00:52:10,170
+for each individual.
+
+967
+00:52:10,170 --> 00:52:13,880
+So let's talk about
+how to do that.
+
+968
+00:52:13,880 --> 00:52:16,740
+Now everything I've written on
+the board is on the next slide.
+
+969
+00:52:16,740 --> 00:52:18,760
+The problem is, if I
+put it on the slide,
+
+970
+00:52:18,760 --> 00:52:20,800
+it will flash in front
+of you and you'll go,
+
+971
+00:52:20,800 --> 00:52:24,059
+yes, I understand that, I think.
+
+972
+00:52:24,059 --> 00:52:25,725
+This way, I'll put
+it on the board first
+
+973
+00:52:25,725 --> 00:52:26,810
+and you'll look at
+it and you'll say,
+
+974
+00:52:26,810 --> 00:52:28,765
+hm, maybe I don't
+understand that, I think.
+
+975
+00:52:28,765 --> 00:52:30,140
+And then you'll
+ask any questions
+
+976
+00:52:30,140 --> 00:52:32,380
+and we can look at the
+slide in a moment, OK?
+
+977
+00:52:32,380 --> 00:52:36,680
+But here's the fundamental
+idea, all right?
+
+978
+00:52:36,680 --> 00:52:39,420
+At a given base in the
+genome, the probability
+
+979
+00:52:39,420 --> 00:52:42,820
+of the reads that we see based
+upon the genotype that we think
+
+980
+00:52:42,820 --> 00:52:48,550
+is there can be expressed
+in the following form, which
+
+981
+00:52:48,550 --> 00:52:52,470
+is that we take the product over
+all the reads that we see, OK?
+
+982
+00:52:52,470 --> 00:52:59,322
+And the genotype is going to
+be a composition of the base we
+
+983
+00:52:59,322 --> 00:53:01,280
+get from mom and the base
+that we get from dad,
+
+984
+00:53:01,280 --> 00:53:05,480
+or it could simply
+be 0, 1, and 2.
+
+985
+00:53:05,480 --> 00:53:08,790
+We'll put that
+aside for a moment.
+
+986
+00:53:08,790 --> 00:53:11,850
+So what's the chance that
+we inherited something
+
+987
+00:53:11,850 --> 00:53:16,260
+from a particular base from mom?
+
+988
+00:53:16,260 --> 00:53:20,590
+It's this base over
+a particular read.
+
+989
+00:53:20,590 --> 00:53:22,340
+What's the chance
+a particular read
+
+990
+00:53:22,340 --> 00:53:25,030
+came from mom's chromosome?
+
+991
+00:53:25,030 --> 00:53:26,830
+That's one half
+times the probability
+
+992
+00:53:26,830 --> 00:53:31,930
+of the data given
+the base that we see.
+
+993
+00:53:31,930 --> 00:53:33,840
+And once again, since
+it could be a coin
+
+994
+00:53:33,840 --> 00:53:37,070
+flip whether the read came
+from mom or dad's chromosome,
+
+995
+00:53:37,070 --> 00:53:39,710
+divide it by 2-- the
+probability of the data
+
+996
+00:53:39,710 --> 00:53:43,555
+that we see with dad's version
+of that particular base.
+
+997
+00:53:46,090 --> 00:53:50,060
+So once again, for
+all the reads we're
+
+998
+00:53:50,060 --> 00:53:52,120
+going to compute the
+probability of the read set
+
+999
+00:53:52,120 --> 00:53:56,730
+that we see given a particular
+hypothesized genotype
+
+1000
+00:53:56,730 --> 00:54:01,080
+by looking at what's the
+likelihood or the probability
+
+1001
+00:54:01,080 --> 00:54:03,427
+of all those reads.
+
+1002
+00:54:03,427 --> 00:54:05,010
+And for each read,
+we don't know if it
+
+1003
+00:54:05,010 --> 00:54:06,247
+came from mom or from dad.
+
+1004
+00:54:06,247 --> 00:54:08,580
+But in any event, we're going
+to compute the probability
+
+1005
+00:54:08,580 --> 00:54:11,680
+on the next blackboard,
+this bit right here.
+
+1006
+00:54:11,680 --> 00:54:13,460
+OK?
+
+1007
+00:54:13,460 --> 00:54:15,306
+Yes?
+
+1008
+00:54:15,306 --> 00:54:17,732
+AUDIENCE: So if you assume
+that mom and dad have
+
+1009
+00:54:17,732 --> 00:54:23,547
+a different phase at
+a particular base,
+
+1010
+00:54:23,547 --> 00:54:25,338
+couldn't that possibly
+skew the probability
+
+1011
+00:54:25,338 --> 00:54:28,314
+of getting a read from mom's
+chromosome or dad's chromosome?
+
+1012
+00:54:31,336 --> 00:54:33,434
+PROFESSOR: A different phase?
+
+1013
+00:54:33,434 --> 00:54:39,802
+AUDIENCE: So the composition
+of bases affect what you get.
+
+1014
+00:54:39,802 --> 00:54:45,258
+I think certain
+base compositions
+
+1015
+00:54:45,258 --> 00:54:48,250
+are more likely to be
+sequenced, for example.
+
+1016
+00:54:48,250 --> 00:54:48,930
+PROFESSOR: Yes.
+
+1017
+00:54:48,930 --> 00:54:50,910
+AUDIENCE: Could that bias--
+
+1018
+00:54:50,910 --> 00:54:51,535
+PROFESSOR: Yes.
+
+1019
+00:54:51,535 --> 00:54:54,720
+In fact, that's why on,
+I think, the third slide,
+
+1020
+00:54:54,720 --> 00:54:57,940
+I said non-random genotyping
+error was being excluded.
+
+1021
+00:54:57,940 --> 00:54:59,292
+AUDIENCE: Oh.
+
+1022
+00:54:59,292 --> 00:55:00,000
+PROFESSOR: Right?
+
+1023
+00:55:00,000 --> 00:55:01,010
+From our discussion today?
+
+1024
+00:55:01,010 --> 00:55:03,510
+But you're right that it might
+be that certain sequences are
+
+1025
+00:55:03,510 --> 00:55:07,240
+more difficult to
+see, but we're going
+
+1026
+00:55:07,240 --> 00:55:09,030
+to exclude that
+for the time being.
+
+1027
+00:55:09,030 --> 00:55:11,220
+OK?
+
+1028
+00:55:11,220 --> 00:55:13,010
+So this is the
+probability of the reads
+
+1029
+00:55:13,010 --> 00:55:17,320
+that we see given a
+hypothesized genotype.
+
+1030
+00:55:17,320 --> 00:55:20,500
+And I'll just show you,
+that's very simple.
+
+1031
+00:55:20,500 --> 00:55:23,390
+That we have a read, let's
+call the read D sub j,
+
+1032
+00:55:23,390 --> 00:55:26,770
+and we have the base that
+we think we should see.
+
+1033
+00:55:26,770 --> 00:55:30,000
+And if the base is correct,
+then the probability
+
+1034
+00:55:30,000 --> 00:55:33,210
+that that's correct is 1
+minus the error, right,
+
+1035
+00:55:33,210 --> 00:55:35,090
+that the machine reported.
+
+1036
+00:55:35,090 --> 00:55:36,850
+And if it isn't
+correct, the probability
+
+1037
+00:55:36,850 --> 00:55:41,350
+is just the error at that base
+that the machine reported.
+
+1038
+00:55:41,350 --> 00:55:44,530
+So we're using the error
+statistics from the machine
+
+1039
+00:55:44,530 --> 00:55:48,892
+and if it matches what we
+expect, it's 1 minus the error.
+
+1040
+00:55:48,892 --> 00:55:50,850
+And if it doesn't match,
+it's just simply going
+
+1041
+00:55:50,850 --> 00:55:54,590
+to be the error
+that's reported, OK?
+
+1042
+00:55:54,590 --> 00:55:57,567
+So this is the probability of
+seeing a particular read given
+
+1043
+00:55:57,567 --> 00:55:59,275
+a hypothesized base
+that should be there.
+
+1044
+00:56:02,270 --> 00:56:05,550
+Here's how we use that, looking
+at all the possible bases that
+
+1045
+00:56:05,550 --> 00:56:09,540
+could be there given a
+hypothesized genotype.
+
+1046
+00:56:09,540 --> 00:56:12,340
+Remember, this genotype is
+only going to be one pair.
+
+1047
+00:56:12,340 --> 00:56:14,720
+It's only going to be AA or
+TT or what have you, right?
+
+1048
+00:56:14,720 --> 00:56:16,870
+So it's going to be one pair.
+
+1049
+00:56:16,870 --> 00:56:21,170
+So we're going to be testing
+for either one or two bases
+
+1050
+00:56:21,170 --> 00:56:23,270
+being present.
+
+1051
+00:56:23,270 --> 00:56:29,060
+And finally, we want to
+compute the posterior
+
+1052
+00:56:29,060 --> 00:56:33,400
+of the genotype given the
+data we have observed, OK?
+
+1053
+00:56:33,400 --> 00:56:37,930
+So we want to compute what's
+the probability of the genotype
+
+1054
+00:56:37,930 --> 00:56:40,779
+given the reads that
+we have in our hand.
+
+1055
+00:56:40,779 --> 00:56:41,820
+This is really important.
+
+1056
+00:56:41,820 --> 00:56:47,540
+That is what that genotype
+likelihood is up there.
+
+1057
+00:56:47,540 --> 00:56:51,377
+It's the probability of the read
+set given the genotype times
+
+1058
+00:56:51,377 --> 00:56:52,960
+the probability of
+the genotype-- this
+
+1059
+00:56:52,960 --> 00:56:56,286
+is a prior-- over the
+probability of the data.
+
+1060
+00:56:56,286 --> 00:56:57,410
+This is simply Bayes' Rule.
+
+1061
+00:57:00,120 --> 00:57:04,390
+So with this, for
+an individual now,
+
+1062
+00:57:04,390 --> 00:57:07,150
+we can compute the
+posterior of the genotype
+
+1063
+00:57:07,150 --> 00:57:10,150
+given the read set.
+
+1064
+00:57:10,150 --> 00:57:12,270
+Very simple concept.
+
+1065
+00:57:12,270 --> 00:57:16,990
+So in another form, you can
+see the same thing here,
+
+1066
+00:57:16,990 --> 00:57:19,960
+which is the Bayesian model.
+
+1067
+00:57:19,960 --> 00:57:22,630
+And we've talked about this
+haploid likelihood function,
+
+1068
+00:57:22,630 --> 00:57:26,880
+which was on the
+blackboard I showed you.
+
+1069
+00:57:26,880 --> 00:57:29,120
+And we're assuming all
+the reads are independent
+
+1070
+00:57:29,120 --> 00:57:31,170
+and that they're
+going to come equally
+
+1071
+00:57:31,170 --> 00:57:36,940
+from mom and dad, more
+or less, et cetera, OK?
+
+1072
+00:57:36,940 --> 00:57:43,050
+And the haploid likelihood
+function, once again,
+
+1073
+00:57:43,050 --> 00:57:47,410
+just is using the error
+statistics for the machine.
+
+1074
+00:57:47,410 --> 00:57:50,525
+So I'm asking if the
+machine says this is an A
+
+1075
+00:57:50,525 --> 00:57:54,900
+and I think it's an A, then the
+probability that that's correct
+
+1076
+00:57:54,900 --> 00:57:58,570
+is 1 minus the error
+of the machine.
+
+1077
+00:57:58,570 --> 00:58:00,870
+If the two are not
+in agreement, it's
+
+1078
+00:58:00,870 --> 00:58:03,250
+simply the error in the
+machine that I'm using.
+
+1079
+00:58:03,250 --> 00:58:08,700
+So this allows me now to
+give a posterior probability
+
+1080
+00:58:08,700 --> 00:58:12,320
+of a genotype given a
+whole bunch of reads.
+
+1081
+00:58:15,030 --> 00:58:19,090
+And the one part that
+we haven't discussed
+
+1082
+00:58:19,090 --> 00:58:22,800
+is this prior,
+which is how do we
+
+1083
+00:58:22,800 --> 00:58:25,745
+establish what we think is
+going on in the population
+
+1084
+00:58:25,745 --> 00:58:29,190
+and how do we set that?
+
+1085
+00:58:29,190 --> 00:58:31,960
+So if you look back
+at the slide again,
+
+1086
+00:58:31,960 --> 00:58:33,820
+you can see that we
+have these individuals
+
+1087
+00:58:33,820 --> 00:58:36,920
+and there's this magic step
+on the right-hand side, which
+
+1088
+00:58:36,920 --> 00:58:39,440
+is that somehow we're
+going to compute
+
+1089
+00:58:39,440 --> 00:58:42,660
+a joint estimate
+across all the samples
+
+1090
+00:58:42,660 --> 00:58:46,000
+to come up with an estimate
+of what the genotypes are
+
+1091
+00:58:46,000 --> 00:58:51,000
+in a particular SNP position.
+
+1092
+00:58:51,000 --> 00:58:55,660
+And the way that we can do
+that is with an iterative EM
+
+1093
+00:58:55,660 --> 00:58:59,090
+procedure-- looks
+like this-- so we
+
+1094
+00:58:59,090 --> 00:59:06,840
+can estimate the probability
+of the population genotype
+
+1095
+00:59:06,840 --> 00:59:12,342
+iteratively using this
+equation until convergence.
+
+1096
+00:59:12,342 --> 00:59:13,550
+And there are various tricks.
+
+1097
+00:59:13,550 --> 00:59:15,610
+As you'll see if you
+want to delve further
+
+1098
+00:59:15,610 --> 00:59:17,930
+into this in the
+paper I posted, there
+
+1099
+00:59:17,930 --> 00:59:21,040
+are ways to deal with some
+of the numerical issues
+
+1100
+00:59:21,040 --> 00:59:23,290
+and do allele count
+frequencies and so forth.
+
+1101
+00:59:23,290 --> 00:59:25,860
+But fundamentally,
+in a population
+
+1102
+00:59:25,860 --> 00:59:27,840
+we're going to
+estimate a probability
+
+1103
+00:59:27,840 --> 00:59:32,182
+over the genotypes for
+a particular position.
+
+1104
+00:59:32,182 --> 00:59:33,640
+And just to keep
+it simple, you can
+
+1105
+00:59:33,640 --> 00:59:36,780
+think about the
+genotypes being 0, 1,
+
+1106
+00:59:36,780 --> 00:59:40,990
+or 2-- 0, no reference
+alleles present;
+
+1107
+00:59:40,990 --> 00:59:44,980
+1, one reference allele present
+to that site; 2, two reference
+
+1108
+00:59:44,980 --> 00:59:48,182
+alleles present
+to that site, OK?
+
+1109
+00:59:48,182 --> 00:59:49,640
+So we get a
+probability of each one
+
+1110
+00:59:49,640 --> 00:59:51,520
+of those states for
+that population.
+
+1111
+00:59:57,310 --> 01:00:00,760
+Any questions at all about that?
+
+1112
+01:00:00,760 --> 01:00:02,280
+The details or anything at all?
+
+1113
+01:00:06,010 --> 01:00:08,300
+People get the general idea
+that what we're just doing
+
+1114
+01:00:08,300 --> 01:00:12,900
+is we're taking a bunch of
+reads at a particular position
+
+1115
+01:00:12,900 --> 01:00:16,660
+for an individual and
+computing the posterior
+
+1116
+01:00:16,660 --> 01:00:20,070
+probability of a genotype
+seeing all of those reads
+
+1117
+01:00:20,070 --> 01:00:23,970
+and then, when we think about
+the entire population-- say
+
+1118
+01:00:23,970 --> 01:00:26,340
+either the cases
+or the controls--
+
+1119
+01:00:26,340 --> 01:00:29,000
+we're computing the
+probability over the genotypes
+
+1120
+01:00:29,000 --> 01:00:31,430
+within that population
+using this kind
+
+1121
+01:00:31,430 --> 01:00:32,614
+of iterative procedure.
+
+1122
+01:00:37,720 --> 01:00:44,710
+OK, so going on then, if
+we go back to our 0, 1,
+
+1123
+01:00:44,710 --> 01:00:47,260
+2 kind of genotype
+representation,
+
+1124
+01:00:47,260 --> 01:00:51,190
+we can marginalize psi,
+which is the probability
+
+1125
+01:00:51,190 --> 01:00:53,195
+of the reference allele
+being in the population,
+
+1126
+01:00:53,195 --> 01:00:54,815
+and 1 minus psi
+being the probability
+
+1127
+01:00:54,815 --> 01:00:58,280
+of the non-reference allele,
+where the capital alleles are
+
+1128
+01:00:58,280 --> 01:01:01,870
+reference and the little
+ones are non-reference.
+
+1129
+01:01:01,870 --> 01:01:05,870
+And then we could also
+for epsilon 0, epsilon 1,
+
+1130
+01:01:05,870 --> 01:01:08,540
+And Epsilon 2, those
+are the probabilities
+
+1131
+01:01:08,540 --> 01:01:12,820
+of the various allelic
+forms, the various genotypes.
+
+1132
+01:01:15,330 --> 01:01:17,740
+And actually, I think
+epsilon 0 should be little A,
+
+1133
+01:01:17,740 --> 01:01:19,820
+little A. Must have
+got the two of them
+
+1134
+01:01:19,820 --> 01:01:23,740
+flipped, but it's not
+really that important.
+
+1135
+01:01:23,740 --> 01:01:28,910
+OK, so what do we know
+about a population?
+
+1136
+01:01:28,910 --> 01:01:31,050
+Who's heard about
+Hardy-Weinberg before?
+
+1137
+01:01:31,050 --> 01:01:33,420
+Hardy-Weinberg equilibrium?
+
+1138
+01:01:33,420 --> 01:01:34,970
+OK.
+
+1139
+01:01:34,970 --> 01:01:38,210
+So Hardy-Weinberg equilibrium
+says that, for example,
+
+1140
+01:01:38,210 --> 01:01:40,740
+in a population, if the allelic
+frequency of the reference
+
+1141
+01:01:40,740 --> 01:01:44,810
+allele is psi, right, what's
+the chance that an individual
+
+1142
+01:01:44,810 --> 01:01:48,690
+should be AA, big A, big
+A, reference, reference?
+
+1143
+01:01:51,630 --> 01:01:54,980
+In a population?
+
+1144
+01:01:54,980 --> 01:01:57,269
+Pardon?
+
+1145
+01:01:57,269 --> 01:01:58,060
+I think I heard it.
+
+1146
+01:01:58,060 --> 01:02:00,190
+Psi squared, right?
+
+1147
+01:02:00,190 --> 01:02:02,640
+We're going to assume
+diploid organisms,
+
+1148
+01:02:02,640 --> 01:02:04,242
+we're going to
+assume random mating,
+
+1149
+01:02:04,242 --> 01:02:05,700
+we're going to
+assume no selection,
+
+1150
+01:02:05,700 --> 01:02:09,430
+we're going to assume no
+bottlenecks, and so forth,
+
+1151
+01:02:09,430 --> 01:02:10,110
+right?
+
+1152
+01:02:10,110 --> 01:02:13,826
+That over time, the population
+will come to its equilibrium
+
+1153
+01:02:13,826 --> 01:02:15,300
+in the exchange of alleles.
+
+1154
+01:02:15,300 --> 01:02:17,780
+However, if there's
+strong selection
+
+1155
+01:02:17,780 --> 01:02:20,460
+or if part of the
+population gets up and moves
+
+1156
+01:02:20,460 --> 01:02:23,030
+to a different continent
+or something of that sort,
+
+1157
+01:02:23,030 --> 01:02:25,920
+you can get out of equilibrium.
+
+1158
+01:02:25,920 --> 01:02:27,420
+And so one question,
+whenever you're
+
+1159
+01:02:27,420 --> 01:02:28,794
+doing a genetic
+study like this--
+
+1160
+01:02:28,794 --> 01:02:31,320
+is your population in
+equilibrium or not?
+
+1161
+01:02:34,270 --> 01:02:37,570
+And we have a direct way for
+testing for that because we're
+
+1162
+01:02:37,570 --> 01:02:40,330
+actually estimating
+the genotypes, right?
+
+1163
+01:02:40,330 --> 01:02:44,670
+So what we can do is this test.
+
+1164
+01:02:44,670 --> 01:02:48,020
+We can do a log likelihood
+test directly, right?
+
+1165
+01:02:48,020 --> 01:02:52,060
+And we can compare the
+probability of the observed
+
+1166
+01:02:52,060 --> 01:02:58,090
+genotypes-- these are E1 and
+E2, where the number indicates
+
+1167
+01:02:58,090 --> 01:03:02,340
+the number of reference
+copies-- over the probability
+
+1168
+01:03:02,340 --> 01:03:08,090
+of the genotypes being
+composed directly
+
+1169
+01:03:08,090 --> 01:03:12,980
+from the frequency of
+the reference allele.
+
+1170
+01:03:12,980 --> 01:03:17,160
+And this will tell
+us whether or not
+
+1171
+01:03:17,160 --> 01:03:20,330
+these are concordant or not.
+
+1172
+01:03:20,330 --> 01:03:22,410
+And if the Chi-square
+value is large enough,
+
+1173
+01:03:22,410 --> 01:03:26,750
+we're going to say that this
+divergence couldn't have
+
+1174
+01:03:26,750 --> 01:03:29,630
+occurred at random and
+therefore the population is not
+
+1175
+01:03:29,630 --> 01:03:30,255
+in equilibrium.
+
+1176
+01:03:32,950 --> 01:03:35,570
+And you might say,
+well, gee, why
+
+1177
+01:03:35,570 --> 01:03:37,570
+do I really care if it's
+in equilibrium or not?
+
+1178
+01:03:37,570 --> 01:03:41,470
+I mean, you know,
+what relevance does
+
+1179
+01:03:41,470 --> 01:03:44,500
+that have to me when
+I'm doing my test?
+
+1180
+01:03:44,500 --> 01:03:46,710
+Well, here's the issue.
+
+1181
+01:03:46,710 --> 01:03:51,410
+The issue is this-- you're going
+to be testing whether or not
+
+1182
+01:03:51,410 --> 01:03:55,290
+genotypes are different
+between a case and a control
+
+1183
+01:03:55,290 --> 01:03:58,170
+population, let's say, OK?
+
+1184
+01:03:58,170 --> 01:04:01,670
+And you have a couple
+different tests you can do.
+
+1185
+01:04:01,670 --> 01:04:04,780
+The first test is
+the test on the top
+
+1186
+01:04:04,780 --> 01:04:07,090
+and the second test is
+the test on the bottom.
+
+1187
+01:04:07,090 --> 01:04:10,010
+Let's look at the test on
+the bottom for a moment, OK?
+
+1188
+01:04:10,010 --> 01:04:13,580
+The test in the bottom
+is saying you consider
+
+1189
+01:04:13,580 --> 01:04:17,630
+the likelihood of
+the data in group one
+
+1190
+01:04:17,630 --> 01:04:19,290
+and group two
+multiplied together
+
+1191
+01:04:19,290 --> 01:04:22,830
+over the probability of the
+data with the groups combined
+
+1192
+01:04:22,830 --> 01:04:31,430
+and you ask whether or not the
+increased likelihood-- you're
+
+1193
+01:04:31,430 --> 01:04:35,750
+willing to pay for that given
+the two degrees of freedom
+
+1194
+01:04:35,750 --> 01:04:39,120
+that model implies, right?
+
+1195
+01:04:39,120 --> 01:04:47,790
+Because you have to have two
+additional degrees of freedom
+
+1196
+01:04:47,790 --> 01:04:50,300
+to pay for that in the bottom.
+
+1197
+01:04:50,300 --> 01:04:52,760
+On the other hand,
+in the top, you only
+
+1198
+01:04:52,760 --> 01:04:55,510
+have one degree of
+additional freedom
+
+1199
+01:04:55,510 --> 01:04:58,050
+to pay for the difference in
+simply the reference allele
+
+1200
+01:04:58,050 --> 01:05:00,047
+frequency.
+
+1201
+01:05:00,047 --> 01:05:01,630
+And so these are two
+different metrics
+
+1202
+01:05:01,630 --> 01:05:03,780
+you can use to test
+for associations
+
+1203
+01:05:03,780 --> 01:05:08,180
+for a particular SNP in two
+different case and control
+
+1204
+01:05:08,180 --> 01:05:10,200
+populations.
+
+1205
+01:05:10,200 --> 01:05:14,290
+The problem comes is that if the
+population is in equilibrium,
+
+1206
+01:05:14,290 --> 01:05:19,210
+then the bottom has too many
+degrees of freedom, right?
+
+1207
+01:05:19,210 --> 01:05:20,630
+Because the bottom,
+in some sense,
+
+1208
+01:05:20,630 --> 01:05:22,570
+can be computed
+directly from the top.
+
+1209
+01:05:22,570 --> 01:05:24,820
+You can compute the epsilons
+directly from the size
+
+1210
+01:05:24,820 --> 01:05:27,420
+if it's in equilibrium.
+
+1211
+01:05:27,420 --> 01:05:29,050
+So you need to
+know whether or not
+
+1212
+01:05:29,050 --> 01:05:31,550
+you're in equilibrium or not
+to figure out what kind of test
+
+1213
+01:05:31,550 --> 01:05:35,705
+to use to see whether or not a
+particular SNP is significant.
+
+1214
+01:05:38,890 --> 01:05:44,130
+OK, so just a brief review where
+we've come to at this point.
+
+1215
+01:05:44,130 --> 01:05:46,220
+I've handed you a
+basket of reads.
+
+1216
+01:05:46,220 --> 01:05:49,650
+We're focusing on a particular
+location in the genome.
+
+1217
+01:05:49,650 --> 01:05:53,220
+For an individual, we can
+look at that basket of reads
+
+1218
+01:05:53,220 --> 01:05:56,220
+and compute a posterior
+probability of the genotype
+
+1219
+01:05:56,220 --> 01:05:58,630
+at that location.
+
+1220
+01:05:58,630 --> 01:06:00,890
+We then asked if we take
+all of the individuals
+
+1221
+01:06:00,890 --> 01:06:04,760
+in a given interesting
+population, like the cases,
+
+1222
+01:06:04,760 --> 01:06:07,000
+we could compute the
+posterior or the probability
+
+1223
+01:06:07,000 --> 01:06:10,160
+of the genotype over
+all those cases.
+
+1224
+01:06:10,160 --> 01:06:12,910
+We then can take the
+cases and the controls
+
+1225
+01:06:12,910 --> 01:06:19,860
+and test for associations using
+this likelihood ratio, OK?
+
+1226
+01:06:19,860 --> 01:06:26,790
+So that is the way to go
+at the question of SNPs.
+
+1227
+01:06:26,790 --> 01:06:29,470
+And I'll pause here
+and see if there
+
+1228
+01:06:29,470 --> 01:06:31,839
+any other questions about this.
+
+1229
+01:06:37,110 --> 01:06:38,680
+OK, now there are
+lots of other ways
+
+1230
+01:06:38,680 --> 01:06:41,640
+of approaching
+structural variation.
+
+1231
+01:06:41,640 --> 01:06:44,080
+I said I would touch upon it.
+
+1232
+01:06:44,080 --> 01:06:47,320
+There is another
+method which is--
+
+1233
+01:06:47,320 --> 01:06:51,030
+we've not been here assigning
+what haplotypes to things
+
+1234
+01:06:51,030 --> 01:06:55,900
+or paying attention to
+which chromosome or mom
+
+1235
+01:06:55,900 --> 01:06:58,420
+or dad a particularly
+allele came from.
+
+1236
+01:06:58,420 --> 01:07:00,150
+But suffice to
+say-- I'll let you
+
+1237
+01:07:00,150 --> 01:07:02,330
+read this slide
+at your leisure--
+
+1238
+01:07:02,330 --> 01:07:06,950
+the key thing is that, imagine
+you have a bunch of reads.
+
+1239
+01:07:06,950 --> 01:07:08,730
+What you can do in
+a particular area
+
+1240
+01:07:08,730 --> 01:07:10,230
+there's going to
+be a variant is you
+
+1241
+01:07:10,230 --> 01:07:13,080
+can do local assembly
+of the reads.
+
+1242
+01:07:13,080 --> 01:07:17,580
+We want to do local assembly
+because local assembly handles
+
+1243
+01:07:17,580 --> 01:07:19,340
+general cases of
+structural variation.
+
+1244
+01:07:21,900 --> 01:07:25,490
+And if you then take
+the most likely cases
+
+1245
+01:07:25,490 --> 01:07:28,360
+of the local assembly
+supported by reads,
+
+1246
+01:07:28,360 --> 01:07:33,060
+you have the different possible
+haplotypes or collections
+
+1247
+01:07:33,060 --> 01:07:38,180
+of bases along the
+genome from the assembly.
+
+1248
+01:07:38,180 --> 01:07:41,330
+And we've already talked
+about, earlier in class,
+
+1249
+01:07:41,330 --> 01:07:44,190
+how to take a given
+sequence of bases
+
+1250
+01:07:44,190 --> 01:07:46,300
+and estimate the probability
+of the divergence
+
+1251
+01:07:46,300 --> 01:07:48,610
+from another string.
+
+1252
+01:07:48,610 --> 01:07:50,510
+So you can estimate
+the divergence
+
+1253
+01:07:50,510 --> 01:07:53,180
+of each one of those
+assemblies from the reference
+
+1254
+01:07:53,180 --> 01:07:56,230
+and compute likelihoods, like
+we did before for single bases,
+
+1255
+01:07:56,230 --> 01:07:59,190
+although it's
+somewhat more complex.
+
+1256
+01:07:59,190 --> 01:08:01,060
+And so another way
+to approach this
+
+1257
+01:08:01,060 --> 01:08:04,910
+is, instead of asking
+about individual bases
+
+1258
+01:08:04,910 --> 01:08:08,240
+and looking at the likelihood
+of individual bases,
+
+1259
+01:08:08,240 --> 01:08:13,140
+you can look at doing
+localized assembly of the reads
+
+1260
+01:08:13,140 --> 01:08:14,570
+that handle
+structural variation.
+
+1261
+01:08:17,490 --> 01:08:23,050
+And if you do that,
+what happens is
+
+1262
+01:08:23,050 --> 01:08:29,920
+that you can recover
+INDEL issues that
+
+1263
+01:08:29,920 --> 01:08:38,529
+appear to call SNP variants that
+actually are actually induced
+
+1264
+01:08:38,529 --> 01:08:44,410
+by insertions and deletions
+in one of the chromosomes.
+
+1265
+01:08:44,410 --> 01:08:50,510
+So as you can see, as things
+get more sophisticated
+
+1266
+01:08:50,510 --> 01:08:52,779
+in the analysis of
+human genome data,
+
+1267
+01:08:52,779 --> 01:08:54,720
+one needs a variety
+of techniques,
+
+1268
+01:08:54,720 --> 01:08:57,830
+including local assembly,
+to be able to recover
+
+1269
+01:08:57,830 --> 01:08:58,500
+what's going on.
+
+1270
+01:08:58,500 --> 01:09:00,229
+Because of course,
+the reference genome
+
+1271
+01:09:00,229 --> 01:09:02,680
+is only an approximate
+idea of what's
+
+1272
+01:09:02,680 --> 01:09:06,640
+there and is being
+used as a scaffold.
+
+1273
+01:09:06,640 --> 01:09:13,649
+So we've already talked
+about the idea of phasing,
+
+1274
+01:09:13,649 --> 01:09:17,790
+and we talked about why phasing
+is important, especially
+
+1275
+01:09:17,790 --> 01:09:22,479
+when we're trying to
+recover whether or not
+
+1276
+01:09:22,479 --> 01:09:24,750
+you have a loss of
+function event, right?
+
+1277
+01:09:24,750 --> 01:09:28,819
+And so the phasing
+part of genomics
+
+1278
+01:09:28,819 --> 01:09:32,529
+right now is highly
+heuristic, relies partly
+
+1279
+01:09:32,529 --> 01:09:37,090
+upon empirical data from
+things like the HapMap Project
+
+1280
+01:09:37,090 --> 01:09:39,090
+and is outside the
+scope of what we're
+
+1281
+01:09:39,090 --> 01:09:40,840
+going to talk about,
+because we could talk
+
+1282
+01:09:40,840 --> 01:09:42,529
+about phasing for
+an entire lecture.
+
+1283
+01:09:42,529 --> 01:09:44,880
+But suffice it to
+say, it's important.
+
+1284
+01:09:44,880 --> 01:09:47,300
+And if you look at
+what actually goes on,
+
+1285
+01:09:47,300 --> 01:09:50,770
+here's a trio, mom,
+dad, and the daughter.
+
+1286
+01:09:50,770 --> 01:09:53,990
+You can see down at the
+bottom, you see mom's reads.
+
+1287
+01:09:53,990 --> 01:09:56,340
+And you see dad actually
+has two haplotypes.
+
+1288
+01:09:56,340 --> 01:09:58,210
+He got one haplotype
+from one of his parents
+
+1289
+01:09:58,210 --> 01:10:02,580
+and the other haplotype
+from both of his parents.
+
+1290
+01:10:02,580 --> 01:10:09,410
+And then the daughter actually
+has the haplotype number one
+
+1291
+01:10:09,410 --> 01:10:13,510
+from dad and no haplotype
+number one from mom.
+
+1292
+01:10:13,510 --> 01:10:17,500
+So you can see how these
+blocks of mutations
+
+1293
+01:10:17,500 --> 01:10:24,400
+are inherited through the
+generation in this form.
+
+1294
+01:10:27,260 --> 01:10:31,740
+And finally, if you
+look at a VCF file,
+
+1295
+01:10:31,740 --> 01:10:36,140
+if you see a
+vertical bar, that's
+
+1296
+01:10:36,140 --> 01:10:43,410
+telling you that the
+chromosomal origin is fixed.
+
+1297
+01:10:43,410 --> 01:10:45,890
+So it tells you, for
+example, in this case,
+
+1298
+01:10:45,890 --> 01:10:47,390
+the one where the
+arrow's pointed to
+
+1299
+01:10:47,390 --> 01:10:49,680
+is that variant
+number one, which
+
+1300
+01:10:49,680 --> 01:10:52,680
+is the alternative
+variant T came from mom
+
+1301
+01:10:52,680 --> 01:10:55,120
+and a T came from dad.
+
+1302
+01:10:55,120 --> 01:11:00,370
+So VCF, when it has
+slashes between the two
+
+1303
+01:11:00,370 --> 01:11:05,190
+different alleles of a
+genotype is unphased,
+
+1304
+01:11:05,190 --> 01:11:08,100
+but you can actually have
+a phased VCF version.
+
+1305
+01:11:08,100 --> 01:11:12,500
+And so there's a whole
+phase in the GATK tool kit
+
+1306
+01:11:12,500 --> 01:11:15,380
+that does phasing.
+
+1307
+01:11:15,380 --> 01:11:18,390
+And finally, we get
+through all this,
+
+1308
+01:11:18,390 --> 01:11:21,970
+the question is how important
+are the variants you discover?
+
+1309
+01:11:21,970 --> 01:11:24,970
+And so there's a
+variant analysis phase
+
+1310
+01:11:24,970 --> 01:11:28,160
+and it will go through and
+annotate all the variants.
+
+1311
+01:11:28,160 --> 01:11:33,410
+For example, this is a
+splice site acceptor variant
+
+1312
+01:11:33,410 --> 01:11:36,120
+which is in a
+protein coating gene
+
+1313
+01:11:36,120 --> 01:11:39,240
+and it's thought
+to be important.
+
+1314
+01:11:39,240 --> 01:11:41,110
+And so at the end
+of this pipeline,
+
+1315
+01:11:41,110 --> 01:11:42,693
+what's going to
+happen is you're going
+
+1316
+01:11:42,693 --> 01:11:46,090
+to be spitting out not
+only the variants but,
+
+1317
+01:11:46,090 --> 01:11:48,960
+for some of them, what
+their annotated function is.
+
+1318
+01:11:51,960 --> 01:11:54,500
+OK, so that ends the
+part of our lecture
+
+1319
+01:11:54,500 --> 01:11:58,840
+where we're talking about
+how to process raw read data.
+
+1320
+01:11:58,840 --> 01:12:03,922
+And I encourage you to look
+at the GATK and other websites
+
+1321
+01:12:03,922 --> 01:12:05,630
+to actually look at
+the state of the art.
+
+1322
+01:12:05,630 --> 01:12:11,000
+But as you can see, it's
+an evolving discipline
+
+1323
+01:12:11,000 --> 01:12:17,170
+that has a kernel of principal
+probabilistic analysis in part
+
+1324
+01:12:17,170 --> 01:12:22,749
+of its core surrounded by
+a whole lot of baling wire,
+
+1325
+01:12:22,749 --> 01:12:24,040
+right, to hold it all together.
+
+1326
+01:12:24,040 --> 01:12:25,870
+And you get the
+reads marshalled,
+
+1327
+01:12:25,870 --> 01:12:31,510
+organized, compressed,
+aligned properly, phased,
+
+1328
+01:12:31,510 --> 01:12:36,000
+and so forth, OK?
+
+1329
+01:12:36,000 --> 01:12:39,830
+Let's talk now about how
+to prioritize variants.
+
+1330
+01:12:39,830 --> 01:12:44,160
+And I just wanted to show you
+a very beautiful result that
+
+1331
+01:12:44,160 --> 01:12:50,620
+is represented by this paper,
+which came out very recently.
+
+1332
+01:12:50,620 --> 01:12:54,990
+And here is a portion
+of the genome.
+
+1333
+01:12:54,990 --> 01:12:59,090
+And we're looking
+here at-- you see
+
+1334
+01:12:59,090 --> 01:13:06,470
+here-- a pancreatic disorder.
+
+1335
+01:13:06,470 --> 01:13:09,340
+And there is an enhancer
+on the right-hand side
+
+1336
+01:13:09,340 --> 01:13:12,180
+of the screen where that
+little red square is.
+
+1337
+01:13:12,180 --> 01:13:16,860
+And recall that we said that
+certain histone marks were
+
+1338
+01:13:16,860 --> 01:13:19,340
+present typically
+over active enhancers.
+
+1339
+01:13:19,340 --> 01:13:23,090
+And so you can see the
+H3K4 mono-methyl mark being
+
+1340
+01:13:23,090 --> 01:13:25,030
+present over that little
+red box as well as
+
+1341
+01:13:25,030 --> 01:13:30,380
+the binding of two pancreatic
+regulators, FoxA2 and Pdx1.
+
+1342
+01:13:30,380 --> 01:13:32,672
+And within that
+enhancer you can see
+
+1343
+01:13:32,672 --> 01:13:34,630
+there are a whole lot of
+variants being called.
+
+1344
+01:13:34,630 --> 01:13:35,390
+Well, not a whole lot.
+
+1345
+01:13:35,390 --> 01:13:36,690
+There are actually
+five different variants
+
+1346
+01:13:36,690 --> 01:13:37,430
+being called.
+
+1347
+01:13:37,430 --> 01:13:41,260
+And in addition to those
+five specific SNP variants,
+
+1348
+01:13:41,260 --> 01:13:43,490
+there's also another
+variation that was observed
+
+1349
+01:13:43,490 --> 01:13:47,100
+in the population of a 7.6-kb
+deletion right around that
+
+1350
+01:13:47,100 --> 01:13:49,140
+enhancer.
+
+1351
+01:13:49,140 --> 01:13:55,410
+And if you look at the
+inheritance of those mutations
+
+1352
+01:13:55,410 --> 01:13:58,110
+with disease
+prevalence, you can see
+
+1353
+01:13:58,110 --> 01:14:01,415
+that there's a very
+marked correlation.
+
+1354
+01:14:01,415 --> 01:14:06,070
+That when you inherit
+these variants,
+
+1355
+01:14:06,070 --> 01:14:09,450
+you get this Mendelian disorder.
+
+1356
+01:14:09,450 --> 01:14:11,170
+So it's a single
+gene disorder really.
+
+1357
+01:14:14,070 --> 01:14:20,270
+And in order to confirm this,
+what the authors of this study
+
+1358
+01:14:20,270 --> 01:14:23,980
+did was they took
+that enhancer and they
+
+1359
+01:14:23,980 --> 01:14:28,740
+looked at all the different
+SNPs and they mutated it.
+
+1360
+01:14:28,740 --> 01:14:30,860
+And in the upper
+left-hand corner,
+
+1361
+01:14:30,860 --> 01:14:36,230
+you can see that the five little
+asterisks note the decrease
+
+1362
+01:14:36,230 --> 01:14:42,160
+in activity of that
+enhancer when they mutated
+
+1363
+01:14:42,160 --> 01:14:45,440
+the bases indicated
+at SNP positions.
+
+1364
+01:14:45,440 --> 01:14:48,760
+The three C's on the
+panel on the right
+
+1365
+01:14:48,760 --> 01:14:51,370
+with the y-axis being
+relative interaction
+
+1366
+01:14:51,370 --> 01:14:53,280
+shows that that
+enhancer is interacting
+
+1367
+01:14:53,280 --> 01:14:56,290
+with the promoter of that gene.
+
+1368
+01:14:56,290 --> 01:14:58,880
+And they further
+elucidated the motifs
+
+1369
+01:14:58,880 --> 01:15:03,240
+that were being interacted with
+and the little arrows point
+
+1370
+01:15:03,240 --> 01:15:07,680
+to where the mutations
+in those motifs occur.
+
+1371
+01:15:07,680 --> 01:15:10,180
+So they've gone
+from an association
+
+1372
+01:15:10,180 --> 01:15:16,540
+with that particular disease
+to the actual functional
+
+1373
+01:15:16,540 --> 01:15:19,760
+characterization
+of what's going on.
+
+1374
+01:15:19,760 --> 01:15:22,380
+I'll leave you with a final
+thought to think about.
+
+1375
+01:15:22,380 --> 01:15:25,587
+This is the thing
+that caused the brawls
+
+1376
+01:15:25,587 --> 01:15:27,920
+in the bars I told you about
+at the beginning of today's
+
+1377
+01:15:27,920 --> 01:15:29,700
+lecture.
+
+1378
+01:15:29,700 --> 01:15:31,920
+Let's suppose you look
+at identical twins,
+
+1379
+01:15:31,920 --> 01:15:34,270
+monozygotic twins, and you
+ask the following question.
+
+1380
+01:15:34,270 --> 01:15:37,050
+You say, OK, in
+monozygotic twins,
+
+1381
+01:15:37,050 --> 01:15:43,180
+the prevalence of a particular
+disease is a 30% correlative.
+
+1382
+01:15:43,180 --> 01:15:46,860
+That is, if one individual
+in a twin has the disease,
+
+1383
+01:15:46,860 --> 01:15:51,300
+there's a 30% chance that the
+other twin's going to get it.
+
+1384
+01:15:51,300 --> 01:15:52,940
+Now there are two
+possibilities here,
+
+1385
+01:15:52,940 --> 01:15:56,504
+which is that for
+all pairs of twins,
+
+1386
+01:15:56,504 --> 01:15:58,670
+there's a very low risk
+that you're going to get it,
+
+1387
+01:15:58,670 --> 01:16:03,150
+or that there are some
+subset of genotypes where
+
+1388
+01:16:03,150 --> 01:16:07,180
+if one twin has it, the other
+one's always going to get it.
+
+1389
+01:16:07,180 --> 01:16:10,320
+So the author of the
+study actually looked
+
+1390
+01:16:10,320 --> 01:16:13,110
+at a block of identical twin
+data and asked two questions.
+
+1391
+01:16:13,110 --> 01:16:17,960
+The first was if you look at
+the percentage of cases that
+
+1392
+01:16:17,960 --> 01:16:23,020
+would test positive, making
+no assumptions about genotype,
+
+1393
+01:16:23,020 --> 01:16:25,929
+using twin data, you
+can see the percentage
+
+1394
+01:16:25,929 --> 01:16:27,720
+of people that actually
+have a disease that
+
+1395
+01:16:27,720 --> 01:16:30,000
+will test positive
+is actually fairly
+
+1396
+01:16:30,000 --> 01:16:32,320
+low for a wide
+variety of diseases.
+
+1397
+01:16:32,320 --> 01:16:35,210
+All these diseases were
+studied in the context
+
+1398
+01:16:35,210 --> 01:16:38,410
+of identical twins.
+
+1399
+01:16:38,410 --> 01:16:43,560
+And this suggested to
+them that, in fact,
+
+1400
+01:16:43,560 --> 01:16:46,500
+personal genomic
+sequencing might not
+
+1401
+01:16:46,500 --> 01:16:50,540
+be as predictive
+as one might like.
+
+1402
+01:16:50,540 --> 01:16:54,690
+That is, if you have a disease,
+for over half of these,
+
+1403
+01:16:54,690 --> 01:16:58,260
+the test will not be positive.
+
+1404
+01:16:58,260 --> 01:17:02,170
+And furthermore, if you test
+negative for the disease,
+
+1405
+01:17:02,170 --> 01:17:03,990
+your relative risk--
+that is, the chance
+
+1406
+01:17:03,990 --> 01:17:06,590
+you're going to get this
+disease to the chance you get it
+
+1407
+01:17:06,590 --> 01:17:11,950
+at random in the population--
+is not really reduced that much.
+
+1408
+01:17:11,950 --> 01:17:15,960
+And so, since this study
+relied solely on twin data
+
+1409
+01:17:15,960 --> 01:17:18,150
+and didn't make any
+other assumptions,
+
+1410
+01:17:18,150 --> 01:17:22,610
+it raised the question in
+the field of to what extent
+
+1411
+01:17:22,610 --> 01:17:26,070
+is personal genome sequencing
+going to be really helpful?
+
+1412
+01:17:26,070 --> 01:17:28,410
+So on that note, we've
+talked a lot today
+
+1413
+01:17:28,410 --> 01:17:32,440
+about the analysis of
+human genetic variation.
+
+1414
+01:17:32,440 --> 01:17:33,980
+I hope you've enjoyed it.
+
+1415
+01:17:33,980 --> 01:17:38,457
+Once again, on Thursday
+we have Ron Weiss coming.
+
+1416
+01:17:38,457 --> 01:17:39,290
+Thank you very much.
+
+1417
+01:17:39,290 --> 01:17:42,432
+This concludes lecture 20 of the
+formal material in the course
+
+1418
+01:17:42,432 --> 01:17:43,640
+and we'll see you in lecture.
+
+1419
+01:17:43,640 --> 01:17:45,790
+Thank you very much.

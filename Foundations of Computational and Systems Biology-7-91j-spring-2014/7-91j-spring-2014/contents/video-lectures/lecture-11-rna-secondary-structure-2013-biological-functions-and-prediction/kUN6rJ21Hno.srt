@@ -1,0 +1,7471 @@
+1
+00:00:00,070 --> 00:00:01,780
+The following
+content is provided
+
+2
+00:00:01,780 --> 00:00:04,030
+under a Creative
+Commons license.
+
+3
+00:00:04,030 --> 00:00:06,870
+Your support will help MIT
+OpenCourseWare continue
+
+4
+00:00:06,870 --> 00:00:10,730
+to offer high quality
+educational resources for free.
+
+5
+00:00:10,730 --> 00:00:13,330
+To make a donation or
+view additional materials
+
+6
+00:00:13,330 --> 00:00:17,217
+from hundreds of MIT courses,
+visit MIT OpenCourseWare
+
+7
+00:00:17,217 --> 00:00:17,842
+at ocw.mit.edu.
+
+8
+00:00:26,830 --> 00:00:27,959
+PROFESSOR: All right.
+
+9
+00:00:27,959 --> 00:00:29,250
+We should probably get started.
+
+10
+00:00:33,230 --> 00:00:37,960
+So RNA plays important
+regulatory and catalytic roles
+
+11
+00:00:37,960 --> 00:00:40,860
+in biology, and so it's
+important to understand
+
+12
+00:00:40,860 --> 00:00:41,450
+its function.
+
+13
+00:00:41,450 --> 00:00:45,462
+And so that's going to be the
+main theme of today's lecture.
+
+14
+00:00:45,462 --> 00:00:46,920
+But before we get
+to that, I wanted
+
+15
+00:00:46,920 --> 00:00:51,840
+to briefly review what
+we went over last time.
+
+16
+00:00:51,840 --> 00:00:55,160
+So we talked about hidden
+Markov models, some
+
+17
+00:00:55,160 --> 00:00:59,670
+of the terminology, thinking
+of them as generative models,
+
+18
+00:00:59,670 --> 00:01:03,160
+terminology of the different
+types of parameters,
+
+19
+00:01:03,160 --> 00:01:06,050
+the initiation probabilities
+and transition probabilities
+
+20
+00:01:06,050 --> 00:01:07,320
+and so forth.
+
+21
+00:01:07,320 --> 00:01:11,200
+And Viterbi algorithm, just
+sort of the core algorithm
+
+22
+00:01:11,200 --> 00:01:16,077
+used whenever you apply HMMs.
+
+23
+00:01:16,077 --> 00:01:18,160
+Essentially, you always
+use the Viterbi algorithm.
+
+24
+00:01:18,160 --> 00:01:22,410
+And then we gave as an
+example the CpG Island HMM,
+
+25
+00:01:22,410 --> 00:01:25,740
+which is admittedly a
+bit of a toy example.
+
+26
+00:01:25,740 --> 00:01:28,397
+It's not really
+used in practice,
+
+27
+00:01:28,397 --> 00:01:29,730
+that illustrates the principles.
+
+28
+00:01:29,730 --> 00:01:32,650
+And then today we're going
+to talk about a couple
+
+29
+00:01:32,650 --> 00:01:35,246
+of real world HMMs.
+
+30
+00:01:35,246 --> 00:01:36,620
+But before we get
+to that, I just
+
+31
+00:01:36,620 --> 00:01:38,300
+wanted to-- sort
+of toward the end,
+
+32
+00:01:38,300 --> 00:01:40,930
+we talked about the
+computational complexity
+
+33
+00:01:40,930 --> 00:01:45,920
+of the algorithm, and concluded
+that if you have a case state
+
+34
+00:01:45,920 --> 00:01:51,050
+HMM run on a sequence of length
+L, it's order k squared L.
+
+35
+00:01:51,050 --> 00:01:55,660
+And this diagram is helpful
+to many people in sort
+
+36
+00:01:55,660 --> 00:01:56,910
+of thinking about that.
+
+37
+00:01:56,910 --> 00:02:00,520
+So you can have transitions
+from any state--
+
+38
+00:02:00,520 --> 00:02:03,000
+for example, from this state--
+to any of the other five
+
+39
+00:02:03,000 --> 00:02:04,754
+states, and there's
+five-state HMM.
+
+40
+00:02:04,754 --> 00:02:06,170
+And when you're
+doing the Viterbi,
+
+41
+00:02:06,170 --> 00:02:10,750
+you have to maximize over the
+five possible input transitions
+
+42
+00:02:10,750 --> 00:02:11,440
+into each state.
+
+43
+00:02:11,440 --> 00:02:14,435
+And so the full
+set of computations
+
+44
+00:02:14,435 --> 00:02:19,070
+that you have to do from going
+from position i to i plus 1
+
+45
+00:02:19,070 --> 00:02:20,025
+is k squared.
+
+46
+00:02:20,025 --> 00:02:20,900
+Does that make sense?
+
+47
+00:02:20,900 --> 00:02:23,890
+And then there's L different
+transitions you have to do,
+
+48
+00:02:23,890 --> 00:02:26,670
+so it's k squared L.
+
+49
+00:02:26,670 --> 00:02:30,670
+Any questions about that?
+
+50
+00:02:30,670 --> 00:02:31,860
+OK.
+
+51
+00:02:31,860 --> 00:02:35,900
+All right and, so the example
+that we gave is shown here.
+
+52
+00:02:35,900 --> 00:02:40,870
+And what we did was to take an
+example sort of where you could
+
+53
+00:02:40,870 --> 00:02:44,870
+sort of see the answer--
+not immediately see it,
+
+54
+00:02:44,870 --> 00:02:49,900
+but if we're thinking about it
+a little, figure out the answer.
+
+55
+00:02:49,900 --> 00:02:53,010
+And then we talked about how
+the Viterbi algorithm actually
+
+56
+00:02:53,010 --> 00:02:57,940
+works, and why it makes the
+transitions at the right place.
+
+57
+00:03:00,960 --> 00:03:05,080
+It seems to intuitively like it
+would make a transition later,
+
+58
+00:03:05,080 --> 00:03:07,180
+but actually transitions
+at the right place.
+
+59
+00:03:07,180 --> 00:03:09,000
+And one way to
+think about that is
+
+60
+00:03:09,000 --> 00:03:16,540
+that these are not hard and
+fast decisions because you're
+
+61
+00:03:16,540 --> 00:03:18,540
+optimizing two different paths.
+
+62
+00:03:18,540 --> 00:03:21,840
+At every state, you're
+considering two possibilities.
+
+63
+00:03:21,840 --> 00:03:26,140
+And so you explore the
+possibility of-- the first time
+
+64
+00:03:26,140 --> 00:03:29,710
+you hit a c, you explore the
+possibility of transitioning
+
+65
+00:03:29,710 --> 00:03:32,080
+from genome to
+island, but you're not
+
+66
+00:03:32,080 --> 00:03:35,510
+confirming whether you're going
+to do that yet until you get
+
+67
+00:03:35,510 --> 00:03:38,410
+to the end and see whether that
+path ends up having a higher
+
+68
+00:03:38,410 --> 00:03:42,060
+probability at the end of the
+sequence than the alternative.
+
+69
+00:03:42,060 --> 00:03:45,570
+So that's sort of one way
+of thinking about that.
+
+70
+00:03:45,570 --> 00:03:48,920
+Any questions about
+this sort of thing,
+
+71
+00:03:48,920 --> 00:03:53,470
+how to understand when a
+transition will be made?
+
+72
+00:03:53,470 --> 00:03:56,760
+And I want to emphasize,
+for this simple HMM,
+
+73
+00:03:56,760 --> 00:03:58,840
+we talked about
+you can kind of see
+
+74
+00:03:58,840 --> 00:04:00,220
+what the answer's going to be.
+
+75
+00:04:00,220 --> 00:04:05,080
+But if you have any HMM, any
+sort of interesting real world
+
+76
+00:04:05,080 --> 00:04:07,550
+HMM with multiple
+states, there's
+
+77
+00:04:07,550 --> 00:04:09,600
+no way you're going
+to be able to see it.
+
+78
+00:04:09,600 --> 00:04:11,558
+Maybe you could guess
+what the answer might be,
+
+79
+00:04:11,558 --> 00:04:14,290
+but you're not going to be able
+to be confident of what that
+
+80
+00:04:14,290 --> 00:04:16,942
+is, which is why you have
+to actually implement it.
+
+81
+00:04:19,840 --> 00:04:21,940
+All right, good.
+
+82
+00:04:21,940 --> 00:04:23,840
+Let's talk about a couple
+of real world HMMs.
+
+83
+00:04:23,840 --> 00:04:26,730
+So I mentioned gene finding.
+
+84
+00:04:26,730 --> 00:04:30,560
+That's been a popular
+application of HMMs,
+
+85
+00:04:30,560 --> 00:04:32,100
+both in prokaryotes
+and eukaryotes.
+
+86
+00:04:32,100 --> 00:04:34,400
+There's some examples
+discussed in the text.
+
+87
+00:04:34,400 --> 00:04:39,610
+Another very popular application
+are so-called profile HMMs.
+
+88
+00:04:39,610 --> 00:04:43,440
+And so this is a
+hidden Markov model
+
+89
+00:04:43,440 --> 00:04:47,570
+that's made based on a multiple
+alignment of proteins which
+
+90
+00:04:47,570 --> 00:04:49,887
+have a related function
+or share a common domain.
+
+91
+00:04:49,887 --> 00:04:51,470
+For example, there's
+a database called
+
+92
+00:04:51,470 --> 00:04:56,280
+Pfam, which includes
+profile HMMs for hundreds
+
+93
+00:04:56,280 --> 00:04:58,740
+of different types
+of protein domains.
+
+94
+00:04:58,740 --> 00:05:03,210
+And so once you have many
+dozens or hundreds or thousands
+
+95
+00:05:03,210 --> 00:05:05,020
+of examples of a
+protein domain, you
+
+96
+00:05:05,020 --> 00:05:07,270
+can learn lots of
+things about it--
+
+97
+00:05:07,270 --> 00:05:11,110
+not just what the
+frequencies of each residue
+
+98
+00:05:11,110 --> 00:05:12,910
+are in each position,
+but how likely
+
+99
+00:05:12,910 --> 00:05:15,460
+you are to have an
+insertion at each position.
+
+100
+00:05:15,460 --> 00:05:17,330
+And if you do have
+an insertion, what
+
+101
+00:05:17,330 --> 00:05:20,200
+types of amino acid residues
+are likely to be inserted
+
+102
+00:05:20,200 --> 00:05:21,970
+in that position,
+and how often you
+
+103
+00:05:21,970 --> 00:05:25,060
+are likely to have a
+deletion at each position
+
+104
+00:05:25,060 --> 00:05:26,240
+in the multiple alignment.
+
+105
+00:05:26,240 --> 00:05:30,460
+And so the challenge then
+is to take a query protein
+
+106
+00:05:30,460 --> 00:05:35,080
+and to thread it through all
+of these profile HMMs and ask,
+
+107
+00:05:35,080 --> 00:05:37,660
+does it have a significant
+match to any of them?
+
+108
+00:05:37,660 --> 00:05:40,280
+And so that's basically
+how Pfam works.
+
+109
+00:05:40,280 --> 00:05:42,580
+And the nice thing about
+HMMs is that they allow you
+
+110
+00:05:42,580 --> 00:05:46,040
+to-- if you want to have
+the same probability
+
+111
+00:05:46,040 --> 00:05:49,880
+of an insertion at each position
+in your multiple alignment,
+
+112
+00:05:49,880 --> 00:05:50,550
+you can do that.
+
+113
+00:05:50,550 --> 00:05:53,390
+But if you have enough data
+to observe that there's
+
+114
+00:05:53,390 --> 00:05:58,630
+a five-fold higher likelihood of
+having an insertion at position
+
+115
+00:05:58,630 --> 00:06:02,000
+three in a multiple alignment
+than there is at position two,
+
+116
+00:06:02,000 --> 00:06:03,010
+you can put that in.
+
+117
+00:06:03,010 --> 00:06:06,310
+You just change
+those probabilities.
+
+118
+00:06:06,310 --> 00:06:09,230
+So in this HMM, each
+of the hidden states
+
+119
+00:06:09,230 --> 00:06:14,860
+is either an M state, which is
+a match state, or an I state,
+
+120
+00:06:14,860 --> 00:06:15,850
+or an insert state.
+
+121
+00:06:15,850 --> 00:06:19,520
+And so those will emit
+actual amino acid residues.
+
+122
+00:06:19,520 --> 00:06:21,240
+Or it could be a
+delete state, which
+
+123
+00:06:21,240 --> 00:06:25,190
+is thought of as emitting
+a dash, a placeholder
+
+124
+00:06:25,190 --> 00:06:27,810
+in the multiple alignment.
+
+125
+00:06:27,810 --> 00:06:30,650
+So these are also widely used.
+
+126
+00:06:30,650 --> 00:06:36,140
+And then one of my favorite
+examples-- it's fairly simple,
+
+127
+00:06:36,140 --> 00:06:38,530
+but it turns out to
+be quite useful--
+
+128
+00:06:38,530 --> 00:06:42,820
+is the so-called
+TMHMM for prediction
+
+129
+00:06:42,820 --> 00:06:45,200
+of transmembrane
+helices in protein.
+
+130
+00:06:45,200 --> 00:06:50,280
+So we know that many,
+especially eukaryotic proteins,
+
+131
+00:06:50,280 --> 00:06:52,500
+are embedded in membranes.
+
+132
+00:06:52,500 --> 00:06:59,400
+And there's one famous family
+of seven transmembrane helix
+
+133
+00:06:59,400 --> 00:07:01,400
+proteins, and there
+are others that
+
+134
+00:07:01,400 --> 00:07:04,030
+have one or a few
+transmembrane helices.
+
+135
+00:07:04,030 --> 00:07:08,180
+And knowing that a protein
+has at least one transmembrane
+
+136
+00:07:08,180 --> 00:07:10,735
+helix is very useful in terms
+of predicting its function.
+
+137
+00:07:10,735 --> 00:07:12,600
+You predict it's localization.
+
+138
+00:07:12,600 --> 00:07:15,000
+And knowing that it's a seven
+transmembrane helix protein
+
+139
+00:07:15,000 --> 00:07:16,380
+is also useful.
+
+140
+00:07:16,380 --> 00:07:20,250
+And so you want to predict
+whether the protein has
+
+141
+00:07:20,250 --> 00:07:23,785
+transmembrane helices and
+what their orientation is.
+
+142
+00:07:23,785 --> 00:07:25,660
+That is, proteins can
+have their end terminus
+
+143
+00:07:25,660 --> 00:07:29,030
+either inside the cell
+or outside the cell.
+
+144
+00:07:29,030 --> 00:07:33,260
+And then of course, where
+exactly those helices are.
+
+145
+00:07:33,260 --> 00:07:38,240
+And this program has
+about a 97% accuracy,
+
+146
+00:07:38,240 --> 00:07:41,650
+according to [? the author. ?]
+So it works very well.
+
+147
+00:07:41,650 --> 00:07:44,930
+So what properties
+do you think--
+
+148
+00:07:44,930 --> 00:07:46,950
+we said before that
+you have to have
+
+149
+00:07:46,950 --> 00:07:49,310
+strongly different
+emission probabilities
+
+150
+00:07:49,310 --> 00:07:52,080
+in the different hidden states
+to have a chance of being
+
+151
+00:07:52,080 --> 00:07:54,580
+able to predict
+things accurately.
+
+152
+00:07:54,580 --> 00:07:56,570
+So what properties do
+you think are captured
+
+153
+00:07:56,570 --> 00:08:00,210
+in a model of
+transmembrane helices?
+
+154
+00:08:00,210 --> 00:08:01,780
+What types of
+emission probabilities
+
+155
+00:08:01,780 --> 00:08:05,956
+would you when you have for the
+different states in this model?
+
+156
+00:08:05,956 --> 00:08:06,456
+Anyone?
+
+157
+00:08:09,830 --> 00:08:13,690
+So for this protein,
+what kind of residues
+
+158
+00:08:13,690 --> 00:08:15,730
+would you have in here?
+
+159
+00:08:15,730 --> 00:08:16,970
+Oops, sorry.
+
+160
+00:08:16,970 --> 00:08:19,300
+I'm having trouble
+with this thing.
+
+161
+00:08:19,300 --> 00:08:21,550
+All right, here in the
+middle of the membrane,
+
+162
+00:08:21,550 --> 00:08:24,187
+what kind of residues are
+you going to see there?
+
+163
+00:08:24,187 --> 00:08:25,062
+AUDIENCE: [INAUDIBLE]
+
+164
+00:08:25,062 --> 00:08:26,200
+PROFESSOR: Those are
+going to be hydrophobic.
+
+165
+00:08:26,200 --> 00:08:26,700
+Exactly.
+
+166
+00:08:26,700 --> 00:08:30,450
+And what about right
+where the helix emerges
+
+167
+00:08:30,450 --> 00:08:33,310
+from the membrane?
+
+168
+00:08:33,310 --> 00:08:35,564
+[INAUDIBLE] charge residue's
+there to kind of anchor
+
+169
+00:08:35,564 --> 00:08:38,276
+it and prevent it from
+sliding back into membrane.
+
+170
+00:08:38,276 --> 00:08:43,860
+And then in general, both on
+the exterior and interior,
+
+171
+00:08:43,860 --> 00:08:46,520
+you'll tend to have more
+hydrophilic residues.
+
+172
+00:08:46,520 --> 00:08:50,680
+So that's sort of
+the basis of TMHMM.
+
+173
+00:08:50,680 --> 00:08:52,390
+So this is the structure.
+
+174
+00:08:52,390 --> 00:08:56,680
+And you'll notice that these are
+not exactly the hidden states
+
+175
+00:08:56,680 --> 00:09:00,160
+that correspond to individual
+amino acid residues.
+
+176
+00:09:00,160 --> 00:09:03,100
+These are like meta
+states, just to illustrate
+
+177
+00:09:03,100 --> 00:09:04,710
+the overall structure.
+
+178
+00:09:04,710 --> 00:09:07,880
+I'll show you the actual
+states on the next slide.
+
+179
+00:09:07,880 --> 00:09:10,450
+But these were the
+types of states
+
+180
+00:09:10,450 --> 00:09:14,020
+that the author, Anders
+[? Crow ?], decided to model.
+
+181
+00:09:14,020 --> 00:09:20,000
+So he has sort of a-- focuses
+here on the helix core.
+
+182
+00:09:20,000 --> 00:09:23,710
+There's also a cytoplasmic
+cap and a non-cytoplasmic cap.
+
+183
+00:09:23,710 --> 00:09:25,660
+Oops, didn't mean that.
+
+184
+00:09:25,660 --> 00:09:31,020
+And then there's sort of a
+globular domain on each side--
+
+185
+00:09:31,020 --> 00:09:32,720
+both on the cytoplasmic
+side, or you
+
+186
+00:09:32,720 --> 00:09:35,600
+could have one on the
+non-cytoplasmic side.
+
+187
+00:09:35,600 --> 00:09:40,480
+OK, so there's going to be
+different compositions in each
+
+188
+00:09:40,480 --> 00:09:41,460
+of these regions.
+
+189
+00:09:41,460 --> 00:09:44,740
+Now one of the things we
+talked about with HMMs
+
+190
+00:09:44,740 --> 00:09:48,169
+is that if you were-- now let's
+think about the helix core.
+
+191
+00:09:48,169 --> 00:09:49,710
+The simplest model
+you might think of
+
+192
+00:09:49,710 --> 00:09:53,120
+would be to have sort
+of a helix state,
+
+193
+00:09:53,120 --> 00:09:56,520
+and then to allow that
+state to recur to itself.
+
+194
+00:09:56,520 --> 00:09:59,670
+OK, so this type of thing where
+you then have some transition
+
+195
+00:09:59,670 --> 00:10:04,350
+to some sort of cap state
+after, this would allow you
+
+196
+00:10:04,350 --> 00:10:10,590
+to model helices of any length.
+
+197
+00:10:10,590 --> 00:10:13,200
+But now how long are
+transmembrane helices?
+
+198
+00:10:13,200 --> 00:10:15,610
+What does that
+distribution look like?
+
+199
+00:10:15,610 --> 00:10:18,800
+Anyone have an idea?
+
+200
+00:10:18,800 --> 00:10:20,611
+There's a certain
+physical dimension.
+
+201
+00:10:20,611 --> 00:10:21,110
+[INAUDIBLE]
+
+202
+00:10:24,800 --> 00:10:27,530
+It takes a certain number
+residues to get across here,
+
+203
+00:10:27,530 --> 00:10:30,590
+and then that number
+is about 20-ish.
+
+204
+00:10:30,590 --> 00:10:32,420
+So transmembrane helices
+tend to be sort of
+
+205
+00:10:32,420 --> 00:10:34,960
+on the order of 20
+plus or minus a few.
+
+206
+00:10:34,960 --> 00:10:37,580
+And so it's totally unrealistic
+to have a transmembrane helix
+
+207
+00:10:37,580 --> 00:10:40,430
+that's, like, five
+residues long.
+
+208
+00:10:40,430 --> 00:10:44,980
+So if you run this algorithm
+in generative mode,
+
+209
+00:10:44,980 --> 00:10:49,275
+what distribution of helix
+lengths will you produce?
+
+210
+00:10:52,697 --> 00:10:54,280
+We're running in
+generative mode where
+
+211
+00:10:54,280 --> 00:10:56,460
+we're going to let,
+remember, to generate
+
+212
+00:10:56,460 --> 00:10:58,350
+a series of hidden
+states and then
+
+213
+00:10:58,350 --> 00:11:02,750
+associated amino acid sequences.
+
+214
+00:11:02,750 --> 00:11:05,995
+It's coming from some,
+let's say-- I don't know.
+
+215
+00:11:05,995 --> 00:11:09,650
+What kind of states are there
+here? [INAUDIBLE] plasmic.
+
+216
+00:11:09,650 --> 00:11:14,980
+Let's say goes into
+helix, hangs out here.
+
+217
+00:11:14,980 --> 00:11:17,886
+I'm sorry, is there an
+answer to this question?
+
+218
+00:11:17,886 --> 00:11:19,130
+Anyone?
+
+219
+00:11:19,130 --> 00:11:21,470
+I don't know how
+long-- if I let it run,
+
+220
+00:11:21,470 --> 00:11:22,770
+it'll generate a random number.
+
+221
+00:11:22,770 --> 00:11:25,710
+It depends on what this
+probability is here.
+
+222
+00:11:25,710 --> 00:11:27,940
+Let's call this probability
+p, and then this
+
+223
+00:11:27,940 --> 00:11:30,190
+would be 1 minus p.
+
+224
+00:11:30,190 --> 00:11:34,420
+OK, so obviously if
+1 minus p is bigger,
+
+225
+00:11:34,420 --> 00:11:36,595
+it'll tend to produce
+longer helices.
+
+226
+00:11:36,595 --> 00:11:37,970
+But in general,
+what is the shape
+
+227
+00:11:37,970 --> 00:11:42,940
+of the distribution there of
+consecutive helical states
+
+228
+00:11:42,940 --> 00:11:45,778
+that this model will generate?
+
+229
+00:11:45,778 --> 00:11:47,150
+AUDIENCE: Binomial.
+
+230
+00:11:47,150 --> 00:11:48,050
+PROFESSOR: Binomial.
+
+231
+00:11:48,050 --> 00:11:49,970
+OK, can you explain why?
+
+232
+00:11:49,970 --> 00:11:55,290
+AUDIENCE: Because
+the helix would
+
+233
+00:11:55,290 --> 00:11:59,900
+have to have probable--
+the helix of length n
+
+234
+00:11:59,900 --> 00:12:05,466
+would occur 1 minus
+p to the n power.
+
+235
+00:12:05,466 --> 00:12:08,730
+PROFESSOR: OK, so a helix of
+length 10 with a probability
+
+236
+00:12:08,730 --> 00:12:12,580
+of then, say, let's call it L,
+for the length of the helix,
+
+237
+00:12:12,580 --> 00:12:19,197
+equals n is 1 minus
+p to the n, right?
+
+238
+00:12:19,197 --> 00:12:19,905
+Is that binomial?
+
+239
+00:12:22,770 --> 00:12:24,916
+Someone else?
+
+240
+00:12:24,916 --> 00:12:25,880
+AUDIENCE: Yeah.
+
+241
+00:12:25,880 --> 00:12:27,564
+Is it a negative binomial?
+
+242
+00:12:27,564 --> 00:12:28,772
+PROFESSOR: Negative binomial.
+
+243
+00:12:28,772 --> 00:12:29,736
+OK.
+
+244
+00:12:29,736 --> 00:12:33,110
+AUDIENCE: [INAUDIBLE] states and
+a helix state before moving out
+
+245
+00:12:33,110 --> 00:12:34,384
+[INAUDIBLE].
+
+246
+00:12:34,384 --> 00:12:35,050
+PROFESSOR: Yeah.
+
+247
+00:12:35,050 --> 00:12:37,630
+So the distribution is
+going to be like that.
+
+248
+00:12:37,630 --> 00:12:43,620
+You have to stay in here
+for n and then leave.
+
+249
+00:12:43,620 --> 00:12:49,242
+So this is the
+simplest-- you can
+
+250
+00:12:49,242 --> 00:12:51,450
+have special cases of binomial
+and negative binomial.
+
+251
+00:12:51,450 --> 00:12:52,950
+But in general,
+this distribution
+
+252
+00:12:52,950 --> 00:12:55,180
+is called the
+geometric distribution.
+
+253
+00:12:55,180 --> 00:12:58,430
+Or a continuous version would
+be the exponential distribution.
+
+254
+00:12:58,430 --> 00:13:01,880
+So what is the shape
+of this distribution?
+
+255
+00:13:01,880 --> 00:13:11,140
+If I were to plot n down here on
+this axis, and the probability
+
+256
+00:13:11,140 --> 00:13:14,760
+that L equals n on this
+axis, what kind of shape--
+
+257
+00:13:14,760 --> 00:13:17,920
+could someone draw in the air?
+
+258
+00:13:17,920 --> 00:13:20,586
+So you had up and then down?
+
+259
+00:13:20,586 --> 00:13:24,950
+OK, so actually, it's
+going to be just down.
+
+260
+00:13:31,210 --> 00:13:32,550
+Like that, right?
+
+261
+00:13:32,550 --> 00:13:36,806
+Because as n increases,
+this goes down
+
+262
+00:13:36,806 --> 00:13:38,180
+because 1 minus
+p is less than 1.
+
+263
+00:13:38,180 --> 00:13:40,275
+So it just steadily goes down.
+
+264
+00:13:40,275 --> 00:13:42,025
+And what is the mean
+of this distribution?
+
+265
+00:13:47,150 --> 00:13:48,608
+Anyone remember this?
+
+266
+00:13:51,524 --> 00:13:53,940
+Yeah, so there's sort
+of two versions of this
+
+267
+00:13:53,940 --> 00:13:55,340
+that you'll see.
+
+268
+00:13:55,340 --> 00:14:03,120
+One of them is the 1 minus p
+n minus 1 p, and one of them
+
+269
+00:14:03,120 --> 00:14:03,620
+is this.
+
+270
+00:14:03,620 --> 00:14:08,990
+And so this is the number of
+failures before a success,
+
+271
+00:14:08,990 --> 00:14:09,970
+if you will.
+
+272
+00:14:09,970 --> 00:14:11,650
+Successes lead to the helix.
+
+273
+00:14:11,650 --> 00:14:14,800
+And this is the number of
+trials till the first success.
+
+274
+00:14:14,800 --> 00:14:17,190
+So one of them has
+a mean that's 1/p,
+
+275
+00:14:17,190 --> 00:14:22,030
+and the other has a mean
+that's 1 minus p over p.
+
+276
+00:14:22,030 --> 00:14:26,510
+So usually, p is small, and
+so those are about the same.
+
+277
+00:14:26,510 --> 00:14:27,150
+So 1/p.
+
+278
+00:14:27,150 --> 00:14:29,050
+You could think that
+1/p is roughly right.
+
+279
+00:14:29,050 --> 00:14:32,520
+And so if we were to model
+transmembrane helices,
+
+280
+00:14:32,520 --> 00:14:34,360
+and if transmembrane
+heresies are about--
+
+281
+00:14:34,360 --> 00:14:37,130
+I said about 20
+residues long-- you
+
+282
+00:14:37,130 --> 00:14:46,157
+would set p to what value
+to get the right mean?
+
+283
+00:14:49,900 --> 00:14:51,770
+AUDIENCE: 0.05.
+
+284
+00:14:51,770 --> 00:14:54,250
+PROFESSOR: Yeah.
+
+285
+00:14:54,250 --> 00:14:55,170
+0.05.
+
+286
+00:14:55,170 --> 00:15:01,010
+1/20, so that 1 over that
+will be about 20, right?
+
+287
+00:15:01,010 --> 00:15:04,860
+And then 1 minus p
+would, of course, be 0.9.
+
+288
+00:15:04,860 --> 00:15:07,335
+So if I were to do that,
+I would get a distribution
+
+289
+00:15:07,335 --> 00:15:10,780
+that looks about like
+this with a mean of 20.
+
+290
+00:15:10,780 --> 00:15:14,910
+But if I were to then look
+at real transmembrane helices
+
+291
+00:15:14,910 --> 00:15:16,930
+and look at their
+distribution, I
+
+292
+00:15:16,930 --> 00:15:21,220
+would see something
+totally different.
+
+293
+00:15:21,220 --> 00:15:23,000
+It would probably
+look like that.
+
+294
+00:15:23,000 --> 00:15:25,600
+It would have a mean around 20.
+
+295
+00:15:25,600 --> 00:15:30,360
+But the probability of anything
+less than 15 would be 0.
+
+296
+00:15:30,360 --> 00:15:31,130
+That's too short.
+
+297
+00:15:31,130 --> 00:15:35,500
+It can't go across the membrane.
+
+298
+00:15:35,500 --> 00:15:37,680
+And then again, you don't
+have ones that are 40.
+
+299
+00:15:37,680 --> 00:15:40,180
+They don't kind of wiggle around
+in there and then come out.
+
+300
+00:15:40,180 --> 00:15:43,010
+They tend to just
+go straight across.
+
+301
+00:15:43,010 --> 00:15:46,330
+So there's a problem here.
+
+302
+00:15:46,330 --> 00:15:51,020
+You can see that if you want
+to make a more accurate model,
+
+303
+00:15:51,020 --> 00:15:54,340
+you want to not only get the
+right emission probabilities
+
+304
+00:15:54,340 --> 00:15:57,100
+with the right probabilities of
+hydrophobics and hydrophilics
+
+305
+00:15:57,100 --> 00:15:58,240
+and the different
+states, but you also
+
+306
+00:15:58,240 --> 00:15:59,600
+want to get the length right.
+
+307
+00:15:59,600 --> 00:16:04,470
+And so the trick that--
+well, actually, yeah.
+
+308
+00:16:04,470 --> 00:16:07,190
+Can anyone think of tricks
+to get the right length
+
+309
+00:16:07,190 --> 00:16:09,270
+distribution here?
+
+310
+00:16:09,270 --> 00:16:11,290
+How do we do better than this?
+
+311
+00:16:11,290 --> 00:16:14,770
+Basically, hidden
+Markov models where
+
+312
+00:16:14,770 --> 00:16:16,660
+you have a state that
+will recur to itself,
+
+313
+00:16:16,660 --> 00:16:18,580
+it will always be a
+geometric distribution.
+
+314
+00:16:18,580 --> 00:16:22,010
+The only choice you have is
+what is that probability.
+
+315
+00:16:22,010 --> 00:16:24,360
+And so you can get
+any mean you want,
+
+316
+00:16:24,360 --> 00:16:26,330
+but you always get this shape.
+
+317
+00:16:26,330 --> 00:16:29,380
+So if you want a
+more general shape,
+
+318
+00:16:29,380 --> 00:16:32,805
+what are some tricks
+that you could do?
+
+319
+00:16:32,805 --> 00:16:36,094
+How could you change the model?
+
+320
+00:16:36,094 --> 00:16:37,078
+any ideas?
+
+321
+00:16:37,078 --> 00:16:38,554
+Yeah, go ahead.
+
+322
+00:16:38,554 --> 00:16:40,623
+AUDIENCE: [INAUDIBLE] have
+multiple helix states.
+
+323
+00:16:40,623 --> 00:16:41,998
+PROFESSOR: Multiple
+helix states.
+
+324
+00:16:41,998 --> 00:16:42,498
+OK.
+
+325
+00:16:42,498 --> 00:16:43,474
+How many?
+
+326
+00:16:46,426 --> 00:16:49,880
+AUDIENCE: Proportional to the
+length we want, [INAUDIBLE].
+
+327
+00:16:49,880 --> 00:16:53,030
+PROFESSOR: Like one for
+each possible length.
+
+328
+00:16:53,030 --> 00:16:55,010
+AUDIENCE: It'd be
+less than one length.
+
+329
+00:16:55,010 --> 00:16:56,495
+PROFESSOR: Or less than one.
+
+330
+00:16:56,495 --> 00:16:56,994
+OK.
+
+331
+00:16:56,994 --> 00:16:58,970
+So you could have
+something like-- I mean,
+
+332
+00:16:58,970 --> 00:17:02,940
+let's say you have like this.
+
+333
+00:17:02,940 --> 00:17:08,450
+Helix begin-- or,
+helix 1, helix 2.
+
+334
+00:17:08,450 --> 00:17:11,290
+You allow each of these
+to recur to themselves.
+
+335
+00:17:14,260 --> 00:17:15,220
+What does that get you?
+
+336
+00:17:18,702 --> 00:17:20,910
+This actually gets you
+something a little bit better.
+
+337
+00:17:20,910 --> 00:17:26,780
+It gives you a little bit
+about of-- it's more like that.
+
+338
+00:17:26,780 --> 00:17:28,860
+So that's better.
+
+339
+00:17:28,860 --> 00:17:32,330
+But if I want to get the exact
+distribution, then actually
+
+340
+00:17:32,330 --> 00:17:37,870
+one-- so this is the solution
+that the authors actually used.
+
+341
+00:17:37,870 --> 00:17:44,490
+They made essentially 25
+different helix states,
+
+342
+00:17:44,490 --> 00:17:49,190
+and then they allowed various
+different transitions here.
+
+343
+00:17:49,190 --> 00:17:52,810
+So it's a larger
+arbitrary here, but they
+
+344
+00:17:52,810 --> 00:17:58,100
+have this special state three
+that can kind of take a jump.
+
+345
+00:17:58,100 --> 00:18:00,600
+So it can just
+continue on to four,
+
+346
+00:18:00,600 --> 00:18:03,860
+and that'll make your
+maximum length helix core.
+
+347
+00:18:03,860 --> 00:18:07,180
+Or it can skip one, go
+to five, and that'll
+
+348
+00:18:07,180 --> 00:18:10,006
+make a helix core that's one
+residue shorter than that,
+
+349
+00:18:10,006 --> 00:18:11,380
+or it can skip
+two, and so forth.
+
+350
+00:18:11,380 --> 00:18:13,150
+And you can set
+any probabilities
+
+351
+00:18:13,150 --> 00:18:14,410
+you want on these transitions.
+
+352
+00:18:14,410 --> 00:18:18,120
+As so you can fit basically
+an arbitrary distribution
+
+353
+00:18:18,120 --> 00:18:20,450
+within a fixed range
+of lengths that's
+
+354
+00:18:20,450 --> 00:18:22,450
+determined by how
+many states you have.
+
+355
+00:18:22,450 --> 00:18:26,270
+OK, so they really wanted to get
+the length distribution right,
+
+356
+00:18:26,270 --> 00:18:27,561
+and that's what they did.
+
+357
+00:18:27,561 --> 00:18:28,560
+What's the cost of this?
+
+358
+00:18:28,560 --> 00:18:29,570
+What's the downside?
+
+359
+00:18:29,570 --> 00:18:30,904
+Simona?
+
+360
+00:18:30,904 --> 00:18:32,320
+AUDIENCE: I was
+just going to ask,
+
+361
+00:18:32,320 --> 00:18:34,930
+it looks like from
+this your minimum helix
+
+362
+00:18:34,930 --> 00:18:36,500
+length could be four.
+
+363
+00:18:36,500 --> 00:18:37,262
+PROFESSOR: Yeah.
+
+364
+00:18:37,262 --> 00:18:38,220
+That's a good question.
+
+365
+00:18:42,262 --> 00:18:44,470
+Well, we don't know what
+the probabilities-- they say
+
+366
+00:18:44,470 --> 00:18:45,080
+said on that.
+
+367
+00:18:45,080 --> 00:18:47,624
+Well, did they really mean that?
+
+368
+00:18:47,624 --> 00:18:50,040
+And also, that's only the core,
+and maybe these cap things
+
+369
+00:18:50,040 --> 00:18:52,780
+can be-- yeah, that seems
+a little short to me.
+
+370
+00:18:52,780 --> 00:18:55,840
+So yeah, I agree.
+
+371
+00:18:55,840 --> 00:18:56,430
+I'm not sure.
+
+372
+00:18:56,430 --> 00:18:58,346
+It could just be for the
+sake of illustration,
+
+373
+00:18:58,346 --> 00:19:01,660
+but they don't
+actually use those.
+
+374
+00:19:01,660 --> 00:19:05,869
+But anyway, I'll probably
+have to read the paper.
+
+375
+00:19:05,869 --> 00:19:07,535
+I haven't read this
+paper for many years
+
+376
+00:19:07,535 --> 00:19:09,493
+so I don't remember
+exactly the answer to that.
+
+377
+00:19:09,493 --> 00:19:13,410
+But I have a citation.
+
+378
+00:19:13,410 --> 00:19:15,095
+You can look it up
+if you're curious.
+
+379
+00:19:15,095 --> 00:19:16,970
+But the main point I
+wanted to make with this
+
+380
+00:19:16,970 --> 00:19:20,020
+is just that by setting an
+arbitrary number of states
+
+381
+00:19:20,020 --> 00:19:22,062
+and putting in possible
+transitions between them,
+
+382
+00:19:22,062 --> 00:19:24,270
+you can actually construct
+any length of distribution
+
+383
+00:19:24,270 --> 00:19:24,790
+you want.
+
+384
+00:19:24,790 --> 00:19:27,392
+But there is a downside,
+and what is that downside?
+
+385
+00:19:27,392 --> 00:19:28,600
+AUDIENCE: Computational cost.
+
+386
+00:19:28,600 --> 00:19:30,930
+PROFESSOR: Yeah, the
+computational cost.
+
+387
+00:19:30,930 --> 00:19:32,490
+Instead of having
+one helix state,
+
+388
+00:19:32,490 --> 00:19:34,580
+now we've got 25 or something.
+
+389
+00:19:34,580 --> 00:19:38,660
+So and the time goes up by the
+square of the number of states,
+
+390
+00:19:38,660 --> 00:19:41,300
+so it's going to run slower.
+
+391
+00:19:41,300 --> 00:19:45,480
+And you also have to estimate
+all these parameters.
+
+392
+00:19:45,480 --> 00:19:54,520
+OK, so here's an example
+of the output of the TMHMM
+
+393
+00:19:54,520 --> 00:20:00,180
+program for a mouse
+chloride channel gene, CLC6.
+
+394
+00:20:00,180 --> 00:20:02,810
+So the program
+predicts that there
+
+395
+00:20:02,810 --> 00:20:05,820
+are seven transmembrane
+helices, as shown
+
+396
+00:20:05,820 --> 00:20:07,790
+by these little red blocks here.
+
+397
+00:20:07,790 --> 00:20:11,040
+You can see they're all about
+the same-- about 20 or so--
+
+398
+00:20:11,040 --> 00:20:17,530
+and that the program starts
+outside and ends inside.
+
+399
+00:20:17,530 --> 00:20:21,850
+So let's say you were going
+to do some experiments
+
+400
+00:20:21,850 --> 00:20:25,737
+on this protein to
+test this prediction.
+
+401
+00:20:25,737 --> 00:20:27,570
+So one of the types of
+experiments people do
+
+402
+00:20:27,570 --> 00:20:30,150
+is they put some
+sort of modifiable
+
+403
+00:20:30,150 --> 00:20:35,670
+or modified residue
+into one of the spaces
+
+404
+00:20:35,670 --> 00:20:37,530
+between the
+transmembrane helices.
+
+405
+00:20:37,530 --> 00:20:41,190
+And then you can test,
+by modifying this cell
+
+406
+00:20:41,190 --> 00:20:45,030
+with something that's a
+non-permeable chemical,
+
+407
+00:20:45,030 --> 00:20:46,820
+can you modify that protein?
+
+408
+00:20:46,820 --> 00:20:52,150
+So only if that stretches
+on the outside of the cell
+
+409
+00:20:52,150 --> 00:20:53,800
+will you be able to predict it.
+
+410
+00:20:53,800 --> 00:20:57,961
+So that's a way of
+testing the topology.
+
+411
+00:20:57,961 --> 00:20:59,960
+So if you were doing those
+types of experiments,
+
+412
+00:20:59,960 --> 00:21:02,440
+you might actually-- like
+maybe you're not sure
+
+413
+00:21:02,440 --> 00:21:06,110
+if every transmembrane
+helix is correct.
+
+414
+00:21:06,110 --> 00:21:08,250
+There could be some
+where the boundaries were
+
+415
+00:21:08,250 --> 00:21:10,450
+a little off, or
+even a wrong helix.
+
+416
+00:21:10,450 --> 00:21:12,300
+And so one of the
+things that you often
+
+417
+00:21:12,300 --> 00:21:14,940
+want with a
+prediction is not only
+
+418
+00:21:14,940 --> 00:21:18,490
+to know what is the optimal
+or most likely prediction,
+
+419
+00:21:18,490 --> 00:21:21,770
+but also how confident
+is the algorithm in each
+
+420
+00:21:21,770 --> 00:21:23,390
+of the parts of its prediction.
+
+421
+00:21:23,390 --> 00:21:28,310
+How confident is it in the
+location of transmembrane helix
+
+422
+00:21:28,310 --> 00:21:33,710
+three or the probability
+that actually there
+
+423
+00:21:33,710 --> 00:21:36,250
+is a transmembrane helix three.
+
+424
+00:21:36,250 --> 00:21:42,280
+And so the way that this program
+does that is using something
+
+425
+00:21:42,280 --> 00:21:45,380
+called the
+forward-backward algorithm.
+
+426
+00:21:45,380 --> 00:21:48,070
+So those of you who read
+the Rabener tutorial,
+
+427
+00:21:48,070 --> 00:21:49,660
+it's described
+pretty well there.
+
+428
+00:21:49,660 --> 00:21:52,480
+The basic idea is
+that I mentioned
+
+429
+00:21:52,480 --> 00:21:59,630
+that this Po-- the probability
+of the observable sequence
+
+430
+00:21:59,630 --> 00:22:02,680
+summing over all
+possible HMM structures
+
+431
+00:22:02,680 --> 00:22:05,550
+or all possible sequences
+of hidden states--
+
+432
+00:22:05,550 --> 00:22:06,950
+that is possible to calculate.
+
+433
+00:22:06,950 --> 00:22:08,580
+And the way that
+you do it is you
+
+434
+00:22:08,580 --> 00:22:11,630
+run an algorithm that's
+similar to the Viterbi,
+
+435
+00:22:11,630 --> 00:22:14,340
+but instead of taking
+the maximum entering
+
+436
+00:22:14,340 --> 00:22:17,910
+each hidden state at
+intermediate positions,
+
+437
+00:22:17,910 --> 00:22:19,907
+you sum those inputs.
+
+438
+00:22:19,907 --> 00:22:21,490
+So you just do the
+sum at every point.
+
+439
+00:22:21,490 --> 00:22:25,720
+And it turns out that will
+calculate the sum of the two
+
+440
+00:22:25,720 --> 00:22:28,220
+values at the end-- or
+the k values at the end
+
+441
+00:22:28,220 --> 00:22:33,580
+will be equal to the sum of
+the probabilities of generating
+
+442
+00:22:33,580 --> 00:22:37,232
+the observable sequence
+over all possible sequences
+
+443
+00:22:37,232 --> 00:22:37,940
+of hidden states.
+
+444
+00:22:37,940 --> 00:22:39,420
+OK, so that's useful.
+
+445
+00:22:39,420 --> 00:22:41,310
+And then you can also
+run it backwards.
+
+446
+00:22:41,310 --> 00:22:44,750
+There's no reason it has to be
+only going in one direction.
+
+447
+00:22:44,750 --> 00:22:48,420
+And so what you do is you run
+these sort of summing versions
+
+448
+00:22:48,420 --> 00:22:56,330
+of the Viterbi in both
+the forward direction
+
+449
+00:22:56,330 --> 00:23:01,350
+and also run one in
+the backward direction.
+
+450
+00:23:01,350 --> 00:23:04,870
+And then you take a
+particular position here--
+
+451
+00:23:04,870 --> 00:23:09,365
+like let's say this is your
+helix state, for example.
+
+452
+00:23:09,365 --> 00:23:11,150
+And we're interested
+in this position
+
+453
+00:23:11,150 --> 00:23:13,240
+somewhere in the
+middle of the protein.
+
+454
+00:23:13,240 --> 00:23:14,590
+Is that a helix or not?
+
+455
+00:23:14,590 --> 00:23:18,480
+And so basically
+you take the value
+
+456
+00:23:18,480 --> 00:23:20,800
+that you get here
+from the forward
+
+457
+00:23:20,800 --> 00:23:22,797
+in your forward
+algorithm and the value
+
+458
+00:23:22,797 --> 00:23:24,630
+that you get here in
+the backward algorithm,
+
+459
+00:23:24,630 --> 00:23:28,710
+and multiply those two
+together, and divide by this Po.
+
+460
+00:23:28,710 --> 00:23:31,310
+And that gives you
+the probability.
+
+461
+00:23:31,310 --> 00:23:35,350
+So that ends up being
+a way of calculating
+
+462
+00:23:35,350 --> 00:23:37,900
+the sum of all
+the parses that go
+
+463
+00:23:37,900 --> 00:23:42,580
+through this particular
+position i in the sequence
+
+464
+00:23:42,580 --> 00:23:43,740
+in that particular state.
+
+465
+00:23:46,320 --> 00:23:50,880
+I mean, I realize that may
+not have been totally clear,
+
+466
+00:23:50,880 --> 00:23:56,590
+and I don't want to take more
+time to totally go into it,
+
+467
+00:23:56,590 --> 00:23:59,274
+but it is pretty well
+described and Rabener.
+
+468
+00:23:59,274 --> 00:24:00,690
+And I'll just give
+you an example.
+
+469
+00:24:00,690 --> 00:24:03,504
+So if you're motivated,
+please take a look at that.
+
+470
+00:24:03,504 --> 00:24:04,920
+And if you have
+further questions,
+
+471
+00:24:04,920 --> 00:24:09,640
+I'd be happy to discuss
+during office hours next week.
+
+472
+00:24:09,640 --> 00:24:12,930
+And this is what it looks like
+for this particular protein.
+
+473
+00:24:12,930 --> 00:24:15,690
+So you get something called the
+posterior probability, which
+
+474
+00:24:15,690 --> 00:24:21,410
+is the sum of the probabilities
+of all the parses.
+
+475
+00:24:21,410 --> 00:24:25,270
+And they've plotted it for
+the particular state that
+
+476
+00:24:25,270 --> 00:24:28,830
+is in the Viterbi path, that
+is in the optimal parse--
+
+477
+00:24:28,830 --> 00:24:31,111
+so for example, in blue here.
+
+478
+00:24:31,111 --> 00:24:33,610
+Well, actually, they've done
+it for all the different states
+
+479
+00:24:33,610 --> 00:24:34,390
+here.
+
+480
+00:24:34,390 --> 00:24:37,670
+So blue is the probability
+that you're outside.
+
+481
+00:24:37,670 --> 00:24:40,770
+OK, so it's very, very
+confident that the end terminus
+
+482
+00:24:40,770 --> 00:24:42,690
+of the protein is
+outside the cell.
+
+483
+00:24:42,690 --> 00:24:44,440
+It's very, very confident
+in the locations
+
+484
+00:24:44,440 --> 00:24:48,330
+of transmembrane
+helices one and two.
+
+485
+00:24:48,330 --> 00:24:51,330
+It actually more
+often than not thinks
+
+486
+00:24:51,330 --> 00:24:54,584
+there's actually a
+third helix right here,
+
+487
+00:24:54,584 --> 00:24:56,500
+but that didn't make it
+in the optional parse.
+
+488
+00:24:56,500 --> 00:24:58,458
+That actually occurs in
+the majority of parses,
+
+489
+00:24:58,458 --> 00:25:00,650
+but not in the optimal.
+
+490
+00:25:00,650 --> 00:25:03,820
+And it's probably because it
+would then cause other things
+
+491
+00:25:03,820 --> 00:25:08,550
+to be flipped later on if you
+had transmembrane helix there.
+
+492
+00:25:08,550 --> 00:25:11,800
+It's not sure whether
+there's a helix there or not,
+
+493
+00:25:11,800 --> 00:25:13,450
+but then it's
+confident in this one.
+
+494
+00:25:13,450 --> 00:25:15,380
+OK, so this gives you an idea.
+
+495
+00:25:15,380 --> 00:25:19,990
+Now if you wanted to do some
+sort of test of the prediction,
+
+496
+00:25:19,990 --> 00:25:23,860
+you want to test probably
+first the higher confidence
+
+497
+00:25:23,860 --> 00:25:27,700
+predictions, so you might
+do something right here.
+
+498
+00:25:27,700 --> 00:25:30,170
+Or if maybe from
+experience you know
+
+499
+00:25:30,170 --> 00:25:32,587
+that when it has a
+probability that's that high,
+
+500
+00:25:32,587 --> 00:25:34,670
+it's always right, so
+there's no point testing it.
+
+501
+00:25:34,670 --> 00:25:38,580
+So you should test one of these
+kind of less confident regions.
+
+502
+00:25:38,580 --> 00:25:41,450
+So this actually makes the
+prediction much more useful
+
+503
+00:25:41,450 --> 00:25:44,010
+to have some degree
+of confidence assigned
+
+504
+00:25:44,010 --> 00:25:46,500
+to each part of the prediction.
+
+505
+00:25:51,760 --> 00:25:55,750
+So for the remainder
+of today, I want
+
+506
+00:25:55,750 --> 00:26:01,870
+to turn to the topic of
+RNA secondary structure.
+
+507
+00:26:01,870 --> 00:26:03,710
+So at the beginning,
+I will sort of
+
+508
+00:26:03,710 --> 00:26:05,390
+get through some nomenclature.
+
+509
+00:26:05,390 --> 00:26:10,450
+And then to motivate the topic,
+give some biological examples
+
+510
+00:26:10,450 --> 00:26:11,590
+of RNA structure.
+
+511
+00:26:11,590 --> 00:26:15,370
+Gives me an excuse to show some
+pretty pictures of structure.
+
+512
+00:26:15,370 --> 00:26:18,180
+And then we'll talk about
+two approaches which
+
+513
+00:26:18,180 --> 00:26:21,470
+are two of the most widely used
+approaches toward predicting
+
+514
+00:26:21,470 --> 00:26:21,970
+structure.
+
+515
+00:26:21,970 --> 00:26:25,600
+So using evolution
+to predict structure
+
+516
+00:26:25,600 --> 00:26:31,210
+by method of co-variations,
+which works well when you
+
+517
+00:26:31,210 --> 00:26:33,080
+have many homologous sequences.
+
+518
+00:26:33,080 --> 00:26:35,770
+And then using sort
+of first principles
+
+519
+00:26:35,770 --> 00:26:38,761
+thermodynamics to predict
+secondary structure
+
+520
+00:26:38,761 --> 00:26:40,510
+by energy minimization
+where obviously you
+
+521
+00:26:40,510 --> 00:26:45,100
+don't need to have a
+homologous sequence present.
+
+522
+00:26:45,100 --> 00:26:47,710
+And the nature
+biotechnology primer
+
+523
+00:26:47,710 --> 00:26:51,000
+on RNA folding
+that I recommended
+
+524
+00:26:51,000 --> 00:26:57,312
+is a good intro to the
+energy minimization approach.
+
+525
+00:26:57,312 --> 00:26:58,770
+So what is RNA
+secondary structure?
+
+526
+00:26:58,770 --> 00:27:03,520
+So you all know that
+RNAs, like proteins,
+
+527
+00:27:03,520 --> 00:27:08,690
+have a three-dimensional
+tertiary fold structure that,
+
+528
+00:27:08,690 --> 00:27:11,860
+in many cases, determines
+their function.
+
+529
+00:27:11,860 --> 00:27:14,890
+But there's also sort of
+a simpler representation
+
+530
+00:27:14,890 --> 00:27:19,610
+of this structure where you just
+describe which pairs of bases
+
+531
+00:27:19,610 --> 00:27:21,230
+are hydrogen bonded
+to one other.
+
+532
+00:27:21,230 --> 00:27:25,010
+OK, and so for RNA-- so
+it's a famous example
+
+533
+00:27:25,010 --> 00:27:27,760
+of an RNA structure, this
+sort of clover leaf structure
+
+534
+00:27:27,760 --> 00:27:29,970
+that all tRNAs have.
+
+535
+00:27:29,970 --> 00:27:34,260
+The secondary structure of the
+tRNA is the set of base pairs.
+
+536
+00:27:34,260 --> 00:27:37,310
+So it's this base pair
+here between the first base
+
+537
+00:27:37,310 --> 00:27:40,495
+and this one toward
+the end, and then
+
+538
+00:27:40,495 --> 00:27:42,180
+base right here, and so forth.
+
+539
+00:27:42,180 --> 00:27:44,460
+And so if you specify
+all those base pairs,
+
+540
+00:27:44,460 --> 00:27:50,140
+then you can then draw a picture
+like this, which gives you
+
+541
+00:27:50,140 --> 00:27:54,990
+a good idea of what parts of
+the RNA molecule are accessible.
+
+542
+00:27:54,990 --> 00:27:56,700
+So for example,
+it won't tell you
+
+543
+00:27:56,700 --> 00:28:00,134
+where the anticodon
+loop is, which
+
+544
+00:28:00,134 --> 00:28:01,800
+is sort of the business
+end of the tRNA.
+
+545
+00:28:01,800 --> 00:28:04,460
+But it narrows it down
+to three possibilities.
+
+546
+00:28:04,460 --> 00:28:09,710
+You might consider that,
+or that, or down here.
+
+547
+00:28:09,710 --> 00:28:11,875
+It's unlikely to be
+something in here
+
+548
+00:28:11,875 --> 00:28:13,500
+because these bases
+are already paired.
+
+549
+00:28:13,500 --> 00:28:15,280
+They can't pair to message.
+
+550
+00:28:15,280 --> 00:28:19,570
+So it gives you sort of a first
+approximation toward the 3D
+
+551
+00:28:19,570 --> 00:28:21,550
+structure, and so
+it's quite useful.
+
+552
+00:28:21,550 --> 00:28:24,110
+So how do we represent
+secondary structure?
+
+553
+00:28:24,110 --> 00:28:28,650
+So there's a few different
+common representations
+
+554
+00:28:28,650 --> 00:28:29,620
+that you'll see.
+
+555
+00:28:29,620 --> 00:28:33,530
+So one is-- and this is sort
+of a computer-friendly but not
+
+556
+00:28:33,530 --> 00:28:36,230
+terribly human-friendly
+representation,
+
+557
+00:28:36,230 --> 00:28:38,470
+I would say-- is
+this sort of dot
+
+558
+00:28:38,470 --> 00:28:40,560
+in parentheses notation here.
+
+559
+00:28:40,560 --> 00:28:46,040
+So the dot is an unpaired
+base and the parenthesis
+
+560
+00:28:46,040 --> 00:28:48,070
+is a paired base.
+
+561
+00:28:48,070 --> 00:28:53,500
+And how do you know-- chalk
+is sort of non-uniformly
+
+562
+00:28:53,500 --> 00:28:59,400
+distributed here-- so if you
+have a structure like this
+
+563
+00:28:59,400 --> 00:29:01,700
+and you have these
+three parentheses, what
+
+564
+00:29:01,700 --> 00:29:02,670
+are they paired to?
+
+565
+00:29:02,670 --> 00:29:06,350
+Well, you don't know yet
+until you get further down.
+
+566
+00:29:06,350 --> 00:29:08,370
+And then each left
+parenthesis has
+
+567
+00:29:08,370 --> 00:29:10,520
+to have a right
+parenthesis somewhere.
+
+568
+00:29:10,520 --> 00:29:13,650
+So now if we see
+this, then we know
+
+569
+00:29:13,650 --> 00:29:16,310
+that there are two
+unpaired bases here,
+
+570
+00:29:16,310 --> 00:29:18,050
+and then there's
+going to be three
+
+571
+00:29:18,050 --> 00:29:21,545
+in a row that are
+paired-- these guys.
+
+572
+00:29:21,545 --> 00:29:24,310
+We don't know what
+they're paired to yet.
+
+573
+00:29:24,310 --> 00:29:26,940
+Then there's going to be a
+five base pair loop, maybe
+
+574
+00:29:26,940 --> 00:29:30,240
+a little pentagon type thing.
+
+575
+00:29:30,240 --> 00:29:34,550
+Two, three, four--
+oops-- four, five.
+
+576
+00:29:34,550 --> 00:29:38,670
+And this one would be
+the right parentheses
+
+577
+00:29:38,670 --> 00:29:47,010
+that pair with the left
+parentheses over here.
+
+578
+00:29:47,010 --> 00:29:48,690
+I should probably
+draw this coming out
+
+579
+00:29:48,690 --> 00:29:51,930
+to make it clearer
+that it's not paired.
+
+580
+00:29:51,930 --> 00:29:54,680
+So this notation you
+can convert to this.
+
+581
+00:29:54,680 --> 00:29:59,370
+So after a while, it's
+relatively easy to do this,
+
+582
+00:29:59,370 --> 00:30:02,960
+except when they're super long.
+
+583
+00:30:02,960 --> 00:30:05,522
+So that's what the left part
+of that would look like.
+
+584
+00:30:05,522 --> 00:30:06,730
+So what about the right part?
+
+585
+00:30:06,730 --> 00:30:11,710
+So the right part, we have
+something like one, two, three,
+
+586
+00:30:11,710 --> 00:30:15,900
+four, bunch of dots, and then
+we have two, and then a dot,
+
+587
+00:30:15,900 --> 00:30:17,189
+and then two.
+
+588
+00:30:17,189 --> 00:30:18,480
+What does that thing look like?
+
+589
+00:30:18,480 --> 00:30:22,008
+So that's going to look like
+four bases here in a stem.
+
+590
+00:30:25,470 --> 00:30:29,230
+Big loop, and then there's
+going to be two bases that
+
+591
+00:30:29,230 --> 00:30:31,600
+are paired, and then
+a bulge, and then
+
+592
+00:30:31,600 --> 00:30:35,010
+two more that are paired.
+
+593
+00:30:35,010 --> 00:30:38,290
+These things happen
+in real structures.
+
+594
+00:30:38,290 --> 00:30:40,200
+OK and then the
+arced notation is
+
+595
+00:30:40,200 --> 00:30:41,500
+a little more human-friendly.
+
+596
+00:30:41,500 --> 00:30:44,890
+It actually draws an
+arc between each pair
+
+597
+00:30:44,890 --> 00:30:47,340
+of bases that are
+hydrogen bonded.
+
+598
+00:30:47,340 --> 00:30:50,880
+So I'm sure you can imagine
+what those structures would
+
+599
+00:30:50,880 --> 00:30:51,380
+look like.
+
+600
+00:30:53,900 --> 00:30:56,744
+And it turns out that the
+arcs are very important.
+
+601
+00:30:56,744 --> 00:30:58,410
+Like whether those
+arcs cross each other
+
+602
+00:30:58,410 --> 00:31:02,050
+or not is sort of a fundamental
+classification of RNA
+
+603
+00:31:02,050 --> 00:31:05,480
+secondary structures, into
+the ones that are tractable
+
+604
+00:31:05,480 --> 00:31:07,150
+and the ones that
+are really difficult.
+
+605
+00:31:09,670 --> 00:31:11,710
+So pretty pictures of RNA.
+
+606
+00:31:11,710 --> 00:31:15,480
+So this is a lower
+resolution cryo-EM structure
+
+607
+00:31:15,480 --> 00:31:17,280
+of the bacterial ribosomes.
+
+608
+00:31:17,280 --> 00:31:20,380
+Remember, ribosomes have two
+sub-units-- a large sub-unit,
+
+609
+00:31:20,380 --> 00:31:23,160
+50S, and a small sub-unit, 30S.
+
+610
+00:31:23,160 --> 00:31:26,100
+And if you crack it open--
+OK, so you basically split.
+
+611
+00:31:26,100 --> 00:31:30,330
+You sort of break the ribosome
+like that, and you look inside,
+
+612
+00:31:30,330 --> 00:31:32,760
+they're full of tRNAs.
+
+613
+00:31:32,760 --> 00:31:36,430
+So there are three
+pockets that are normally
+
+614
+00:31:36,430 --> 00:31:37,900
+distinguished within ribosomes.
+
+615
+00:31:37,900 --> 00:31:40,020
+The A site-- this
+is the site where
+
+616
+00:31:40,020 --> 00:31:43,390
+the tRNA enters
+that's going to add
+
+617
+00:31:43,390 --> 00:31:45,710
+a new amino acid to the
+growing peptide chain.
+
+618
+00:31:45,710 --> 00:31:49,370
+The P site, which is
+this tRNA will have it
+
+619
+00:31:49,370 --> 00:31:52,720
+[INAUDIBLE] with the
+actual growing peptide.
+
+620
+00:31:52,720 --> 00:31:56,730
+And then the exit tunnel where
+this tRNA will eventually--
+
+621
+00:31:56,730 --> 00:32:00,910
+the exit, the E site,
+which is the one that
+
+622
+00:32:00,910 --> 00:32:02,982
+was added a couple
+of residues ago.
+
+623
+00:32:05,810 --> 00:32:10,139
+So people often think
+of RNA structure
+
+624
+00:32:10,139 --> 00:32:11,930
+just in terms of these
+secondary structures
+
+625
+00:32:11,930 --> 00:32:16,420
+because they're much
+easier to generate
+
+626
+00:32:16,420 --> 00:32:20,910
+than tertiary structures, and
+they give you-- like for tRNA,
+
+627
+00:32:20,910 --> 00:32:25,850
+it gives you some pretty good
+information about how it works.
+
+628
+00:32:25,850 --> 00:32:31,030
+But for a large and complex
+structure like the ribosome,
+
+629
+00:32:31,030 --> 00:32:33,390
+it turns out that
+RNA is actually not
+
+630
+00:32:33,390 --> 00:32:36,030
+bad at building
+complex structures.
+
+631
+00:32:36,030 --> 00:32:38,230
+I would say it's not
+as good as protein,
+
+632
+00:32:38,230 --> 00:32:43,130
+but it is capable of
+constructing something
+
+633
+00:32:43,130 --> 00:32:44,356
+like a long tube.
+
+634
+00:32:44,356 --> 00:32:45,730
+And in fact, in
+the ribosome, you
+
+635
+00:32:45,730 --> 00:32:49,580
+find such a long
+tube right here.
+
+636
+00:32:49,580 --> 00:32:55,430
+That is where the peptide
+that's been synthesized
+
+637
+00:32:55,430 --> 00:32:57,610
+exits the ribosome.
+
+638
+00:32:57,610 --> 00:33:01,480
+And you'll notice it's not
+a large cavity in which
+
+639
+00:33:01,480 --> 00:33:02,920
+the protein might start folding.
+
+640
+00:33:02,920 --> 00:33:09,210
+It's a skinny tube that is thin
+enough that the polypeptide has
+
+641
+00:33:09,210 --> 00:33:13,380
+to remain linear, cannot
+start folding back on itself.
+
+642
+00:33:13,380 --> 00:33:16,120
+So you sort of
+extrude the protein
+
+643
+00:33:16,120 --> 00:33:18,590
+in a linear, unfolded
+confirmation,
+
+644
+00:33:18,590 --> 00:33:21,240
+and let it fold outside
+of the ribosome.
+
+645
+00:33:21,240 --> 00:33:24,550
+If it could fold inside
+that, that might clog it up.
+
+646
+00:33:24,550 --> 00:33:31,440
+That's probably one reason why
+it's not designed that way.
+
+647
+00:33:31,440 --> 00:33:34,210
+I'm sure that was tried
+bye evolution and rejected.
+
+648
+00:33:34,210 --> 00:33:37,020
+So if you look at the
+ribosome-- now remember,
+
+649
+00:33:37,020 --> 00:33:40,500
+the ribosome is composed
+of both RNA and protein--
+
+650
+00:33:40,500 --> 00:33:45,560
+you'll see that it's much
+more of one than the other.
+
+651
+00:33:45,560 --> 00:33:51,795
+And so it's really much more
+of the fettuccine, which
+
+652
+00:33:51,795 --> 00:33:56,120
+is the RNA part, than the
+linguini of the protein.
+
+653
+00:33:56,120 --> 00:33:58,440
+And if you also look
+at the distribution
+
+654
+00:33:58,440 --> 00:34:00,240
+of the proteins on
+the ribosome, you'll
+
+655
+00:34:00,240 --> 00:34:03,070
+see that they're
+not in the core.
+
+656
+00:34:03,070 --> 00:34:05,010
+They're kind of decorated
+around the edges.
+
+657
+00:34:05,010 --> 00:34:08,040
+It really looks like something
+that was originally made out
+
+658
+00:34:08,040 --> 00:34:12,341
+of RNA, and then you sort of
+added proteins as accessories
+
+659
+00:34:12,341 --> 00:34:12,840
+later.
+
+660
+00:34:12,840 --> 00:34:14,256
+And that's probably
+what happened.
+
+661
+00:34:17,670 --> 00:34:19,409
+This is based on
+the structures that
+
+662
+00:34:19,409 --> 00:34:22,050
+were solved a few years ago.
+
+663
+00:34:22,050 --> 00:34:27,130
+If you then look at where
+the nearest proteins are
+
+664
+00:34:27,130 --> 00:34:29,449
+to the active site-- actual
+catalytic site-- remember,
+
+665
+00:34:29,449 --> 00:34:35,050
+the ribosome catalyzes peptide
+in addition to an amino acid
+
+666
+00:34:35,050 --> 00:34:38,300
+to a growing peptide, so
+peptide bond formation--
+
+667
+00:34:38,300 --> 00:34:42,250
+you'll find that the
+nearest proteins are around
+
+668
+00:34:42,250 --> 00:34:46,290
+18 to 20 angstroms away.
+
+669
+00:34:46,290 --> 00:34:48,489
+And this is too far
+to do any chemistry,
+
+670
+00:34:48,489 --> 00:34:54,370
+so the active site
+residues or molecules
+
+671
+00:34:54,370 --> 00:34:56,330
+need to be within
+a few angstroms
+
+672
+00:34:56,330 --> 00:34:58,060
+to do any useful chemistry.
+
+673
+00:34:58,060 --> 00:35:02,430
+And so this basically
+proves that the ribosome.
+
+674
+00:35:02,430 --> 00:35:03,160
+Is a ribozyme.
+
+675
+00:35:03,160 --> 00:35:05,100
+That is, it's an RNA enzyme.
+
+676
+00:35:05,100 --> 00:35:06,030
+RNAs is [INAUDIBLE].
+
+677
+00:35:11,540 --> 00:35:17,620
+So here is the
+structure of a ribosome.
+
+678
+00:35:17,620 --> 00:35:20,160
+It's very kind of beautiful,
+and it's impressive
+
+679
+00:35:20,160 --> 00:35:23,500
+that somebody can actually
+solve the structure of something
+
+680
+00:35:23,500 --> 00:35:24,450
+this big.
+
+681
+00:35:24,450 --> 00:35:27,450
+But what is actually
+the practical use
+
+682
+00:35:27,450 --> 00:35:28,870
+of this structure?
+
+683
+00:35:28,870 --> 00:35:33,170
+Turns out there's quite an
+important practical application
+
+684
+00:35:33,170 --> 00:35:35,130
+of knowing the structure.
+
+685
+00:35:35,130 --> 00:35:38,330
+Any ideas?
+
+686
+00:35:38,330 --> 00:35:39,332
+AUDIENCE: Antibiotics.
+
+687
+00:35:39,332 --> 00:35:40,290
+PROFESSOR: Antibiotics.
+
+688
+00:35:40,290 --> 00:35:40,790
+Exactly.
+
+689
+00:35:40,790 --> 00:35:47,640
+So many antibiotics work by
+taking advantage of differences
+
+690
+00:35:47,640 --> 00:35:49,980
+between the prokaryotic
+ribosome structure
+
+691
+00:35:49,980 --> 00:35:51,610
+and eukaryotic
+ribosome structure.
+
+692
+00:35:51,610 --> 00:35:55,330
+So if you can make
+a small molecule--
+
+693
+00:35:55,330 --> 00:35:58,980
+these are some examples--
+that will inhibit
+
+694
+00:35:58,980 --> 00:36:01,625
+prokaryotic ribosomes
+but hopefully not
+
+695
+00:36:01,625 --> 00:36:03,000
+inhibit eukaryotic
+ribosome, then
+
+696
+00:36:03,000 --> 00:36:06,710
+you can kill bacteria that
+might be infecting you.
+
+697
+00:36:11,920 --> 00:36:14,550
+So non-coding RNA.
+
+698
+00:36:14,550 --> 00:36:17,260
+So there's many different
+families of non-coding RNAs,
+
+699
+00:36:17,260 --> 00:36:19,202
+and I'm going to list
+some in a moment.
+
+700
+00:36:19,202 --> 00:36:20,660
+And I'm going to
+actually challenge
+
+701
+00:36:20,660 --> 00:36:22,404
+you, see if you can
+come up with any more
+
+702
+00:36:22,404 --> 00:36:23,570
+families of non-coding RNAs.
+
+703
+00:36:23,570 --> 00:36:27,550
+But they're receiving
+increasing interest,
+
+704
+00:36:27,550 --> 00:36:32,350
+I would say, ever since
+micro RNA's were discovered.
+
+705
+00:36:32,350 --> 00:36:34,940
+Sort of a boom in looking
+at different types
+
+706
+00:36:34,940 --> 00:36:36,240
+of non-coding RNAs.
+
+707
+00:36:36,240 --> 00:36:40,690
+Link RNA is also important and
+interesting, as well as many
+
+708
+00:36:40,690 --> 00:36:47,240
+of the classical RNA's like
+tRNAs and rRNAs and snoRNAs.
+
+709
+00:36:47,240 --> 00:36:50,489
+There may be new aspects of
+their regulation and function
+
+710
+00:36:50,489 --> 00:36:51,530
+that will be interesting.
+
+711
+00:36:51,530 --> 00:36:55,230
+And so when you're
+studying a non RNA,
+
+712
+00:36:55,230 --> 00:36:58,910
+it's very, very helpful
+to know its structure.
+
+713
+00:36:58,910 --> 00:37:02,600
+If it's going to base pair in
+trans with some other RNA--
+
+714
+00:37:02,600 --> 00:37:07,870
+as tRNAs do, as micro RNA's
+do, for example, or snRNAs
+
+715
+00:37:07,870 --> 00:37:10,240
+and snoRNAs-- then
+you want to know
+
+716
+00:37:10,240 --> 00:37:12,110
+which parts of the
+molecule are free
+
+717
+00:37:12,110 --> 00:37:15,340
+and which are
+internally based paired.
+
+718
+00:37:15,340 --> 00:37:20,960
+And if you want to predict
+non RNAs genes in a genome,
+
+719
+00:37:20,960 --> 00:37:23,500
+you may want to look
+for regions that
+
+720
+00:37:23,500 --> 00:37:28,120
+are under selection for
+conservation of RNA structure,
+
+721
+00:37:28,120 --> 00:37:30,750
+for conservation
+of the potential
+
+722
+00:37:30,750 --> 00:37:32,960
+to base pair at some distance.
+
+723
+00:37:32,960 --> 00:37:34,780
+If you see that,
+it's much more likely
+
+724
+00:37:34,780 --> 00:37:38,430
+that that region of the genome
+encodes a non-coding RNA
+
+725
+00:37:38,430 --> 00:37:43,379
+than it codes, for example--
+there's a coding axon
+
+726
+00:37:43,379 --> 00:37:45,170
+or that it's a
+transcription factor binding
+
+727
+00:37:45,170 --> 00:37:48,050
+site or something like that
+that functions at the DNA level.
+
+728
+00:37:48,050 --> 00:37:54,030
+So having this
+notion of structure--
+
+729
+00:37:54,030 --> 00:37:59,610
+even just secondary structure--
+is helpful for that application
+
+730
+00:37:59,610 --> 00:38:01,530
+as well, and predicting
+functions as well,
+
+731
+00:38:01,530 --> 00:38:02,740
+as I mentioned.
+
+732
+00:38:02,740 --> 00:38:05,760
+So co-variation.
+
+733
+00:38:05,760 --> 00:38:08,830
+So let's take a look
+at these sequences.
+
+734
+00:38:08,830 --> 00:38:15,110
+So imagine you've discovered a
+new class of mini micro RNA's.
+
+735
+00:38:15,110 --> 00:38:19,640
+They're only eight bases
+long, and you've sequence five
+
+736
+00:38:19,640 --> 00:38:24,870
+homologues from your
+five favorite mammals.
+
+737
+00:38:24,870 --> 00:38:28,430
+And these are the
+sequences that you get.
+
+738
+00:38:28,430 --> 00:38:30,560
+And you know that
+they're homologous
+
+739
+00:38:30,560 --> 00:38:32,560
+by [? a centimeter ?],
+they're in the same place
+
+740
+00:38:32,560 --> 00:38:35,630
+in the genome, and they seem
+to have the same function.
+
+741
+00:38:35,630 --> 00:38:39,040
+What could you say about
+their secondary structure
+
+742
+00:38:39,040 --> 00:38:42,400
+based on this
+multiple alignment?
+
+743
+00:38:42,400 --> 00:38:45,644
+You have to stare at it a
+little bit to see the pattern.
+
+744
+00:38:45,644 --> 00:38:46,636
+There's a pattern here.
+
+745
+00:38:50,108 --> 00:38:51,596
+Any ideas?
+
+746
+00:38:51,596 --> 00:38:55,564
+Anyone have a guess about
+what the structure is?
+
+747
+00:39:01,020 --> 00:39:01,710
+Yeah, go ahead.
+
+748
+00:39:01,710 --> 00:39:04,520
+AUDIENCE: There's a two
+base pair stem, and then
+
+749
+00:39:04,520 --> 00:39:08,060
+a four base loop.
+
+750
+00:39:08,060 --> 00:39:10,020
+PROFESSOR: Two base pair
+stem, four base loop,
+
+751
+00:39:10,020 --> 00:39:11,472
+and you have of the stem.
+
+752
+00:39:11,472 --> 00:39:13,410
+So how do you know that?
+
+753
+00:39:13,410 --> 00:39:17,275
+AUDIENCE: So if you
+look at the first two
+
+754
+00:39:17,275 --> 00:39:22,400
+and last two bases
+of each sequence,
+
+755
+00:39:22,400 --> 00:39:24,790
+the first and the
+eighths nucleotide
+
+756
+00:39:24,790 --> 00:39:28,812
+can pair with each other, and so
+can the second and the seventh.
+
+757
+00:39:28,812 --> 00:39:29,966
+PROFESSOR: Yeah.
+
+758
+00:39:29,966 --> 00:39:30,716
+Everyone see that?
+
+759
+00:39:30,716 --> 00:39:34,700
+So in the first
+column you have AUACG,
+
+760
+00:39:34,700 --> 00:39:36,155
+and that's
+complementary to UAUGC.
+
+761
+00:39:38,966 --> 00:39:40,090
+Each base is complementary.
+
+762
+00:39:40,090 --> 00:39:44,580
+And the second position is
+CAGGU complementary to GUCUA.
+
+763
+00:39:48,200 --> 00:39:50,196
+There's one slight
+exception there.
+
+764
+00:39:50,196 --> 00:39:51,070
+AUDIENCE: [INAUDIBLE]
+
+765
+00:39:51,070 --> 00:39:52,050
+PROFESSOR: Yeah.
+
+766
+00:39:52,050 --> 00:39:56,445
+Well, it turns out that that
+RNA-- although the Watson Crick
+
+767
+00:39:56,445 --> 00:39:59,580
+pairs GC and AU are the
+most stable-- GU pairs
+
+768
+00:39:59,580 --> 00:40:02,850
+are only a little bit
+less stable than AU pairs,
+
+769
+00:40:02,850 --> 00:40:07,050
+and they occur in
+natural RNA molecules.
+
+770
+00:40:07,050 --> 00:40:09,920
+So GU is allowed in RNA
+even though you would never
+
+771
+00:40:09,920 --> 00:40:11,695
+see that in DNA.
+
+772
+00:40:11,695 --> 00:40:13,740
+OK, so everyone see that?
+
+773
+00:40:13,740 --> 00:40:18,200
+So the structure is--
+I think I have it here.
+
+774
+00:40:23,770 --> 00:40:28,030
+This would be co-variation
+You're changing the bases,
+
+775
+00:40:28,030 --> 00:40:29,850
+but preserving the
+ability to pair.
+
+776
+00:40:29,850 --> 00:40:32,570
+So when one base change-- when
+the first base changes from A
+
+777
+00:40:32,570 --> 00:40:35,091
+to U, the last base
+changes from U to A
+
+778
+00:40:35,091 --> 00:40:36,532
+in order to preserve
+that pairing.
+
+779
+00:40:36,532 --> 00:40:38,740
+You wouldn't know that if
+you just had two sequences,
+
+780
+00:40:38,740 --> 00:40:41,080
+but once you get
+several sequences,
+
+781
+00:40:41,080 --> 00:40:43,990
+it can be pretty
+compelling and allow
+
+782
+00:40:43,990 --> 00:40:47,050
+you to make a pretty
+strong inference that that
+
+783
+00:40:47,050 --> 00:40:50,509
+is the structure
+of that molecule.
+
+784
+00:40:50,509 --> 00:40:51,550
+So how would you do this?
+
+785
+00:40:51,550 --> 00:40:53,900
+So imagine you had a more
+realistic example where
+
+786
+00:40:53,900 --> 00:40:57,010
+you've got a non-coding RNA
+that's 100 or a few hundred
+
+787
+00:40:57,010 --> 00:41:01,520
+bases long, and you might have
+a multiple alignment of 50
+
+788
+00:41:01,520 --> 00:41:03,710
+homologous sequences.
+
+789
+00:41:03,710 --> 00:41:05,720
+You want something,
+you're not going
+
+790
+00:41:05,720 --> 00:41:07,810
+to be able to see it by eye.
+
+791
+00:41:07,810 --> 00:41:13,130
+You need sort of a more
+objective criterion.
+
+792
+00:41:13,130 --> 00:41:15,740
+So one method
+that's commonly used
+
+793
+00:41:15,740 --> 00:41:21,020
+is this statistic IX
+mutual information.
+
+794
+00:41:21,020 --> 00:41:26,190
+So if you look in your
+multiple alignment--
+
+795
+00:41:26,190 --> 00:41:27,816
+I'll just draw this here.
+
+796
+00:41:33,655 --> 00:41:34,655
+You have many sequences.
+
+797
+00:41:37,760 --> 00:41:41,370
+You consider every
+pair of columns--
+
+798
+00:41:41,370 --> 00:41:44,760
+this is a multiple alignment,
+so this column and this column--
+
+799
+00:41:44,760 --> 00:41:46,980
+and you calculate
+what we're going
+
+800
+00:41:46,980 --> 00:41:49,796
+to call-- what are we
+going to call it? f ix.
+
+801
+00:41:52,770 --> 00:41:54,860
+That would be the frequency
+of a nucleotide x.
+
+802
+00:41:54,860 --> 00:41:57,610
+You're in column i, so you just
+count how many A's, C's, G's,
+
+803
+00:41:57,610 --> 00:41:58,610
+and T's there are.
+
+804
+00:41:58,610 --> 00:42:04,875
+And similarly, f jy for
+all the possible values
+
+805
+00:42:04,875 --> 00:42:06,849
+of x and all the
+possible values of y.
+
+806
+00:42:06,849 --> 00:42:08,890
+So these are the base
+frequencies in each column.
+
+807
+00:42:08,890 --> 00:42:14,400
+And then you calculate the
+dinucleotide frequencies xy
+
+808
+00:42:14,400 --> 00:42:17,490
+at each pair of columns.
+
+809
+00:42:17,490 --> 00:42:22,470
+So in this colony, you say if
+there's an A here and a C here,
+
+810
+00:42:22,470 --> 00:42:24,460
+and then there's
+another AC down here,
+
+811
+00:42:24,460 --> 00:42:27,702
+and there's a total of one,
+two, three, four, five, six,
+
+812
+00:42:27,702 --> 00:42:37,470
+seven sequences,
+then f AC ij is 2/7.
+
+813
+00:42:37,470 --> 00:42:40,620
+So you just calculate the
+frequency of each dinucleotide.
+
+814
+00:42:40,620 --> 00:42:43,670
+These are no longer consecutive
+dinucleotides in a sequence
+
+815
+00:42:43,670 --> 00:42:44,700
+necessarily there.
+
+816
+00:42:44,700 --> 00:42:47,770
+They can be in
+arbitrary spacing.
+
+817
+00:42:47,770 --> 00:42:49,640
+OK, so you calculate
+those and then
+
+818
+00:42:49,640 --> 00:42:54,552
+you throw them
+into this formula,
+
+819
+00:42:54,552 --> 00:42:55,510
+and out comes a number.
+
+820
+00:42:55,510 --> 00:42:58,660
+So what does this
+formula remind of?
+
+821
+00:42:58,660 --> 00:43:01,396
+Have you seen a
+similar formula before?
+
+822
+00:43:05,380 --> 00:43:06,376
+AUDIENCE: [INAUDIBLE]
+
+823
+00:43:06,376 --> 00:43:09,902
+PROFESSOR: Someone said
+[INAUDIBLE] Yeah, go ahead.
+
+824
+00:43:09,902 --> 00:43:12,360
+AUDIENCE: It reminds me of the
+Shannon entropy [INAUDIBLE].
+
+825
+00:43:12,360 --> 00:43:14,834
+PROFESSOR: Yeah, it looks
+like Shannon entropy,
+
+826
+00:43:14,834 --> 00:43:17,120
+but there's a log
+of a ratio in there,
+
+827
+00:43:17,120 --> 00:43:19,010
+so it's not exactly
+Shannon entropy.
+
+828
+00:43:19,010 --> 00:43:23,590
+So what other formula has
+a log of a ratio in it?
+
+829
+00:43:23,590 --> 00:43:24,586
+AUDIENCE: [INAUDIBLE]
+
+830
+00:43:24,586 --> 00:43:25,419
+PROFESSOR: Relative.
+
+831
+00:43:25,419 --> 00:43:28,570
+So it actually looks
+like relative entropy.
+
+832
+00:43:28,570 --> 00:43:31,200
+So relative entropy
+of what versus what?
+
+833
+00:43:39,270 --> 00:43:43,900
+Who can sort of say more
+precisely if it's-- we'll say
+
+834
+00:43:43,900 --> 00:43:47,140
+it's relative entropy of
+something versus a p versus q.
+
+835
+00:43:47,140 --> 00:43:49,650
+And what is p and what is q?
+
+836
+00:43:49,650 --> 00:43:50,950
+Yeah, in the back.
+
+837
+00:43:50,950 --> 00:43:54,819
+AUDIENCE: Is it relative
+entropy of co-occurrence
+
+838
+00:43:54,819 --> 00:43:56,220
+versus independent occurrence?
+
+839
+00:43:56,220 --> 00:43:57,630
+PROFESSOR: Good.
+
+840
+00:43:57,630 --> 00:43:59,910
+Yeah. co-occurence--
+everyone get that?
+
+841
+00:43:59,910 --> 00:44:05,520
+Co-occurrence of a pair of
+nucleotide xy at positions ij.
+
+842
+00:44:05,520 --> 00:44:08,680
+Versus q is an
+independent occurrence.
+
+843
+00:44:08,680 --> 00:44:12,130
+So if x and y occurred
+independently,
+
+844
+00:44:12,130 --> 00:44:17,270
+they would have this frequency.
+
+845
+00:44:17,270 --> 00:44:20,030
+So if you think about it,
+you calculate the frequency
+
+846
+00:44:20,030 --> 00:44:23,420
+of each base at each column
+in the multiple alignment.
+
+847
+00:44:23,420 --> 00:44:25,900
+And this is like
+your null hypothesis.
+
+848
+00:44:25,900 --> 00:44:28,810
+You're going to assume, what if
+they're evolving independently?
+
+849
+00:44:28,810 --> 00:44:35,060
+So if it's not a folded
+RNA-- or if it's a folded RNA
+
+850
+00:44:35,060 --> 00:44:37,380
+but those two columns
+don't happen to interact--
+
+851
+00:44:37,380 --> 00:44:40,470
+there's no reason to suspect
+that those bases would
+
+852
+00:44:40,470 --> 00:44:42,420
+have any relationship
+to each other.
+
+853
+00:44:42,420 --> 00:44:45,540
+So this is like
+your expected value
+
+854
+00:44:45,540 --> 00:44:50,490
+of the frequency of
+xy in position ij.
+
+855
+00:44:50,490 --> 00:44:53,060
+And then this p is
+your observed value.
+
+856
+00:44:53,060 --> 00:44:56,040
+So you're taking relative
+entropy of basically observed
+
+857
+00:44:56,040 --> 00:44:58,040
+over expected.
+
+858
+00:44:58,040 --> 00:45:04,170
+And so relative entropy
+has-- I haven't proved this,
+
+859
+00:45:04,170 --> 00:45:06,910
+but it's non-negative.
+
+860
+00:45:06,910 --> 00:45:10,310
+It can be 0, and then it
+goes up to some maximum,
+
+861
+00:45:10,310 --> 00:45:12,580
+a positive value, but
+it's never negative.
+
+862
+00:45:12,580 --> 00:45:20,900
+And what would it be if,
+in fact, p were equal to q?
+
+863
+00:45:20,900 --> 00:45:22,804
+What would this formula give?
+
+864
+00:45:26,980 --> 00:45:29,900
+This is where we're
+saying suppose.
+
+865
+00:45:29,900 --> 00:45:30,490
+Suppose this.
+
+866
+00:45:30,490 --> 00:45:33,160
+In general, this won't
+be sure, but suppose
+
+867
+00:45:33,160 --> 00:45:35,920
+it was equal to that.
+
+868
+00:45:35,920 --> 00:45:40,726
+We've got mi ij equals
+summation of what?
+
+869
+00:45:48,170 --> 00:45:52,120
+That log of this,
+which is equal to this,
+
+870
+00:45:52,120 --> 00:46:05,196
+so it's fx i fy j
+over the same thing--
+
+871
+00:46:05,196 --> 00:46:12,280
+hope you can see that-- log
+of-- log of 1 is 0, right?
+
+872
+00:46:12,280 --> 00:46:14,360
+So it's just 0.
+
+873
+00:46:14,360 --> 00:46:19,580
+So if the nucleotides
+of the two columns
+
+874
+00:46:19,580 --> 00:46:24,160
+occur completely independently,
+mutual information is 0.
+
+875
+00:46:24,160 --> 00:46:27,810
+And that's one reason it's
+called mutual information.
+
+876
+00:46:27,810 --> 00:46:29,040
+There's no information.
+
+877
+00:46:29,040 --> 00:46:30,640
+Knowing what's in
+column i gives you
+
+878
+00:46:30,640 --> 00:46:33,620
+no information about column j.
+
+879
+00:46:33,620 --> 00:46:36,590
+So remember, relative entities
+are measures of information,
+
+880
+00:46:36,590 --> 00:46:39,870
+not entropy.
+
+881
+00:46:39,870 --> 00:46:45,400
+And what is the maximum value
+that the mutual information
+
+882
+00:46:45,400 --> 00:46:47,080
+could have?
+
+883
+00:46:47,080 --> 00:46:47,860
+Any ideas on that?
+
+884
+00:46:53,810 --> 00:46:54,360
+Any guesses?
+
+885
+00:47:03,613 --> 00:47:04,587
+Joe, yeah.
+
+886
+00:47:04,587 --> 00:47:08,970
+AUDIENCE: You could have
+log base 2 log over f sub x,
+
+887
+00:47:08,970 --> 00:47:09,750
+f sub y.
+
+888
+00:47:13,674 --> 00:47:14,340
+PROFESSOR: Of 1?
+
+889
+00:47:14,340 --> 00:47:17,060
+OK, so you're saying if one of
+the particular dinucleotides
+
+890
+00:47:17,060 --> 00:47:18,930
+had a frequency of 1?
+
+891
+00:47:18,930 --> 00:47:19,555
+AUDIENCE: Yeah.
+
+892
+00:47:19,555 --> 00:47:23,000
+So if they're always the same
+whenever there's-- like an A,
+
+893
+00:47:23,000 --> 00:47:24,750
+there's always going to be a T.
+
+894
+00:47:24,750 --> 00:47:25,458
+PROFESSOR: Right.
+
+895
+00:47:25,458 --> 00:47:31,370
+So whenever there's an A,
+there's always a G or a T.
+
+896
+00:47:31,370 --> 00:47:34,010
+AUDIENCE: So then you'd
+get a 1 in the numerator,
+
+897
+00:47:34,010 --> 00:47:40,573
+and they're relative
+probably in the bottom, which
+
+898
+00:47:40,573 --> 00:47:44,240
+would be maximized if
+they were all even.
+
+899
+00:47:44,240 --> 00:47:45,697
+PROFESSOR: If they were all?
+
+900
+00:47:45,697 --> 00:47:46,530
+[INTERPOSING VOICES]
+
+901
+00:47:46,530 --> 00:47:47,480
+PROFESSOR: If they were uniform.
+
+902
+00:47:47,480 --> 00:47:47,980
+Yeah.
+
+903
+00:47:47,980 --> 00:47:49,110
+So did everyone get that?
+
+904
+00:47:49,110 --> 00:47:59,560
+So the maximum occurs if fx i
+and j-- they're both uniform,
+
+905
+00:47:59,560 --> 00:48:03,790
+so they're a quarter for
+every base at both positions.
+
+906
+00:48:03,790 --> 00:48:08,770
+That's the maximum entropy in
+the background distribution.
+
+907
+00:48:08,770 --> 00:48:26,720
+But then if fx y ij equals
+1/4, for example, x equals y--
+
+908
+00:48:26,720 --> 00:48:28,870
+or in our case, we're
+not interested in that.
+
+909
+00:48:28,870 --> 00:48:34,530
+We're interested in x
+equals complement of y.
+
+910
+00:48:34,530 --> 00:48:36,784
+C of y is going to be
+the complement of y.
+
+911
+00:48:41,890 --> 00:48:50,000
+And 0 otherwise for x not
+equal complement of y.
+
+912
+00:48:50,000 --> 00:48:58,714
+OK, so for example, if we have
+only the dinucleotides AT,
+
+913
+00:48:58,714 --> 00:49:04,400
+CG, GC, and TA occur,
+and each of them
+
+914
+00:49:04,400 --> 00:49:10,470
+occurs with a
+frequency of 1/4, then
+
+915
+00:49:10,470 --> 00:49:13,670
+you'll have four terms in
+the sum because, remember,
+
+916
+00:49:13,670 --> 00:49:15,500
+the 0 log 0 is 0.
+
+917
+00:49:15,500 --> 00:49:18,940
+So you'll have four terms
+in the sum, and each of them
+
+918
+00:49:18,940 --> 00:49:29,580
+will look like 1/4 log
+1/4 over a 1/4 times 1/4.
+
+919
+00:49:29,580 --> 00:49:33,510
+And so this will be 4,
+so log 2 of 4 4 is 2.
+
+920
+00:49:33,510 --> 00:49:39,000
+And so you have four terms
+that are each 1/4 times 2.
+
+921
+00:49:39,000 --> 00:49:41,822
+And so you'll get 2.
+
+922
+00:49:44,690 --> 00:49:46,719
+Well, this is not a sum.
+
+923
+00:49:46,719 --> 00:49:47,760
+These are the four terms.
+
+924
+00:49:47,760 --> 00:49:53,140
+These are the individual
+nonzero terms in that sum.
+
+925
+00:49:53,140 --> 00:49:54,030
+Does that make sense?
+
+926
+00:49:54,030 --> 00:49:55,340
+Everyone get this?
+
+927
+00:49:57,880 --> 00:50:02,640
+So that's why this is a useful
+measure of co-variation.
+
+928
+00:50:05,950 --> 00:50:08,850
+If what's in one
+column really strongly
+
+929
+00:50:08,850 --> 00:50:11,710
+influences what's
+in the other column,
+
+930
+00:50:11,710 --> 00:50:14,110
+and there's a lot of
+variation in the two columns,
+
+931
+00:50:14,110 --> 00:50:17,420
+and so you can really see
+that co-variation well,
+
+932
+00:50:17,420 --> 00:50:19,975
+then mutual information
+is maximized.
+
+933
+00:50:22,760 --> 00:50:24,390
+And that's basically
+what we just said,
+
+934
+00:50:24,390 --> 00:50:28,390
+is written down here.
+
+935
+00:50:28,390 --> 00:50:31,400
+So it's maximal.
+
+936
+00:50:31,400 --> 00:50:32,900
+They don't have to
+be complementary.
+
+937
+00:50:32,900 --> 00:50:36,750
+It would achieve this maximum
+of 2 if they are complementary,
+
+938
+00:50:36,750 --> 00:50:39,950
+but it would be also if they
+had some other very specific
+
+939
+00:50:39,950 --> 00:50:42,690
+relationship between
+the nucleotides.
+
+940
+00:50:42,690 --> 00:50:45,960
+So if you're going to use
+this, the way you would use it
+
+941
+00:50:45,960 --> 00:50:48,200
+is take your multiple
+alignment, calculate
+
+942
+00:50:48,200 --> 00:50:50,800
+the mutual information
+of each pair of columns--
+
+943
+00:50:50,800 --> 00:50:53,320
+so you actually have to
+make a table, i versus j,
+
+944
+00:50:53,320 --> 00:50:55,130
+all possible pairs
+of columns-- and then
+
+945
+00:50:55,130 --> 00:50:57,310
+you're going to look for
+the really high values.
+
+946
+00:50:57,310 --> 00:51:01,970
+And then when you find
+those high values, when
+
+947
+00:51:01,970 --> 00:51:04,570
+you look at what actual bases
+are tending to occur together,
+
+948
+00:51:04,570 --> 00:51:07,070
+you'll want to see
+that they're bases
+
+949
+00:51:07,070 --> 00:51:09,540
+that are complementary
+to one another.
+
+950
+00:51:09,540 --> 00:51:11,400
+And another thing
+that you'd want to see
+
+951
+00:51:11,400 --> 00:51:15,120
+is you'd want to see that
+consecutive positions in one
+
+952
+00:51:15,120 --> 00:51:17,770
+part of the alignment
+are co-varying
+
+953
+00:51:17,770 --> 00:51:21,770
+with consecutive positions in
+another part of the alignment
+
+954
+00:51:21,770 --> 00:51:24,990
+in the right way, in this sort
+of inverse complementary way
+
+955
+00:51:24,990 --> 00:51:27,295
+that RNA likes to pair.
+
+956
+00:51:27,295 --> 00:51:28,170
+Does that make sense?
+
+957
+00:51:28,170 --> 00:51:35,890
+So in a sort of nested way
+in your multiple alignment,
+
+958
+00:51:35,890 --> 00:51:38,450
+if you saw that this
+one co-varied with that,
+
+959
+00:51:38,450 --> 00:51:41,860
+and then you also saw that
+the next base co-varied
+
+960
+00:51:41,860 --> 00:51:44,340
+with the base right
+before this one,
+
+961
+00:51:44,340 --> 00:51:46,960
+and this one co-varies
+with that one,
+
+962
+00:51:46,960 --> 00:51:48,620
+that starts to look like a stem.
+
+963
+00:51:48,620 --> 00:51:51,320
+It's much more likely that
+you have a three-base stem
+
+964
+00:51:51,320 --> 00:51:55,184
+than that you just
+have some isolated base
+
+965
+00:51:55,184 --> 00:51:56,600
+pair out in the
+middle of nowhere.
+
+966
+00:51:56,600 --> 00:51:59,020
+It turns out it takes
+a few bases to make
+
+967
+00:51:59,020 --> 00:52:01,920
+a good thermodynamically
+stable stem,
+
+968
+00:52:01,920 --> 00:52:04,286
+and so you want to look
+for blocks of these things.
+
+969
+00:52:04,286 --> 00:52:08,194
+And so this works pretty well.
+
+970
+00:52:08,194 --> 00:52:10,110
+Yeah, actually, one point
+I want to make first
+
+971
+00:52:10,110 --> 00:52:13,300
+is that mutual
+information is nice
+
+972
+00:52:13,300 --> 00:52:16,544
+because it's kind
+of a useful concept
+
+973
+00:52:16,544 --> 00:52:18,835
+and it also relates to some
+of the entropy and relative
+
+974
+00:52:18,835 --> 00:52:21,293
+entropy that we've been talking
+about in the course before.
+
+975
+00:52:21,293 --> 00:52:24,190
+But it's not the only statistic
+that would work in practice.
+
+976
+00:52:24,190 --> 00:52:27,720
+You can use any measure of
+basically non-independence
+
+977
+00:52:27,720 --> 00:52:29,500
+between distributions.
+
+978
+00:52:29,500 --> 00:52:31,240
+A chi square statistic
+would probably
+
+979
+00:52:31,240 --> 00:52:34,730
+work equally well in practice.
+
+980
+00:52:34,730 --> 00:52:37,770
+And so here is a
+multiple alignment
+
+981
+00:52:37,770 --> 00:52:39,410
+of a bunch of sequences.
+
+982
+00:52:39,410 --> 00:52:45,410
+And what I've done is
+put boxes around columns
+
+983
+00:52:45,410 --> 00:52:48,510
+that have significant
+
+984
+00:52:48,510 --> 00:52:52,230
+mutual information with
+other sets of columns.
+
+985
+00:52:52,230 --> 00:52:57,470
+So for example, this set of
+columns here at the left-- the
+
+986
+00:52:57,470 --> 00:53:01,660
+far left-- has significant
+mutual information
+
+987
+00:53:01,660 --> 00:53:03,660
+with the ones at the far right.
+
+988
+00:53:03,660 --> 00:53:06,510
+And these ones,
+these four positions
+
+989
+00:53:06,510 --> 00:53:08,850
+co-vary with these
+four, and so forth.
+
+990
+00:53:08,850 --> 00:53:11,450
+So can you tell,
+based on looking
+
+991
+00:53:11,450 --> 00:53:13,240
+at this pattern of
+co-variation, what
+
+992
+00:53:13,240 --> 00:53:14,860
+the structure is going to be?
+
+993
+00:53:22,440 --> 00:53:25,400
+OK, let's say we start up here.
+
+994
+00:53:25,400 --> 00:53:29,200
+The first is going to
+pair with the last,
+
+995
+00:53:29,200 --> 00:53:30,404
+with something at the end.
+
+996
+00:53:30,404 --> 00:53:31,820
+Then we're going
+to have something
+
+997
+00:53:31,820 --> 00:53:36,150
+here in the middle that pairs
+with something else nearby.
+
+998
+00:53:36,150 --> 00:53:38,690
+Then we have something
+here that pairs
+
+999
+00:53:38,690 --> 00:53:42,060
+with something else nearby,
+then we have another like that.
+
+1000
+00:53:44,475 --> 00:53:45,350
+Does that make sense?
+
+1001
+00:53:45,350 --> 00:53:49,190
+So that there's these
+three pairs of columns
+
+1002
+00:53:49,190 --> 00:53:52,490
+in the middle-- these two, these
+two, and these two-- and then
+
+1003
+00:53:52,490 --> 00:53:55,220
+they're surrounded
+by this thing,
+
+1004
+00:53:55,220 --> 00:53:57,160
+the first pairing with the last.
+
+1005
+00:53:57,160 --> 00:53:59,160
+And so it's a clover
+leaf, so that's tRNA.
+
+1006
+00:54:05,056 --> 00:54:05,556
+Yeah?
+
+1007
+00:54:08,250 --> 00:54:14,381
+AUDIENCE: So with that previous
+slide, this table here,
+
+1008
+00:54:14,381 --> 00:54:17,470
+you could create a
+co-variation matrix.
+
+1009
+00:54:17,470 --> 00:54:19,155
+How would that-- or,
+and it could be--
+
+1010
+00:54:19,155 --> 00:54:21,113
+PROFESSOR: How does that
+co-variations matrix--
+
+1011
+00:54:21,113 --> 00:54:23,580
+how do you convert it
+to this representations?
+
+1012
+00:54:23,580 --> 00:54:27,100
+AUDIENCE: I'm just wondering
+how this would go up.
+
+1013
+00:54:27,100 --> 00:54:29,480
+Like let's say you took
+the co-variation matrix--
+
+1014
+00:54:29,480 --> 00:54:30,271
+PROFESSOR: Oh, what
+would it look like?
+
+1015
+00:54:30,271 --> 00:54:31,173
+AUDIENCE: --and visualized
+it as a heat map--
+
+1016
+00:54:31,173 --> 00:54:32,530
+PROFESSOR: In the
+co-variation matrix.
+
+1017
+00:54:32,530 --> 00:54:33,155
+AUDIENCE: Yeah.
+
+1018
+00:54:33,155 --> 00:54:37,554
+What would it look like in
+this particular example?
+
+1019
+00:54:37,554 --> 00:54:39,220
+PROFESSOR: Yeah,
+that's a good question.
+
+1020
+00:54:39,220 --> 00:54:40,200
+OK, let's do that.
+
+1021
+00:54:42,690 --> 00:54:44,190
+I haven't thought
+about that before,
+
+1022
+00:54:44,190 --> 00:54:47,560
+so you'll have to
+help me on this.
+
+1023
+00:54:47,560 --> 00:54:52,224
+So here's the beginning.
+
+1024
+00:54:52,224 --> 00:54:53,890
+We're going to write
+the sequence from 1
+
+1025
+00:54:53,890 --> 00:54:57,790
+to n in both dimensions.
+
+1026
+00:54:57,790 --> 00:55:02,330
+And so here's the beginning,
+and it co-varies with the end.
+
+1027
+00:55:02,330 --> 00:55:06,670
+So this first would have a
+co-variation with the last,
+
+1028
+00:55:06,670 --> 00:55:08,760
+and then the second would
+co-vary with the second
+
+1029
+00:55:08,760 --> 00:55:10,150
+to last, and so forth.
+
+1030
+00:55:10,150 --> 00:55:13,730
+So you get a little
+diagonal down here.
+
+1031
+00:55:13,730 --> 00:55:17,210
+That's this top stem here.
+
+1032
+00:55:17,210 --> 00:55:18,980
+And then what about
+the second stem?
+
+1033
+00:55:18,980 --> 00:55:21,894
+So then you have
+something down here
+
+1034
+00:55:21,894 --> 00:55:24,310
+that's going to co-vary with
+something kind of near by it.
+
+1035
+00:55:29,720 --> 00:55:32,300
+So block two is going to
+co-vary with block three.
+
+1036
+00:55:32,300 --> 00:55:35,283
+And again, it's going to be
+this inverse complementary kind
+
+1037
+00:55:35,283 --> 00:55:38,230
+of thing like that.
+
+1038
+00:55:38,230 --> 00:55:43,910
+It's symmetrical, so
+you get this with that.
+
+1039
+00:55:43,910 --> 00:55:47,100
+But you only have
+to do one half,
+
+1040
+00:55:47,100 --> 00:55:49,770
+so you can just do
+this upper half here.
+
+1041
+00:55:49,770 --> 00:55:50,660
+So you get that.
+
+1042
+00:55:50,660 --> 00:55:55,046
+So it would look
+something like that.
+
+1043
+00:55:55,046 --> 00:55:57,426
+AUDIENCE: So with the
+diagonal line orthogonal
+
+1044
+00:55:57,426 --> 00:56:01,890
+to the diagonal of the matrix--
+
+1045
+00:56:01,890 --> 00:56:05,730
+PROFESSOR: Yeah, that's because
+they're inverse complementary.
+
+1046
+00:56:05,730 --> 00:56:08,130
+AUDIENCE: OK.
+
+1047
+00:56:08,130 --> 00:56:10,050
+PROFESSOR: That make sense?
+
+1048
+00:56:10,050 --> 00:56:12,450
+Good question.
+
+1049
+00:56:12,450 --> 00:56:14,187
+But we'll see an
+example like that later
+
+1050
+00:56:14,187 --> 00:56:15,270
+actually, as it turns out.
+
+1051
+00:56:17,910 --> 00:56:22,180
+All right, so here's
+my question for you.
+
+1052
+00:56:22,180 --> 00:56:25,390
+You're setting this
+non-coding RNA.
+
+1053
+00:56:25,390 --> 00:56:26,810
+It has some length.
+
+1054
+00:56:26,810 --> 00:56:29,190
+You have some
+number of sequences.
+
+1055
+00:56:29,190 --> 00:56:32,910
+They might have some structure.
+
+1056
+00:56:32,910 --> 00:56:35,850
+Is this method going to
+work for you, or is it not?
+
+1057
+00:56:35,850 --> 00:56:40,060
+What is required for it to work?
+
+1058
+00:56:40,060 --> 00:56:45,160
+For example, would
+I want to isolate
+
+1059
+00:56:45,160 --> 00:56:48,820
+this gene-- this
+non-coding RNA gene--
+
+1060
+00:56:48,820 --> 00:56:52,680
+just from primates, from
+like human, gorilla,
+
+1061
+00:56:52,680 --> 00:56:57,770
+chimp, orangutan, and
+do that alignment?
+
+1062
+00:56:57,770 --> 00:56:59,290
+Or would I want to go further?
+
+1063
+00:56:59,290 --> 00:57:05,840
+Would I want to go back to
+the rodents and dog, horse--
+
+1064
+00:57:05,840 --> 00:57:06,925
+how far do you want to go?
+
+1065
+00:57:06,925 --> 00:57:07,590
+Yeah, question.
+
+1066
+00:57:07,590 --> 00:57:10,662
+AUDIENCE: I think we a need a
+very strong sequence alignment
+
+1067
+00:57:10,662 --> 00:57:14,106
+for this, so we
+cannot go very far,
+
+1068
+00:57:14,106 --> 00:57:17,058
+because if you don't have
+a high percentage homology,
+
+1069
+00:57:17,058 --> 00:57:19,518
+then you will see all
+sorts of false positives.
+
+1070
+00:57:19,518 --> 00:57:20,502
+PROFESSOR: Absolutely.
+
+1071
+00:57:20,502 --> 00:57:23,590
+So if you go too far, your
+alignment will suffer,
+
+1072
+00:57:23,590 --> 00:57:25,097
+and you need an
+alignment in order
+
+1073
+00:57:25,097 --> 00:57:26,680
+to identify the
+corresponding columns.
+
+1074
+00:57:26,680 --> 00:57:30,580
+So that puts an upper limit
+on how far you can go.
+
+1075
+00:57:30,580 --> 00:57:32,790
+But excellent point.
+
+1076
+00:57:32,790 --> 00:57:33,890
+Is there a lower limit?
+
+1077
+00:57:33,890 --> 00:57:35,515
+Do you want to go as
+close as possible,
+
+1078
+00:57:35,515 --> 00:57:40,200
+like this example I gave
+with human, chimp, orangutan?
+
+1079
+00:57:40,200 --> 00:57:42,750
+Or is that too close?
+
+1080
+00:57:42,750 --> 00:57:44,030
+Why is too close bad?
+
+1081
+00:57:44,030 --> 00:57:44,842
+Tim?
+
+1082
+00:57:44,842 --> 00:57:46,770
+AUDIENCE: Maybe if
+you're too close,
+
+1083
+00:57:46,770 --> 00:57:49,180
+then the sequence is
+having to [INAUDIBLE]
+
+1084
+00:57:49,180 --> 00:57:51,108
+to give you enough
+information [INAUDIBLE].
+
+1085
+00:57:51,108 --> 00:57:52,149
+PROFESSOR: Yeah, exactly.
+
+1086
+00:57:52,149 --> 00:57:53,040
+They're all the same.
+
+1087
+00:57:53,040 --> 00:57:57,880
+Actually, you'll
+get 1 times 1 over 1
+
+1088
+00:57:57,880 --> 00:58:00,210
+in that mutual information
+statistic, which log of that
+
+1089
+00:58:00,210 --> 00:58:01,440
+is going to be 0.
+
+1090
+00:58:01,440 --> 00:58:04,860
+There's zero mutual information
+if they're all the same.
+
+1091
+00:58:04,860 --> 00:58:09,400
+So there has to
+be some variation,
+
+1092
+00:58:09,400 --> 00:58:12,230
+and the structure
+has to be conserved.
+
+1093
+00:58:12,230 --> 00:58:13,180
+That's key.
+
+1094
+00:58:13,180 --> 00:58:17,340
+You have to assume that the
+structure is well conserved
+
+1095
+00:58:17,340 --> 00:58:20,147
+and you have to have
+a good alignment
+
+1096
+00:58:20,147 --> 00:58:21,605
+and there has to
+be some variation,
+
+1097
+00:58:21,605 --> 00:58:22,854
+a certain amount of variation.
+
+1098
+00:58:22,854 --> 00:58:26,620
+Those are basically
+the three keys.
+
+1099
+00:58:26,620 --> 00:58:29,170
+Secondary structure has a more
+highly conserved sequence.
+
+1100
+00:58:29,170 --> 00:58:31,710
+Sufficient divergence so that
+you have these variations,
+
+1101
+00:58:31,710 --> 00:58:35,060
+and sufficient number of
+homologues you have to get good
+
+1102
+00:58:35,060 --> 00:58:40,340
+statistics, and not so far
+they your alignment is bad.
+
+1103
+00:58:40,340 --> 00:58:41,050
+Sorry about that.
+
+1104
+00:58:41,050 --> 00:58:41,550
+Sally?
+
+1105
+00:58:44,201 --> 00:58:45,742
+AUDIENCE: It seems
+like another thing
+
+1106
+00:58:45,742 --> 00:58:50,030
+that we assume here is that
+you can project it onto a plane
+
+1107
+00:58:50,030 --> 00:58:52,590
+and it will lie flat.
+
+1108
+00:58:52,590 --> 00:58:55,270
+So if you have some very
+important, weird folding
+
+1109
+00:58:55,270 --> 00:58:58,611
+that allows you to, say,
+crisscross the rainbow thing.
+
+1110
+00:58:58,611 --> 00:59:00,277
+PROFESSOR: Yeah,
+crisscross the rainbow.
+
+1111
+00:59:00,277 --> 00:59:01,684
+Yeah, very good question.
+
+1112
+00:59:08,420 --> 00:59:10,400
+So in the example
+of tRNA, if you
+
+1113
+00:59:10,400 --> 00:59:12,880
+were to do that arc
+diagram for tRNA,
+
+1114
+00:59:12,880 --> 00:59:14,664
+it would look like
+another big arc--
+
+1115
+00:59:14,664 --> 00:59:16,330
+that's the first and
+last-- and then you
+
+1116
+00:59:16,330 --> 00:59:19,460
+have these three nested arcs.
+
+1117
+00:59:19,460 --> 00:59:20,405
+Nothing crisscrossing.
+
+1118
+00:59:24,410 --> 00:59:32,340
+What if I saw-- [INAUDIBLE]--
+two blocks of sequence that
+
+1119
+00:59:32,340 --> 00:59:33,793
+have a relationship like that?
+
+1120
+00:59:33,793 --> 00:59:34,779
+Is that OK?
+
+1121
+00:59:43,160 --> 00:59:46,611
+With this method, the
+co-variation, that's OK.
+
+1122
+00:59:46,611 --> 00:59:47,730
+There's no problem there.
+
+1123
+00:59:47,730 --> 00:59:51,034
+What does this
+structure look like?
+
+1124
+00:59:51,034 --> 00:59:57,870
+So [INAUDIBLE] you have a
+stem, then you have a loop,
+
+1125
+00:59:57,870 --> 00:59:58,550
+and then a stem.
+
+1126
+00:59:58,550 --> 01:00:01,640
+So this is 1 pairs with 3.
+
+1127
+01:00:01,640 --> 01:00:02,510
+That's 1.
+
+1128
+01:00:02,510 --> 01:00:03,610
+That's 3.
+
+1129
+01:00:03,610 --> 01:00:06,350
+Then you've got 2 up
+here, but 2 pairs with 4.
+
+1130
+01:00:06,350 --> 01:00:09,340
+So here's 4 over
+here, so 4 is going
+
+1131
+01:00:09,340 --> 01:00:12,620
+to have to come back up
+here and pair with 2.
+
+1132
+01:00:15,270 --> 01:00:16,940
+This is 2 over here.
+
+1133
+01:00:16,940 --> 01:00:20,750
+So that is called a pseudoknot.
+
+1134
+01:00:20,750 --> 01:00:22,920
+It's not really a knot
+because this thing doesn't
+
+1135
+01:00:22,920 --> 01:00:25,850
+go through the
+loop, but it kind of
+
+1136
+01:00:25,850 --> 01:00:27,800
+behaves like a
+knot in some ways.
+
+1137
+01:00:27,800 --> 01:00:31,290
+And so do these actually
+occur in natural RNAs?
+
+1138
+01:00:31,290 --> 01:00:32,780
+Yes, Tim is nodding.
+
+1139
+01:00:32,780 --> 01:00:34,580
+And are they important?
+
+1140
+01:00:34,580 --> 01:00:37,090
+Can you give me an example
+where they are important
+
+1141
+01:00:37,090 --> 01:00:38,289
+biologically?
+
+1142
+01:00:38,289 --> 01:00:39,726
+AUDIENCE: [INAUDIBLE]
+
+1143
+01:00:39,726 --> 01:00:41,163
+[INTERPOSING VOICES]
+
+1144
+01:00:41,163 --> 01:00:42,850
+PROFESSOR: Riboswitches.
+
+1145
+01:00:42,850 --> 01:00:44,516
+We're going to come
+to what riboswitches
+
+1146
+01:00:44,516 --> 01:00:49,390
+are in a moment for
+those not familiar.
+
+1147
+01:00:49,390 --> 01:00:51,050
+And I think I have
+an example later
+
+1148
+01:00:51,050 --> 01:00:52,450
+of a pseudoknot
+that's important.
+
+1149
+01:00:52,450 --> 01:00:53,533
+So that's a good question.
+
+1150
+01:00:58,190 --> 01:01:00,290
+I think I should have added
+to this list the point
+
+1151
+01:01:00,290 --> 01:01:03,203
+that you made in
+the back that they
+
+1152
+01:01:03,203 --> 01:01:06,020
+have to be close enough that
+you can get a good alignment.
+
+1153
+01:01:06,020 --> 01:01:07,502
+I should add that to this last.
+
+1154
+01:01:07,502 --> 01:01:08,002
+Thanks.
+
+1155
+01:01:08,002 --> 01:01:09,650
+It's a good point.
+
+1156
+01:01:09,650 --> 01:01:11,730
+All right, so classes
+of non-coding RNAs.
+
+1157
+01:01:11,730 --> 01:01:14,340
+As promised, my
+favorites listed here.
+
+1158
+01:01:17,070 --> 01:01:19,540
+Everyone knows tRNAs, rRNAs.
+
+1159
+01:01:19,540 --> 01:01:22,530
+You can think of UTRs
+as being non RNAs.
+
+1160
+01:01:22,530 --> 01:01:24,270
+They often have
+structure that can
+
+1161
+01:01:24,270 --> 01:01:26,230
+be involved in
+regulating the message.
+
+1162
+01:01:26,230 --> 01:01:28,160
+snRNAs involved splicing.
+
+1163
+01:01:28,160 --> 01:01:31,490
+snoRNAs-- small
+nucleolar RNAs-- are
+
+1164
+01:01:31,490 --> 01:01:33,870
+involved in directing
+modification
+
+1165
+01:01:33,870 --> 01:01:39,519
+of other RNAs, such as ribosomal
+RNAs and snRNAs, for example.
+
+1166
+01:01:39,519 --> 01:01:41,310
+Terminators of
+transcription in prokaryotes
+
+1167
+01:01:41,310 --> 01:01:43,460
+are like little stem
+loop structures.
+
+1168
+01:01:43,460 --> 01:01:45,200
+RNaseP is an important enzyme.
+
+1169
+01:01:45,200 --> 01:01:51,590
+SRP is involved in targeting
+proteins with signal peptides
+
+1170
+01:01:51,590 --> 01:01:54,290
+to the export machinery.
+
+1171
+01:01:54,290 --> 01:01:55,730
+We won't go into tmRNA.
+
+1172
+01:01:55,730 --> 01:01:57,440
+micro RNAs and link
+RNAs, you probably
+
+1173
+01:01:57,440 --> 01:01:59,400
+know, and riboswitches.
+
+1174
+01:01:59,400 --> 01:02:03,394
+So Tim, can you tell us
+what a riboswitch is?
+
+1175
+01:02:03,394 --> 01:02:06,810
+AUDIENCE: A riboswitch
+is any RNA structure
+
+1176
+01:02:06,810 --> 01:02:10,226
+that changes
+confirmation according
+
+1177
+01:02:10,226 --> 01:02:16,550
+to some stimulus [INAUDIBLE]
+or something in the cell.
+
+1178
+01:02:16,550 --> 01:02:20,020
+It could be an ion, critical
+changes in the structure.
+
+1179
+01:02:20,020 --> 01:02:22,317
+[INAUDIBLE]
+
+1180
+01:02:22,317 --> 01:02:23,650
+PROFESSOR: Yeah, that was great.
+
+1181
+01:02:23,650 --> 01:02:25,922
+So just for those that
+may not have heard,
+
+1182
+01:02:25,922 --> 01:02:26,880
+I'll just say it again.
+
+1183
+01:02:26,880 --> 01:02:31,480
+So a riboswitch is
+any RNA that can
+
+1184
+01:02:31,480 --> 01:02:34,750
+have multiple confirmations,
+and changes confirmation
+
+1185
+01:02:34,750 --> 01:02:41,325
+in response to some stimulus--
+temperature, binding
+
+1186
+01:02:41,325 --> 01:02:45,190
+of some ligand, small molecules,
+something like that, et cetera.
+
+1187
+01:02:45,190 --> 01:02:49,360
+And often, one of
+those structures
+
+1188
+01:02:49,360 --> 01:02:51,970
+will block a particular
+regulatory element.
+
+1189
+01:02:51,970 --> 01:02:53,600
+I'll show an
+example in a moment.
+
+1190
+01:02:53,600 --> 01:02:55,940
+And so when it's in
+one confirmation,
+
+1191
+01:02:55,940 --> 01:02:57,180
+the gene will be repressed.
+
+1192
+01:02:57,180 --> 01:02:58,555
+And when it's in
+the other, it'll
+
+1193
+01:02:58,555 --> 01:03:02,560
+be on. so it's a way of using
+RNA's secondary structure
+
+1194
+01:03:02,560 --> 01:03:04,630
+to sense what's
+going on in the cell
+
+1195
+01:03:04,630 --> 01:03:06,590
+and to appropriately
+regulate gene expression.
+
+1196
+01:03:09,027 --> 01:03:11,610
+All right, so now we're going
+to talk about a second approach.
+
+1197
+01:03:11,610 --> 01:03:12,860
+So this would be the approach.
+
+1198
+01:03:12,860 --> 01:03:14,670
+You've got some RNA.
+
+1199
+01:03:14,670 --> 01:03:18,561
+It may not do something,
+and maybe you can't find any
+
+1200
+01:03:18,561 --> 01:03:19,060
+homologues.
+
+1201
+01:03:19,060 --> 01:03:21,940
+It might be some newly
+evolved species-specific RNA,
+
+1202
+01:03:21,940 --> 01:03:24,250
+or your studying
+some obscure species
+
+1203
+01:03:24,250 --> 01:03:27,100
+where you don't have a lot
+of genomic sequence around.
+
+1204
+01:03:27,100 --> 01:03:29,200
+So you want to use the
+first principles, approach,
+
+1205
+01:03:29,200 --> 01:03:31,545
+the energy
+minimization approach.
+
+1206
+01:03:31,545 --> 01:03:32,920
+Or maybe you have
+the homologues,
+
+1207
+01:03:32,920 --> 01:03:34,820
+but you don't trust
+your alignment.
+
+1208
+01:03:34,820 --> 01:03:36,680
+You want a second
+opinion on what
+
+1209
+01:03:36,680 --> 01:03:38,130
+the structure is going to be.
+
+1210
+01:03:38,130 --> 01:03:44,870
+So just in the way
+that protein folding--
+
+1211
+01:03:44,870 --> 01:03:46,540
+you could think of
+an equilibrium model
+
+1212
+01:03:46,540 --> 01:03:49,400
+where it's determined
+by folding free energy,
+
+1213
+01:03:49,400 --> 01:03:52,200
+and enthalpy will
+favor base pairing.
+
+1214
+01:03:52,200 --> 01:03:55,810
+You get gain some enthalpy
+when you form a hydrogen bond,
+
+1215
+01:03:55,810 --> 01:03:58,770
+and entropy will tend
+to favor unfolding.
+
+1216
+01:03:58,770 --> 01:04:02,590
+So an RNA molecule
+that's linear has
+
+1217
+01:04:02,590 --> 01:04:04,210
+all this confirmational
+flexibility,
+
+1218
+01:04:04,210 --> 01:04:06,072
+and lose some of that
+when you form a stem.
+
+1219
+01:04:06,072 --> 01:04:06,780
+It forms a helix.
+
+1220
+01:04:06,780 --> 01:04:09,460
+Those things don't have
+as much flexibility.
+
+1221
+01:04:09,460 --> 01:04:13,670
+And even the nucleotides in
+the loop are a little bit
+
+1222
+01:04:13,670 --> 01:04:16,340
+confirmationally--
+they're not as flexible
+
+1223
+01:04:16,340 --> 01:04:18,600
+as they were when it was linear.
+
+1224
+01:04:18,600 --> 01:04:20,790
+So that means that
+at high temperatures,
+
+1225
+01:04:20,790 --> 01:04:24,930
+it'll favor unfolding.
+
+1226
+01:04:24,930 --> 01:04:29,480
+So the earliest
+approaches were approaches
+
+1227
+01:04:29,480 --> 01:04:34,300
+that sought to maximize
+the number of base pairs.
+
+1228
+01:04:34,300 --> 01:04:37,710
+So they basically ignore entropy
+and focus on the enthalpy
+
+1229
+01:04:37,710 --> 01:04:39,530
+that you gain from
+forming base pairs.
+
+1230
+01:04:39,530 --> 01:04:43,730
+And so Ruth Nussinov
+described the first algorithm
+
+1231
+01:04:43,730 --> 01:04:47,780
+to figure out what is the
+maximum number of base pairs
+
+1232
+01:04:47,780 --> 01:04:51,160
+that you can form in an RNA.
+
+1233
+01:04:51,160 --> 01:04:57,750
+And so a way to
+think about this is
+
+1234
+01:04:57,750 --> 01:04:59,225
+imagine you've
+got this sequence.
+
+1235
+01:05:06,444 --> 01:05:08,110
+What is the largest
+number of base pairs
+
+1236
+01:05:08,110 --> 01:05:09,690
+I can form with this sequence?
+
+1237
+01:05:15,090 --> 01:05:17,405
+I could just draw all
+possible base pairs.
+
+1238
+01:05:17,405 --> 01:05:19,780
+That A can pair with that T.
+This A can pair with that T.
+
+1239
+01:05:19,780 --> 01:05:21,660
+They can't both pair
+simultaneously, right?
+
+1240
+01:05:21,660 --> 01:05:27,460
+And this C can pair with that G.
+So if we don't allow crossing,
+
+1241
+01:05:27,460 --> 01:05:30,610
+which-- coming back
+to Sally's point--
+
+1242
+01:05:30,610 --> 01:05:32,470
+this would cross this, right?
+
+1243
+01:05:32,470 --> 01:05:34,320
+So we're not going
+to allow that.
+
+1244
+01:05:34,320 --> 01:05:38,780
+So the best you could do be to
+have this A pair with this C
+
+1245
+01:05:38,780 --> 01:05:41,790
+and this C pair with this G
+and form this little structure.
+
+1246
+01:05:45,500 --> 01:05:49,324
+This is not realistic because
+RNA loops can't be one base.
+
+1247
+01:05:49,324 --> 01:05:50,490
+They minimum is about three.
+
+1248
+01:05:50,490 --> 01:05:52,810
+But just for the
+sake of argument,
+
+1249
+01:05:52,810 --> 01:05:55,720
+you can list all these
+out, but imagine now
+
+1250
+01:05:55,720 --> 01:05:59,140
+you've got 100 bases here.
+
+1251
+01:05:59,140 --> 01:06:02,490
+Every base will on
+average potentially
+
+1252
+01:06:02,490 --> 01:06:07,700
+be able to pair with
+24 or 25 other bases.
+
+1253
+01:06:07,700 --> 01:06:12,190
+So you're just going to have
+just an incredible mishmash
+
+1254
+01:06:12,190 --> 01:06:16,960
+of possible lines
+all crisscrossing.
+
+1255
+01:06:16,960 --> 01:06:22,697
+So how do you figure out how
+to maximize that pairing?
+
+1256
+01:06:27,231 --> 01:06:27,730
+Any ideas?
+
+1257
+01:06:33,208 --> 01:06:34,950
+Don, yeah?
+
+1258
+01:06:34,950 --> 01:06:37,512
+AUDIENCE: You look for
+sections of homology.
+
+1259
+01:06:37,512 --> 01:06:39,400
+PROFESSOR: We're
+not using homology.
+
+1260
+01:06:39,400 --> 01:06:41,300
+We're doing [INAUDIBLE]
+
+1261
+01:06:41,300 --> 01:06:44,190
+AUDIENCE: I'm sorry, not
+homology, but sections where--
+
+1262
+01:06:44,190 --> 01:06:44,602
+PROFESSOR: Complementary?
+
+1263
+01:06:44,602 --> 01:06:45,426
+AUDIENCE: Complementary.
+
+1264
+01:06:45,426 --> 01:06:46,967
+Yeah, that's the
+word I was thinking.
+
+1265
+01:06:46,967 --> 01:06:48,670
+PROFESSOR: The blocks
+are complementary.
+
+1266
+01:06:48,670 --> 01:06:51,470
+AUDIENCE: And then so--
+
+1267
+01:06:51,470 --> 01:06:54,172
+PROFESSOR: You could blast
+the sequence against inverse
+
+1268
+01:06:54,172 --> 01:06:56,990
+complements itself and
+look for little blocks.
+
+1269
+01:06:56,990 --> 01:06:59,410
+You could do that.
+
+1270
+01:06:59,410 --> 01:07:00,970
+That's not what
+people generally do,
+
+1271
+01:07:00,970 --> 01:07:03,770
+mostly because the blocks of
+complementarity in real RNA
+
+1272
+01:07:03,770 --> 01:07:05,680
+structures are really short.
+
+1273
+01:07:05,680 --> 01:07:07,710
+They can be two,
+three, four, bases.
+
+1274
+01:07:07,710 --> 01:07:08,625
+Sally, yeah?
+
+1275
+01:07:08,625 --> 01:07:11,000
+AUDIENCE: Could you use
+[INAUDIBLE] approach
+
+1276
+01:07:11,000 --> 01:07:16,110
+where you just start with a
+very small case and build up?
+
+1277
+01:07:16,110 --> 01:07:18,630
+PROFESSOR: So we've seen that
+work for protein sequence
+
+1278
+01:07:18,630 --> 01:07:19,130
+alignment.
+
+1279
+01:07:19,130 --> 01:07:22,750
+We've seen it work for
+the Viterbi algorithm.
+
+1280
+01:07:22,750 --> 01:07:27,710
+So that is sort of the go-to
+approach in bioinfomatics,
+
+1281
+01:07:27,710 --> 01:07:29,950
+is to use some sort of
+dynamic programming.
+
+1282
+01:07:29,950 --> 01:07:32,790
+Now this one for RNA
+secondary structure
+
+1283
+01:07:32,790 --> 01:07:35,440
+that Nussinov came up
+with is a little bit
+
+1284
+01:07:35,440 --> 01:07:36,800
+different than the others.
+
+1285
+01:07:36,800 --> 01:07:39,860
+So you'll see it has a
+kind of different flavor.
+
+1286
+01:07:39,860 --> 01:07:42,482
+It turns out to be
+actually it's a little hard
+
+1287
+01:07:42,482 --> 01:07:44,190
+to get your head around
+at the beginning,
+
+1288
+01:07:44,190 --> 01:07:47,720
+but it's actually
+easier to do by hand.
+
+1289
+01:07:47,720 --> 01:07:49,380
+So let's take a look at that.
+
+1290
+01:07:49,380 --> 01:07:53,020
+OK, so recursive
+maximization of base pairing.
+
+1291
+01:07:53,020 --> 01:07:55,290
+Now the thing about
+base pairing that's
+
+1292
+01:07:55,290 --> 01:07:56,780
+different from
+these other problems
+
+1293
+01:07:56,780 --> 01:07:59,500
+is that the first
+base in the sequence
+
+1294
+01:07:59,500 --> 01:08:02,980
+can base pair with the last.
+
+1295
+01:08:02,980 --> 01:08:05,220
+How do you chop up a sequence?
+
+1296
+01:08:05,220 --> 01:08:08,870
+Remember with Needleman-Wunsch
+and with Viterbi
+
+1297
+01:08:08,870 --> 01:08:11,146
+we go from the
+beginning to the end,
+
+1298
+01:08:11,146 --> 01:08:12,270
+and that's a logical order.
+
+1299
+01:08:12,270 --> 01:08:16,560
+But with base pairing, that's
+actually not a logical order.
+
+1300
+01:08:16,560 --> 01:08:19,350
+You can't really do it that way.
+
+1301
+01:08:19,350 --> 01:08:24,540
+So instead, you go
+from the inside out.
+
+1302
+01:08:24,540 --> 01:08:26,640
+You start in the
+middle of a sequence
+
+1303
+01:08:26,640 --> 01:08:30,990
+and work your way outwards
+in both directions.
+
+1304
+01:08:30,990 --> 01:08:40,890
+Or another way to think about
+it is you start with you write
+
+1305
+01:08:40,890 --> 01:08:45,920
+the sequence from 1
+to n on both axes,
+
+1306
+01:08:45,920 --> 01:08:52,399
+and then actually we'll see that
+we initiate the diagonal all
+
+1307
+01:08:52,399 --> 01:08:53,584
+to 0's.
+
+1308
+01:08:53,584 --> 01:08:58,229
+And then we think about
+these positions here next.
+
+1309
+01:09:02,620 --> 01:09:06,109
+So 1 versus 2.
+
+1310
+01:09:06,109 --> 01:09:08,100
+Could 1 pair with 2?
+
+1311
+01:09:08,100 --> 01:09:09,439
+And could 2 pair with 3?
+
+1312
+01:09:09,439 --> 01:09:12,087
+Those are like little
+bits of possible RNA
+
+1313
+01:09:12,087 --> 01:09:12,920
+secondary structure.
+
+1314
+01:09:12,920 --> 01:09:14,340
+Again, we're ignoring
+this fact that loops
+
+1315
+01:09:14,340 --> 01:09:15,464
+have to be certain minimum.
+
+1316
+01:09:15,464 --> 01:09:17,800
+This is sort of a
+simplified case.
+
+1317
+01:09:17,800 --> 01:09:19,600
+And then you build outwards.
+
+1318
+01:09:19,600 --> 01:09:27,220
+So you conclude that base 4
+here could pair with base 5,
+
+1319
+01:09:27,220 --> 01:09:30,090
+so we're going to put a 1 there.
+
+1320
+01:09:30,090 --> 01:09:33,630
+And then we're going
+to build outward
+
+1321
+01:09:33,630 --> 01:09:35,590
+from that toward the
+beginning of the sequence
+
+1322
+01:09:35,590 --> 01:09:38,930
+and toward the end, adding
+additional base pairs
+
+1323
+01:09:38,930 --> 01:09:40,210
+when we can.
+
+1324
+01:09:40,210 --> 01:09:42,200
+That's basically the way
+the [INAUDIBLE] works.
+
+1325
+01:09:42,200 --> 01:09:47,740
+And so that's one
+key idea, that we
+
+1326
+01:09:47,740 --> 01:09:50,890
+go from sort of
+close sequences, work
+
+1327
+01:09:50,890 --> 01:09:53,120
+outward, to faraway sequences.
+
+1328
+01:09:53,120 --> 01:09:57,540
+And the second key idea
+is that the relationship
+
+1329
+01:09:57,540 --> 01:10:00,620
+that, as you add more bases
+on the outside of what you've
+
+1330
+01:10:00,620 --> 01:10:05,920
+already got, that the optimal
+structure in that larger
+
+1331
+01:10:05,920 --> 01:10:08,430
+portion of sequence
+space is related
+
+1332
+01:10:08,430 --> 01:10:13,100
+to the optimal structures
+of smaller portions of it
+
+1333
+01:10:13,100 --> 01:10:14,810
+in one of four different ways.
+
+1334
+01:10:14,810 --> 01:10:17,470
+And these are the four ways.
+
+1335
+01:10:17,470 --> 01:10:21,370
+So let's look at these.
+
+1336
+01:10:23,940 --> 01:10:29,830
+So the first one is
+probably the simplest
+
+1337
+01:10:29,830 --> 01:10:38,270
+where if you're doing this,
+you're here somewhere,
+
+1338
+01:10:38,270 --> 01:10:44,050
+meaning you've compared
+sequences from position,
+
+1339
+01:10:44,050 --> 01:10:49,680
+let's say, i minus
+1 to j minus 1 here.
+
+1340
+01:10:49,680 --> 01:10:53,430
+And then we're going to
+consider adding-- actually,
+
+1341
+01:10:53,430 --> 01:10:56,700
+it depends how you
+number your sequence.
+
+1342
+01:10:56,700 --> 01:10:58,460
+Let me see how this is done.
+
+1343
+01:10:58,460 --> 01:10:59,530
+Sorry. i plus 1.
+
+1344
+01:11:03,360 --> 01:11:06,482
+i plus 1 to j minus 1.
+
+1345
+01:11:06,482 --> 01:11:08,690
+We figured out what the
+optimal structure is in here,
+
+1346
+01:11:08,690 --> 01:11:09,920
+let's suppose.
+
+1347
+01:11:09,920 --> 01:11:12,370
+And now we're going to
+consider adding one more
+
+1348
+01:11:12,370 --> 01:11:13,750
+base on either end.
+
+1349
+01:11:13,750 --> 01:11:19,780
+We're going to add j
+down here, and we're
+
+1350
+01:11:19,780 --> 01:11:22,190
+going to ask if it pairs with i.
+
+1351
+01:11:22,190 --> 01:11:25,020
+And if so, we're going to take
+whatever the optimal structure
+
+1352
+01:11:25,020 --> 01:11:27,612
+was in here and we're
+going to add one base pair,
+
+1353
+01:11:27,612 --> 01:11:29,320
+and we're going to
+add plus 1 because now
+
+1354
+01:11:29,320 --> 01:11:30,810
+it's got one additional.
+
+1355
+01:11:30,810 --> 01:11:32,040
+We're counting base pairs.
+
+1356
+01:11:32,040 --> 01:11:36,230
+So that's that first case there.
+
+1357
+01:11:36,230 --> 01:11:39,940
+And then the second case is
+you could also consider just
+
+1358
+01:11:39,940 --> 01:11:43,270
+adding one unpaired base onto
+whatever structure you had,
+
+1359
+01:11:43,270 --> 01:11:45,380
+and then you don't add one.
+
+1360
+01:11:45,380 --> 01:11:47,484
+And you could go in
+either direction.
+
+1361
+01:11:47,484 --> 01:11:49,900
+You can go sort of toward of
+the beginning of the sequence
+
+1362
+01:11:49,900 --> 01:11:52,580
+or toward the end
+of the sequence.
+
+1363
+01:11:52,580 --> 01:11:54,890
+And then the third
+one is the tricky one,
+
+1364
+01:11:54,890 --> 01:11:57,830
+is what's called a bifurcation.
+
+1365
+01:11:57,830 --> 01:12:02,840
+You could consider
+that actually i and j
+
+1366
+01:12:02,840 --> 01:12:05,840
+are both paired, but
+not with each other.
+
+1367
+01:12:05,840 --> 01:12:09,280
+That i pairs with something
+that was inside here
+
+1368
+01:12:09,280 --> 01:12:11,280
+and j pairs with something
+that was inside here.
+
+1369
+01:12:11,280 --> 01:12:15,760
+So your optimal parse
+from i to j, if you will,
+
+1370
+01:12:15,760 --> 01:12:18,650
+is not going to come from the
+optimal parse from i plus 1
+
+1371
+01:12:18,650 --> 01:12:19,500
+to j minus 1.
+
+1372
+01:12:19,500 --> 01:12:23,160
+It's going to come from
+rethinking this and doing
+
+1373
+01:12:23,160 --> 01:12:25,690
+the optimal parse from here
+to here and from here to here,
+
+1374
+01:12:25,690 --> 01:12:29,060
+and combining those two.
+
+1375
+01:12:29,060 --> 01:12:32,590
+So you're probably
+confused by now,
+
+1376
+01:12:32,590 --> 01:12:35,252
+so let me try to do an example.
+
+1377
+01:12:46,545 --> 01:12:49,320
+And then I have an analogy
+that will confuse you further.
+
+1378
+01:12:49,320 --> 01:12:51,200
+So ask me for that one.
+
+1379
+01:13:00,630 --> 01:13:02,350
+This was the simplest
+one I could come up
+
+1380
+01:13:02,350 --> 01:13:04,220
+with that has this property.
+
+1381
+01:13:04,220 --> 01:13:11,510
+OK, so we said before that
+if you were doing the optimal
+
+1382
+01:13:11,510 --> 01:13:18,080
+from 1 to 5, that it would be
+the AC pairing with the GT.
+
+1383
+01:13:18,080 --> 01:13:19,450
+We do that one.
+
+1384
+01:13:19,450 --> 01:13:24,800
+And now if you notice, this guy
+is kind of a similar sequence.
+
+1385
+01:13:24,800 --> 01:13:27,060
+I just added a T at the
+beginning and an A at the end.
+
+1386
+01:13:27,060 --> 01:13:33,910
+And so you can probably imagine
+that the best structure of this
+
+1387
+01:13:33,910 --> 01:13:36,470
+is here, those three.
+
+1388
+01:13:36,470 --> 01:13:39,644
+You've got three pairs of
+this sub-sequence here.
+
+1389
+01:13:39,644 --> 01:13:41,560
+That's as good as you
+can do with seven bases.
+
+1390
+01:13:41,560 --> 01:13:43,170
+You can only get three pairs.
+
+1391
+01:13:43,170 --> 01:13:45,003
+And this is as good as
+you can do with five,
+
+1392
+01:13:45,003 --> 01:13:47,050
+so these are clearly optimal.
+
+1393
+01:13:47,050 --> 01:13:53,900
+So the issue comes that if
+you're starting from somewhere
+
+1394
+01:13:53,900 --> 01:13:58,669
+in the middle here-- let's
+say you are-- let's see,
+
+1395
+01:13:58,669 --> 01:13:59,960
+so how would you be doing this?
+
+1396
+01:14:02,610 --> 01:14:03,659
+You start here.
+
+1397
+01:14:03,659 --> 01:14:05,950
+Let's suppose the first two
+you consider are these two.
+
+1398
+01:14:05,950 --> 01:14:08,520
+You consider pairing
+that T with that A.
+
+1399
+01:14:08,520 --> 01:14:12,900
+You can see this is
+not going to go well.
+
+1400
+01:14:12,900 --> 01:14:17,640
+You might end up with that
+as your optimal substructure
+
+1401
+01:14:17,640 --> 01:14:18,410
+of this region.
+
+1402
+01:14:18,410 --> 01:14:20,285
+Remember, you're working
+from the inside out,
+
+1403
+01:14:20,285 --> 01:14:24,760
+so you're going from here to
+here, and you end up with that.
+
+1404
+01:14:27,790 --> 01:14:29,270
+And what do you do here?
+
+1405
+01:14:29,270 --> 01:14:30,770
+You don't have a G
+to pair the C to,
+
+1406
+01:14:30,770 --> 01:14:33,880
+so you add another
+unpaired base.
+
+1407
+01:14:33,880 --> 01:14:36,140
+Now you've got this
+optimal substructure
+
+1408
+01:14:36,140 --> 01:14:38,680
+of a sequence that's
+almost the whole sequence.
+
+1409
+01:14:38,680 --> 01:14:40,590
+It's just missing the
+first and last bases,
+
+1410
+01:14:40,590 --> 01:14:43,500
+but it only has
+three base pairs.
+
+1411
+01:14:43,500 --> 01:14:46,410
+So when you go to add
+this, you can say,
+
+1412
+01:14:46,410 --> 01:14:49,560
+oh, I can't add any more base
+pairs, so I've only got three.
+
+1413
+01:14:49,560 --> 01:14:52,280
+But you should consider
+that we've already
+
+1414
+01:14:52,280 --> 01:14:54,570
+solved the optimal
+structure of that,
+
+1415
+01:14:54,570 --> 01:14:57,120
+and we had two nice pairs here.
+
+1416
+01:14:57,120 --> 01:15:00,480
+We had that pair and
+that pair, and we already
+
+1417
+01:15:00,480 --> 01:15:04,380
+solved the substructure
+of the optimal structure
+
+1418
+01:15:04,380 --> 01:15:06,700
+of this portion here, and
+you had those three pairs.
+
+1419
+01:15:06,700 --> 01:15:09,770
+And so you can combine those
+two and all of a sudden
+
+1420
+01:15:09,770 --> 01:15:12,680
+you can do much better.
+
+1421
+01:15:12,680 --> 01:15:16,215
+So that's what that
+bifurcation thing is about.
+
+1422
+01:15:20,650 --> 01:15:23,030
+So this is the
+recursion working out,
+
+1423
+01:15:23,030 --> 01:15:25,920
+and you can see that's
+the base pairing one.
+
+1424
+01:15:25,920 --> 01:15:29,470
+You can add one, or you can
+just add an unpaired base
+
+1425
+01:15:29,470 --> 01:15:30,610
+and you don't add anything.
+
+1426
+01:15:30,610 --> 01:15:33,220
+Or you consider all
+the possible locations
+
+1427
+01:15:33,220 --> 01:15:36,150
+of bifurcations in-between the
+two positions you're adding,
+
+1428
+01:15:36,150 --> 01:15:39,040
+i and j, and you consider
+all the possible pairs.
+
+1429
+01:15:39,040 --> 01:15:43,204
+And you just sum up each
+pair and go-- I'm sorry,
+
+1430
+01:15:43,204 --> 01:15:44,120
+you don't sum them up.
+
+1431
+01:15:44,120 --> 01:15:48,740
+You consider them all, and
+then you take the maximum.
+
+1432
+01:15:48,740 --> 01:15:54,570
+All right, so the algorithm
+is to take an n by n matrix,
+
+1433
+01:15:54,570 --> 01:15:58,810
+initialize the diagonal to 0,
+and initialize the sub-diagonal
+
+1434
+01:15:58,810 --> 01:16:00,379
+to 0 also.
+
+1435
+01:16:00,379 --> 01:16:01,920
+Just don't think
+too much about that.
+
+1436
+01:16:01,920 --> 01:16:02,760
+Just do it.
+
+1437
+01:16:02,760 --> 01:16:07,040
+And then fill in this
+matrix recursively
+
+1438
+01:16:07,040 --> 01:16:09,520
+from the diagonal
+up and to the right.
+
+1439
+01:16:09,520 --> 01:16:12,760
+And it actually doesn't matter
+what order you fill it in
+
+1440
+01:16:12,760 --> 01:16:14,730
+as long as you're kind
+of working your way up
+
+1441
+01:16:14,730 --> 01:16:15,355
+into the right.
+
+1442
+01:16:15,355 --> 01:16:17,590
+You have to have the thing
+to the left and the thing
+
+1443
+01:16:17,590 --> 01:16:21,500
+below already filled in if
+you're going to fill in a box.
+
+1444
+01:16:21,500 --> 01:16:24,210
+And then you keep track of
+the optimal score, which
+
+1445
+01:16:24,210 --> 01:16:25,980
+is going to be the
+sum of base pairs.
+
+1446
+01:16:25,980 --> 01:16:28,970
+And then you also keep
+track of how you got there.
+
+1447
+01:16:28,970 --> 01:16:32,789
+What base pair did you add
+so that you can trace back?
+
+1448
+01:16:32,789 --> 01:16:34,580
+And then when you get
+up to the upper right
+
+1449
+01:16:34,580 --> 01:16:39,010
+corner of this matrix,
+you then trace back.
+
+1450
+01:16:39,010 --> 01:16:42,190
+So here is a partially
+filled in this matrix.
+
+1451
+01:16:42,190 --> 01:16:44,820
+This is from that the
+Nature Biotechnology Review.
+
+1452
+01:16:44,820 --> 01:16:48,534
+And the 0's are filled in.
+
+1453
+01:16:48,534 --> 01:16:50,200
+So here's what I want
+you to do at home,
+
+1454
+01:16:50,200 --> 01:16:54,110
+is print out, photocopy or
+whatever-- make this matrix,
+
+1455
+01:16:54,110 --> 01:16:56,260
+or make a bigger
+version of it perhaps--
+
+1456
+01:16:56,260 --> 01:17:00,580
+and look at the sequence
+and fill in this matrix,
+
+1457
+01:17:00,580 --> 01:17:05,284
+and fill in the little arrows
+every time you add a base pair.
+
+1458
+01:17:05,284 --> 01:17:06,450
+It's actually not that hard.
+
+1459
+01:17:06,450 --> 01:17:09,150
+There are no bifurcations in
+this, so that's the tricky one.
+
+1460
+01:17:09,150 --> 01:17:09,936
+Ignore that one.
+
+1461
+01:17:09,936 --> 01:17:11,310
+You'll just be
+adding base pairs.
+
+1462
+01:17:11,310 --> 01:17:12,340
+It'll be pretty easy.
+
+1463
+01:17:12,340 --> 01:17:15,470
+And then you can
+reconstruct the sequence.
+
+1464
+01:17:15,470 --> 01:17:16,835
+So here it is filled in.
+
+1465
+01:17:16,835 --> 01:17:18,960
+And the answer is given,
+so you can check yourself.
+
+1466
+01:17:18,960 --> 01:17:21,000
+But do it without
+looking at the answer.
+
+1467
+01:17:21,000 --> 01:17:24,160
+And then you go to the
+upper right corner.
+
+1468
+01:17:24,160 --> 01:17:26,000
+That means that the
+optimal structure
+
+1469
+01:17:26,000 --> 01:17:28,250
+from the beginning of the
+sequence to the end-- which,
+
+1470
+01:17:28,250 --> 01:17:30,080
+of course, was our
+goal all along.
+
+1471
+01:17:30,080 --> 01:17:32,590
+And then you trace
+back and you can
+
+1472
+01:17:32,590 --> 01:17:38,410
+see whenever you're
+moving diagonally here,
+
+1473
+01:17:38,410 --> 01:17:40,440
+you're adding a base pair.
+
+1474
+01:17:40,440 --> 01:17:42,880
+Remember, you add
+one on each end,
+
+1475
+01:17:42,880 --> 01:17:45,590
+and so you're moving diagonally
+and adding the base pair,
+
+1476
+01:17:45,590 --> 01:17:47,940
+and you get this
+little structure here.
+
+1477
+01:17:52,270 --> 01:17:55,427
+So computational complexity
+of the algorithm.
+
+1478
+01:17:55,427 --> 01:17:57,510
+You could think about this
+but I'll just tell you.
+
+1479
+01:17:57,510 --> 01:17:59,415
+It's memory n squared
+because you've
+
+1480
+01:17:59,415 --> 01:18:01,970
+got to fill in this
+matrix, so square
+
+1481
+01:18:01,970 --> 01:18:03,220
+of the length of the sequence.
+
+1482
+01:18:03,220 --> 01:18:06,100
+Time n cubed.
+
+1483
+01:18:06,100 --> 01:18:07,210
+This is bad now.
+
+1484
+01:18:07,210 --> 01:18:08,700
+And why is it n cubed?
+
+1485
+01:18:08,700 --> 01:18:11,657
+It's n cubed because you have to
+fill in a matrix that's n by n.
+
+1486
+01:18:11,657 --> 01:18:13,490
+And then when you do
+that maximization step,
+
+1487
+01:18:13,490 --> 01:18:16,310
+that check for bifurcations,
+that's sort of of order n,
+
+1488
+01:18:16,310 --> 01:18:16,930
+as well.
+
+1489
+01:18:16,930 --> 01:18:19,517
+So n cubed-- so this means
+that RNA folding is slow.
+
+1490
+01:18:19,517 --> 01:18:21,100
+And in fact, some
+of the servers won't
+
+1491
+01:18:21,100 --> 01:18:23,058
+allow you to fold anything
+more than a thousand
+
+1492
+01:18:23,058 --> 01:18:27,530
+bases because they'll take
+forever or something like that.
+
+1493
+01:18:27,530 --> 01:18:30,300
+And it cannot
+handle pseudoknots.
+
+1494
+01:18:30,300 --> 01:18:32,420
+If you think through
+the recursion,
+
+1495
+01:18:32,420 --> 01:18:34,220
+pseudoknots will be a problem.
+
+1496
+01:18:37,170 --> 01:18:40,810
+I'm going to just
+show you-- yeah,
+
+1497
+01:18:40,810 --> 01:18:44,910
+I'll get to this-- that
+these are from the viruses.
+
+1498
+01:18:44,910 --> 01:18:49,010
+Real viruses, some of
+them have pseudoknots
+
+1499
+01:18:49,010 --> 01:18:51,782
+like these ones shown
+here, and some even
+
+1500
+01:18:51,782 --> 01:18:53,990
+have these kissing loops,
+which is another type where
+
+1501
+01:18:53,990 --> 01:18:57,550
+the two stem loops,
+the loops interact.
+
+1502
+01:18:57,550 --> 01:18:59,840
+And the pseudoknots
+in particular
+
+1503
+01:18:59,840 --> 01:19:01,790
+are important in the
+viral life cycle.
+
+1504
+01:19:01,790 --> 01:19:03,900
+They can actually cause
+programmed ribosomal frame
+
+1505
+01:19:03,900 --> 01:19:05,750
+shifting.
+
+1506
+01:19:05,750 --> 01:19:07,500
+When the ribosomes
+hits one of the things,
+
+1507
+01:19:07,500 --> 01:19:10,332
+normally it just denatures
+RNA secondary structure.
+
+1508
+01:19:10,332 --> 01:19:12,040
+When it hits a
+pseudoknot, it'll actually
+
+1509
+01:19:12,040 --> 01:19:15,420
+get knocked back by
+one and will start
+
+1510
+01:19:15,420 --> 01:19:16,980
+translating in a
+different frame.
+
+1511
+01:19:16,980 --> 01:19:18,670
+And that's actually
+useful to the virus
+
+1512
+01:19:18,670 --> 01:19:20,540
+to do that under
+certain circumstances.
+
+1513
+01:19:20,540 --> 01:19:23,940
+That's how HIV makes the
+replicated polymerase,
+
+1514
+01:19:23,940 --> 01:19:30,870
+is by doing a frame shift on
+the ribosome using a pseudoknot.
+
+1515
+01:19:30,870 --> 01:19:33,790
+So these things are important.
+
+1516
+01:19:33,790 --> 01:19:40,510
+And there's fancier
+methods that use
+
+1517
+01:19:40,510 --> 01:19:43,010
+more sophisticated
+thermodynamic models where
+
+1518
+01:19:43,010 --> 01:19:46,270
+GC counts more than AU.
+
+1519
+01:19:46,270 --> 01:19:48,810
+And I won't go into
+the details, but I just
+
+1520
+01:19:48,810 --> 01:19:51,540
+wanted to show you some
+pretty pictures here
+
+1521
+01:19:51,540 --> 01:19:55,110
+that the Zuker
+algorithm-- this is
+
+1522
+01:19:55,110 --> 01:19:59,800
+a real world RNA folding
+algorithm-- calculates not only
+
+1523
+01:19:59,800 --> 01:20:03,610
+the minimum energy fold,
+but also sub-optimal folds,
+
+1524
+01:20:03,610 --> 01:20:05,990
+and the probabilities of
+particular base pairs,
+
+1525
+01:20:05,990 --> 01:20:10,800
+summing over all the possible
+structures that RNA could form,
+
+1526
+01:20:10,800 --> 01:20:14,370
+weighted by their free energy.
+
+1527
+01:20:14,370 --> 01:20:16,180
+So it's the full
+partition function.
+
+1528
+01:20:16,180 --> 01:20:17,614
+It's not perfectly accurate.
+
+1529
+01:20:17,614 --> 01:20:19,280
+It gets about 70% of
+base pairs correct,
+
+1530
+01:20:19,280 --> 01:20:20,988
+which means it usually
+gets things right,
+
+1531
+01:20:20,988 --> 01:20:23,230
+but occasionally totally wrong.
+
+1532
+01:20:23,230 --> 01:20:27,560
+And there's a website for the
+Mfold server, which is actually
+
+1533
+01:20:27,560 --> 01:20:30,370
+one of the most beautiful
+websites in bioinfomatics,
+
+1534
+01:20:30,370 --> 01:20:31,510
+I would say.
+
+1535
+01:20:31,510 --> 01:20:34,140
+And also if you want
+to run it locally,
+
+1536
+01:20:34,140 --> 01:20:36,480
+you should download the
+Vienna RNAfold package,
+
+1537
+01:20:36,480 --> 01:20:38,880
+which has a very
+similar algorithm.
+
+1538
+01:20:38,880 --> 01:20:41,590
+And I just wanted to show
+you one or two examples.
+
+1539
+01:20:41,590 --> 01:20:43,990
+So this is the U5 snRNA.
+
+1540
+01:20:43,990 --> 01:20:45,480
+This is the output of Mfold.
+
+1541
+01:20:45,480 --> 01:20:47,500
+It predicts this structure.
+
+1542
+01:20:47,500 --> 01:20:50,710
+And then this what's called
+the energy dot plot, which
+
+1543
+01:20:50,710 --> 01:20:55,260
+shows the bases in the optimal
+structure down below here
+
+1544
+01:20:55,260 --> 01:20:58,030
+and then sort of these
+suboptimal structures here.
+
+1545
+01:20:58,030 --> 01:21:00,180
+And you can see
+there's no ambiguity.
+
+1546
+01:21:00,180 --> 01:21:02,850
+It's totally confident
+in this structure.
+
+1547
+01:21:02,850 --> 01:21:07,420
+Then I ran the lysine
+riboswitch through this program,
+
+1548
+01:21:07,420 --> 01:21:09,840
+and I got this.
+
+1549
+01:21:09,840 --> 01:21:12,060
+I got the minimum
+for energy structure
+
+1550
+01:21:12,060 --> 01:21:13,020
+down in the lower left.
+
+1551
+01:21:13,020 --> 01:21:15,630
+And then you see there's a
+lot of other colored dots.
+
+1552
+01:21:15,630 --> 01:21:17,450
+Those are from the
+suboptimal structures.
+
+1553
+01:21:17,450 --> 01:21:20,850
+So it looks like this thing
+has multiple structures, which
+
+1554
+01:21:20,850 --> 01:21:21,950
+of course it does.
+
+1555
+01:21:21,950 --> 01:21:28,050
+So the way that this one works
+is, in the absence of lysine,
+
+1556
+01:21:28,050 --> 01:21:31,810
+it forms this structure
+where the ribosome binding
+
+1557
+01:21:31,810 --> 01:21:34,750
+sequences-- this is
+prokaryotic-- is exposed.
+
+1558
+01:21:34,750 --> 01:21:37,710
+And so the ribosome
+can enter and translate
+
+1559
+01:21:37,710 --> 01:21:40,520
+these lysine
+biosynthetic enzymes.
+
+1560
+01:21:40,520 --> 01:21:43,630
+But then when lysine
+accumulates to a certain level,
+
+1561
+01:21:43,630 --> 01:21:47,900
+it can interact with the
+RNA and shift it's structure
+
+1562
+01:21:47,900 --> 01:21:50,600
+so that you now form
+this stem, which
+
+1563
+01:21:50,600 --> 01:21:52,520
+sequesters the ribosome
+binding sequence
+
+1564
+01:21:52,520 --> 01:21:54,640
+and blocks lysine biosynthesis.
+
+1565
+01:21:54,640 --> 01:21:56,980
+So a very clever system.
+
+1566
+01:21:56,980 --> 01:22:00,040
+And it turns out
+that there's dozens
+
+1567
+01:22:00,040 --> 01:22:02,030
+of these things in
+bacterial genomes,
+
+1568
+01:22:02,030 --> 01:22:04,267
+and they control a
+lot of metabolism.
+
+1569
+01:22:04,267 --> 01:22:05,350
+So they're very important.
+
+1570
+01:22:05,350 --> 01:22:07,590
+And there may be some
+in eukaryotes, too,
+
+1571
+01:22:07,590 --> 01:22:09,077
+and that would be good.
+
+1572
+01:22:09,077 --> 01:22:10,910
+If anyone's looking for
+a product, not happy
+
+1573
+01:22:10,910 --> 01:22:12,451
+with their current
+project, you might
+
+1574
+01:22:12,451 --> 01:22:15,780
+think about looking
+for more riboswitches.
+
+1575
+01:22:15,780 --> 01:22:18,810
+So I'm going to
+have to end there.
+
+1576
+01:22:18,810 --> 01:22:21,440
+And thank you guys
+for your attention,
+
+1577
+01:22:21,440 --> 01:22:24,500
+and good luck on the midterm.
